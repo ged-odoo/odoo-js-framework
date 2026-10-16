@@ -203,12 +203,12 @@
 
 /* ---------- the url, where the title usually sits ---------- */
 
-/* Every slide signs itself "Masterclass Odoo JS" in the foot, from
+/* Every slide signs itself "Odoo Framework JS" in the foot, from
    config.js's title (--footer-brand, set in app.js). On the one slide people
    photograph off a projector, the url is worth more than the name they are
    already looking at. */
 .clean .slide.brand-url {
-  --footer-brand: "https://ged-odoo.github.io/masterclass-js-2026/";
+  --footer-brand: "https://ged-odoo.github.io/odoo-js-framework/";
 }
 
 .clean .slide.brand-url .slide-foot::after {
