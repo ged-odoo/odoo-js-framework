@@ -1,0 +1,248 @@
+/* This project's own tweaks, loaded after gas/assets/style.css - see
+   gas/README.md. Everything below is specific to a page this project
+   itself adds (sections/81-odoosh/odoosh.html), not part of GAS. */
+
+/* ---------- the display face on every title ---------- */
+
+/* Branding, the same call the two talks make: Caveat carries every slide
+   title, so the masterclass and the talks read as one set. Three things have
+   to move with the family - it only ships a bold, its x-height is far
+   smaller than Geist's at the same size, so the sizes go up to match, and
+   the tracking Geist was tightened by has to come back off. */
+.clean .slide h2 {
+  font-family: "Caveat", ui-rounded, cursive;
+  font-size: max(28px, calc(5.8cqw * var(--content-scale, 1)));
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: 0;
+}
+
+.clean .statement h2 {
+  font-size: max(34px, calc(7.4cqw * var(--content-scale, 1)));
+}
+
+/* after .statement, which a cover also is */
+.clean .cover h2 {
+  font-size: max(42px, calc(9cqw * var(--content-scale, 1)));
+}
+
+#view-odoosh { max-width: 700px; }
+
+#view-odoosh .lead {
+  margin: 0 0 20px;
+  font-size: 17px;
+  color: var(--muted);
+}
+
+#view-odoosh li { margin-bottom: 8px; }
+
+/* the code attendees type on odoo.sh to get their Odoo 20 project - the one
+   thing on this page they have to carry with them, so it is set large enough
+   to read off a projected screen and copy by hand. */
+.odoosh-code {
+  margin: 24px 0 28px;
+  padding: 18px 22px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.odoosh-code .key {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.odoosh-code .code {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.odoosh-code .hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+
+.odoosh-code a { color: var(--accent); }
+
+/* the lifecycle's two nested pairs: setup/onWillDestroy on the outside,
+   onMounted/onWillUnmount within it. Colour is the whole explanation, so it
+   goes on those four boxes and nothing else. */
+#deck-talk .slide[data-from="owl"] .figure .bx.open {
+  fill: #e6f1e8;
+  stroke: #7fb896;
+}
+
+#deck-talk .slide[data-from="owl"] .figure .bx.mount {
+  fill: #fdf0dd;
+  stroke: #d3a45e;
+}
+
+[data-theme="dark"] #deck-talk .slide[data-from="owl"] .figure .bx.open {
+  fill: #1c3326;
+  stroke: #4f8f68;
+}
+
+[data-theme="dark"] #deck-talk .slide[data-from="owl"] .figure .bx.mount {
+  fill: #35291a;
+  stroke: #91743f;
+}
+
+/* the web client tree shares its slide with the template that produces it, so
+   it is drawn at the width of its own column. The width carries
+   --content-scale, or the figure is dead weight the auto-fit cannot compress */
+#deck-talk .slide[data-from="js-framework"] .figure.webclient {
+  width: calc(46cqw * var(--content-scale, 1));
+  margin: 0 auto;
+}
+
+/* ---------- a wider sidebar ---------- */
+
+/* This deck's nav runs deeper than the talks' - every topic lists its
+   presentation and its exercises - so the 300px GAS rail wraps entries that
+   should sit on one line. Only the wide layout moves; below 720px the
+   sidebar is a full-width bar and GAS's own rule still governs. */
+@media (min-width: 721px) {
+  .sidebar {
+    width: 340px;
+    flex-basis: 340px;
+  }
+}
+
+/* ---------- Owl 2 vs Owl 3: the vocabulary ---------- */
+
+/* The chips come with the slide, copied from the talk this deck's
+   comparisons come from (talk1-introducing-owl3/style.css). The talk's own
+   copy reads --line/--card/--quiet/--ink, which only the clean system
+   defines - this deck is the plainer one, so these read the palette's own
+   tokens instead. */
+#deck-talk .slide[data-from="owl-2-vs-3"] .vocab {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2.6cqw;
+}
+
+#deck-talk .slide[data-from="owl-2-vs-3"] .chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.7cqw;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#deck-talk .slide[data-from="owl-2-vs-3"] .chips li {
+  margin: 0;
+  padding: 0.6cqw 1cqw;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: max(10px, 1.45cqw);
+  line-height: 1.2;
+}
+
+#deck-talk .slide[data-from="owl-2-vs-3"] .chips.gone li {
+  border-color: var(--border);
+  background: var(--bg);
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+#deck-talk .slide[data-from="owl-2-vs-3"] .chips.new li {
+  border-color: var(--accent-light);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* a rename is one chip, not two: the arrow carries the accent */
+#deck-talk .slide[data-from="owl-2-vs-3"] .chips.changed li {
+  border-color: var(--border);
+  background: var(--panel);
+  color: var(--text);
+}
+
+#deck-talk .slide[data-from="owl-2-vs-3"] .chips .to {
+  padding: 0 0.2cqw;
+  color: var(--accent);
+}
+
+/* a name that stayed while its contract moved: the note says what changed */
+#deck-talk .slide[data-from="owl-2-vs-3"] .chips .note {
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.86em;
+  color: var(--muted);
+}
+
+/* ---------- the welcome cover's own url ---------- */
+
+/* Where this site lives, for anyone reading it off a projector. Placed like
+   the artwork around it - a percentage of the slide, so it rides the same
+   scaling - and quiet enough to stay out of the way of the title. Indented
+   past the sparkle and the burst in that corner (at 6% and 8% from the left,
+   86% and 90% down), so it can sit low without printing over them. */
+.slide.welcome .welcome-url {
+  position: absolute;
+  left: 15%;
+  bottom: 5%;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.5cqw;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ---------- the url, where the title usually sits ---------- */
+
+/* Every slide signs itself "Masterclass Odoo JS" in the foot, from
+   config.js's title (--footer-brand, set in app.js). On the one slide people
+   photograph off a projector, the url is worth more than the name they are
+   already looking at. */
+.clean .slide.brand-url {
+  --footer-brand: "https://ged-odoo.github.io/masterclass-js-2026/";
+}
+
+.clean .slide.brand-url .slide-foot::after {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--ink-2);
+}
+
+/* ---------- the cover, as a slide of a clean deck ---------- */
+
+.deck.clean .slide.welcome {
+  position: relative;
+  justify-content: flex-start;
+  padding: 0;
+  overflow: hidden;
+  background: none;
+  color: #fff;
+}
+
+.deck.clean .slide.welcome h2 {
+  font-family: "Caveat", ui-rounded, cursive;
+  font-size: 8.3cqw;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 0.975;
+  letter-spacing: 0;
+  color: #fff;
+  margin: 0;
+}
+
+.deck.clean .slide.welcome .lead {
+  font-family: "Geist", inherit;
+  font-size: 2.03cqw;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  max-width: none;
+}

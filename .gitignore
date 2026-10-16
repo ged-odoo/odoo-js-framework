@@ -1,0 +1,5 @@
+# what gas/dev.py serves while editing, rebuilt on every save
+/_site/
+
+# python bytecode, written by gas/ whenever the build runs
+__pycache__/

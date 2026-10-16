@@ -1,0 +1,3538 @@
+<div class="deck clean" id="deck-talk">
+<article class="slide welcome current" data-id="9e3c0001" data-act="title" data-label="Odoo Framework JS">
+      <div class="welcome-bg"></div>
+      <div class="welcome-stars"></div>
+      <!-- decorations lifted from the template, placed as it places them -->
+      <div class="welcome-art">
+        <img src="assets/stickers/ring.webp" alt="" style="left: 8.08%; top: 9.69%; width: 5.77%;">
+        <img src="assets/stickers/cross.webp" alt="" style="left: 18.72%; top: 6.9%; width: 3.67%;">
+        <img src="assets/stickers/sparkle.webp" alt="" style="left: 14.83%; top: 16.22%; width: 1.28%;">
+        <img src="assets/stickers/burst.webp" alt="" style="left: 61.14%; top: 5.04%; width: 3.67%;">
+        <img src="assets/stickers/sparkle.webp" alt="" style="left: 66.75%; top: 10.52%; width: 1.28%;">
+        <img src="assets/stickers/ufo.webp" alt="" style="left: 75.86%; top: 53.74%; width: 15.93%;">
+        <img src="assets/stickers/spiral.webp" alt="" style="left: 73.31%; top: 76.09%; width: 9.74%;">
+        <img src="assets/stickers/sparkle.webp" alt="" style="left: 94.27%; top: 69.99%; width: 1.28%;">
+        <img src="assets/stickers/sparkle.webp" alt="" style="left: 5.88%; top: 86.46%; width: 1.28%;">
+        <img src="assets/stickers/burst.webp" alt="" style="left: 8.08%; top: 89.89%; width: 3.67%;">
+      </div>
+
+      <img class="welcome-logo" src="assets/odoo-experience.webp"
+           alt="Odoo Experience 2026">
+
+      <div class="welcome-content">
+        <h2>Odoo<br>Framework JS</h2>
+        <p class="lead">RD Framework JS</p>
+      </div>
+
+      <p class="welcome-url">https://ged-odoo.github.io/masterclass-js-2026/</p>
+    </article>
+  <article class="slide divider" data-id="9e3c0101" data-act="ecosystem">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>The Odoo JS Ecosystem</h2>
+      <p class="divider-sub">The codebases, the architecture, the assets and the templates.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <!-- 20-odoo-js-ecosystem/slides.html -->
+  <article data-act="ecosystem" data-from="intro" class="slide statement cover" data-id="25d5d255">
+    <header class="slide-head">
+      <p class="eyebrow">javascript Masterclass · Odoo Experience 2026</p>
+      <h2>The Odoo JS ecosystem</h2>
+      <p class="lead">A quick overview of the Odoo javascript codebase.</p>
+    </header>
+    <footer class="slide-foot">
+      <p>Python first, then the codebases, the architecture, the assets, and the templates.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide statement" data-id="341ebede">
+    <header class="slide-head">
+      <p class="eyebrow">Rule one</p>
+      <h2>The first rule of customizing Odoo in javascript is…</h2>
+    </header>
+    <footer class="slide-foot"></footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide statement inverse" data-id="27a1df15">
+    <header class="slide-head">
+      <p class="eyebrow">Rule one · Before reaching for javascript</p>
+      <h2>Do it in Python.</h2>
+      <p class="lead">The server is usually the simpler, safer extension point.</p>
+    </header>
+    <footer class="slide-foot"></footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="3930f26f">
+    <header class="slide-head">
+      <p class="eyebrow">Decision guide</p>
+      <h2>When javascript is the right answer</h2>
+      <p class="lead">The rule has exceptions.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="bullets">
+        <li><h3>Customizing a field</h3><p>The standard widgets cannot show what you need.</p></li>
+        <li><h3>A screen</h3><p>It is not a view: a dashboard, a game, a custom workspace.</p></li>
+        <li><h3>Website behaviour</h3><p>A public page needs interaction in the browser.</p></li>
+        <li><h3>The point of sale</h3><p>The cash-register experience itself must change.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p><span class="k">Default</span>Everything else is a Python job.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="c8a8ce1e">
+    <header class="slide-head">
+      <p class="eyebrow">The landscape</p>
+      <h2>Javascript in Odoo</h2>
+      <p class="lead">Three entry points, three addons. Every app is built on one of them.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes codebases">
+        <li><h3>Web client</h3><p>The back office, and every standard business app.</p><p class="meta"><code>/odoo</code> · <code>addons/web</code></p></li>
+        <li><h3>Website</h3><p>Public pages: the shop, events, blogs, campaigns.</p><p class="meta"><code>/</code> · <code>addons/website</code></p></li>
+        <li><h3>Point of sale</h3><p>The cash register: a focused application that also works offline.</p><p class="meta"><code>/pos/ui</code> · <code>addons/point_of_sale</code></p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>This masterclass is focused on the web client. The website and the point of sale are outside the scope of these two days.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="82405cba">
+    <header class="slide-head">
+      <p class="eyebrow">Architecture</p>
+      <h2>Two ways of rendering</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 334" role="img"
+             aria-label="The website is rendered by the server, page by page: on the next link the server renders a whole new page. The web client and the point of sale are rendered by Owl in the browser, on a single page: on the next click only the data moves.">
+          <defs>
+            <marker id="eco-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+            <marker id="eco-rt-1" class="rt-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <text class="lane" x="0" y="16">Website</text>
+          <text class="s l" x="82" y="16">a multi-page application</text>
+
+          <rect class="bx" x="0" y="30" width="190" height="76" rx="6"/>
+          <text class="t" x="95" y="60">Browser</text>
+          <text class="s" x="95" y="82">clicks a link</text>
+          <path class="ar" marker-end="url(#eco-ar-1)" d="M196 68 H264"/>
+          <text class="s m" x="230" y="58">GET /shop</text>
+
+          <rect class="bx srv" x="270" y="30" width="190" height="76" rx="6"/>
+          <text class="t" x="365" y="60">Server</text>
+          <text class="s" x="365" y="80">renders the page</text>
+          <text class="s" x="365" y="96">QWeb, in Python</text>
+          <path class="ar" marker-end="url(#eco-ar-1)" d="M466 68 H534"/>
+          <text class="s" x="500" y="58">HTML</text>
+
+          <rect class="bx" x="540" y="30" width="190" height="76" rx="6"/>
+          <text class="t" x="635" y="60">Browser</text>
+          <text class="s" x="635" y="82">shows the page</text>
+          <path class="ar" marker-end="url(#eco-ar-1)" d="M736 68 H804"/>
+          <text class="s" x="770" y="58">then</text>
+
+          <rect class="bx js" x="810" y="30" width="190" height="76" rx="6"/>
+          <text class="t" x="905" y="60">javascript</text>
+          <text class="s" x="905" y="80">Interactions attach</text>
+          <text class="s" x="905" y="96">behaviour to the page</text>
+
+          <path class="rt" marker-end="url(#eco-rt-1)" d="M905 110 V132 H95 V114"/>
+          <text class="s" x="500" y="152">next link: the server renders a whole new page</text>
+
+          <text class="lane" x="0" y="192">Web client, point of sale</text>
+          <text class="s l" x="238" y="192">a single-page application</text>
+
+          <rect class="bx" x="0" y="206" width="190" height="76" rx="6"/>
+          <text class="t" x="95" y="236">Browser</text>
+          <text class="s" x="95" y="258">opens the app</text>
+          <path class="ar" marker-end="url(#eco-ar-1)" d="M196 244 H264"/>
+          <text class="s m" x="230" y="234">GET /odoo</text>
+
+          <rect class="bx srv" x="270" y="206" width="190" height="76" rx="6"/>
+          <text class="t" x="365" y="236">Server</text>
+          <text class="s" x="365" y="256">sends an empty page</text>
+          <text class="s" x="365" y="272">and the bundle</text>
+          <path class="ar" marker-end="url(#eco-ar-1)" d="M466 244 H534"/>
+          <text class="s ms" x="500" y="234">JS, CSS, XML</text>
+
+          <rect class="bx js" x="540" y="206" width="190" height="76" rx="6"/>
+          <text class="t" x="635" y="236">Owl</text>
+          <text class="s" x="635" y="256">compiles the templates</text>
+          <text class="s" x="635" y="272">renders the UI</text>
+          <path class="ar" marker-end="url(#eco-ar-1)" d="M736 244 H804"/>
+          <text class="s" x="770" y="234">DOM</text>
+
+          <rect class="bx" x="810" y="206" width="190" height="76" rx="6"/>
+          <text class="t" x="905" y="236">Browser</text>
+          <text class="s" x="905" y="256">shows the app</text>
+          <text class="s" x="905" y="272">data comes by RPC</text>
+
+          <path class="rt" marker-end="url(#eco-rt-1)" d="M905 286 V308 H635 V290"/>
+          <text class="s" x="770" y="330">next click: Owl re-renders, only the data moves</text>
+
+          <rect class="bx srv" x="0" y="318" width="14" height="14" rx="3"/>
+          <text class="s l" x="22" y="330">the server, Python</text>
+          <rect class="bx" x="160" y="318" width="14" height="14" rx="3"/>
+          <text class="s l" x="182" y="330">the browser</text>
+          <rect class="bx js" x="290" y="318" width="14" height="14" rx="3"/>
+          <text class="s l" x="312" y="330">javascript, in the browser</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>This masterclass lives in the second lane: the web client, rendered by Owl.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="8ca2efde">
+    <header class="slide-head">
+      <p class="eyebrow">Addon anatomy</p>
+      <h2>Anatomy of an addon</h2>
+    </header>
+    <div class="slide-body two-col tree">
+      <section>
+<pre class="tree"><code>my_addon/
+├── __manifest__.py
+├── models/
+├── views/
+├── security/
+└── <mark>static/</mark>
+    ├── src/
+    │   ├── counter/
+    │   │   ├── counter.js
+    │   │   ├── counter.xml
+    │   │   └── counter.scss
+    │   └── dashboard/
+    ├── tests/
+    └── lib/</code></pre>
+      </section>
+      <section>
+        <h3 class="label">What static holds</h3>
+        <ul class="rows wide-key">
+          <li><span class="key"><code>static/src</code></span><span>javascript, XML templates, SCSS</span></li>
+          <li><span class="key"><code>static/tests</code></span><span>Unit tests and tours</span></li>
+          <li><span class="key"><code>static/lib</code></span><span>Third-party libraries</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>static/</code> is the only new folder. The rest is the addon you already know.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="7fd04493">
+    <header class="slide-head">
+      <p class="eyebrow">Assets</p>
+      <h2>Assets and bundles</h2>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+<pre class="big"><code class="language-python"># __manifest__.py
+{
+    "name": "My addon",
+    "depends": ["web"],
+    "assets": {
+        <mark>"web.assets_backend"</mark>: [
+            "my_addon/static/src/**/*",
+        ],
+    },
+}</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Manifest</span><span>Registers each file into a named bundle.</span></li>
+          <li><span class="key">Main bundles</span><span>One per codebase: <code>web.assets_backend</code>, <code>web.assets_frontend</code>, <code>point_of_sale._assets_pos</code>.</span></li>
+          <li><span class="key">No bundle</span><span>A file in no bundle is never loaded.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Glob patterns are fine: <code>my_addon/static/src/**/*</code> takes the whole folder.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="fb98b27a">
+    <header class="slide-head">
+      <p class="eyebrow">Assets</p>
+      <h2>No build step</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 300" role="img"
+             aria-label="The static files of an addon, registered in the manifest, are combined by the Odoo server into one JS file - which carries the XML templates too - and one CSS file, that the browser loads once, at startup.">
+          <defs>
+            <marker id="eco-ar-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="0" y="0" width="220" height="300" rx="6"/>
+          <text class="m mt" x="110" y="36">static/src</text>
+          <text class="m l" x="28" y="86">counter.js</text>
+          <text class="m l" x="28" y="118">counter.xml</text>
+          <text class="m l" x="28" y="150">counter.scss</text>
+          <text class="m l" x="28" y="182">dashboard.js</text>
+          <text class="m l" x="28" y="214">dashboard.xml</text>
+          <text class="m l" x="28" y="246">…</text>
+
+          <path class="ar" marker-end="url(#eco-ar-3)" d="M228 150 H382"/>
+          <text class="s m" x="305" y="136">__manifest__.py</text>
+          <text class="s m" x="305" y="172">web.assets_backend</text>
+
+          <rect class="bx srv" x="390" y="70" width="220" height="160" rx="6"/>
+          <text class="t" x="500" y="106">Odoo server</text>
+          <text class="s" x="500" y="134">concatenates the files</text>
+          <text class="s" x="500" y="156">compiles the SCSS</text>
+          <text class="s" x="500" y="178">minifies, caches</text>
+          <text class="s" x="500" y="200">serves the result</text>
+
+          <path class="ar" marker-end="url(#eco-ar-3)" d="M618 150 H734"/>
+          <text class="s" x="676" y="136">two requests</text>
+
+          <rect class="bx" x="744" y="0" width="256" height="300" rx="6"/>
+          <text class="t" x="872" y="36">Browser</text>
+          <rect class="bx" x="760" y="86" width="224" height="60" rx="4"/>
+          <text class="m ms" x="872" y="110">web.assets_backend.min.js</text>
+          <text class="s" x="872" y="132">javascript and templates</text>
+          <rect class="bx" x="760" y="162" width="224" height="40" rx="4"/>
+          <text class="m ms" x="872" y="187">web.assets_backend.min.css</text>
+          <text class="s" x="872" y="252">loaded once, at startup</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>The Odoo server is the bundler. No npm, no webpack, no Node.js to install. The XML rides inside the js bundle, registered as a module of its own.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="15a0e29b">
+    <header class="slide-head">
+      <p class="eyebrow">Modules</p>
+      <h2>Javascript modules</h2>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+<pre class="big"><code class="language-javascript">// my_addon/static/src/dashboard/dashboard.js
+import { Component } from "@odoo/owl";
+import { Counter } from <mark>"@my_addon/counter/counter"</mark>;
+import { formatAmount } from <mark>"./format"</mark>;
+
+export class Dashboard extends Component {
+    static template = "my_addon.Dashboard";
+    static components = { Counter };
+}</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">ES modules</span><span>Every file: <code>import</code> and <code>export</code>, no globals.</span></li>
+          <li><span class="key">Names</span><span><code>@my_addon/<wbr>counter/<wbr>counter</code> is <code>my_addon/<wbr>static/<wbr>src/<wbr>counter/<wbr>counter.js</code>.</span></li>
+          <li><span class="key">Relative too</span><span><code>./format</code> is the file next door, <code>dashboard/<wbr>format.js</code>.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Modules are resolved by <code>odoo.loader</code>, in the browser, at startup.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="8aad5b2e">
+    <header class="slide-head">
+      <p class="eyebrow">Architecture</p>
+      <h2>The JS Stack</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 372" role="img"
+             aria-label="Owl at the bottom, the Odoo JS framework on top of it - registries, services, views and fields - then the web client, the website and the point of sale, and the apps above them. Owl, the framework and the web client live in addons/web.">
+          <rect class="chip" x="0" y="0" width="580" height="34" rx="6"/>
+          <text class="s" x="290" y="22">accounting · crm · sale · project · every other app</text>
+          <rect class="chip" x="610" y="0" width="180" height="34" rx="6"/>
+          <text class="s" x="700" y="22">shop · blog · events</text>
+          <rect class="chip" x="820" y="0" width="180" height="34" rx="6"/>
+          <text class="s" x="910" y="22">restaurant · loyalty</text>
+
+          <rect class="bx" x="0" y="50" width="580" height="84" rx="6"/>
+          <text class="t" x="290" y="86">Web client</text>
+          <text class="s" x="290" y="108">navbar, menus, systray, actions, …</text>
+
+          <rect class="bx" x="610" y="50" width="180" height="84" rx="6"/>
+          <text class="t" x="700" y="80">Website</text>
+          <text class="s" x="700" y="100">Interactions, snippets</text>
+          <text class="s m" x="700" y="122">addons/website</text>
+
+          <rect class="bx" x="820" y="50" width="180" height="84" rx="6"/>
+          <text class="t" x="910" y="80">Point of sale</text>
+          <text class="s" x="910" y="100">screens, offline data</text>
+          <text class="s m" x="910" y="122">addons/point_of_sale</text>
+
+          <rect class="bx" x="0" y="154" width="1000" height="84" rx="6"/>
+          <text class="t" x="500" y="190">The Odoo JS framework</text>
+          <text class="s" x="500" y="212">registries, services, utilities, generic components, views and fields</text>
+
+          <rect class="bx js" x="0" y="258" width="1000" height="84" rx="6"/>
+          <text class="t" x="500" y="294">Owl</text>
+          <text class="s" x="500" y="316">the component system, @odoo/owl</text>
+
+          <path class="bound" d="M-10 40 H590 V144 H1010 V352 H-10 Z"/>
+          <text class="m l" x="0" y="368">addons/web</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Everything below the apps lives in <code>addons/web</code>. That is where you will read code.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="0d1b7e50">
+    <header class="slide-head">
+      <p class="eyebrow">The framework</p>
+      <h2>New in Odoo 20: Owl 3</h2>
+      <p class="lead">Odoo is moving from Owl 2 to Owl 3. It landed in <code>saas-19.4</code>, Odoo 20 runs on it, and it is a separate library rather than a superset: Owl 3 does not run Owl 2 code.</p>
+    </header>
+    <div class="slide-body">
+      <div class="highlights">
+        <h3>Highlights</h3>
+        <p>signal, plugins, typed props <span class="quiet">and more.</span></p>
+      </div>
+    </div>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="9e9cc97e">
+    <header class="slide-head">
+      <p class="eyebrow">Migration</p>
+      <h2>Owl 2 to Owl 3</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure timeline">
+        <svg viewBox="0 0 1000 150" role="img"
+             aria-label="Odoo 19.0 up to saas-19.3 run on Owl 2. From saas-19.4 on, Odoo runs on Owl 3, with a temporary compatibility layer.">
+          <defs>
+            <marker id="eco-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+          <rect class="bx" x="40" y="18" width="410" height="44" rx="6"/>
+          <text class="t" x="245" y="46">Owl 2</text>
+          <rect class="bx js" x="450" y="18" width="530" height="44" rx="6"/>
+          <text class="t" x="715" y="46">Owl 3</text>
+          <rect class="chip" x="450" y="70" width="420" height="30" rx="6"/>
+          <text class="s l" x="462" y="89">compatibility layer, temporary</text>
+          <path class="axis" marker-end="url(#eco-ar-2)" d="M20 118 H978"/>
+          <path class="tick" d="M60 112 V124 M380 112 V124 M520 112 V124 M880 112 V124"/>
+          <path class="rt" d="M450 6 V126"/>
+          <text class="s" x="60" y="144">19.0</text>
+          <text class="s" x="380" y="144">saas-19.3</text>
+          <text class="s" x="520" y="144">saas-19.4</text>
+          <text class="s" x="880" y="144">20.0</text>
+        </svg>
+      </figure>
+      <ul class="rows wide-key">
+        <li><span class="key">Not compatible</span><span>Owl 3 does not run Owl 2 code. The two are separate libraries.</span></li>
+        <li><span class="key">Mostly migrated</span><span>Most of Odoo is on Owl 3. A compatibility layer runs the rest, mostly.</span></li>
+        <li><span class="key">Temporary</span><span>The layer goes as soon as possible.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Odoo 19.0 stays on Owl 2. saas-19.4 and later run Owl 3.</p>
+    </footer>
+  </article>
+
+
+
+
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="ffa37c68">
+    <header class="slide-head">
+      <p class="eyebrow">Templates</p>
+      <h2>QWeb, two engines</h2>
+      <p class="lead">QWeb is an XML templating language: directives are attributes on ordinary tags. One syntax, two engines that read it.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes">
+        <li><h3>QWeb in Python</h3><p>Reports, website pages, emails. Rendered on the server, page by page.</p><p class="meta"><code>t-field</code> · <code>t-call</code></p></li>
+        <li><h3>QWeb in Owl</h3><p>Components. Compiled in the browser the first time a template is needed, then re-rendered whenever the state it reads changes.</p><p class="meta"><code>t-on-click</code> · <code>t-ref</code> · <code>t-call-slot</code></p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>An XML file goes in the bundle like any other file.</p>
+    </footer>
+  </article>
+
+  <article class="slide divider" data-id="9e3c0102" data-act="owl">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Owl</h2>
+      <p class="divider-sub">Components and signals, building an application, and generic components.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <!-- 30-owl/components-and-signals.html -->
+  <article data-act="owl" data-from="owl" class="slide statement cover" data-id="c3edbcc4">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 1 · Owl</p>
+      <h2>An introduction to Owl 3</h2>
+      <p class="lead">Components, signals, templates, props, hooks.</p>
+    </header>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide" data-id="8c553a2a">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 1 · Owl</p>
+      <h2>Goals</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes tinted goals">
+        <li><h3>Components</h3></li>
+        <li><h3>Templates</h3></li>
+        <li><h3>Signals</h3></li>
+        <li><h3>Props</h3></li>
+        <li><h3>Hooks</h3></li>
+      </ul>
+    </div>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide" data-id="12d9fc3b">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 1 · Owl</p>
+      <h2>What is Owl?</h2>
+      <p class="lead">A JavaScript framework, in the family of React and Vue.</p>
+    </header>
+    <div class="slide-body two-col picture">
+      <section>
+        <h3 class="label">It defines</h3>
+        <ul class="rows wide-key">
+          <li><span class="key">Components</span><span>A base <code>Component</code> class.</span></li>
+          <li><span class="key">Reactivity</span><span>Built on signals.</span></li>
+          <li><span class="key">Templates</span><span>An extension of QWeb.</span></li>
+          <li><span class="key">Hooks</span><span>And utility functions.</span></li>
+        </ul>
+      </section>
+      <section class="frame">
+        <img src="assets/owl.webp" alt="A great horned owl perched on a branch">
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Open source, at <code>github.com/odoo/owl</code>. The Odoo web client is built on it.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide walkthrough" data-id="a3eca203">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>A Counter component</h2>
+      <p class="lead">A component is a class and a template.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    counter = signal(0);
+
+    increment() {
+        this.counter.set(this.counter() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">counter.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t t-out="this.counter()"/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            t-on-click="this.increment"&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The template name in <code>static template</code> is what ties the two files together.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide walkthrough" data-id="f2902aa5">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>Rendering context</h2>
+      <p class="lead">A template has a context of its own. At first it only holds the component, reached through <code>this</code>.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    counter = signal(0);
+
+    increment() {
+        this.counter.set(this.counter() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">counter.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t t-out="<mark>this.counter()</mark>"/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            <mark>t-on-click="this.increment"</mark>&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Every directive value is a JavaScript expression, evaluated in that context.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide walkthrough" data-id="657824c5">
+    <header class="slide-head">
+      <p class="eyebrow">Reactivity</p>
+      <h2>Signals</h2>
+      <ul class="notes">
+        <li>A value of its own: <em>call it</em> to read, <code>set</code> it to write. There is no <code>get</code>.</li>
+        <li>Fine grained: a component follows the signals it reads, and re-renders when one changes.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    counter = <mark>signal(0)</mark>;
+
+    increment() {
+        this.counter.set(this.counter() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">counter.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t t-out="<mark>this.counter()</mark>"/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            t-on-click="this.increment"&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Signals are new in Owl 3. Owl 2 used <code>useState</code>: see Owl 2 vs Owl 3, at the foot of the sidebar.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide walkthrough" data-id="91cdaddf">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>Event handling</h2>
+      <p class="lead">The <code>t-on-</code> directive takes any event name: <code>t-on-click</code>, <code>t-on-keydown</code>, <code>t-on-input</code>.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    counter = signal(0);
+
+    <mark>increment</mark>() {
+        this.counter.set(this.counter() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">counter.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t t-out="this.counter()"/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            <mark>t-on-click="this.increment"</mark>&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The handler receives the DOM event as its argument.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide" data-id="7d1f0a6c">
+    <header class="slide-head">
+      <p class="eyebrow">Templates</p>
+      <h2>Template syntax</h2>
+      <p class="lead">QWeb, plus what a component needs.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table syntax">
+        <li class="head"><span>Directive</span><span>What it does</span><span>Example</span></li>
+        <li><span><code>t-out</code></span><span>insert a value</span><span><code>&lt;span t-out="this.name()"/&gt;</code></span></li>
+        <li><span><code>t-if</code>, <code>t-else</code></span><span>render or not</span><span><code>&lt;p t-if="this.isValid()"&gt;Ok&lt;/p&gt;</code></span></li>
+        <li><span><code>t-foreach</code>, <code>t-key</code></span><span>repeat a block</span><span><code>&lt;t t-foreach="this.todos()" t-as="todo" t-key="todo.id"&gt;</code></span></li>
+        <li><span><code>t-att-*</code></span><span>set an attribute</span><span><code>&lt;li t-att-class="{ done: this.done() }"&gt;</code></span></li>
+        <li><span><code>t-on-*</code></span><span>listen to an event</span><span><code>&lt;button t-on-click="this.increment"&gt;</code></span></li>
+        <li><span><code>t-model</code></span><span>two-way binding</span><span><code>&lt;input t-model="this.name"/&gt;</code></span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Every value is plain JavaScript, evaluated with the component as <code>this</code>.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide" data-id="0c9b53ae">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>Sub components</h2>
+      <p class="lead">A component is a unit you reuse: its JavaScript, its template, its CSS.</p>
+    </header>
+    <div class="slide-body two-col sub">
+      <section>
+      <figure class="figure">
+        <svg viewBox="0 0 1000 215" role="img"
+             aria-label="A Root component renders two independent Counter components. A Counter is made of three files: counter.js, counter.xml and counter.css.">
+          <defs>
+            <marker id="owl-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="330" y="8" width="340" height="72" rx="6"/>
+          <text class="t" x="500" y="40">Root</text>
+          <text class="m" x="500" y="64">static components = { Counter }</text>
+
+          <path class="ar" marker-end="url(#owl-ar-1)" d="M430 86 L182 124"/>
+          <path class="ar" marker-end="url(#owl-ar-1)" d="M570 86 L818 124"/>
+          <text class="m" x="500" y="112">&lt;Counter/&gt;</text>
+
+          <rect class="bx js" x="0" y="128" width="290" height="76" rx="6"/>
+          <text class="t" x="145" y="160">Counter</text>
+          <text class="m" x="145" y="186">count = signal(0)</text>
+
+          <rect class="bx js" x="710" y="128" width="290" height="76" rx="6"/>
+          <text class="t" x="855" y="160">Counter</text>
+          <text class="m" x="855" y="186">count = signal(0)</text>
+
+          <text class="s" x="500" y="158">two instances,</text>
+          <text class="s" x="500" y="180">two states of their own</text>
+
+        </svg>
+      </figure>
+      </section>
+      <section>
+        <h3 class="label file">root.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="my_module.Root"&gt;
+    &lt;div class="p-3"&gt;
+        &lt;h1&gt;Two counters&lt;/h1&gt;
+        &lt;<mark>Counter</mark>/&gt;
+        &lt;<mark>Counter</mark>/&gt;
+    &lt;/div&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Declared in <code>static components</code>, then used as a tag: lowercase is html, a capital is a component.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide" data-id="5e46d8b2">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>Props, and their validation</h2>
+      <ul class="notes">
+        <li>The parent passes data down. The child never writes to it.</li>
+        <li><code>useProps</code> declares the shape. A missing or wrong prop fails loudly, in dev mode.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">The child declares what it accepts</h3>
+<pre><code class="language-javascript">import { useProps, t } from "@odoo/owl";
+
+export class ProductCard extends Component {
+    static template = "tutorial.ProductCard";
+
+    props = <mark>useProps</mark>({
+        name: t.string(),
+        price: t.number(),
+        image: t.string().<mark>optional("📦")</mark>,
+    });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label">The parent passes them, as JavaScript</h3>
+<pre><code class="language-markup">&lt;t t-name="tutorial.Root"&gt;
+    &lt;ProductCard
+        name="this.keyboard.name"
+        price="this.keyboard.price"
+        image="this.keyboard.image"/&gt;
+&lt;/t&gt;
+
+&lt;!-- in the child --&gt;
+&lt;div t-out="<mark>this.props.name</mark>"/&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>To send something up, the parent passes a function: callback props, in Building an Application.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide" data-id="4b2c7e91">
+    <header class="slide-head">
+      <p class="eyebrow">Reactivity</p>
+      <h2>Derived values: computed</h2>
+      <ul class="notes">
+        <li>A value built from other signals, read like a signal: <code>this.isValid()</code>.</li>
+        <li>Recomputed on its own, only when what it read has changed.</li>
+        <li><code>t-model</code> binds an input to a signal, both ways.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">some_component.js</h3>
+<pre><code class="language-javascript">import { signal, computed } from "@odoo/owl";
+
+class SomeComponent extends Component {
+    name = signal("");
+    email = signal("");
+
+    isValid = <mark>computed</mark>(() =&gt; {
+        return this.name()
+            &amp;&amp; this.email().includes("@");
+    });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">some_component.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="my_module.SomeComponent"&gt;
+    &lt;input <mark>t-model="this.name"</mark>
+           placeholder="Name"/&gt;
+    &lt;input t-model="this.email"
+           placeholder="Email"/&gt;
+    &lt;div t-out="this.isValid()
+                ? 'Valid' : 'Invalid'"/&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Read a computed like a signal. Never set it: it follows its inputs.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide" data-id="a71c2f30">
+    <header class="slide-head">
+      <p class="eyebrow">Hooks</p>
+      <h2>The lifecycle, and its hooks</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 216" role="img"
+             aria-label="Three phases, one after the other. On creation: setup, then onWillStart - the one hook that may be async, which the first render waits for - then the first render, then onMounted. Then, on every re-render: onWillPatch, the patch, then onPatched. Then, on removal: onWillUnmount, then onWillDestroy.">
+          <defs>
+            <marker id="owl-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+            <marker id="owl-ar-3" class="rt-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <text class="lane" x="0" y="22">create</text>
+          <text class="s l" x="0" y="42">once</text>
+
+          <rect class="bx open" x="170" y="0" width="170" height="44" rx="6"/>
+          <text class="t" x="255" y="28">setup</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M344 22 H382"/>
+
+          <rect class="bx" x="386" y="0" width="170" height="44" rx="6"/>
+          <text class="t" x="471" y="22">onWillStart</text>
+          <text class="s" x="471" y="38">async — the render waits</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M560 22 H598"/>
+
+          <rect class="chip" x="602" y="0" width="170" height="44" rx="6"/>
+          <text class="t" x="687" y="28">first render</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M776 22 H814"/>
+
+          <rect class="bx mount" x="818" y="0" width="170" height="44" rx="6"/>
+          <text class="t" x="903" y="28">onMounted</text>
+
+          <path class="ar rt" marker-end="url(#owl-ar-3)" d="M24 50 V80"/>
+
+          <text class="lane" x="0" y="100">update</text>
+          <text class="s l" x="0" y="120">every re-render</text>
+
+          <rect class="bx" x="170" y="78" width="170" height="44" rx="6"/>
+          <text class="t" x="255" y="106">onWillPatch</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M344 100 H382"/>
+
+          <rect class="chip" x="386" y="78" width="170" height="44" rx="6"/>
+          <text class="t" x="471" y="106">the patch</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M560 100 H598"/>
+
+          <rect class="bx" x="602" y="78" width="170" height="44" rx="6"/>
+          <text class="t" x="687" y="106">onPatched</text>
+
+          <path class="ar rt" marker-end="url(#owl-ar-3)" d="M24 128 V158"/>
+
+          <text class="lane" x="0" y="178">destroy</text>
+          <text class="s l" x="0" y="198">once</text>
+
+          <rect class="bx mount" x="170" y="156" width="170" height="44" rx="6"/>
+          <text class="t" x="255" y="184">onWillUnmount</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M344 178 H382"/>
+
+          <rect class="bx open" x="386" y="156" width="170" height="44" rx="6"/>
+          <text class="t" x="471" y="184">onWillDestroy</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>What <code>setup</code> starts, <code>onWillDestroy</code> ends. What <code>onMounted</code> starts, <code>onWillUnmount</code> ends. And <code>onWillStart</code> may be async.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl" class="slide" data-id="b8e0d4a7">
+    <header class="slide-head">
+      <p class="eyebrow">Owl</p>
+      <h2>odoo.github.io/owl</h2>
+      <p class="lead">The documentation, the playground and the source. Everything in this topic, in reference form.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure shot">
+        <img src="assets/owl-website.webp" alt="The Owl website: what Owl is, with links to the documentation and the playground">
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p><a href="https://odoo.github.io/owl/">odoo.github.io/owl</a> — also under Resources, at the foot of the sidebar.</p>
+    </footer>
+  </article>
+
+  <!-- 30-owl/building-an-application.html -->
+  <article data-act="owl" data-from="owl-app" class="slide statement cover" data-id="2f8a41d7">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 1 · Owl</p>
+      <h2>Building an application</h2>
+      <p class="lead">Lists, state, and where the logic lives.</p>
+    </header>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="9c3e5b18">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 1 · Owl</p>
+      <h2>Goals</h2>
+      <p class="lead">The first deck was the syntax. This one is the architecture.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes tinted goals">
+        <li><h3>Lists</h3></li>
+        <li><h3>Refs</h3></li>
+        <li><h3>Callback props</h3></li>
+        <li><h3>Plugins</h3></li>
+        <li><h3>Picking one</h3></li>
+      </ul>
+    </div>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="6a0d92f4">
+    <header class="slide-head">
+      <p class="eyebrow">Lists</p>
+      <h2>A list of components</h2>
+      <ul class="notes">
+        <li><code>t-foreach</code> over the data, one child component per item.</li>
+        <li><code>t-key</code> is how Owl tells the items apart between two renders. Never skip it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">todo_list.js</h3>
+<pre><code class="language-javascript">export class TodoList extends Component {
+    static template = "tutorial.TodoList";
+    static components = { TodoItem };
+
+    todos = signal.Array([
+        { id: 1, text: "Buy milk" },
+        { id: 2, text: "Walk the dog" },
+    ]);
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.xml</h3>
+<pre><code class="language-markup">&lt;ul class="todo-list"&gt;
+    &lt;t <mark>t-foreach="this.todos()"</mark>
+       t-as="todo"
+       <mark>t-key="todo.id"</mark>&gt;
+        &lt;TodoItem todo="todo"/&gt;
+    &lt;/t&gt;
+&lt;/ul&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Owl keeps the child whose key is still there, and creates or drops the rest.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="3e7f16c9">
+    <header class="slide-head">
+      <p class="eyebrow">Lists</p>
+      <h2>When push renders nothing</h2>
+      <p class="lead">A plain array is not reactive. Owl has no way to know it changed.</p>
+      <ul class="notes">
+        <li><code>signal.Array</code> and <code>signal.Object</code> track their own content: <code>push</code>, <code>splice</code>, a key set or deleted.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">A plain array</h3>
+<pre><code class="language-javascript">// nothing happens on screen
+todos = [
+    { id: 1, text: "Buy milk" },
+];
+
+addTodo(text) {
+    this.todos.push({ id: 2, text });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label">A collection signal</h3>
+<pre><code class="language-javascript">// the list re-renders
+todos = <mark>signal.Array</mark>([
+    { id: 1, text: "Buy milk" },
+]);
+
+addTodo(text) {
+    this.todos()<mark>.push</mark>({ id: 2, text });
+}</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The wrapping is shallow: what is inside stays a plain object, and stays untracked.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="8b52c0da">
+    <header class="slide-head">
+      <p class="eyebrow">Lists</p>
+      <h2>Reactive data inside the list</h2>
+      <p class="lead">Ticking the checkbox changes nothing: <code>completed</code> is a plain boolean, one level below what <code>signal.Array</code> tracks.</p>
+      <ul class="notes">
+        <li>A signal is a value. It can sit in an object, be passed as a prop, be bound with <code>t-model</code>.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">The data, and the props of the item</h3>
+<pre><code class="language-javascript">todos = signal.Array([
+    { id: 1, text: "Buy milk",
+      completed: <mark>signal(false)</mark> },
+]);
+
+// in TodoItem
+props = useProps({
+    todo: t.object({
+        id: t.number(),
+        text: t.string(),
+        completed: <mark>t.signal()</mark>,
+    }),
+});</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_item.xml</h3>
+<pre><code class="language-markup">&lt;li class="todo-item"
+    t-att-class="{
+      completed: <mark>this.props.todo.completed()</mark>
+    }"&gt;
+    &lt;input type="checkbox"
+           <mark>t-model="this.props.todo.completed"</mark>/&gt;
+    &lt;span t-out="this.props.todo.text"/&gt;
+&lt;/li&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Make reactive what actually changes, and nothing else: <code>text</code> and <code>id</code> stay plain.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="cc4a8e17">
+    <header class="slide-head">
+      <p class="eyebrow">Refs</p>
+      <h2>Reaching the DOM</h2>
+      <ul class="notes">
+        <li><code>signal.ref()</code> plus <code>t-ref</code>: the element lands in the signal once mounted.</li>
+        <li>Before mounting it is <code>null</code>, which is why the DOM is touched in <code>onMounted</code>.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label file">todo_list.js</h3>
+<pre><code class="language-javascript">import { signal, onMounted } from "@odoo/owl";
+
+export class TodoList extends Component {
+    input = <mark>signal.ref()</mark>;
+
+    setup() {
+        onMounted(() =&gt; {
+            this.input().focus();
+        });
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.xml</h3>
+<pre><code class="language-markup">&lt;input class="todo-input"
+       <mark>t-ref="this.input"</mark>
+       placeholder="What needs to be done?"/&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A ref is a signal: read it with <code>this.input()</code>, like any other.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="47b30f5e">
+    <header class="slide-head">
+      <p class="eyebrow">Refs</p>
+      <h2>Writing your own hook</h2>
+      <ul class="notes">
+        <li>A plain function that calls other hooks, named <code>use…</code> by convention.</li>
+        <li>It is how behaviour is shared between components, without a base class.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">utils.js</h3>
+<pre><code class="language-javascript">import { onMounted } from "@odoo/owl";
+
+export function <mark>useAutofocus</mark>(ref) {
+    onMounted(() =&gt; {
+        ref()?.focus();
+    });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.js</h3>
+<pre><code class="language-javascript">import { useAutofocus } from "./utils";
+
+export class TodoList extends Component {
+    input = signal.ref();
+
+    setup() {
+        <mark>useAutofocus(this.input)</mark>;
+    }
+}</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Called while the component is being created: in <code>setup</code>, or as a class field. Not later, from a handler or a method.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="e2915cb6">
+    <header class="slide-head">
+      <p class="eyebrow">Callback props</p>
+      <h2>Talking to the parent</h2>
+      <p class="lead">The child displays a todo, but the parent owns the list. So the parent deletes, and the child asks.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="150 0 700 260" role="img"
+             aria-label="TodoList passes a todo and an onDelete callback down to TodoItem. TodoItem calls the callback back up when its delete button is clicked.">
+          <defs>
+            <marker id="app-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="300" y="8" width="400" height="78" rx="6"/>
+          <text class="t" x="500" y="42">TodoList</text>
+          <text class="s" x="500" y="66">owns the array of todos</text>
+
+          <path class="ar" marker-end="url(#app-ar-1)" d="M420 92 V166"/>
+          <text class="m r" x="404" y="126">todo="todo"</text>
+          <text class="s r" x="404" y="146">data goes down</text>
+
+          <path class="ar" marker-end="url(#app-ar-1)" d="M580 168 V94"/>
+          <text class="m l" x="596" y="126">onDelete="..."</text>
+          <text class="s l" x="596" y="146">intent comes up</text>
+
+          <rect class="bx js" x="300" y="174" width="400" height="78" rx="6"/>
+          <text class="t" x="500" y="208">TodoItem</text>
+          <text class="s" x="500" y="232">displays one todo</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>A function is a prop like any other: <code>onDelete: t.function().optional()</code>.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="70ad3c81">
+    <header class="slide-head">
+      <p class="eyebrow">Picking one</p>
+      <h2>Reacting to a change</h2>
+      <p class="lead">Both track the signals they read, and run again when those change. The difference is what you want out of them.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">computed</h3>
+        <ul class="notes">
+          <li>You want a value.</li>
+          <li>Read it like a signal: <code>this.remaining()</code>.</li>
+          <li>No side effect, ever.</li>
+        </ul>
+<pre><code class="language-javascript">remaining = computed(() =&gt;
+    this.todos().filter((t) =&gt; !t.completed()).length
+);</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">useEffect</h3>
+        <ul class="notes">
+          <li>You want a side effect.</li>
+          <li>Saving, logging, a third-party library.</li>
+          <li>Returns nothing useful.</li>
+        </ul>
+<pre><code class="language-javascript">useEffect(() =&gt; {
+    localStorage.setItem("todos", serialize(this.todos()));
+});</code></pre>
+      </section>
+    </div>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="b6f42e09">
+    <header class="slide-head">
+      <p class="eyebrow">Plugins</p>
+      <h2>Sharing state and logic between components</h2>
+      <p class="lead">A component renders. Everything else, the data and the rules, belongs somewhere a second component can reach.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 300" role="img"
+             aria-label="A tree of components: TodoList, with two TodoItem children. All three overlap the same TodoListPlugin, drawn behind them: one object, shared by the three of them.">
+          <rect class="bx js" x="480" y="24" width="420" height="252" rx="8"/>
+          <text class="t" x="700" y="110">TodoListPlugin</text>
+          <text class="s" x="700" y="138">todos, addTodo, remaining</text>
+          <text class="m" x="700" y="180">usePlugin(TodoListPlugin)</text>
+          <text class="s" x="700" y="216">one instance, the same in each</text>
+
+          <path class="ar" d="M104 88 V246 M104 152 H160 M104 246 H160"/>
+
+          <rect class="bx" x="80" y="16" width="420" height="72" rx="6"/>
+          <text class="t" x="290" y="50">TodoList</text>
+          <text class="s" x="290" y="74">renders the list</text>
+
+          <rect class="bx" x="160" y="116" width="340" height="72" rx="6"/>
+          <text class="t" x="330" y="150">TodoItem</text>
+          <text class="s" x="330" y="174">renders one todo</text>
+
+          <rect class="bx" x="160" y="210" width="340" height="72" rx="6"/>
+          <text class="t" x="330" y="244">TodoItem</text>
+          <text class="s" x="330" y="268">renders one todo</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>A plugin is a class with signals and methods. Every component that asks gets the same instance.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="19c8d7fb">
+    <header class="slide-head">
+      <p class="eyebrow">Plugins</p>
+      <h2>A plugin, in code</h2>
+      <ul class="notes">
+        <li><code>providePlugins</code> at the top, once: it opens the plugins to that component and its children.</li>
+        <li><code>usePlugin</code> anywhere below, in a component or in a plugin.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">todo_list_plugin.js</h3>
+<pre><code class="language-javascript">import { Plugin, signal, usePlugin } from "@odoo/owl";
+import { StoragePlugin } from "../storage_plugin";
+
+export class TodoListPlugin extends <mark>Plugin</mark> {
+    todos = signal.Array([]);
+
+    storage = <mark>usePlugin(StoragePlugin)</mark>;
+
+    addTodo(text) {
+        text = text.trim();
+        if (text) {
+            this.todos().push({ ... });
+        }
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.js, todo_item.js</h3>
+<pre><code class="language-javascript">export class TodoList extends Component {
+    setup() {
+        <mark>providePlugins([TodoListPlugin])</mark>;
+        this.todoList = usePlugin(TodoListPlugin);
+    }
+}
+
+// and in the child, no prop needed
+export class TodoItem extends Component {
+    todoList = <mark>usePlugin(TodoListPlugin)</mark>;
+}</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>No prop drilling: the child reaches the plugin on its own.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="owl-app" class="slide" data-id="5af3e2b4">
+    <header class="slide-head">
+      <p class="eyebrow">Picking one</p>
+      <h2>Four ways to be reactive</h2>
+      <p class="lead">One dependency tracker underneath, four shapes on top. Pick by the shape of your data.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes shapes">
+        <li><h3><code>signal(0)</code></h3><p>A single value.</p><p class="meta">Tracks the value.</p></li>
+        <li><h3><code>signal.Array([])</code></h3><p>A list you add to.</p><p class="meta">Tracks its own items, shallow.</p></li>
+        <li><h3><code>signal.Object({})</code></h3><p>A flat bag of keys.</p><p class="meta">Tracks its own keys, shallow.</p></li>
+        <li><h3><code>proxy({...})</code></h3><p>A nested tree of settings.</p><p class="meta">Tracks every level, recursively.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>With a <code>proxy</code>, a plain write notifies: <code>viewPrefs.sort.direction = "desc"</code>. In a template, <code>t-model.proxy="this.viewPrefs.sort.by"</code>.</p>
+    </footer>
+  </article>
+
+  <!-- 30-owl/generic-components.html -->
+  <article data-act="owl" data-from="generic-components" class="slide statement cover" data-id="074e956b">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 1 · Owl</p>
+      <h2>Generic components</h2>
+      <p class="lead">A component whose content is somebody else's: slots.</p>
+    </header>
+  </article>
+
+  <article data-act="owl" data-from="generic-components" class="slide" data-id="50b92cfe">
+    <header class="slide-head">
+      <p class="eyebrow">Slots</p>
+      <h2>Content the caller writes</h2>
+      <ul class="notes">
+        <li>A <code>Card</code> draws the frame. What goes inside is different at every call site.</li>
+        <li>Props pass <em>data</em> down: a string, a number, a record. They cannot pass a paragraph and a button with a handler on it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">root.xml — what we want to be able to write</h3>
+<pre><code class="language-markup">&lt;t t-name="tutorial.Root"&gt;
+    &lt;<mark>Card</mark>&gt;
+        &lt;p&gt;Some quick example text.&lt;/p&gt;
+        &lt;a class="btn btn-primary"
+           t-on-click="this.goSomewhere"&gt;
+          Go somewhere
+        &lt;/a&gt;
+    &lt;/Card&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Markup</span><span>A paragraph, a button, another component — whatever this screen needs.</span></li>
+          <li><span class="key">Its own</span><span><code>this.goSomewhere</code> is the Root's method. The Card never hears about it.</span></li>
+          <li><span class="key">Every call</span><span>The next <code>&lt;Card/&gt;</code> holds something else entirely.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Owl calls that a slot: the generic component leaves a hole, and whoever uses it fills the hole.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="generic-components" class="slide" data-id="c47b0e83">
+    <header class="slide-head">
+      <p class="eyebrow">Slots</p>
+      <h2>A slot is a hole in a template</h2>
+      <ul class="notes">
+        <li>The generic component says <em>where</em> the content goes, with <code>t-call-slot</code>. The caller says what it is.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">card.xml — the generic component</h3>
+<pre><code class="language-markup">&lt;t t-name="tutorial.Card"&gt;
+    &lt;div class="card"&gt;
+        &lt;div class="card-body"&gt;
+            &lt;t <mark>t-call-slot="default"</mark>/&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">default</span><span>Everything the caller wrote between <code>&lt;Card&gt;</code> and <code>&lt;/Card&gt;</code>.</span></li>
+          <li><span class="key">Nothing else</span><span>The Card is seven lines of markup, and no javascript at all.</span></li>
+          <li><span class="key">Reusable</span><span>Every screen that needs a card frame now has one.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The content is rendered where it was <em>written</em>: <code>this.goSomewhere</code> is the Root's method, not the Card's.</p>
+    </footer>
+  </article>
+
+  <article data-act="owl" data-from="generic-components" class="slide" data-id="944efe79">
+    <header class="slide-head">
+      <p class="eyebrow">Slots</p>
+      <h2>Named slots, and optional ones</h2>
+      <ul class="notes">
+        <li><code>t-set-slot</code> names a piece of content. Everything left over is the <code>default</code> slot.</li>
+        <li>What the caller gave you is readable: <code>this.props.slots</code>, keyed by slot name.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">card.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="tutorial.Card"&gt;
+  &lt;div class="card"&gt;
+    &lt;div class="card-body"&gt;
+      &lt;h5 class="card-title"
+          t-if="<mark>this.props.slots.title</mark>"&gt;
+        &lt;t t-call-slot="title"/&gt;
+      &lt;/h5&gt;
+      &lt;t t-call-slot="default"/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">root.xml</h3>
+<pre><code class="language-markup">&lt;Card&gt;
+    &lt;t <mark>t-set-slot="title"</mark>&gt;Card title&lt;/t&gt;
+    &lt;p&gt;Some quick example text.&lt;/p&gt;
+&lt;/Card&gt;
+
+&lt;!-- no title given: the h5 is not
+     rendered at all --&gt;
+&lt;Card&gt;
+    &lt;p&gt;Just a body.&lt;/p&gt;
+&lt;/Card&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A slot can carry a default too: <code>&lt;t t-call-slot="title"&gt;Untitled&lt;/t&gt;</code> renders that when the caller gave nothing.</p>
+    </footer>
+  </article>
+
+  <article class="slide divider" data-id="9e3c0103" data-act="framework">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>The Odoo JS Framework</h2>
+      <p class="divider-sub">The web client, registries, client actions, the server, and plugins.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <!-- 40-js-framework/slides.html -->
+  <article data-act="framework" data-from="js-framework" class="slide statement cover" data-id="85474460">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 2 · Part 1</p>
+      <h2>JS Framework 101</h2>
+      <p class="lead">What <code>addons/web</code> gives you, and how your code plugs into it.</p>
+    </header>
+  </article>
+
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="7a79bc68">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 2 · The Odoo JS framework</p>
+      <h2>Goals</h2>
+      <p class="lead">Owl gave you components. This topic is the application they live in.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">The web client</span><span>One component tree, from the navbar down to your screen.</span></li>
+        <li><span class="key">Registries</span><span>How an addon adds something the web client picks up.</span></li>
+        <li><span class="key">Services</span><span>The code that stays alive, and how a component reaches it.</span></li>
+        <li><span class="key">Client actions</span><span>A screen of your own, opened from a menu.</span></li>
+        <li><span class="key">The server</span><span>The orm plugin, controllers, and when to load.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Dashboard, the exercise that follows, uses every one of them.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="20b72e9c">
+    <header class="slide-head">
+      <p class="eyebrow">The web client</p>
+      <h2>Building blocks</h2>
+      <p class="lead">Three layers, and the names you will keep meeting. Your addon writes the top one.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 300" role="img"
+             aria-label="Three layers. Your addon writes components, templates, a client action and a plugin. addons/web provides the WebClient, the registries, the services, the actions and the ORM. The server holds the Python models and the controllers.">
+          <text class="lane" x="0" y="12">your addon</text>
+
+          <rect class="bx js" x="0" y="20" width="235" height="66" rx="6"/>
+          <text class="t" x="117" y="48">Components</text>
+          <text class="s" x="117" y="70">Owl, as in topic 1</text>
+
+          <rect class="bx js" x="255" y="20" width="235" height="66" rx="6"/>
+          <text class="t" x="372" y="48">Templates</text>
+          <text class="s" x="372" y="70">QWeb, in XML</text>
+
+          <rect class="bx js" x="510" y="20" width="235" height="66" rx="6"/>
+          <text class="t" x="627" y="48">Client action</text>
+          <text class="s" x="627" y="70">a screen of your own</text>
+
+          <rect class="bx js" x="765" y="20" width="235" height="66" rx="6"/>
+          <text class="t" x="882" y="48">Plugins</text>
+          <text class="s" x="882" y="70">your long-lived code</text>
+
+          <text class="lane" x="0" y="118">addons/web</text>
+
+          <rect class="bx" x="0" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="93" y="154">WebClient</text>
+          <text class="s" x="93" y="176">the root</text>
+
+          <rect class="bx" x="203" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="296" y="154">Registries</text>
+          <text class="s" x="296" y="176">how you plug in</text>
+
+          <rect class="bx" x="406" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="499" y="154">Services</text>
+          <text class="s" x="499" y="176">the ones web ships</text>
+
+          <rect class="bx" x="610" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="703" y="154">Actions</text>
+          <text class="s" x="703" y="176">what menus open</text>
+
+          <rect class="bx" x="813" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="906" y="154">ORM</text>
+          <text class="s" x="906" y="176">calls the server</text>
+
+          <text class="lane" x="0" y="224">the server</text>
+
+          <rect class="bx srv" x="0" y="232" width="490" height="66" rx="6"/>
+          <text class="t" x="245" y="260">Python models</text>
+          <text class="s" x="245" y="282">where the data actually is</text>
+
+          <rect class="bx srv" x="510" y="232" width="490" height="66" rx="6"/>
+          <text class="t" x="755" y="260">Controllers</text>
+          <text class="s" x="755" y="282">routes, for everything else</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Your addon never imports the web client. It writes into a registry, and the web client reads it.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="1a7c9e42">
+    <header class="slide-head">
+      <p class="eyebrow">The web client</p>
+      <h2>Web client</h2>
+      <p class="lead">The web client is an ordinary Owl component. Everything on screen hangs below it.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <figure class="figure webclient">
+          <svg viewBox="0 0 520 256" role="img"
+               aria-label="WebClient at the top, with three children: NavBar, ActionContainer and MainComponentsContainer. The ActionContainer holds the current action, a view or a client action.">
+            <defs>
+              <marker id="fw-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx" x="0" y="0" width="250" height="54" rx="6"/>
+            <text class="t" x="125" y="24">WebClient</text>
+            <text class="s" x="125" y="44">web.WebClient</text>
+
+            <path class="ar" d="M28 54 V223 M28 95 H56 M28 159 H56 M28 223 H56"/>
+
+            <rect class="bx" x="56" y="70" width="250" height="50" rx="6"/>
+            <text class="t" x="181" y="92">NavBar</text>
+            <text class="s" x="181" y="110">apps, menus, systray</text>
+
+            <rect class="bx js" x="56" y="134" width="230" height="50" rx="6"/>
+            <text class="t" x="171" y="156">ActionContainer</text>
+            <text class="s" x="171" y="174">the current action</text>
+
+            <path class="ar" marker-end="url(#fw-ar-1)" d="M290 159 H312"/>
+
+            <rect class="chip" x="316" y="134" width="204" height="50" rx="6"/>
+            <text class="s" x="418" y="154">a view, a report,</text>
+            <text class="s" x="418" y="172">or your client action</text>
+
+            <rect class="bx" x="56" y="198" width="380" height="50" rx="6"/>
+            <text class="t" x="246" y="220">MainComponentsContainer</text>
+            <text class="s" x="246" y="238">dialogs, notifications</text>
+          </svg>
+        </figure>
+      </section>
+      <section>
+        <h3 class="label file">web/static/src/webclient/webclient.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="<mark>web.WebClient</mark>"&gt;
+    &lt;t t-if="!this.state.fullscreen"&gt;
+        &lt;NavBar/&gt;
+    &lt;/t&gt;
+    &lt;ActionContainer/&gt;
+    &lt;MainComponentsContainer/&gt;
+&lt;/t&gt;</code></pre>
+        <p class="caption">That is the whole thing. Three tags, one of them behind a <code>t-if</code>.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Nothing special about it: open the file and read it, then follow <code>ActionContainer</code> down.</p>
+    </footer>
+  </article>
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="3f6b1d84">
+    <header class="slide-head">
+      <p class="eyebrow">Registries</p>
+      <h2>Extending the web client</h2>
+      <p class="lead">The primary extension mechanism: every addon registers what it adds, and the web client picks it up.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 280" role="img"
+             aria-label="Three addons, accounting, crm and yours, each add entries to the registries: fields, views, systray, actions. The web client reads those registries to build the screen.">
+          <defs>
+            <marker id="fw-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="0" y="20" width="210" height="52" rx="6"/>
+          <text class="t" x="105" y="52">accounting</text>
+
+          <rect class="bx" x="0" y="100" width="210" height="52" rx="6"/>
+          <text class="t" x="105" y="132">crm</text>
+
+          <rect class="bx" x="0" y="180" width="210" height="52" rx="6"/>
+          <text class="t" x="105" y="212">your addon</text>
+
+          <path class="ar" marker-end="url(#fw-ar-2)" d="M214 46 H326"/>
+          <path class="ar" marker-end="url(#fw-ar-2)" d="M214 126 H326"/>
+          <path class="ar" marker-end="url(#fw-ar-2)" d="M214 206 H326"/>
+          <text class="s" x="270" y="116">register</text>
+
+          <rect class="chip" x="330" y="0" width="240" height="246" rx="8"/>
+
+          <rect class="bx js" x="350" y="14" width="200" height="44" rx="6"/>
+          <text class="t" x="450" y="42">fields</text>
+
+          <rect class="bx js" x="350" y="72" width="200" height="44" rx="6"/>
+          <text class="t" x="450" y="100">views</text>
+
+          <rect class="bx js" x="350" y="130" width="200" height="44" rx="6"/>
+          <text class="t" x="450" y="158">systray</text>
+
+          <rect class="bx js" x="350" y="188" width="200" height="44" rx="6"/>
+          <text class="t" x="450" y="216">actions</text>
+
+          <text class="s" x="450" y="268">registries</text>
+
+          <path class="ar" marker-start="url(#fw-ar-2)" d="M574 123 H696"/>
+          <text class="s" x="635" y="113">reads</text>
+
+          <rect class="bx" x="700" y="71" width="300" height="104" rx="6"/>
+          <text class="t" x="850" y="118">the web client</text>
+          <text class="s" x="850" y="140">builds the screen out of them</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Nothing is special about <code>web</code>: it fills the same registries, and the standard list view is registered exactly the way yours is.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="4b8d2f61">
+    <header class="slide-head">
+      <p class="eyebrow">Registries</p>
+      <h2>Registries</h2>
+      <ul class="notes">
+        <li>The primary extension point: an addon registers something, the web client picks it up.</li>
+        <li>One global <code>registry</code>, split into categories. A <code>sequence</code> keeps an order when order matters.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label file">my_addon/static/src/dashboard/dashboard.js</h3>
+<pre><code class="language-javascript">import { registry } from "@web/core/registry";
+
+// a category is a sub-registry
+const actions = registry.<mark>category("actions")</mark>;
+
+actions.<mark>add</mark>("my_addon.dashboard", Dashboard);
+
+// with an order, for the categories that keep one
+registry.category("systray").add(
+    "my_addon.counter",
+    { Component: CounterItem },
+    <mark>{ sequence: 30 }</mark>,
+);</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">No import</span><span>The web client never imports your addon. It reads the registry.</span></li>
+          <li><span class="key">Replace</span><span>Adding on a key that exists, with <code>{ force: true }</code>, overrides the standard entry.</span></li>
+          <li><span class="key">Live</span><span>A registry is an <code>EventBus</code>: it fires on every add, so a late entry still reaches the screen.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>In the console: <code>odoo.loader.modules.get("@web/core/registry").registry.category("actions").getEntries()</code></p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="7c3e5a09">
+    <header class="slide-head">
+      <p class="eyebrow">Registries</p>
+      <h2>The ones you will use</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table registries">
+        <li class="head"><span>Category</span><span>What it holds</span><span>Topic</span></li>
+        <li><span><code>actions</code></span><span>Client actions: a screen of your own.</span><span>this one</span></li>
+        <li><span><code>services</code></span><span>The code started with the web client.</span><span>this one</span></li>
+        <li><span><code>fields</code></span><span>One component per field widget.</span><span>Views and fields</span></li>
+        <li><span><code>views</code></span><span>The list, kanban, form… and yours.</span><span>Views and fields</span></li>
+        <li><span><code>systray</code></span><span>The items at the right of the navbar.</span><span>Advanced JS framework</span></li>
+        <li><span><code>error_handlers</code></span><span>What happens when something throws.</span><span class="quiet">good to know</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Some fifty categories in all. These six cover most of what an addon adds.</p>
+    </footer>
+  </article>
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="9e2c5b70">
+    <header class="slide-head">
+      <p class="eyebrow">Registries</p>
+      <h2>Registry and Resource, in Owl 3</h2>
+      <ul class="notes">
+        <li>The global <code>registry</code> is Odoo's own, and still holds every category above. Owl 3 ships two of its own, and new code uses those.</li>
+        <li>Each one is a plain object, declared and exported where it belongs. No string category to spell right, and the type is checked on the way in.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label">Registry · keyed, like the ones above</h3>
+<pre><code class="language-javascript">import { Registry, t } from "@odoo/owl";
+
+const views = new Registry({
+    name: "views",
+    <mark>validation: t.object({ type: t.string() })</mark>,
+});
+
+views.add("list", listView, { sequence: 10 });
+views.add("list", other);                   // throws
+views.add("list", other, { force: true });  // ok
+
+views.get("list");        // throws if missing
+views.get("map", null);   // or a default
+views.<mark>items()</mark>;          // sorted by sequence</code></pre>
+      </section>
+      <section>
+        <h3 class="label">Resource · a list, no keys</h3>
+<pre><code class="language-javascript">import { Plugin, Resource, t } from "@odoo/owl";
+
+// @web/core/services, the one you meet first
+export const services = new Resource({
+    name: "services",
+    validation: t.constructor(Plugin),
+});
+
+services.add(ReportingPlugin);  // started with the web client
+
+// one of your own, read back with tiles.items()
+const tiles = new Resource({ name: "tiles" });
+
+tiles.add({ Component: SalesTile }, { sequence: 20 });
+tiles.<mark>use</mark>({ Component: SalesTile });  // until destroy</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>items()</code> is a computed, so a template that reads one follows every add and remove. <code>use()</code> drops the entry when the component or plugin that added it is destroyed.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="b3e91d47">
+    <header class="slide-head">
+      <p class="eyebrow">Client actions</p>
+      <h2>Everything on screen is an action</h2>
+      <p class="lead">A menu item points at an action record. The type of that record decides who renders it.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table actions">
+        <li class="head"><span>Type</span><span>What it is</span><span>Rendered by</span></li>
+        <li><span><code>ir.actions.act_window</code></span><span>Views on a model, with a domain and a context.</span><span>the view, from the <code>views</code> registry</span></li>
+        <li><span><code>ir.actions.client</code></span><span>A component of your own. Anything you like.</span><span>your entry in the <code>actions</code> registry</span></li>
+        <li><span><code>ir.actions.report</code></span><span>A PDF or an HTML report.</span><span>the report action</span></li>
+        <li><span><code>ir.actions.server</code></span><span>Python, which usually returns another action.</span><span>the server, then the browser</span></li>
+        <li><span><code>ir.actions.act_url</code></span><span>A url to open.</span><span>the browser</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>One service runs them all: <code>this.action.doAction("base_setup.action_general_configuration")</code>.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="d6f1a30b">
+    <header class="slide-head">
+      <p class="eyebrow">Client actions</p>
+      <h2>Window actions</h2>
+      <ul class="notes">
+        <li>Far and away the most common one: nearly every menu in Odoo opens an <code>act_window</code>.</li>
+        <li>The xml below is not read at runtime: installing the addon writes a row in <code>ir_actions</code>. The UI lives in the database, which most frameworks do not do.</li>
+        <li>It names a model and a list of view types. The web client loads those views and renders the first, with a switcher for the rest.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">crm/views/crm_lead_views.xml</h3>
+<pre><code class="language-markup">&lt;record id="crm_lead_action_pipeline"
+        model="<mark>ir.actions.act_window</mark>"&gt;
+    &lt;field name="name"&gt;Pipeline&lt;/field&gt;
+    &lt;field name="<mark>res_model</mark>"&gt;crm.lead&lt;/field&gt;
+    &lt;field name="<mark>view_mode</mark>"&gt;kanban,list,form&lt;/field&gt;
+    &lt;field name="domain"&gt;[("type", "=", "opportunity")]&lt;/field&gt;
+    &lt;field name="context"&gt;{"default_type": "opportunity"}&lt;/field&gt;
+&lt;/record&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">res_model</span><span>The model the views are built on.</span></li>
+          <li><span class="key">view_mode</span><span>Which views, and in what order. The first one opens.</span></li>
+          <li><span class="key">domain</span><span>What is in scope. The user's own filters are added to it, never instead of it.</span></li>
+          <li><span class="key">context</span><span>Defaults for a new record, and anything a view wants to read.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Nothing here is javascript: it is a record, and a user with the rights can edit it. Your addon writes one when a menu should open a screen it did not have to build.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="5f1a8c37">
+    <header class="slide-head">
+      <p class="eyebrow">Client actions</p>
+      <h2>Client Actions</h2>
+      <ul class="notes">
+        <li>A record in Python names the action; the registry says which component renders it.</li>
+        <li><code>Layout</code> gives your screen the control panel every other screen has.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">dashboard.js, and the action record</h3>
+<pre><code class="language-javascript">class Dashboard extends Component {
+    static template = "awesome_dashboard.Dashboard";
+    // ...
+}
+
+registry.category("actions")
+    .add(<mark>"awesome_dashboard.dashboard"</mark>, Dashboard);</code></pre>
+<pre><code class="language-markup">&lt;record id="dashboard" model="<mark>ir.actions.client</mark>"&gt;
+    &lt;field name="name"&gt;Dashboard&lt;/field&gt;
+    &lt;field name="tag"&gt;awesome_dashboard.dashboard&lt;/field&gt;
+&lt;/record&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">dashboard.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="awesome_dashboard.Dashboard"&gt;
+    &lt;<mark>Layout</mark> display="{ controlPanel: {} }"
+            className="'o_dashboard h-100'"&gt;
+        &lt;t t-set-slot="layout-buttons"&gt;
+            &lt;button class="btn btn-primary"
+                    t-on-click="this.openCustomers"&gt;
+                Customers
+            &lt;/button&gt;
+        &lt;/t&gt;
+        the content of the dashboard
+    &lt;/Layout&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A menu item points at the action record. From there on, the screen is yours.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework" class="slide" data-id="c48ea30f">
+    <header class="slide-head">
+      <p class="eyebrow">Data</p>
+      <h2>Talking to the server</h2>
+      <p class="lead">The browser has no database: every piece of data is a request, and your Python method is the API.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">A controller route</h3>
+<pre><code class="language-javascript">import { rpc } from "@web/core/network/rpc";
+
+const stats = await <mark>rpc</mark>("/my_addon/stats", {
+    period: "month",
+});</code></pre>
+<pre><code class="language-python">@http.route("/my_addon/stats", auth="user",
+            <mark>type="jsonrpc"</mark>)
+def stats(self, period):
+    return {"orders": 42}</code></pre>
+        <p class="caption">JSON in, JSON out.</p>
+      </section>
+      <section>
+        <h3 class="label">The orm plugin</h3>
+<pre><code class="language-javascript">import { Component, onWillStart, signal, usePlugin } from "@odoo/owl";
+import { ORM } from "@web/core/orm_plugin";
+
+class Dashboard extends Component {
+    orm = <mark>usePlugin(ORM)</mark>;
+    partners = signal([]);
+
+    setup() {
+        onWillStart(() =&gt; this.load());
+    }
+
+    async load() {
+        const domain = [["is_company", "=", true]];
+        const partners = await this.orm.<mark>searchRead</mark>(
+            "res.partner", domain, ["name", "email"],
+        );
+        this.partners.set(partners);
+    }
+}</code></pre>
+        <p class="caption"><code>orm.call</code> reaches any other model method.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Both go through JSON-RPC. The network tab of the browser shows every call.</p>
+    </footer>
+  </article>
+
+  <!-- 40-js-framework/slides-part-2.html -->
+  <article data-act="framework" data-from="js-framework-2" class="slide statement cover" data-id="2c59f513">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 2 · Part 2</p>
+      <h2>Plugins</h2>
+      <p class="lead">The code that outlives a screen, and what has to be loaded before the first render.</p>
+    </header>
+  </article>
+
+  <article data-act="framework" data-from="js-framework-2" class="slide" data-id="2e9b6d14">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>Plugins and services</h2>
+      <p class="lead">A component is created and destroyed with its screen. A service is started once, with the web client, and outlives every screen.</p>
+      <ul class="notes">
+        <li>State that must survive a screen change, or be shared between two of them, belongs in a service.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">The older shape, still everywhere</h3>
+<pre><code class="language-javascript">import { registry } from "@web/core/registry";
+
+const myService = {
+    <mark>dependencies: ["notification"]</mark>,
+    start(env, { notification }) {
+        return { doSomething() { /* ... */ } };
+    },
+};
+registry.category("services").add("my", myService);
+
+// in a component
+this.my = <mark>useService("my")</mark>;</code></pre>
+      </section>
+      <section>
+        <h3 class="label">Owl 3: a global plugin</h3>
+<pre><code class="language-javascript">import { Plugin, usePlugin } from "@odoo/owl";
+import { NotificationPlugin }
+    from "@web/core/notifications/notification_plugin";
+import { services } from "@web/core/services";
+
+export class MyPlugin extends <mark>Plugin</mark> {
+    <mark>notification = usePlugin(NotificationPlugin)</mark>;
+
+    doSomething() { /* ... */ }
+}
+
+<mark>services.add</mark>(MyPlugin);
+
+// in a component
+my = <mark>usePlugin(MyPlugin)</mark>;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Write plugins. Read both: plenty of services are still in their old shape, and every ported one keeps a <code>useService</code> alias for the code that has not moved yet.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework-2" class="slide" data-id="6a4d1f92">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>The ones already there</h2>
+      <p class="lead">Before writing one, know what the framework already started for you.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table plugins">
+        <li class="head"><span>Plugin</span><span>What it gives you</span><span>Imported from</span></li>
+        <li><span><code>ORM</code></span><span>Reading and writing records.</span><span><code>@web/core/orm_plugin</code></span></li>
+        <li><span><code>NotificationPlugin</code></span><span>The toasts in the top right corner.</span><span><code>@web/core/notifications/notification_plugin</code></span></li>
+        <li><span><code>DialogPlugin</code></span><span>A dialog over the current screen.</span><span><code>@web/core/dialog/dialog_plugin</code></span></li>
+        <li><span><code>EffectPlugin</code></span><span>The rainbowman, and the other effects.</span><span><code>@web/core/effects/effect_plugin</code></span></li>
+        <li><span><code>HotkeyPlugin</code></span><span>Keyboard shortcuts, scoped to what is on screen.</span><span><code>@web/core/hotkeys/hotkey_plugin</code></span></li>
+        <li><span><code>ActionPlugin</code></span><span><code>doAction</code>: the one that opens a screen.</span><span><code>@web/webclient/actions/action_plugin</code></span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>A couple of dozen more in <code>addons/web</code> alone: <code>grep -r "services.add(" addons/web/static/src</code> lists every one of them.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework-2" class="slide" data-id="8c31b7e5">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>Defining a plugin</h2>
+      <ul class="notes">
+        <li>A class extending <code>Plugin</code>, and one line to start it with the web client. Nothing else refers to it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">my_addon/static/src/reporting_plugin.js</h3>
+<pre><code class="language-javascript">import { Plugin, onWillStart, signal, usePlugin } from "@odoo/owl";
+import { ORM } from "@web/core/orm_plugin";
+import { services } from "@web/core/services";
+
+export class ReportingPlugin extends Plugin {
+    <mark>orm = usePlugin(ORM)</mark>;
+    stats = signal.Object({});
+
+    setup() {
+        onWillStart(() =&gt; this.reload());
+    }
+
+    async reload() {
+        const stats = await this.orm.call("my.model", "get_stats");
+        this.stats.set(stats);
+    }
+}
+
+<mark>services.add(ReportingPlugin)</mark>;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">State</span><span>Signals, as in a component. Everything that reads one follows it.</span></li>
+          <li><span class="key">Dependencies</span><span><code>usePlugin</code> in a field, the same call a component makes. What it names is started if it has not been.</span></li>
+          <li><span class="key">setup</span><span>Listeners and subscriptions. <code>onWillStart</code> works here too: the web client waits for it.</span></li>
+          <li><span class="key">Cleanup</span><span>Signals, computeds and <code>useListener</code> undo themselves. For the rest, <code>onWillDestroy</code>.</span></li>
+          <li><span class="key">services.add</span><span>Started once with the web client, and alive until the tab is closed.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>No manifest entry, no registration order: the file is in the bundle, the class is in <code>services</code>, it runs.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework-2" class="slide" data-id="b57e2c14">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>A plugin that only does something</h2>
+      <p class="lead">It holds no state and nobody reads it. It exists because the web client started it.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">my_addon/static/src/tick_tock_plugin.js</h3>
+<pre><code class="language-javascript">import { Plugin, onWillDestroy, usePlugin } from "@odoo/owl";
+import { NotificationPlugin }
+    from "@web/core/notifications/notification_plugin";
+import { services } from "@web/core/services";
+
+class TickTockPlugin extends Plugin {
+    notification = usePlugin(NotificationPlugin);
+
+    setup() {
+        let counter = 1;
+        const id = setInterval(() =&gt; {
+            this.notification.add(`Tick Tock ${counter++}`);
+        }, 5000);
+        <mark>onWillDestroy(() =&gt; clearInterval(id))</mark>;
+    }
+}
+
+services.add(TickTockPlugin);</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Alone</span><span>No component, no template, no screen. Install the addon, reload, and the toasts start.</span></li>
+          <li><span class="key">Reaching out</span><span><code>usePlugin(NotificationPlugin)</code> from inside a plugin: plugins compose the same way components use them.</span></li>
+          <li><span class="key">Giving back</span><span>The interval would outlive the plugin. <code>onWillDestroy</code> runs on the way out, in reverse order.</span></li>
+        </ul>
+        <p class="caption">In the old shape, that dependency was a <code>dependencies: ["notification"]</code> key.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Useful in practice for anything that listens: the bus, a watchdog on the assets, a keyboard shortcut of your own.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework-2" class="slide" data-id="d0a6f3b8">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>Reaching one from a component</h2>
+      <ul class="notes">
+        <li><code>usePlugin(Class)</code> hands back the instance, with everything on it: the class you imported is the documentation.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">uploader.js</h3>
+<pre><code class="language-javascript">import { Component, usePlugin } from "@odoo/owl";
+import { ORM } from "@web/core/orm_plugin";
+import { NotificationPlugin }
+    from "@web/core/notifications/notification_plugin";
+
+export class Uploader extends Component {
+    static template = "my_addon.Uploader";
+
+    <mark>orm = usePlugin(ORM)</mark>;
+    notification = usePlugin(NotificationPlugin);
+
+    async onUpload(data) {
+        const [id] = await this.orm.create(
+            "ir.attachment", [data],
+        );
+        this.notification.add(`Uploaded ${id}`);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Where</span><span>A class field, or <code>setup()</code>. Never anywhere else: it has to run while the component is being created.</span></li>
+          <li><span class="key">No string</span><span>An import, so the editor follows it to the class and every method it has.</span></li>
+          <li><span class="key">Reactive</span><span>Read <code>this.stats.stats()</code> from a plugin in your template and the component re-renders when it changes. Owl 2 needed <code>useState(useService(…))</code>; this does not.</span></li>
+          <li><span class="key">Scoped</span><span>An <code>orm</code> call whose component is destroyed before it answers is dropped, not applied to a screen that is gone.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>One instance per tab: two components calling <code>usePlugin(ReportingPlugin)</code> get the same object, cache included.</p>
+    </footer>
+  </article>
+
+  <article data-act="framework" data-from="js-framework-2" class="slide" data-id="9d4f70b2">
+    <header class="slide-head">
+      <p class="eyebrow">Data</p>
+      <h2>Loading before the first render</h2>
+      <ul class="notes">
+        <li><code>onWillStart</code> runs once, before the component is rendered. The screen waits for the promise.</li>
+        <li>Owl renders the whole tree in one pass: every branch waits, then the DOM is touched once.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label file">dashboard.js</h3>
+<pre><code class="language-javascript">import { Component, onWillStart, usePlugin } from "@odoo/owl";
+import { ReportingPlugin } from "./reporting_plugin";
+
+export class Dashboard extends Component {
+    static template = "my_addon.Dashboard";
+
+    reporting = usePlugin(ReportingPlugin);
+
+    setup() {
+        <mark>onWillStart</mark>(() =&gt; this.reporting.load());
+    }
+}</code></pre>
+        <h3 class="label file">dashboard.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="my_addon.Dashboard"&gt;
+    &lt;p t-out="<mark>this.reporting.someData()</mark>"/&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Once</span><span>Per mounting. Come back to the screen and it runs again, which is why the data, and its cache, live in the plugin.</span></li>
+          <li><span class="key">Later</span><span>A slow call that must not block: render, then let the plugin set its signal when it lands.</span></li>
+          <li><span class="key">Never</span><span>No request in <code>setup</code> without awaiting it somewhere: the render will not wait for it.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>One rule: the data a screen cannot render without is loaded in <code>onWillStart</code>.</p>
+    </footer>
+  </article>
+
+  <article class="slide divider" data-id="9e3c0104" data-act="views">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Views and Fields</h2>
+      <p class="divider-sub">What a view is made of, and how to customize views and fields.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <!-- 50-views-and-fields/slides.html -->
+  <article data-act="views" data-from="views-fields" class="slide statement cover" data-id="b4817e9c">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 3 · Part 1</p>
+      <h2>Views and Fields</h2>
+      <p class="lead">What a view is made of whatever its type, the model behind the relational ones, and the components that plug into them.</p>
+    </header>
+  </article>
+
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="ad84c814">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>What a view does</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes">
+        <li><h3>Loads data</h3><p>Through the ORM, from the model it is set on.</p></li>
+        <li><h3>Structures it</h3><p>According to an <code>arch</code>: an xml document, stored in <code>ir.ui.view</code>.</p></li>
+        <li><h3>Shows it</h3><p>Usually records and fields, though not always.</p></li>
+        <li><h3>Edits</h3><p>Sometimes: a view can be read-only by design.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>The debug tools (developer mode) are the fast way to read a view's actual arch.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="2b7e14c9">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>View architecture</h2>
+      <p class="lead">The same shape whatever the type: a controller on top, a renderer and a model under it.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 288" role="img"
+             aria-label="The web client mounts the controller. The controller owns a renderer, which draws the records, and a model, which loads them from the server and writes them back.">
+          <defs>
+            <marker id="vw-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="280" y="0" width="240" height="56" rx="6"/>
+          <text class="t" x="400" y="24">the web client</text>
+          <text class="s" x="400" y="44">mounts it as an action</text>
+
+          <path class="ar" marker-end="url(#vw-ar-1)" d="M400 56 V92"/>
+
+          <rect class="bx js" x="280" y="96" width="240" height="64" rx="6"/>
+          <text class="t" x="400" y="124">Controller</text>
+          <text class="s" x="400" y="146">owns both, and the arch</text>
+
+          <path class="ar" d="M400 160 V184 M180 184 H620"/>
+          <path class="ar" marker-end="url(#vw-ar-1)" d="M180 184 V210"/>
+          <path class="ar" marker-end="url(#vw-ar-1)" d="M620 184 V210"/>
+
+          <rect class="bx js" x="60" y="214" width="240" height="64" rx="6"/>
+          <text class="t" x="180" y="242">Renderer</text>
+          <text class="s" x="180" y="264">draws the records</text>
+
+          <rect class="bx js" x="500" y="214" width="240" height="64" rx="6"/>
+          <text class="t" x="620" y="242">Model</text>
+          <text class="s" x="620" y="264">loads them, writes them</text>
+
+          <path class="ar" marker-start="url(#vw-ar-1)" marker-end="url(#vw-ar-1)" d="M746 246 H794"/>
+          <text class="s" x="770" y="234">rpc</text>
+
+          <rect class="bx srv" x="800" y="214" width="200" height="64" rx="6"/>
+          <text class="t" x="900" y="242">the server</text>
+          <text class="s" x="900" y="264">the database</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>The renderer never calls the server, and the model never draws anything. They meet in the controller.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="a29dff6f">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>The pieces of a view</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">Controller</span><span>The main component: owns the model, holds the control panel and the renderer.</span></li>
+        <li><span class="key">Renderer</span><span>Below the control panel, the component that actually represents the data.</span></li>
+        <li><span class="key">Model</span><span>Loads data from the database, and writes changes back to it.</span></li>
+        <li><span class="key">ArchParser</span><span>Reads the arch and extracts the information the rest needs.</span></li>
+        <li><span class="key">Compiler</span><span>For some views: turns the arch into an actual Owl template.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>A view type registers all five together, under one name.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="3fc61c8b">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>Registering a view type</h2>
+      <p class="lead">The same shape for every view: kanban, list, form...</p>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+<pre><code class="language-javascript">export const kanbanView = {
+    type: "kanban",
+    ArchParser: KanbanArchParser,
+    Controller: KanbanController,
+    Model: RelationalModel,
+    Renderer: KanbanRenderer,
+    Compiler: KanbanCompiler,
+    buttonTemplate: "web.KanbanView.Buttons",
+    props: (genericProps, view) => {
+        // whatever this returns is what the
+        // controller is then created with
+    },
+};
+
+registry.category("views").add("kanban", kanbanView);</code></pre>
+      </section>
+      <section>
+        <figure class="figure">
+          <svg viewBox="0 0 560 300" role="img"
+               aria-label="The view object defines the controller, and the controller holds a renderer and a model.">
+            <defs>
+              <marker id="vw-ar-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx js" x="0" y="40" width="200" height="72" rx="6"/>
+            <text class="t" x="100" y="83">view</text>
+
+            <path class="ar" marker-start="url(#vw-ar-3)" marker-end="url(#vw-ar-3)" d="M212 76 H288"/>
+            <text class="s" x="250" y="60">defines</text>
+
+            <rect class="bx" x="300" y="40" width="260" height="72" rx="6"/>
+            <text class="t" x="430" y="83">Controller</text>
+
+            <path class="ar" d="M430 112 V168 M360 168 H500"/>
+            <path class="ar" marker-end="url(#vw-ar-3)" d="M360 168 V204"/>
+            <path class="ar" marker-end="url(#vw-ar-3)" d="M500 168 V204"/>
+
+            <rect class="bx" x="290" y="208" width="140" height="72" rx="6"/>
+            <text class="t" x="360" y="251">Renderer</text>
+
+            <rect class="bx" x="440" y="208" width="120" height="72" rx="6"/>
+            <text class="t" x="500" y="251">Model</text>
+          </svg>
+        </figure>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The view's own <code>props</code> function is what feeds the controller the arch, the fields, the domain...</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="5d0c8a37">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>Example: the form view</h2>
+      <p class="lead">The same names, in the tree an actual form view mounts.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure formtree">
+        <svg viewBox="0 0 1000 368" role="img"
+             aria-label="View, the component an action mounts, holds WithSearch, which holds the FormController. The controller owns a RelationalModel and mounts a Layout. The Layout holds the ControlPanel and the FormRenderer. The FormRenderer mounts one component per field: CharField, Many2OneField, X2ManyField. The X2ManyField holds a ListRenderer of its own.">
+          <defs>
+            <marker id="vw-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="0" y="0" width="300" height="40" rx="6"/>
+          <text class="t" x="150" y="26">View</text>
+          <text class="s l" x="320" y="26">what the action mounts</text>
+
+          <path class="ar" d="M18 40 V64 H32"/>
+
+          <rect class="bx" x="36" y="44" width="300" height="40" rx="6"/>
+          <text class="t" x="186" y="70">WithSearch</text>
+          <text class="s l" x="356" y="70">the search bar and its domain</text>
+
+          <path class="ar" d="M54 84 V108 H68"/>
+
+          <rect class="bx js" x="72" y="88" width="300" height="40" rx="6"/>
+          <text class="t" x="222" y="114">FormController</text>
+
+          <path class="ar" marker-end="url(#vw-ar-2)" d="M376 108 H696"/>
+          <text class="s" x="536" y="98">owns</text>
+
+          <rect class="bx js" x="700" y="88" width="280" height="40" rx="6"/>
+          <text class="t" x="840" y="114">RelationalModel</text>
+
+          <path class="ar" d="M90 128 V152 H104"/>
+
+          <rect class="bx" x="108" y="132" width="300" height="40" rx="6"/>
+          <text class="t" x="258" y="158">Layout</text>
+
+          <path class="ar" d="M126 172 V240 M126 196 H144 M126 240 H144"/>
+
+          <rect class="bx" x="144" y="176" width="300" height="40" rx="6"/>
+          <text class="t" x="294" y="202">ControlPanel</text>
+
+          <rect class="bx js" x="144" y="220" width="300" height="40" rx="6"/>
+          <text class="t" x="294" y="246">FormRenderer</text>
+
+          <path class="ar" d="M162 260 V270 H722 M270 270 V276 M486 270 V276 M722 270 V276"/>
+
+          <rect class="bx" x="180" y="276" width="180" height="40" rx="6"/>
+          <text class="t" x="270" y="302">CharField</text>
+
+          <rect class="bx" x="376" y="276" width="220" height="40" rx="6"/>
+          <text class="t" x="486" y="302">Many2OneField</text>
+
+          <rect class="bx" x="612" y="276" width="220" height="40" rx="6"/>
+          <text class="t" x="722" y="302">X2ManyField</text>
+
+          <path class="ar" d="M630 316 V340 H648"/>
+
+          <rect class="bx js" x="648" y="320" width="220" height="40" rx="6"/>
+          <text class="t" x="758" y="346">ListRenderer</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>One component per <code>&lt;field&gt;</code> in the arch, and an x2many holds a renderer of its own: the same architecture, one level down.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="13ec8327">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>Standard flows</h2>
+    </header>
+    <div class="slide-body two-col even flows">
+      <section>
+        <h3 class="label">Editing a value</h3>
+        <ul>
+          <li>The user changes a value in a field's input.</li>
+          <li>That field instance calls <code>update</code> on <code>props.record</code>.</li>
+          <li>The relational model is notified of the change.</li>
+          <li>If there are onchanges, the server is called to get the new values.</li>
+          <li>The model updates, and every changed field rerenders.</li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label">Changing a domain in a list</h3>
+        <ul>
+          <li>The user changes the search filters.</li>
+          <li><code>WithSearch</code> updates its domain.</li>
+          <li>The controller is updated with the new domain as a prop.</li>
+          <li>The relational model refetches the data.</li>
+          <li>The renderer updates, destroying its previous components.</li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Both flows go through the model - it is the one source of truth for a view's data.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="7a2f4c81">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>Odoo views</h2>
+      <p class="lead">Three of them show records and their fields. The rest aggregate, schedule or plot the same data.</p>
+    </header>
+    <div class="slide-body two-col even view-types">
+      <section>
+        <h3 class="label">Relational views</h3>
+        <ul class="rows boxes relational">
+          <li><h3>form</h3><p>One record, and its fields.</p></li>
+          <li><h3>list</h3><p>Many records, in rows.</p></li>
+          <li><h3>kanban</h3><p>Many records, as cards.</p></li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label">The others</h3>
+        <ul class="rows boxes others">
+          <li><h3>graph</h3><p>Totals, as a chart.</p></li>
+          <li><h3>pivot</h3><p>Totals, in a table.</p></li>
+          <li><h3>calendar</h3><p>Records on dates.</p></li>
+          <li><h3>activity</h3><p>What is due, per record.</p></li>
+          <li><h3>gantt</h3><p>Spans on a timeline.</p></li>
+          <li><h3>map</h3><p>Records on a map.</p></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Only the three on the left share the <code>RelationalModel</code>; the others bring their own. <code>gantt</code> and <code>map</code> are enterprise.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="8d581190">
+    <header class="slide-head">
+      <p class="eyebrow">The model</p>
+      <h2>The RelationalModel</h2>
+      <p class="lead">One model behind form, list and kanban. What it manages is not a screen: it is collections of records, and the relations between them.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 300" role="img"
+             aria-label="A record holds its own values; a many2one field points at one other record, and a one2many field holds a list of records, each of which is a record in its own right.">
+          <defs>
+            <marker id="rv-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx js" x="0" y="10" width="380" height="280" rx="8"/>
+          <text class="m" x="190" y="50">res.partner #5</text>
+          <text class="s" x="190" y="76">one record, and its values</text>
+
+          <text class="m l" x="28" y="140">name</text>
+          <text class="s r" x="352" y="140">char</text>
+
+          <text class="m l" x="28" y="200">company_id</text>
+          <text class="s r" x="352" y="200">many2one</text>
+
+          <text class="m l" x="28" y="256">child_ids</text>
+          <text class="s r" x="352" y="256">one2many</text>
+
+          <path class="ar" marker-end="url(#rv-ar-1)" d="M386 196 H516"/>
+          <rect class="bx" x="530" y="166" width="320" height="60" rx="6"/>
+          <text class="m" x="690" y="202">res.company #1</text>
+          <text class="s l" x="866" y="202">one record</text>
+
+          <path class="ar" marker-end="url(#rv-ar-1)" d="M386 252 H516"/>
+          <rect class="bx" x="530" y="238" width="320" height="24" rx="4"/>
+          <text class="m" x="690" y="255">res.partner #7</text>
+          <rect class="bx" x="530" y="266" width="320" height="24" rx="4"/>
+          <text class="m" x="690" y="283">res.partner #9</text>
+          <text class="s l" x="866" y="266">a list of records</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Records, groups of records and x2many lists are all <code>DataPoint</code>s — one tree, loaded and saved in one call. <code>many2many</code> behaves like <code>one2many</code> here.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="5c9a1e46">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>A field is a component</h2>
+      <p class="lead">One <code>&lt;field&gt;</code> in the arch, one component on screen: a child of the renderer, bound to one value of one record.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">the arch, in <code>ir.ui.view</code></h3>
+<pre><code class="language-markup">&lt;form&gt;
+    &lt;group&gt;
+        &lt;<mark>field</mark> name="name"/&gt;
+        &lt;<mark>field</mark> name="email"/&gt;
+        &lt;<mark>field</mark> name="category_id"
+               widget="many2many_tags"/&gt;
+    &lt;/group&gt;
+&lt;/form&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label">what the renderer mounts</h3>
+<pre><code class="language-markup">&lt;!-- FormRenderer, compiled from the arch --&gt;
+&lt;<mark>Field</mark> name="'name'"
+       record="this.props.record"/&gt;
+&lt;<mark>Field</mark> name="'email'"
+       record="this.props.record"/&gt;
+&lt;<mark>Field</mark> name="'category_id'"
+       record="this.props.record"/&gt;</code></pre>
+        <p class="caption">Simplified: the compiler also hands each one its id, the arch info that describes it, and the view's readonly state.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Same <code>Field</code> component every time. Which component it then renders is what the <code>widget</code> attribute, or the field's type, decides.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="2f5a820a">
+    <header class="slide-head">
+      <p class="eyebrow">Fields and widgets</p>
+      <h2>Two registries</h2>
+      <p class="lead">Views are generic, but form, kanban and list allow two kinds of sub components: fields and widgets. Both can read and write the current record.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">Fields</h3>
+        <p>Registry: <code>"fields"</code></p>
+<pre><code class="language-markup">&lt;field name="module_stock_fleet"/&gt;</code></pre>
+        <p>The component is chosen from the field's type, or from the registry if <code>widget=</code> names one.</p>
+<pre><code class="language-markup">&lt;field
+    name="module_delivery_ups"
+    widget="upgrade_boolean"/&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label">Widgets</h3>
+        <p>Registry: <code>"view_widgets"</code></p>
+<pre><code class="language-markup">&lt;widget name="res_config_invite_users"/&gt;</code></pre>
+        <p><code>name</code> is the key in the registry: a widget is not tied to a specific field.</p>
+      </section>
+    </div>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide walkthrough" data-id="64f7d9e4">
+    <header class="slide-head">
+      <p class="eyebrow">Widgets</p>
+      <h2>A view widget</h2>
+      <p class="lead">Typically like a field, but reading whatever it needs off the record.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">In the arch</h3>
+<pre><code class="language-markup">&lt;widget
+    name="web_ribbon"
+    title="Archived"
+    bg_color="text-bg-danger"
+    invisible="active"/&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">ribbon_widget.js</h3>
+<pre><code class="language-javascript">class RibbonWidget extends Component {
+    static template = "web.Ribbon";
+    props = useProps({
+        ...standardWidgetProps,
+        text: t.string(),
+        title: t.string().optional(),
+        bgClass: t.string().optional(),
+    });
+    get classes() {
+        return this.props.bgClass;
+    }
+}
+const ribbonWidget = {
+    component: RibbonWidget,
+    extractProps: ({ attrs }) => ({
+        text: attrs.title || attrs.text,
+        title: attrs.tooltip,
+        bgClass: attrs.bg_color,
+    }),
+};
+registry.category("view_widgets").add("web_ribbon", ribbonWidget);</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A widget receives the record, and everything <code>extractProps</code> pulls out of the arch, as props.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide statement" data-id="5c3a4ab6">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Every &lt;field&gt; tag spawns a field component.</h2>
+    </header>
+    <footer class="slide-foot">
+      <p>Except basic fields in list and kanban views, kept as plain cells for performance.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="a79caf93">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Which component, for which field?</h2>
+    </header>
+    <div class="slide-body two-col even snug">
+      <section>
+        <h3 class="label">1. The widget attribute</h3>
+<pre><code class="language-markup">&lt;field name="category_ids" widget="many2many_tags"/&gt;</code></pre>
+        <p>If it is set, that name is looked up in the <code>"fields"</code> registry.</p>
+      </section>
+      <section>
+        <h3 class="label">2. The field's type</h3>
+<pre><code class="language-markup">&lt;field name="contact_name"/&gt;</code></pre>
+        <p>Otherwise, the type (<code>char</code>, <code>many2one</code>...) picks a default component.</p>
+      </section>
+    </div>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide walkthrough" data-id="6ec1d1bc">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>A field, from nothing</h2>
+      <p class="lead">A component, a template, registered under a name.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">hash_field.js</h3>
+<pre><code class="language-javascript">import { Component, useProps } from "@odoo/owl";
+import { registry } from "@web/core/registry";
+
+class HashField extends Component {
+    static template = "web.HashField";
+}
+
+const hashField = {
+    component: HashField,
+};
+
+registry.category("fields").add("hash", hashField);</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">hash_field.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="web.HashField"&gt;
+        Hello there
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;field name="passkey" widget="hash"/&gt;</code> now renders "Hello there" wherever it is used.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide walkthrough" data-id="181075f9">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Reading and writing the record</h2>
+      <p class="lead">Fields get a default set of props: <code>standardFieldProps</code>.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">hash_field.js</h3>
+<pre><code class="language-javascript">import { Component, useProps } from "@odoo/owl";
+import { registry } from "@web/core/registry";
+import { standardFieldProps } from "../standard_field_props";
+import { createRandomString } from "./utils";
+
+class HashField extends Component {
+    static template = "web.HashField";
+
+    props = useProps({ ...standardFieldProps });
+
+    generate() {
+        const randomHash = createRandomString(18);
+        this.props.record.update({[this.props.name]: randomHash});
+    }
+}
+
+const hashField = {
+    component: HashField,
+};
+
+registry.category("fields").add("hash", hashField);</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">hash_field.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="web.HashField"&gt;
+    &lt;div t-if="!<mark>this.props</mark>.record.data[<mark>this.props</mark>.name]"&gt;
+        &lt;button
+            class="btn btn-secondary"
+            t-on-click="this.generate"&gt;
+            Generate
+        &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;span t-out="<mark>this.props</mark>.record.data[this.props.name]"/&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>record</code> carries the data, <code>update</code> to write to it, plus <code>fields</code>, <code>resId</code>, <code>resModel</code>...</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="618694c6">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>A field-specific prop, from the arch</h2>
+      <p class="lead">For example, the hash's length.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">✗</span><span><code>&lt;field name="passkey" widget="hash" props="{ 'length': 12 }"/&gt;</code></span></li>
+        <li><span class="key">✗</span><span><code>&lt;field name="passkey" widget="hash" length="12"/&gt;</code></span></li>
+        <li><span class="key">✓</span><span><code>&lt;field name="passkey" widget="hash" options="{ 'hash_length': 12 }"/&gt;</code></span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p><code>options</code> is the arch's own way of passing arbitrary data to a field or a widget.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide walkthrough" data-id="076925f9">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Extracting options from the arch, into props</h2>
+    </header>
+    <div class="slide-body">
+      <section>
+<pre><code class="language-javascript">const hashFieldProps = { ...standardFieldProps, length: t.number().optional() };
+
+class HashField extends Component {
+    static template = "web.HashField";
+
+    props = useProps(hashFieldProps);
+
+    generate() {
+        const randomHash = createRandomString(this.props.length);
+        this.props.record.update({[this.props.name]: randomHash});
+    }
+}
+
+const hashField = {
+    component: HashField,
+    extractProps: ({ options }) => ({
+        length: options.hash_length,
+    }),
+};
+
+registry.category("fields").add("hash", hashField);</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;field name="passkey" widget="hash" options="{ 'hash_length': 12 }"/&gt;</code></p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="60a37879">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>extractProps</h2>
+      <p class="lead">Turns arch data into component props. It takes two arguments.</p>
+    </header>
+    <div class="slide-body two-col even snug">
+      <section>
+        <h3 class="label">fieldInfo</h3>
+        <ul>
+          <li><code>attrs</code>, <code>options</code></li>
+          <li><code>viewType</code></li>
+          <li>...</li>
+        </ul>
+        <p class="caption">What the arch said, and which view is asking.</p>
+      </section>
+      <section>
+        <h3 class="label">dynamicInfo</h3>
+        <ul>
+          <li><code>readonly</code>, <code>required</code></li>
+          <li><code>context</code>, <code>domain()</code></li>
+        </ul>
+        <p class="caption">What is true of this instance, right now.</p>
+      </section>
+    </div>
+    <div class="slide-body two-col even snug" style="margin-top: 1.6cqw">
+      <section>
+        <h3 class="label file">priority_field.js — from addons/web</h3>
+<pre><code class="language-javascript">extractProps(<mark>fieldInfo</mark>, dynamicInfo) {
+    return {
+        withCommand: <mark>fieldInfo.viewType === "form"</mark>,
+        readonly: dynamicInfo.readonly,
+    };
+},</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">The component</span><span>Takes a <code>withCommand</code> prop. It never asks what view it is in.</span></li>
+          <li><span class="key">extractProps</span><span>Reads <code>fieldInfo.viewType</code> and decides. Defaulting or forcing a prop per view type is what it is for.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>dynamicInfo is what lets several instances of the same field on a view behave differently.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="views-fields" class="slide" data-id="fde98e93">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Registering for one view type only</h2>
+      <p class="lead">A field can be added under a view-specific name.</p>
+    </header>
+    <div class="slide-body">
+      <section>
+<pre><code class="language-javascript">registry.category("fields").add("list.hash", listHashField);
+registry.category("fields").add("kanban.hash", kanbanHashField);
+
+// uncommon, but possible
+registry.category("fields").add("form.hash", formHashField);</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;field name="passkey" widget="hash"/&gt;</code> resolves to whichever entry matches the current view.</p>
+    </footer>
+  </article>
+
+  <!-- 50-views-and-fields/slides-customizing.html -->
+  <article data-act="views" data-from="customizing-views" class="slide statement cover" data-id="e5d2b70a">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 3 · Part 2</p>
+      <h2>Customizing views and fields</h2>
+      <p class="lead">Changing what a standard field or view does, without forking it.</p>
+    </header>
+  </article>
+
+  <article data-act="views" data-from="customizing-views" class="slide statement" data-id="897fbb20">
+    <header class="slide-head">
+      <p class="eyebrow">Customizing views</p>
+      <h2>Two strategies: monkey-patching, or subclassing.</h2>
+    </header>
+    <footer class="slide-foot"></footer>
+  </article>
+
+  <article data-act="views" data-from="customizing-views" class="slide" data-id="a9f30c5e">
+    <header class="slide-head">
+      <p class="eyebrow">Customizing views</p>
+      <h2>Which one, and when</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes strategies">
+        <li><h3>Monkey-patching</h3><p>Modify in place. Every instance of that view or field changes, everywhere in the web client, for every user.</p></li>
+        <li><h3>Subclassing</h3><p>Create a variation, and use it on the screens that asked for it: a <code>js_class</code> on the view, a <code>widget</code> on the field.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Subclass when you can: what you add is opt-in, and the standard behaviour is still there for everyone who did not ask.</p>
+    </footer>
+  </article>
+
+  <article data-act="views" data-from="customizing-views" class="slide walkthrough" data-id="7453c22a">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Subclassing a field</h2>
+      <p class="lead">Extend the component, extend its props, change what needs changing.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">hidden_hash_field.js</h3>
+<pre><code class="language-javascript">class HiddenHashField extends HashField {
+    props = useProps({
+        ...hashFieldProps,
+        isHidden: t.boolean().optional(),
+    });
+}
+
+const hiddenHashField = {
+    ...hashField,
+    component: HiddenHashField,
+    extractProps(fieldInfo) {
+        const props = hashField.extractProps(fieldInfo);
+        props.isHidden = fieldInfo.options.should_hide;
+        return props;
+    },
+};
+
+registry.category("fields").add("hidden-hash", hiddenHashField);</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">hidden_hash_field.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="web.HiddenHashField" t-inherit="web.HashField"&gt;
+    &lt;xpath expr="//span" position="replace"&gt;
+        &lt;t t-set="hash"
+           t-value="<mark>this.props</mark>.record.data[<mark>this.props</mark>.name]"/&gt;
+        &lt;span t-if="<mark>this.props</mark>.isHidden"
+              t-out="'*'.repeat(hash.length)"/&gt;
+        &lt;span t-else="" t-out="hash"/&gt;
+    &lt;/xpath&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;field name="passkey" widget="hash" options="{ 'should_hide': True, 'hash_length': 30 }"/&gt;</code></p>
+    </footer>
+  </article>
+
+
+  <article data-act="views" data-from="customizing-views" class="slide walkthrough" data-id="78e90cbb">
+    <header class="slide-head">
+      <p class="eyebrow">Customizing views</p>
+      <h2>Subclassing, with js_class</h2>
+      <p class="lead">Register a new view under a name, and use it with the <code>js_class</code> attribute.</p>
+    </header>
+    <div class="slide-body">
+      <section>
+<pre><code class="language-javascript">class CrmFormRecord extends formView.Model.Record {
+    async _save() {
+        // custom behaviour before saving, e.g. a rainbowman
+    }
+}
+
+class CrmFormModel extends formView.Model {
+    static Record = CrmFormRecord;
+}
+
+registry.category("views").add("crm_form", {
+    ...formView,
+    Model: CrmFormModel,
+});</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;form class="o_lead_opportunity_form" js_class="crm_form"&gt;</code></p>
+    </footer>
+  </article>
+
+  <article class="slide divider" data-id="9e3c0105" data-act="advanced">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Advanced JS Framework</h2>
+      <p class="divider-sub">The pieces you did not write, customizing the UI, and state management.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <!-- 60-advanced-js-framework/slides.html -->
+  <article data-act="advanced" data-from="advanced" class="slide statement cover" data-id="e17bfdc7">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 4 · JS Framework 201</p>
+      <h2>JS Framework 201</h2>
+      <p class="lead">The pieces you did not have to write, and how your own files reach the browser.</p>
+    </header>
+  </article>
+
+  <article data-act="advanced" data-from="advanced" class="slide" data-id="6b2f9d41">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 4 · Advanced JS framework</p>
+      <h2>Goals</h2>
+      <p class="lead">So far you added things of your own. This topic is about the rest of Odoo.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">Extending</span><span>Four tools, and which one to reach for.</span></li>
+        <li><span class="key">Patching</span><span>Changing standard code that offers no hook.</span></li>
+        <li><span class="key">Slotting in</span><span>The systray, the user menu, the command palette.</span></li>
+        <li><span class="key">Shared state</span><span>One game, three screens, and a state that survives them.</span></li>
+        <li><span class="key">The toolbox</span><span>Notifications, dialogs, effects, and the generic components.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>The clicker game touches all of it, one step at a time.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="advanced" class="slide" data-id="4a90c7e5">
+    <header class="slide-head">
+      <p class="eyebrow">The DOM</p>
+      <h2>Where an event is caught</h2>
+      <p class="lead">A click on a button is also a click on everything around it. The phase decides who hears it first.</p>
+    </header>
+    <div class="slide-body two-col tree">
+      <section>
+        <figure class="figure">
+          <svg viewBox="0 0 420 300" role="img"
+               aria-label="An event travels down from the document to the button, the capture phase, then back up to the document, the bubbling phase.">
+            <defs>
+              <marker id="adv-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx" x="60" y="0" width="300" height="290" rx="6"/>
+            <text class="m" x="210" y="24">document</text>
+
+            <rect class="bx" x="90" y="40" width="240" height="210" rx="6"/>
+            <text class="m" x="210" y="64">body</text>
+
+            <rect class="bx" x="120" y="80" width="180" height="130" rx="6"/>
+            <text class="m" x="210" y="104">div</text>
+
+            <rect class="bx js" x="150" y="120" width="120" height="50" rx="6"/>
+            <text class="t" x="210" y="150">button</text>
+
+            <path class="ar" marker-end="url(#adv-ar-2)" d="M30 6 V186"/>
+            <text class="s l" x="0" y="200">capture</text>
+
+            <path class="ar" marker-end="url(#adv-ar-2)" d="M390 186 V6"/>
+            <text class="s r" x="420" y="200">bubbling</text>
+          </svg>
+        </figure>
+      </section>
+      <section>
+<pre><code class="language-javascript">setup() {
+    useListener(document.body, "click",
+        () =&gt; this.clicker.addClick(1),
+        <mark>{ capture: true }</mark>,
+    );
+}</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Capture</span><span>Down from the document. You hear the click before the button does.</span></li>
+          <li><span class="key">Bubbling</span><span>Back up. <code>t-on-click</code> listens here, and a handler can stop the trip.</span></li>
+          <li><span class="key">Cleanup</span><span><code>useListener</code> removes it when the component goes. <code>addEventListener</code> does not.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Step 2 of the exercise uses exactly this call, capture included.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="advanced" class="slide" data-id="e2b70f93">
+    <header class="slide-head">
+      <p class="eyebrow">The toolbox</p>
+      <h2>Talking to the user</h2>
+      <p class="lead">Four standard ways. None of them is a component you have to write.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript"><mark>notification = usePlugin(NotificationPlugin)</mark>;
+effect = usePlugin(EffectPlugin);
+dialog = usePlugin(DialogPlugin);
+
+// a toast, top right
+this.notification.add("A bot was bought", {
+    type: "success",
+});
+
+// a rainbowman, for a milestone
+this.effect.add({ message: "1000 clicks!" });
+
+// a dialog
+this.dialog.add(ConfirmationDialog, {
+    body: "Reset the game?",
+    confirm: () =&gt; this.reset(),
+});</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Notification</span><span>Short, non-blocking. <code>sticky: true</code> when it must be dismissed by hand.</span></li>
+          <li><span class="key">Effect</span><span>The rainbowman. Reserved for something worth celebrating.</span></li>
+          <li><span class="key">Dialog</span><span>A component in a modal, stacked and closed by the plugin.</span></li>
+          <li><span class="key">Tooltip</span><span><code>data-tooltip</code> in the template, or a template of your own with <code>data-tooltip-template</code>.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>All three under <code>@web/core</code>: <code>notifications/notification_plugin</code>, <code>effects/effect_plugin</code>, <code>dialog/dialog_plugin</code>. The clicker game uses every one of them.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="advanced" class="slide" data-id="4e8b0c37">
+    <header class="slide-head">
+      <p class="eyebrow">Assets</p>
+      <h2>Everything under <code>static/</code> is served</h2>
+      <p class="lead">Two ways into the browser: the page fetches the file by url, or a bundle carries it.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">static/src</span><span>Your javascript, scss and xml templates. Bundled, never fetched one by one.</span></li>
+        <li><span class="key">static/lib</span><span>A third-party library, as it was downloaded. Bundled too, or loaded on demand with <code>loadJS</code>.</span></li>
+        <li><span class="key">static/img</span><span>Images and fonts. Fetched by url, when something on the page asks for one.</span></li>
+        <li><span class="key">static/tests</span><span>Test files, in a bundle the web client never loads.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>No controller and no access rule in front of it: <code>/my_addon/static/img/logo.png</code> is a public url. Nothing private goes under <code>static/</code>.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="advanced" class="slide" data-id="b1f6a24d">
+    <header class="slide-head">
+      <p class="eyebrow">Assets</p>
+      <h2>Bundles</h2>
+      <ul class="notes">
+        <li>A bundle is an ordered list of files — js, scss, css, xml — declared in <code>__manifest__.py</code>.</li>
+        <li>Your code runs because it is in one. Nothing else loads it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">my_addon/__manifest__.py</h3>
+<pre><code class="language-python">{
+    'assets': {
+        '<mark>web.assets_backend</mark>': [
+            'my_addon/static/src/**/*',
+            (<mark>'remove'</mark>, 'my_addon/static/src/heavy/**/*'),
+        ],
+        # a bundle of your own, loaded when it is needed
+        'my_addon.heavy': [
+            'my_addon/static/src/heavy/**/*',
+        ],
+    },
+}</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">web.assets_backend</span><span>The web client. Nearly everything written in this masterclass.</span></li>
+          <li><span class="key">web.assets_frontend</span><span>The public website: another application, another bundle.</span></li>
+          <li><span class="key">web.assets_unit_tests</span><span>Test files, run by hoot, out of the way of the client.</span></li>
+          <li><span class="key">your own</span><span>Any name you like. <code>LazyComponent</code> loads it the first time a screen needs it.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Ordered, and editable: <code>('before', …)</code>, <code>('after', …)</code>, <code>('replace', …)</code> and <code>('remove', …)</code> place a file, or take one out of a bundle you do not own.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="advanced" class="slide" data-id="7f1a92c4">
+    <header class="slide-head">
+      <p class="eyebrow">The toolbox</p>
+      <h2>Components you should not rewrite</h2>
+      <p class="lead">The web client ships a small library of generic components. Look there first.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table generic">
+        <li class="head"><span>Component</span><span>What it does</span><span>Where</span></li>
+        <li><span><code>Dropdown</code></span><span>A toggle and a menu, with the keyboard handled.</span><span><code>@web/core/dropdown/dropdown</code></span></li>
+        <li><span><code>Notebook</code></span><span>Tabs, from a list of pages or from slots.</span><span><code>@web/core/notebook/notebook</code></span></li>
+        <li><span><code>Pager</code></span><span>Previous, next, and the count.</span><span><code>@web/core/pager/pager</code></span></li>
+        <li><span><code>CheckBox</code></span><span>A checkbox with its label, and the click zone right.</span><span><code>@web/core/checkbox/checkbox</code></span></li>
+        <li><span><code>Layout</code></span><span>The control panel, for a screen of your own.</span><span><code>@web/search/layout</code></span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>The formatters in <code>@web/core/utils/numbers</code> and <code>@web/core/l10n</code> save the same kind of work.</p>
+    </footer>
+  </article>
+
+  <!-- 60-advanced-js-framework/slides-customizing-ui.html -->
+  <article data-act="advanced" data-from="customizing-ui" class="slide statement cover" data-id="a7c4e019">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 4 · Customizing the UI</p>
+      <h2>Customizing the UI</h2>
+      <p class="lead">Changing what the web client already does, and taking the places it leaves open.</p>
+    </header>
+  </article>
+
+  <article data-act="advanced" data-from="customizing-ui" class="slide" data-id="73911d7c">
+    <header class="slide-head">
+      <p class="eyebrow">Extension points</p>
+      <h2>Extending instead of rewriting</h2>
+      <p class="lead">There is no <code>_inherit</code> in javascript. Four tools instead, of two kinds.</p>
+    </header>
+    <div class="slide-body two-col even snug kinds">
+      <section>
+        <h3 class="label">Add something of your own</h3>
+        <ul class="rows boxes">
+          <li><h3>Registries</h3><p>Add or replace a field widget, a view, a service, a systray item.</p></li>
+          <li><h3><code>extends</code></h3><p>Subclass a component, then register the subclass.</p></li>
+        </ul>
+        <p class="caption">The standard code is untouched, and what you added is used where it was asked for.</p>
+      </section>
+      <section>
+        <h3 class="label">Change what is already there</h3>
+        <ul class="rows boxes">
+          <li><h3><code>patch()</code></h3><p>Change a method on an existing class or object.</p></li>
+          <li><h3><code>t-inherit-mode="extension"</code></h3><p>Change an existing template in place, with an <code>xpath</code>.</p></li>
+        </ul>
+        <p class="caption">In place, everywhere, for everyone — including the screens you have never seen.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The left column first. Reach right only when the standard code left you no hook.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="customizing-ui" class="slide" data-id="0c8e3a75">
+    <header class="slide-head">
+      <p class="eyebrow">Patching</p>
+      <h2>When there is no hook</h2>
+      <ul class="notes">
+        <li><code>patch(target, extension)</code> replaces properties and keeps the originals reachable through <code>super</code>.</li>
+        <li>It is global: every use of that class changes, in every addon, for every user.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label file">my_addon/static/src/patches.js</h3>
+<pre><code class="language-javascript">import { patch } from "@web/core/utils/patch";
+import { FormController } from "@web/views/form/form_controller";
+
+<mark>patch</mark>(FormController.prototype, {
+    setup() {
+        <mark>super.setup(...arguments)</mark>;
+        // ... whatever you need
+    },
+
+    get canEdit() {
+        return super.canEdit &amp;&amp; this.props.resId;
+    },
+});</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Prototype</span><span><code>patch(MyClass.prototype, …)</code> for methods and getters, <code>patch(MyClass, …)</code> for statics.</span></li>
+          <li><span class="key">Anything</span><span>A class, a plain object, a service. Not a constructor.</span></li>
+          <li><span class="key">Order</span><span>Two addons patching the same method chain, in the order their bundles load.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The <code>super</code> in a patch is the code you replaced, not the parent class. Call it, unless you truly mean to drop it.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="customizing-ui" class="slide" data-id="3d5c8e20">
+    <header class="slide-head">
+      <p class="eyebrow">Slotting in</p>
+      <h2>Places that are waiting for you</h2>
+      <p class="lead">A registry entry is all it takes to appear in the standard chrome.</p>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+<pre class="big"><code class="language-javascript">// a systray item, right of the navbar
+registry.category(<mark>"systray"</mark>).add(
+    "awesome_clicker.counter",
+    { Component: ClickerSystray },
+    { sequence: 10 },
+);
+
+// an entry in the command palette, ctrl-k
+<mark>useCommand</mark>("Buy a ClickBot", () =&gt; this.buyBot(), {
+    category: "awesome_clicker",
+});
+
+// an item in the user menu
+registry.category(<mark>"user_menuitems"</mark>).add("clicker", () =&gt; ({
+    type: "item",
+    description: "Reset the game",
+    callback: () =&gt; this.reset(),
+}));</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Systray</span><span>An object with a <code>Component</code> key, not the component itself. The sequence decides where it lands.</span></li>
+          <li><span class="key">Commands</span><span><code>useCommand</code> registers while the component is mounted, and cleans up on its own.</span></li>
+          <li><span class="key">Hotkeys</span><span>The <code>hotkey</code> service, for a shortcut without a menu.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Read the standard entries first: the user menu and the debug menu are both just registry entries.</p>
+    </footer>
+  </article>
+
+  <!-- 60-advanced-js-framework/slides-state.html -->
+  <article data-act="advanced" data-from="state-management" class="slide statement cover" data-id="3e85b1fd">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 4 · State Management</p>
+      <h2>State Management</h2>
+      <p class="lead">Where a piece of state should live, who writes it, and how far it has to travel.</p>
+    </header>
+  </article>
+
+  <article data-act="advanced" data-from="state-management" class="slide" data-id="c17e40b9">
+    <header class="slide-head">
+      <p class="eyebrow">Shared state</p>
+      <h2>Where should this state live?</h2>
+      <p class="lead">Climb one rung at a time, and only when the one you are on hurts.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows numbered">
+        <li><span class="num">1</span><h3>In the component</h3><p>A <code>signal</code> field. Most state stops here.</p></li>
+        <li><span class="num">2</span><h3>In a common ancestor</h3><p>Two components need it: lift it up, pass it down as a prop.</p></li>
+        <li><span class="num">3</span><h3>Plus a callback prop</h3><p>A child changes it by calling the owner, never by writing the prop.</p></li>
+        <li><span class="num">4</span><h3>In a plugin</h3><p>Too much plumbing: <code>providePlugins</code> above, <code>usePlugin</code> below.</p></li>
+        <li><span class="num">5</span><h3>In a global plugin</h3><p>It has to outlive the screen: <code>services.add</code>.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>One owner per piece of state, and only the owner writes it.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="state-management" class="slide" data-id="f47b0a2e">
+    <header class="slide-head">
+      <p class="eyebrow">Shared state</p>
+      <h2>The same counter, three rungs up</h2>
+      <ul class="notes">
+        <li>The state is a <code>signal</code> at every rung. What changes is who holds it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">1 · the component owns it</h3>
+<pre><code class="language-javascript">class Counter extends Component {
+    <mark>value = signal(0)</mark>;
+    increment() {
+        this.value.set(this.value() + 1);
+    }
+}</code></pre>
+        <h3 class="label">2 and 3 · the parent owns it</h3>
+<pre><code class="language-javascript">class Parent extends Component {
+    value = signal(0);
+    increment = () =&gt; { /* ... */ };
+}</code></pre>
+<pre><code class="language-markup">&lt;Child value="this.value"
+       <mark>onIncrement.bind="this.increment"</mark>/&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label">4 and 5 · a plugin owns it</h3>
+<pre><code class="language-javascript">export class CounterPlugin extends <mark>Plugin</mark> {
+    value = signal(0);
+    double = <mark>computed</mark>(() =&gt; this.value() * 2);
+    increment() {
+        this.value.set(this.value() + 1);
+    }
+}
+
+providePlugins([CounterPlugin]);  // 4 · one subtree
+services.add(CounterPlugin);      // 5 · the whole tab
+
+// anywhere below, no props
+counter = <mark>usePlugin(CounterPlugin)</mark>;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Rungs 4 and 5 are the same class. Only the line that installs it changes.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="state-management" class="slide" data-id="1e6d9b03">
+    <header class="slide-head">
+      <p class="eyebrow">Shared state</p>
+      <h2>What belongs in a plugin</h2>
+      <p class="lead">The component renders. The plugin knows the rules. That split is the whole architecture.</p>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label">A plugin holds</h3>
+        <ul class="rows wide-key">
+          <li><span class="key">State</span><span>The signals that actually change.</span></li>
+          <li><span class="key">Derivations</span><span>A <code>computed</code> for everything that follows from them. Never store what you can derive.</span></li>
+          <li><span class="key">Intent</span><span>The methods a component calls: <code>buyBot()</code>, not <code>count.set(...)</code> from three places.</span></li>
+          <li><span class="key">Its own edges</span><span>The server, the storage, the timers. Through another plugin when there is one.</span></li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label">And it buys you</h3>
+        <ul class="rows wide-key">
+          <li><span class="key">One owner</span><span>Everyone reads the same signals. No copy to keep in sync.</span></li>
+          <li><span class="key">No plumbing</span><span>A component three levels down asks for the plugin. Nothing passes through the middle.</span></li>
+          <li><span class="key">Fine grain</span><span>A component re-renders only if it read the signal that changed.</span></li>
+          <li><span class="key">Testable</span><span>A plugin is a class with signals. Its rules can be tested without mounting anything.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Step 4 of the clicker game is this refactor: the game rules leave the components for good.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="state-management" class="slide" data-id="9a41d6c8">
+    <header class="slide-head">
+      <p class="eyebrow">Shared state</p>
+      <h2>One game, several screens</h2>
+      <p class="lead">The systray item, the client action and a form view all reach the same counter. None of them owns it.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 250" role="img"
+             aria-label="The systray item, the client action and the user menu item all reach the same ClickerPlugin, which holds the state of the game and saves it through a storage plugin.">
+          <defs>
+            <marker id="adv-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="0" y="0" width="230" height="60" rx="6"/>
+          <text class="t" x="115" y="26">Systray item</text>
+          <text class="s" x="115" y="46">the count, always visible</text>
+
+          <rect class="bx" x="0" y="95" width="230" height="60" rx="6"/>
+          <text class="t" x="115" y="121">Client action</text>
+          <text class="s" x="115" y="141">the game screen</text>
+
+          <rect class="bx" x="0" y="190" width="230" height="60" rx="6"/>
+          <text class="t" x="115" y="216">A form view</text>
+          <text class="s" x="115" y="236">a reward on save</text>
+
+          <path class="ar" marker-end="url(#adv-ar-1)" d="M236 30 L372 108"/>
+          <path class="ar" marker-end="url(#adv-ar-1)" d="M236 125 H372"/>
+          <path class="ar" marker-end="url(#adv-ar-1)" d="M236 220 L372 142"/>
+          <text class="m" x="304" y="112">usePlugin</text>
+
+          <rect class="bx js" x="380" y="60" width="290" height="130" rx="6"/>
+          <text class="t" x="525" y="96">ClickerPlugin</text>
+          <text class="s" x="525" y="120">clicks, bots, milestones</text>
+          <text class="s" x="525" y="142">buyBot(), tick()</text>
+          <text class="s" x="525" y="168">started with the web client</text>
+
+          <path class="ar" marker-end="url(#adv-ar-1)" d="M678 125 H770"/>
+
+          <rect class="bx" x="778" y="80" width="222" height="90" rx="6"/>
+          <text class="t" x="889" y="116">StoragePlugin</text>
+          <text class="s" x="889" y="140">the game survives</text>
+          <text class="s" x="889" y="158">a page reload</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>A global plugin, added with <code>services.add</code>: one instance, alive as long as the tab.</p>
+    </footer>
+  </article>
+
+  <article data-act="advanced" data-from="state-management" class="slide" data-id="d8c52f16">
+    <header class="slide-head">
+      <p class="eyebrow">Reading old code</p>
+      <h2>What became of <code>env</code></h2>
+      <ul class="notes">
+        <li>In Owl 2, <code>env</code> was the shared object every component could reach, and <code>useSubEnv</code> the way to hand something down.</li>
+        <li>Owl 3 has neither. What you see in master comes from the compatibility layer.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">What you will read</h3>
+<pre><code class="language-javascript">// still everywhere in addons/web
+this.env.services.action
+this.env.bus
+this.env.debug
+this.env.isSmall
+
+// Owl 2, handing state down the tree
+useSubEnv({ myCounter: this.counter });
+this.counter = useState(this.env.myCounter);</code></pre>
+        <p class="caption">Provided by <code>@web/owl2/<wbr>owl3_compatibility_layer</code>.</p>
+      </section>
+      <section>
+        <h3 class="label">What you write</h3>
+<pre><code class="language-javascript">// handing state down a subtree: useSubEnv's heir
+<mark>providePlugins([ClickerPlugin])</mark>;
+
+// reading it, anywhere below
+clicker = <mark>usePlugin(ClickerPlugin)</mark>;
+
+// something the app was mounted with
+const debug = <mark>useConfig("debug")</mark>;</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Provide</span><span><code>providePlugins</code> is what <code>useSubEnv</code> became: it makes a plugin available to one subtree. <code>services.add</code> does the same for the whole tab.</span></li>
+          <li><span class="key">Read</span><span><code>usePlugin</code> is the other half — typed, asked for by class, and impossible to reach by accident. <code>env</code> was one bag for everything.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Recognize it, do not write it. <code>env</code> goes with the compatibility layer, and the code leaning on it goes too.</p>
+    </footer>
+  </article>
+</div>
