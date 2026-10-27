@@ -421,10 +421,12 @@ body.printing .deck.current {
   align-items: center;
 }
 
-body.printing .slide {
+body.printing .slide:not(.skipped) {
   display: flex !important;
   margin: 0 auto 24px;
 }
+
+.slide.skipped { display: none !important; }
 
 /* ---------- printing everything ---------- */
 
@@ -1894,6 +1896,46 @@ html.embedded .sidebar { display: none; }
 /* the outline stands in for the deck's own entry: it names the deck on its
    cover row already */
 .nav-item.has-outline { display: none; }
+
+.deck-preset {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 12px 8px;
+}
+
+.deck-preset-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.deck-preset select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--sidebar-active);
+  font: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+.deck-preset select:hover { border-color: rgba(255, 255, 255, 0.35); }
+
+.deck-preset select:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.45);
+  outline-offset: -2px;
+}
+
+/* otherwise the open list shows light text on a white background */
+.deck-preset option {
+  background: var(--sidebar);
+  color: var(--sidebar-text);
+}
 
 .nav-item.slide-item {
   display: grid;

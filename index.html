@@ -36,6 +36,54 @@ window.GAS_CONFIG = {
             { id: "views", title: "Views and Fields" },
             { id: "advanced", title: "Advanced JS Framework" },
           ],
+          presets: [
+            {
+              id: "training-1",
+              label: "Training 1: Owl",
+              acts: ["title", "ecosystem", "owl"],
+            },
+            {
+              id: "training-2",
+              label: "Training 2: The Odoo JS Framework",
+              acts: ["title", "framework"],
+            },
+            {
+              id: "training-3",
+              label: "Training 3: Views and Fields",
+              acts: ["title", "views"],
+            },
+            {
+              id: "training-4",
+              label: "Training 4: Advanced JS Framework",
+              acts: ["title", "advanced"],
+            },
+            {
+              id: "overview",
+              label: "Odoo JavaScript Overview",
+              acts: ["title", "ecosystem"],
+              slides: [
+                "9e3c0102", // 17. Owl (divider)
+                "c3edbcc4", // 18. An introduction to Owl 3
+                "8c553a2a", // 19. Goals
+                "12d9fc3b", // 20. What is Owl?
+                "a3eca203", // 21. A Counter component
+                "f2902aa5", // 22. Rendering context
+                "657824c5", // 23. Signals
+                "91cdaddf", // 24. Event handling
+                "7d1f0a6c", // 25. Template syntax
+                "0c9b53ae", // 26. Sub components
+                "5e46d8b2", // 27. Props, and their validation
+                "4b2c7e91", // 28. Derived values: computed
+                "b8e0d4a7", // 30. odoo.github.io/owl
+                "9e3c0103", // 47. The Odoo JS Framework (divider)
+                "20b72e9c", // 50. Building blocks
+                "1a7c9e42", // 51. Web client
+                "4b8d2f61", // 53. Registries
+                "b3e91d47", // 56. Everything on screen is an action
+                "c48ea30f", // 59. Talking to the server
+              ],
+            },
+          ],
         },
       ],
     },
@@ -742,10 +790,12 @@ body.printing .deck.current {
   align-items: center;
 }
 
-body.printing .slide {
+body.printing .slide:not(.skipped) {
   display: flex !important;
   margin: 0 auto 24px;
 }
+
+.slide.skipped { display: none !important; }
 
 /* ---------- printing everything ---------- */
 
@@ -2215,6 +2265,46 @@ html.embedded .sidebar { display: none; }
 /* the outline stands in for the deck's own entry: it names the deck on its
    cover row already */
 .nav-item.has-outline { display: none; }
+
+.deck-preset {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 12px 8px;
+}
+
+.deck-preset-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.deck-preset select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--sidebar-active);
+  font: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+.deck-preset select:hover { border-color: rgba(255, 255, 255, 0.35); }
+
+.deck-preset select:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.45);
+  outline-offset: -2px;
+}
+
+/* otherwise the open list shows light text on a white background */
+.deck-preset option {
+  background: var(--sidebar);
+  color: var(--sidebar-text);
+}
 
 .nav-item.slide-item {
   display: grid;
@@ -10242,7 +10332,7 @@ const nextBtn = document.getElementById("next");
 let currentDeck = DEFAULT_DECK || Object.keys(decks)[0];
 
 function slidesOf(deckId) {
-  return decks[deckId].querySelectorAll(".slide");
+  return decks[deckId].querySelectorAll(".slide:not(.skipped)");
 }
 
 // ---------- acts: the slide overview, and the divider rail ----------
@@ -10256,10 +10346,14 @@ function slidesOf(deckId) {
 // progress rail with its own act lit. A deck with no acts configured is
 // untouched - it keeps the single sidebar entry it always had.
 const ACTS_OF = {};
+const PRESETS_OF = {};
 for (const { items } of PROGRAM) {
   for (const item of items) {
     if (item.type === "slides" && item.acts && item.acts.length) {
       ACTS_OF[item.id] = item.acts;
+    }
+    if (item.type === "slides" && item.presets && item.presets.length) {
+      PRESETS_OF[item.id] = item.presets;
     }
   }
 }
@@ -10267,6 +10361,7 @@ for (const { items } of PROGRAM) {
 // the rows of each outline, in slide order, so showSlide can light the one
 // it is on without going back to the DOM for it
 const outlineRows = {};
+const outlineEls = {};
 
 // What a slide is called in the overview: its heading, or its eyebrow when
 // it has no heading of its own.
@@ -10394,11 +10489,16 @@ function buildDeckOutline(deckId, acts) {
     rows.push(row);
   });
 
-  anchor.after(outline);
+  if (outlineEls[deckId]) {
+    outlineEls[deckId].replaceWith(outline);
+  } else {
+    anchor.after(outline);
+  }
   // the outline is the deck's entry now: keeping both would name the deck
   // twice over, once as itself and once as its own cover slide
   anchor.classList.add("has-outline");
   outlineRows[deckId] = rows;
+  outlineEls[deckId] = outline;
 }
 
 // An act may sit outside the count with `counted: false` - an appendix, say,
@@ -10460,9 +10560,93 @@ function revealRow(row) {
   }
 }
 
+// ---------- presets ----------
+
+const PRESET_KEY = "gas-presets";
+const presetPicked = readStore(PRESET_KEY, {});
+
+function inPreset(preset, slide) {
+  if ((preset.skip || []).includes(slide.dataset.id)) {
+    return false;
+  }
+  return (preset.acts || []).includes(slide.dataset.act) ||
+    (preset.slides || []).includes(slide.dataset.id);
+}
+
+function applyPreset(deckId, presetId) {
+  const preset = PRESETS_OF[deckId].find((one) => one.id === presetId);
+  const shown = slidesOf(deckId)[deckIndex[deckId]];
+  for (const slide of decks[deckId].querySelectorAll(".slide")) {
+    slide.classList.toggle("skipped", Boolean(preset) && !inPreset(preset, slide));
+  }
+  presetPicked[deckId] = preset ? preset.id : "";
+  deckIndex[deckId] = Math.max(0, [...slidesOf(deckId)].indexOf(shown));
+}
+
+function rememberPreset(presetId) {
+  try {
+    localStorage.setItem(PRESET_KEY, JSON.stringify(presetPicked));
+  } catch (err) {}
+  const url = new URL(location.href);
+  if (presetId) {
+    url.searchParams.set("preset", presetId);
+  } else {
+    url.searchParams.delete("preset");
+  }
+  try {
+    history.replaceState(null, "", url);
+  } catch (err) {}
+}
+
+function buildPresetPicker(deckId) {
+  const anchor = document.querySelector(
+    `.nav-item[data-view="slides"][data-item="${deckId}"]`
+  );
+  if (!anchor) {
+    return;
+  }
+  const picker = document.createElement("label");
+  picker.className = "deck-preset";
+  const name = document.createElement("span");
+  name.className = "deck-preset-label";
+  name.textContent = "Preset";
+  const select = document.createElement("select");
+  select.add(new Option("All slides", ""));
+  for (const preset of PRESETS_OF[deckId]) {
+    select.add(new Option(preset.label || preset.id, preset.id));
+  }
+  select.value = presetPicked[deckId];
+  select.addEventListener("change", () => {
+    applyPreset(deckId, select.value);
+    if (ACTS_OF[deckId]) {
+      buildDeckOutline(deckId, ACTS_OF[deckId]);
+    }
+    rememberPreset(select.value);
+    if (!views.slides.hidden && currentDeck === deckId) {
+      showSlide(deckIndex[deckId]);
+    }
+  });
+  picker.append(name, select);
+  anchor.after(picker);
+}
+
+const presetInUrl = new URLSearchParams(location.search).get("preset");
+for (const [deckId, presets] of Object.entries(PRESETS_OF)) {
+  const fromUrl = presets.some((preset) => preset.id === presetInUrl);
+  applyPreset(deckId, fromUrl ? presetInUrl : presetPicked[deckId]);
+  // slide numbers in the hash count in the preset, so the url must name it
+  if (presetPicked[deckId]) {
+    rememberPreset(presetPicked[deckId]);
+  }
+}
+
 for (const [deckId, acts] of Object.entries(ACTS_OF)) {
   buildDeckOutline(deckId, acts);
   renderDividers(deckId, acts);
+}
+
+for (const deckId of Object.keys(PRESETS_OF)) {
+  buildPresetPicker(deckId);
 }
 
 // The slide rides in the url, so a refresh lands where you were and a link

@@ -495,7 +495,7 @@ const nextBtn = document.getElementById("next");
 let currentDeck = DEFAULT_DECK || Object.keys(decks)[0];
 
 function slidesOf(deckId) {
-  return decks[deckId].querySelectorAll(".slide");
+  return decks[deckId].querySelectorAll(".slide:not(.skipped)");
 }
 
 // ---------- acts: the slide overview, and the divider rail ----------
@@ -509,10 +509,14 @@ function slidesOf(deckId) {
 // progress rail with its own act lit. A deck with no acts configured is
 // untouched - it keeps the single sidebar entry it always had.
 const ACTS_OF = {};
+const PRESETS_OF = {};
 for (const { items } of PROGRAM) {
   for (const item of items) {
     if (item.type === "slides" && item.acts && item.acts.length) {
       ACTS_OF[item.id] = item.acts;
+    }
+    if (item.type === "slides" && item.presets && item.presets.length) {
+      PRESETS_OF[item.id] = item.presets;
     }
   }
 }
@@ -520,6 +524,7 @@ for (const { items } of PROGRAM) {
 // the rows of each outline, in slide order, so showSlide can light the one
 // it is on without going back to the DOM for it
 const outlineRows = {};
+const outlineEls = {};
 
 // What a slide is called in the overview: its heading, or its eyebrow when
 // it has no heading of its own.
@@ -647,11 +652,16 @@ function buildDeckOutline(deckId, acts) {
     rows.push(row);
   });
 
-  anchor.after(outline);
+  if (outlineEls[deckId]) {
+    outlineEls[deckId].replaceWith(outline);
+  } else {
+    anchor.after(outline);
+  }
   // the outline is the deck's entry now: keeping both would name the deck
   // twice over, once as itself and once as its own cover slide
   anchor.classList.add("has-outline");
   outlineRows[deckId] = rows;
+  outlineEls[deckId] = outline;
 }
 
 // An act may sit outside the count with `counted: false` - an appendix, say,
@@ -713,9 +723,93 @@ function revealRow(row) {
   }
 }
 
+// ---------- presets ----------
+
+const PRESET_KEY = "gas-presets";
+const presetPicked = readStore(PRESET_KEY, {});
+
+function inPreset(preset, slide) {
+  if ((preset.skip || []).includes(slide.dataset.id)) {
+    return false;
+  }
+  return (preset.acts || []).includes(slide.dataset.act) ||
+    (preset.slides || []).includes(slide.dataset.id);
+}
+
+function applyPreset(deckId, presetId) {
+  const preset = PRESETS_OF[deckId].find((one) => one.id === presetId);
+  const shown = slidesOf(deckId)[deckIndex[deckId]];
+  for (const slide of decks[deckId].querySelectorAll(".slide")) {
+    slide.classList.toggle("skipped", Boolean(preset) && !inPreset(preset, slide));
+  }
+  presetPicked[deckId] = preset ? preset.id : "";
+  deckIndex[deckId] = Math.max(0, [...slidesOf(deckId)].indexOf(shown));
+}
+
+function rememberPreset(presetId) {
+  try {
+    localStorage.setItem(PRESET_KEY, JSON.stringify(presetPicked));
+  } catch (err) {}
+  const url = new URL(location.href);
+  if (presetId) {
+    url.searchParams.set("preset", presetId);
+  } else {
+    url.searchParams.delete("preset");
+  }
+  try {
+    history.replaceState(null, "", url);
+  } catch (err) {}
+}
+
+function buildPresetPicker(deckId) {
+  const anchor = document.querySelector(
+    `.nav-item[data-view="slides"][data-item="${deckId}"]`
+  );
+  if (!anchor) {
+    return;
+  }
+  const picker = document.createElement("label");
+  picker.className = "deck-preset";
+  const name = document.createElement("span");
+  name.className = "deck-preset-label";
+  name.textContent = "Preset";
+  const select = document.createElement("select");
+  select.add(new Option("All slides", ""));
+  for (const preset of PRESETS_OF[deckId]) {
+    select.add(new Option(preset.label || preset.id, preset.id));
+  }
+  select.value = presetPicked[deckId];
+  select.addEventListener("change", () => {
+    applyPreset(deckId, select.value);
+    if (ACTS_OF[deckId]) {
+      buildDeckOutline(deckId, ACTS_OF[deckId]);
+    }
+    rememberPreset(select.value);
+    if (!views.slides.hidden && currentDeck === deckId) {
+      showSlide(deckIndex[deckId]);
+    }
+  });
+  picker.append(name, select);
+  anchor.after(picker);
+}
+
+const presetInUrl = new URLSearchParams(location.search).get("preset");
+for (const [deckId, presets] of Object.entries(PRESETS_OF)) {
+  const fromUrl = presets.some((preset) => preset.id === presetInUrl);
+  applyPreset(deckId, fromUrl ? presetInUrl : presetPicked[deckId]);
+  // slide numbers in the hash count in the preset, so the url must name it
+  if (presetPicked[deckId]) {
+    rememberPreset(presetPicked[deckId]);
+  }
+}
+
 for (const [deckId, acts] of Object.entries(ACTS_OF)) {
   buildDeckOutline(deckId, acts);
   renderDividers(deckId, acts);
+}
+
+for (const deckId of Object.keys(PRESETS_OF)) {
+  buildPresetPicker(deckId);
 }
 
 // The slide rides in the url, so a refresh lands where you were and a link
