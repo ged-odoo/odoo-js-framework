@@ -251,6 +251,32 @@ whose `data-act` names no listed act still groups under that raw id.
 Adding an act is one entry here plus a matching `data-act` on the new
 slides; every divider renumbers itself.
 
+### Presets
+
+A `slides` item may also list **presets**: named cuts of the deck, for
+giving only part of it - one training of a series, or a shorter onboarding:
+
+```js
+{ type: "slides", id: "talk", label: "...", acts: [...], presets: [
+    { id: "training-1", label: "Training 1", acts: ["title", "ecosystem", "owl"] },
+    { id: "onboarding", label: "Onboarding",
+      acts: ["title", "ecosystem"],    // whole acts
+      skip: ["9e9cc97e"],              // less these slides (data-id)
+      slides: ["85474460"] },          // plus these, from any act
+] }
+```
+
+The sidebar then shows a picker above the deck's outline, "All slides" first.
+A preset keeps the slides of its `acts`, minus `skip`, plus `slides`, in deck
+order. The others are out of the deck while it is picked: the counter, the
+arrows, the outline and Print only see the cut. The dividers keep the
+numbering of the whole deck, so a training's own divider still says where it
+sits in the full program.
+
+The pick rides in the url as `?preset=<id>`, so a link hands the same cut to
+someone else, and is remembered in localStorage for the next visit. A slide
+number in the url (`#slides/talk/12`) counts in the cut deck.
+
 ## Palettes
 
 Every colour on the page - `assets/style.css`'s `var(--bg)`, `var(--accent)`

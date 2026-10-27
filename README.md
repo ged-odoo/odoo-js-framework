@@ -25,6 +25,15 @@ The arrow keys move between slides, `f` goes fullscreen, `m` hides the
 sidebar, and `Ctrl+K` searches for a slide to go to. The sidebar lists every slide, grouped by part. **Print** lays the
 deck out one slide per page, ready to save as a PDF.
 
+The **Preset** picker, on top of the sidebar, cuts the deck down to one
+training: Training 1 (Owl, with the ecosystem), Training 2 (the JS
+framework), Training 3 (views and fields), Training 4 (advanced), or Odoo
+JavaScript Overview (the ecosystem, an introduction to Owl, and the
+framework's building blocks). Only that preset's slides are then shown,
+counted and printed. It
+is kept in the url, `?preset=overview`, so a link opens the deck on the same
+preset. The presets are defined in `presentation/config.js`.
+
 ## Repository layout
 
 ```
