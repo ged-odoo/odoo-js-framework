@@ -379,7 +379,8 @@ the real reference, this is an index into them:
   what a headless render (`chrome --headless --print-to-pdf`) or a build
   step that wants the PDF as a file would load.
 - **Everything else** - the sidebar, code-sample copy/edit-in-place,
-  keyboard shortcuts (arrows, `f` fullscreen, `m` collapse the sidebar) -
+  keyboard shortcuts (arrows, `f` fullscreen, `m` collapse the sidebar,
+  `Ctrl+K` go to any slide, exercise step or page) -
   is unremarkable and best read directly in `app.js`.
 
 ## Deploying (GitHub Pages, as an example)

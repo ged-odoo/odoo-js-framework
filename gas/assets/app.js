@@ -1384,6 +1384,135 @@ function syncFromHash() {
   }
 }
 
+// ---------- go to anything: Ctrl+K ----------
+
+const jumpDialog = document.createElement("dialog");
+jumpDialog.className = "jump-dialog";
+jumpDialog.innerHTML =
+  '<input type="text" class="jump-input" placeholder="Go to a slide, an exercise, a page…" ' +
+  'aria-label="Go to" autocomplete="off" spellcheck="false">' +
+  '<ul class="jump-list" role="listbox"></ul>';
+document.body.append(jumpDialog);
+const jumpInput = jumpDialog.querySelector(".jump-input");
+const jumpList = jumpDialog.querySelector(".jump-list");
+let jumpTargets = [];
+let jumpShown = [];
+let jumpActive = 0;
+
+function foldText(text) {
+  return text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+}
+
+// read from the sidebar each time it opens, so a preset or a reordered
+// outline is always what you search
+function collectJumpTargets() {
+  prepareProjects();
+  const targets = [];
+  const entries = sidebarEl.querySelectorAll(
+    ".nav-item:not([hidden]):not(.slide-item):not(.print-everything)"
+  );
+  for (const item of entries) {
+    // a deck with an outline is reached through its slides, its cover first
+    if (!item.classList.contains("has-outline")) {
+      targets.push({ label: item.textContent.trim(), hint: "", go: () => item.click() });
+    }
+    const deckId = item.dataset.view === "slides" && item.dataset.item;
+    const slides = deckId && slidesOf(deckId);
+    for (const [i, row] of (outlineRows[deckId] || []).entries()) {
+      const label = row.querySelector(".slide-label").textContent;
+      const act = ACTS_OF[deckId].find((one) => one.id === slides[i].dataset.act);
+      const hint = [
+        Object.keys(decks).length > 1 && DECK_LABEL[deckId],
+        act && act.counted !== false && act.title !== label && act.title,
+        i + 1,
+      ].filter(Boolean).join(" · ");
+      targets.push({ label, hint, go: () => row.click() });
+    }
+    const projectId = item.dataset.view === "project" && item.dataset.item;
+    for (const heading of projects[projectId]?.querySelectorAll(".md h2[id]") || []) {
+      targets.push({
+        label: heading.textContent.trim(),
+        hint: PROJECT_LABEL[projectId],
+        go: () => {
+          location.hash = `project/${projectId}/${heading.id}`;
+          syncFromHash();
+        },
+      });
+    }
+  }
+  for (const target of targets) {
+    target.text = foldText(`${target.label} ${target.hint}`);
+  }
+  return targets;
+}
+
+function paintJumpList() {
+  const words = foldText(jumpInput.value).split(/\s+/).filter(Boolean);
+  jumpShown = jumpTargets.filter((target) => words.every((word) => target.text.includes(word)));
+  jumpActive = Math.min(jumpActive, Math.max(0, jumpShown.length - 1));
+  jumpList.replaceChildren(...jumpShown.map((target, i) => {
+    const li = document.createElement("li");
+    li.setAttribute("role", "option");
+    li.setAttribute("aria-selected", String(i === jumpActive));
+    const label = document.createElement("span");
+    label.textContent = target.label;
+    const hint = document.createElement("small");
+    hint.textContent = target.hint;
+    li.append(label, hint);
+    li.addEventListener("click", () => jumpTo(target));
+    return li;
+  }));
+  jumpList.children[jumpActive]?.scrollIntoView({ block: "nearest" });
+}
+
+function jumpTo(target) {
+  jumpDialog.close();
+  target?.go();
+}
+
+function openJump() {
+  jumpTargets = collectJumpTargets();
+  jumpInput.value = "";
+  jumpActive = 0;
+  paintJumpList();
+  jumpDialog.showModal();
+}
+
+jumpInput.addEventListener("input", () => {
+  jumpActive = 0;
+  paintJumpList();
+});
+
+jumpInput.addEventListener("keydown", (ev) => {
+  if (ev.key === "ArrowDown" || ev.key === "ArrowUp") {
+    ev.preventDefault();
+    const step = ev.key === "ArrowDown" ? 1 : -1;
+    jumpActive = (jumpActive + step + jumpShown.length) % (jumpShown.length || 1);
+    paintJumpList();
+  } else if (ev.key === "Enter") {
+    ev.preventDefault();
+    jumpTo(jumpShown[jumpActive]);
+  }
+});
+
+jumpDialog.addEventListener("click", (ev) => {
+  if (ev.target === jumpDialog) {
+    jumpDialog.close();
+  }
+});
+
+document.addEventListener("keydown", (ev) => {
+  if (ev.key.toLowerCase() !== "k" || !(ev.ctrlKey || ev.metaKey) || ev.altKey || ev.shiftKey) {
+    return;
+  }
+  ev.preventDefault();
+  if (jumpDialog.open) {
+    jumpDialog.close();
+  } else if (!document.querySelector("dialog[open]")) {
+    openJump();
+  }
+});
+
 // ---------- edit mode: ?mode=edit ----------
 
 const EDIT_MODE = new URLSearchParams(location.search).get("mode") === "edit";

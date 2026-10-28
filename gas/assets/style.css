@@ -1724,6 +1724,66 @@ html.embedded .sidebar { display: none; }
   font-weight: 600;
 }
 
+/* Ctrl+K: go to any slide, exercise step or page */
+.jump-dialog {
+  width: min(560px, calc(100vw - 32px));
+  max-height: 70vh;
+  margin: 12vh auto auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  background: var(--panel);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+.jump-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.jump-dialog::backdrop { background: rgba(0, 0, 0, 0.4); }
+
+.jump-input {
+  padding: 14px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  outline: none;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-size: 16px;
+}
+
+.jump-list {
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.jump-list:empty { display: none; }
+
+.jump-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.jump-list li:hover { background: var(--bg); }
+.jump-list li[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
+
+.jump-list small {
+  flex: none;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 /* export dialog */
 .export-back {
   position: fixed;

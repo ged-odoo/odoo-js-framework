@@ -21,8 +21,8 @@ put together in one deck.
 fonts and images inside. Open it from the site above, or from a clone of this
 repository, without a server.
 
-The arrow keys move between slides, `f` goes fullscreen, and `m` hides the
-sidebar. The sidebar lists every slide, grouped by part. **Print** lays the
+The arrow keys move between slides, `f` goes fullscreen, `m` hides the
+sidebar, and `Ctrl+K` searches for a slide to go to. The sidebar lists every slide, grouped by part. **Print** lays the
 deck out one slide per page, ready to save as a PDF.
 
 ## Repository layout
