@@ -10378,10 +10378,26 @@ function paintOutline() {
   rows.forEach((row, i) => {
     if (i === deckIndex[currentDeck]) {
       row.setAttribute("aria-current", "page");
+      revealRow(row);
     } else {
       row.removeAttribute("aria-current");
     }
   });
+}
+
+// scrolls the sidebar alone, not scrollIntoView, which would also move the
+// page when the sidebar is stacked above it on a narrow screen
+function revealRow(row) {
+  const box = row.getBoundingClientRect();
+  if (!box.height || sidebarEl.classList.contains("collapsed")) {
+    return;
+  }
+  const view = sidebarEl.getBoundingClientRect();
+  if (box.top < view.top) {
+    sidebarEl.scrollTop -= view.top - box.top;
+  } else if (box.bottom > view.bottom) {
+    sidebarEl.scrollTop += box.bottom - view.bottom;
+  }
 }
 
 for (const [deckId, acts] of Object.entries(ACTS_OF)) {
