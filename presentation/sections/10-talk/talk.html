@@ -101,10 +101,256 @@
     </footer>
   </article>
 
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="19a955b8">
+    <header class="slide-head">
+      <p class="eyebrow">Odoo, Owl, frameworks, …</p>
+      <h2>Every app builds on addons/web</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 330" role="img"
+             aria-label="Accounting, CRM, project and sale all point at addons/web.">
+          <defs>
+            <marker id="eco-ar-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="370" y="0" width="260" height="330" rx="24"/>
+          <text class="m" x="500" y="314">addons/web</text>
+
+          <rect class="chip" x="60" y="30" width="180" height="64" rx="6"/>
+          <text class="t" x="150" y="68">accounting</text>
+          <path class="ar" marker-end="url(#eco-ar-3)" d="M246 70 L360 104"/>
+
+          <rect class="chip" x="60" y="236" width="180" height="64" rx="6"/>
+          <text class="t" x="150" y="274">crm</text>
+          <path class="ar" marker-end="url(#eco-ar-3)" d="M246 260 L360 226"/>
+
+          <rect class="chip" x="760" y="20" width="180" height="64" rx="6"/>
+          <text class="t" x="850" y="58">project</text>
+          <path class="ar" marker-end="url(#eco-ar-3)" d="M754 60 L640 104"/>
+
+          <rect class="chip" x="760" y="246" width="180" height="64" rx="6"/>
+          <text class="t" x="850" y="284">sale</text>
+          <path class="ar" marker-end="url(#eco-ar-3)" d="M754 270 L640 226"/>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>None of them ships its own javascript framework: they all use the one in <code>addons/web</code>.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="dac3d626">
+    <header class="slide-head">
+      <p class="eyebrow">Odoo, Owl, frameworks, …</p>
+      <h2>Inside addons/web</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 330" role="img"
+             aria-label="Inside addons/web, three layers: Owl at the bottom, the Odoo JS framework on top of it, and the web client on top. Accounting, CRM, project and sale point at it.">
+          <defs>
+            <marker id="eco-ar-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="370" y="0" width="260" height="330" rx="24"/>
+          <text class="m" x="500" y="314">addons/web</text>
+
+          <rect class="bx" x="400" y="24" width="200" height="72" rx="6"/>
+          <text class="t" x="500" y="66">Web client</text>
+          <path class="ar" d="M500 96 V120"/>
+          <rect class="bx" x="400" y="120" width="200" height="72" rx="6"/>
+          <text class="t" x="500" y="162">Odoo JS framework</text>
+          <path class="ar" d="M500 192 V216"/>
+          <rect class="bx js" x="400" y="216" width="200" height="72" rx="6"/>
+          <text class="t" x="500" y="258">Owl</text>
+
+          <rect class="chip" x="60" y="30" width="180" height="64" rx="6"/>
+          <text class="t" x="150" y="68">accounting</text>
+          <path class="ar" marker-end="url(#eco-ar-4)" d="M246 70 L360 104"/>
+
+          <rect class="chip" x="60" y="236" width="180" height="64" rx="6"/>
+          <text class="t" x="150" y="274">crm</text>
+          <path class="ar" marker-end="url(#eco-ar-4)" d="M246 260 L360 226"/>
+
+          <rect class="chip" x="760" y="20" width="180" height="64" rx="6"/>
+          <text class="t" x="850" y="58">project</text>
+          <path class="ar" marker-end="url(#eco-ar-4)" d="M754 60 L640 104"/>
+
+          <rect class="chip" x="760" y="246" width="180" height="64" rx="6"/>
+          <text class="t" x="850" y="284">sale</text>
+          <path class="ar" marker-end="url(#eco-ar-4)" d="M754 270 L640 226"/>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Three layers, one addon: Owl at the bottom, the framework on it, the web client on top.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="7c667467">
+    <header class="slide-head">
+      <p class="eyebrow">Odoo, Owl, frameworks, …</p>
+      <h2>What each layer brings</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 330" role="img"
+             aria-label="The web client is the app: navbar, user menu, actions. The Odoo JS framework holds the generic components, utilities, views and fields. Owl is the component system.">
+          <defs>
+            <marker id="eco-ar-5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="370" y="0" width="260" height="330" rx="24"/>
+          <text class="m" x="500" y="314">addons/web</text>
+
+          <rect class="bx" x="400" y="24" width="200" height="72" rx="6"/>
+          <text class="t" x="500" y="66">Web client</text>
+          <path class="ar" d="M500 96 V120"/>
+          <rect class="bx" x="400" y="120" width="200" height="72" rx="6"/>
+          <text class="t" x="500" y="162">Odoo JS framework</text>
+          <path class="ar" d="M500 192 V216"/>
+          <rect class="bx js" x="400" y="216" width="200" height="72" rx="6"/>
+          <text class="t" x="500" y="258">Owl</text>
+
+          <path class="ar" marker-end="url(#eco-ar-5)" d="M716 60 H644"/>
+          <text class="mt l" x="732" y="56">The app</text>
+          <text class="s l" x="732" y="76">navbar, user menu, actions, …</text>
+
+          <path class="ar" marker-end="url(#eco-ar-5)" d="M716 156 H644"/>
+          <text class="mt l" x="732" y="152">The building blocks</text>
+          <text class="s l" x="732" y="172">components, utilities, views, fields, …</text>
+
+          <path class="ar" marker-end="url(#eco-ar-5)" d="M716 252 H644"/>
+          <text class="mt l" x="732" y="248">The component system</text>
+          <text class="s m l" x="732" y="268">@odoo/owl</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Owl is a library of its own. The framework and the web client are Odoo's, built with it.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="8aad5b2e">
+    <header class="slide-head">
+      <p class="eyebrow">Architecture</p>
+      <h2>The JS Stack</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 372" role="img"
+             aria-label="Owl at the bottom, the Odoo JS framework on top of it - registries, services, views and fields - then the web client, the website and the point of sale, and the apps above them. Owl, the framework and the web client live in addons/web.">
+          <rect class="chip" x="0" y="0" width="580" height="34" rx="6"/>
+          <text class="s" x="290" y="22">accounting · crm · sale · project · every other app</text>
+          <rect class="chip" x="610" y="0" width="180" height="34" rx="6"/>
+          <text class="s" x="700" y="22">shop · blog · events</text>
+          <rect class="chip" x="820" y="0" width="180" height="34" rx="6"/>
+          <text class="s" x="910" y="22">restaurant · loyalty</text>
+
+          <rect class="bx" x="0" y="50" width="580" height="84" rx="6"/>
+          <text class="t" x="290" y="86">Web client</text>
+          <text class="s" x="290" y="108">navbar, menus, systray, actions, …</text>
+
+          <rect class="bx" x="610" y="50" width="180" height="84" rx="6"/>
+          <text class="t" x="700" y="80">Website</text>
+          <text class="s" x="700" y="100">Interactions, snippets</text>
+          <text class="s m" x="700" y="122">addons/website</text>
+
+          <rect class="bx" x="820" y="50" width="180" height="84" rx="6"/>
+          <text class="t" x="910" y="80">Point of sale</text>
+          <text class="s" x="910" y="100">screens, offline data</text>
+          <text class="s m" x="910" y="122">addons/point_of_sale</text>
+
+          <rect class="bx" x="0" y="154" width="1000" height="84" rx="6"/>
+          <text class="t" x="500" y="190">The Odoo JS framework</text>
+          <text class="s" x="500" y="212">registries, services, utilities, generic components, views and fields</text>
+
+          <rect class="bx js" x="0" y="258" width="1000" height="84" rx="6"/>
+          <text class="t" x="500" y="294">Owl</text>
+          <text class="s" x="500" y="316">the component system, @odoo/owl</text>
+
+          <path class="bound" d="M-10 40 H590 V144 H1010 V352 H-10 Z"/>
+          <text class="m l" x="0" y="368">addons/web</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Everything below the apps lives in <code>addons/web</code>. That is where you will read code.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="af8b5c3e">
+    <header class="slide-head">
+      <p class="eyebrow">JS in Odoo</p>
+      <h2>Web client or website?</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table compare">
+        <li class="head"><span></span><span>Web client</span><span>Website</span></li>
+        <li><span class="key">Rendered by</span><span>The browser, with Owl.</span><span>The server, with QWeb.</span></li>
+        <li><span class="key">Built from</span><span><code>Component</code>, the basic UI block.</span><span><code>Interaction</code>, to add behaviour.</span></li>
+        <li><span class="key">Data</span><span>Loaded at runtime.</span><span>Sent with the page.</span></li>
+        <li><span class="key">Shape</span><span>A single-page application.</span><span>A multi-page application.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>This masterclass is about the web client: components, not interactions.</p>
+    </footer>
+  </article>
+
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="7a24b5ef">
+    <header class="slide-head">
+      <p class="eyebrow">JS in Odoo</p>
+      <h2>Javascript on the website</h2>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+<pre class="big"><code class="language-javascript">// my_addon/static/src/interactions/read_more.js
+import { Interaction } from "@web/public/interaction";
+import { registry } from "@web/core/registry";
+
+export class ReadMore extends Interaction {
+    static selector = <mark>".o_read_more"</mark>;
+    dynamicContent = {
+        "button": { "t-on-click": this.toggle },
+        ".o_more": { "t-att-class": () =&gt; ({ "d-none": !this.open }) },
+    };
+
+    setup() {
+        this.open = false;
+    }
+
+    toggle() {
+        this.open = !this.open;
+    }
+}
+
+registry.category(<mark>"public.interactions"</mark>).add("my_addon.read_more", ReadMore);</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Interaction</span><span>Behaviour on HTML the server already rendered. Website only.</span></li>
+          <li><span class="key">Selector</span><span>One instance on every element that matches it, started with the page.</span></li>
+          <li><span class="key">Owl</span><span>For complex parts: a component, mounted by <code>&lt;owl-component name="…"/&gt;</code> in the page.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Interactions for the small things, Owl components for the complex ones.</p>
+    </footer>
+  </article>
+
   <article data-act="ecosystem" data-from="intro" class="slide" data-id="82405cba">
     <header class="slide-head">
       <p class="eyebrow">Architecture</p>
-      <h2>Two ways of rendering</h2>
+      <h2>Multi-page vs single-page</h2>
     </header>
     <div class="slide-body">
       <figure class="figure">
@@ -211,7 +457,7 @@
     │   ├── counter/
     │   │   ├── counter.js
     │   │   ├── counter.xml
-    │   │   └── counter.scss
+    │   │   └── counter.css
     │   └── dashboard/
     ├── tests/
     └── lib/</code></pre>
@@ -219,7 +465,7 @@
       <section>
         <h3 class="label">What static holds</h3>
         <ul class="rows wide-key">
-          <li><span class="key"><code>static/src</code></span><span>javascript, XML templates, SCSS</span></li>
+          <li><span class="key"><code>static/src</code></span><span>javascript, XML templates, CSS</span></li>
           <li><span class="key"><code>static/tests</code></span><span>Unit tests and tours</span></li>
           <li><span class="key"><code>static/lib</code></span><span>Third-party libraries</span></li>
         </ul>
@@ -280,7 +526,7 @@
           <text class="m mt" x="110" y="36">static/src</text>
           <text class="m l" x="28" y="86">counter.js</text>
           <text class="m l" x="28" y="118">counter.xml</text>
-          <text class="m l" x="28" y="150">counter.scss</text>
+          <text class="m l" x="28" y="150">counter.css</text>
           <text class="m l" x="28" y="182">dashboard.js</text>
           <text class="m l" x="28" y="214">dashboard.xml</text>
           <text class="m l" x="28" y="246">…</text>
@@ -315,81 +561,55 @@
     </footer>
   </article>
 
+  <article data-act="ecosystem" data-from="intro" class="slide" data-id="ffa37c68">
+    <header class="slide-head">
+      <p class="eyebrow">Templates</p>
+      <h2>QWeb, two engines</h2>
+      <p class="lead">QWeb is an XML templating language: directives are attributes on ordinary tags. One syntax, two engines that read it.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes">
+        <li><h3>QWeb in Python</h3><p>Reports, website pages, emails. Rendered on the server, page by page.</p><p class="meta"><code>t-field</code> · <code>t-call</code></p></li>
+        <li><h3>QWeb in Owl</h3><p>Components. Compiled in the browser the first time a template is needed, then re-rendered whenever the state it reads changes.</p><p class="meta"><code>t-on-click</code> · <code>t-ref</code> · <code>t-call-slot</code></p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>An XML file goes in the bundle like any other file.</p>
+    </footer>
+  </article>
+
   <article data-act="ecosystem" data-from="intro" class="slide" data-id="15a0e29b">
     <header class="slide-head">
       <p class="eyebrow">Modules</p>
-      <h2>Javascript modules</h2>
+      <h2>Importing from another addon</h2>
+      <p class="lead">Every file is an ES module: <code>import</code> and <code>export</code>, no globals.</p>
     </header>
     <div class="slide-body two-col code">
       <section>
 <pre class="big"><code class="language-javascript">// my_addon/static/src/dashboard/dashboard.js
 import { Component } from "@odoo/owl";
-import { Counter } from <mark>"@my_addon/counter/counter"</mark>;
-import { formatAmount } from <mark>"./format"</mark>;
+import { registry } from <mark>"@web/core/registry"</mark>;
+import { Counter } from "../counter/counter";
 
 export class Dashboard extends Component {
     static template = "my_addon.Dashboard";
     static components = { Counter };
-}</code></pre>
+}
+
+registry
+    .category("actions")
+    .add("my_addon.dashboard", Dashboard);</code></pre>
       </section>
       <section>
         <ul class="rows wide-key">
-          <li><span class="key">ES modules</span><span>Every file: <code>import</code> and <code>export</code>, no globals.</span></li>
-          <li><span class="key">Names</span><span><code>@my_addon/<wbr>counter/<wbr>counter</code> is <code>my_addon/<wbr>static/<wbr>src/<wbr>counter/<wbr>counter.js</code>.</span></li>
-          <li><span class="key">Relative too</span><span><code>./format</code> is the file next door, <code>dashboard/<wbr>format.js</code>.</span></li>
+          <li><span class="key">Another addon</span><span><code>@web/<wbr>core/<wbr>registry</code> is <code>web/<wbr>static/<wbr>src/<wbr>core/<wbr>registry.js</code>. The addon must be in your <code>depends</code>.</span></li>
+          <li><span class="key">Your own addon</span><span>A path relative to the file: <code>../counter/<wbr>counter</code>. <code>@my_addon/<wbr>counter/<wbr>counter</code> works too.</span></li>
+          <li><span class="key">A library</span><span><code>@odoo/owl</code>, provided by <code>web</code>.</span></li>
         </ul>
       </section>
     </div>
     <footer class="slide-foot">
       <p>Modules are resolved by <code>odoo.loader</code>, in the browser, at startup.</p>
-    </footer>
-  </article>
-
-  <article data-act="ecosystem" data-from="intro" class="slide" data-id="8aad5b2e">
-    <header class="slide-head">
-      <p class="eyebrow">Architecture</p>
-      <h2>The JS Stack</h2>
-    </header>
-    <div class="slide-body">
-      <figure class="figure">
-        <svg viewBox="0 0 1000 372" role="img"
-             aria-label="Owl at the bottom, the Odoo JS framework on top of it - registries, services, views and fields - then the web client, the website and the point of sale, and the apps above them. Owl, the framework and the web client live in addons/web.">
-          <rect class="chip" x="0" y="0" width="580" height="34" rx="6"/>
-          <text class="s" x="290" y="22">accounting · crm · sale · project · every other app</text>
-          <rect class="chip" x="610" y="0" width="180" height="34" rx="6"/>
-          <text class="s" x="700" y="22">shop · blog · events</text>
-          <rect class="chip" x="820" y="0" width="180" height="34" rx="6"/>
-          <text class="s" x="910" y="22">restaurant · loyalty</text>
-
-          <rect class="bx" x="0" y="50" width="580" height="84" rx="6"/>
-          <text class="t" x="290" y="86">Web client</text>
-          <text class="s" x="290" y="108">navbar, menus, systray, actions, …</text>
-
-          <rect class="bx" x="610" y="50" width="180" height="84" rx="6"/>
-          <text class="t" x="700" y="80">Website</text>
-          <text class="s" x="700" y="100">Interactions, snippets</text>
-          <text class="s m" x="700" y="122">addons/website</text>
-
-          <rect class="bx" x="820" y="50" width="180" height="84" rx="6"/>
-          <text class="t" x="910" y="80">Point of sale</text>
-          <text class="s" x="910" y="100">screens, offline data</text>
-          <text class="s m" x="910" y="122">addons/point_of_sale</text>
-
-          <rect class="bx" x="0" y="154" width="1000" height="84" rx="6"/>
-          <text class="t" x="500" y="190">The Odoo JS framework</text>
-          <text class="s" x="500" y="212">registries, services, utilities, generic components, views and fields</text>
-
-          <rect class="bx js" x="0" y="258" width="1000" height="84" rx="6"/>
-          <text class="t" x="500" y="294">Owl</text>
-          <text class="s" x="500" y="316">the component system, @odoo/owl</text>
-
-          <path class="bound" d="M-10 40 H590 V144 H1010 V352 H-10 Z"/>
-          <text class="m l" x="0" y="368">addons/web</text>
-        </svg>
-      </figure>
-    </div>
-    <footer class="slide-foot">
-      <p>Everything below the apps lives in <code>addons/web</code>. That is where you will read code.</p>
     </footer>
   </article>
 
@@ -451,23 +671,6 @@ export class Dashboard extends Component {
 
 
 
-  <article data-act="ecosystem" data-from="intro" class="slide" data-id="ffa37c68">
-    <header class="slide-head">
-      <p class="eyebrow">Templates</p>
-      <h2>QWeb, two engines</h2>
-      <p class="lead">QWeb is an XML templating language: directives are attributes on ordinary tags. One syntax, two engines that read it.</p>
-    </header>
-    <div class="slide-body">
-      <ul class="rows boxes">
-        <li><h3>QWeb in Python</h3><p>Reports, website pages, emails. Rendered on the server, page by page.</p><p class="meta"><code>t-field</code> · <code>t-call</code></p></li>
-        <li><h3>QWeb in Owl</h3><p>Components. Compiled in the browser the first time a template is needed, then re-rendered whenever the state it reads changes.</p><p class="meta"><code>t-on-click</code> · <code>t-ref</code> · <code>t-call-slot</code></p></li>
-      </ul>
-    </div>
-    <footer class="slide-foot">
-      <p>An XML file goes in the bundle like any other file.</p>
-    </footer>
-  </article>
-
   <article class="slide divider" data-id="9e3c0102" data-act="owl">
     <div class="divider-body">
       <p class="divider-eyebrow"></p>
@@ -484,22 +687,6 @@ export class Dashboard extends Component {
       <h2>An introduction to Owl 3</h2>
       <p class="lead">Components, signals, templates, props, hooks.</p>
     </header>
-  </article>
-
-  <article data-act="owl" data-from="owl" class="slide" data-id="8c553a2a">
-    <header class="slide-head">
-      <p class="eyebrow">Topic 1 · Owl</p>
-      <h2>Goals</h2>
-    </header>
-    <div class="slide-body">
-      <ul class="rows boxes tinted goals">
-        <li><h3>Components</h3></li>
-        <li><h3>Templates</h3></li>
-        <li><h3>Signals</h3></li>
-        <li><h3>Props</h3></li>
-        <li><h3>Hooks</h3></li>
-      </ul>
-    </div>
   </article>
 
   <article data-act="owl" data-from="owl" class="slide" data-id="12d9fc3b">
@@ -726,7 +913,7 @@ class Counter extends Component {
       <h2>Sub components</h2>
       <p class="lead">A component is a unit you reuse: its JavaScript, its template, its CSS.</p>
     </header>
-    <div class="slide-body two-col sub">
+    <div class="slide-body two-col even snug">
       <section>
       <figure class="figure">
         <svg viewBox="0 0 1000 215" role="img"
@@ -738,12 +925,10 @@ class Counter extends Component {
           </defs>
 
           <rect class="bx" x="330" y="8" width="340" height="72" rx="6"/>
-          <text class="t" x="500" y="40">Root</text>
-          <text class="m" x="500" y="64">static components = { Counter }</text>
+          <text class="t" x="500" y="50">Root</text>
 
           <path class="ar" marker-end="url(#owl-ar-1)" d="M430 86 L182 124"/>
           <path class="ar" marker-end="url(#owl-ar-1)" d="M570 86 L818 124"/>
-          <text class="m" x="500" y="112">&lt;Counter/&gt;</text>
 
           <rect class="bx js" x="0" y="128" width="290" height="76" rx="6"/>
           <text class="t" x="145" y="160">Counter</text>
@@ -760,6 +945,14 @@ class Counter extends Component {
       </figure>
       </section>
       <section>
+        <h3 class="label file">root.js</h3>
+<pre><code class="language-javascript">import { Component } from "@odoo/owl";
+import { Counter } from "./counter";
+
+class Root extends Component {
+    static template = "my_module.Root";
+    <mark>static components = { Counter }</mark>;
+}</code></pre>
         <h3 class="label file">root.xml</h3>
 <pre><code class="language-markup">&lt;t t-name="my_module.Root"&gt;
     &lt;div class="p-3"&gt;

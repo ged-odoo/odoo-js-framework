@@ -2472,6 +2472,7 @@ html.embedded .sidebar { display: none; }
 .clean .two-col > section > .code-block > pre { flex: 1; }
 
 .clean .two-col > section > .code-block + .code-block { margin-top: 1.2cqw; }
+.clean .two-col > section > .code-block + h3.label { margin-top: 2.2cqw; }
 
 /* but a section that stacks several panels sizes each one to its own code:
    sharing the depth equally clips the longest sample */
