@@ -1,5 +1,8 @@
 # what gas/dev.py serves while editing, rebuilt on every save
 /_site/
 
+# built by build.py, and on GitHub by the Pages workflow
+/index.html
+
 # python bytecode, written by gas/ whenever the build runs
 __pycache__/
