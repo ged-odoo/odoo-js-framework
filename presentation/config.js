@@ -46,25 +46,16 @@ window.GAS_CONFIG = {
               label: "Odoo JavaScript Overview",
               acts: ["title", "ecosystem"],
               slides: [
-                "9e3c0102", // 17. Owl (divider)
-                "c3edbcc4", // 18. An introduction to Owl 3
-                "8c553a2a", // 19. Goals
-                "12d9fc3b", // 20. What is Owl?
-                "a3eca203", // 21. A Counter component
-                "f2902aa5", // 22. Rendering context
-                "657824c5", // 23. Signals
-                "91cdaddf", // 24. Event handling
-                "7d1f0a6c", // 25. Template syntax
-                "0c9b53ae", // 26. Sub components
-                "5e46d8b2", // 27. Props, and their validation
-                "4b2c7e91", // 28. Derived values: computed
-                "b8e0d4a7", // 30. odoo.github.io/owl
-                "9e3c0103", // 47. The Odoo JS Framework (divider)
-                "20b72e9c", // 50. Building blocks
-                "1a7c9e42", // 51. Web client
-                "4b8d2f61", // 53. Registries
-                "b3e91d47", // 56. Everything on screen is an action
-                "c48ea30f", // 59. Talking to the server
+                "9e3c0102", // 22. Owl (divider)
+                "c3edbcc4", // 23. An introduction to Owl 3
+                "12d9fc3b", // 24. What is Owl?
+                "a3eca203", // 25. A Counter component
+                "657824c5", // 27. Signals
+                "7d1f0a6c", // 29. Template syntax
+                "0c9b53ae", // 30. Sub components
+                "5e46d8b2", // 31. Props, and their validation
+                "4b2c7e91", // 32. Derived values: computed
+                "b8e0d4a7", // 34. odoo.github.io/owl
               ],
             },
           ],

@@ -104,6 +104,9 @@
   margin: 0 auto;
 }
 
+/* web client and website, compared row by row */
+#deck-talk .rows.compare { --cols: 15cqw 1fr 1fr; }
+
 /* ---------- a wider sidebar ---------- */
 
 /* This deck's nav runs deeper than the talks' - every topic lists its
