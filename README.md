@@ -17,9 +17,9 @@ put together in one deck.
 
 ## Presenting
 
-`index.html` is the whole presentation in one file, with its styles, scripts,
-fonts and images inside. Open it from the site above, or from a clone of this
-repository, without a server.
+The site serves the whole presentation as one page, with its styles,
+scripts, fonts and images inside. To present offline, save that page, or
+build it locally (see below).
 
 The arrow keys move between slides, `f` goes fullscreen, `m` hides the
 sidebar, and `Ctrl+K` searches for a slide to go to. The sidebar lists every slide, grouped by part. **Print** lays the
@@ -34,11 +34,27 @@ counted and printed. It
 is kept in the url, `?preset=overview`, so a link opens the deck on the same
 preset. The presets are defined in `presentation/config.js`.
 
+## Building locally
+
+The built page is not in this repository: GitHub builds it for the site
+only. To get it on your machine, you need Python 3.9 or later, and nothing
+else to install:
+
+```
+git clone https://github.com/ged-odoo/odoo-js-framework.git
+cd odoo-js-framework
+python3 build.py
+```
+
+This writes `index.html` at the root of the clone (git ignores it). Open it
+in a browser, straight from the disk: it needs neither a server nor a network
+connection. Run `python3 build.py` again after pulling new slides.
+
 ## Repository layout
 
 ```
-index.html        the built presentation, served by GitHub Pages
-build.py          builds index.html from presentation/
+build.py          builds index.html, the whole presentation, from presentation/
+.github/          the action that builds it and deploys it to GitHub Pages
 presentation/     the source: a GAS project
   sections/10-talk/talk.html    the deck, every slide
   config.js                     the title, and the five parts
@@ -49,14 +65,10 @@ gas/              GAS, the slide framework the deck runs on
 
 ## Editing
 
-The slides are in `presentation/sections/10-talk/talk.html`. After a change,
-rebuild `index.html` and commit both:
-
-```
-python3 build.py
-```
-
-It needs Python 3 and nothing else. To see changes as you make them,
+The slides are in `presentation/sections/10-talk/talk.html`. Every push to
+`main`, merged pull requests included, rebuilds the site and deploys it, with
+the `Deploy to GitHub Pages` GitHub Action: the built page is not committed.
+To see changes as you make them,
 `python3 gas/dev.py presentation _site` serves the deck at
 `http://localhost:8000/` and rebuilds it on every save. That view numbers the
 dividers "Act 1 of 5" rather than "Part 1 of 5": `build.py` renames them.
