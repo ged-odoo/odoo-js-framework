@@ -1,0 +1,257 @@
+<div class="deck clean" id="deck-js-framework-2">
+  <article class="slide statement cover" data-id="2c59f513">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 3 · Part 2</p>
+      <h2>Plugins</h2>
+      <p class="lead">The code that outlives a screen, and what has to be loaded before the first render.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Then</span>Dashboard, steps 5 to 14: caching, charts, and making it extensible</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="2e9b6d14">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>Plugins and services</h2>
+      <p class="lead">A component is created and destroyed with its screen. A service is started once, with the web client, and outlives every screen.</p>
+      <ul class="notes">
+        <li>State that must survive a screen change, or be shared between two of them, belongs in a service.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">The older shape, still everywhere</h3>
+<pre><code class="language-javascript">import { registry } from "@web/core/registry";
+
+const myService = {
+    <mark>dependencies: ["notification"]</mark>,
+    start(env, { notification }) {
+        return { doSomething() { /* ... */ } };
+    },
+};
+registry.category("services").add("my", myService);
+
+// in a component
+this.my = <mark>useService("my")</mark>;</code></pre>
+      </section>
+      <section>
+        <h3 class="label">Owl 3: a global plugin</h3>
+<pre><code class="language-javascript">import { Plugin, usePlugin } from "@odoo/owl";
+import { NotificationPlugin }
+    from "@web/core/notifications/notification_plugin";
+import { services } from "@web/core/services";
+
+export class MyPlugin extends <mark>Plugin</mark> {
+    <mark>notification = usePlugin(NotificationPlugin)</mark>;
+
+    doSomething() { /* ... */ }
+}
+
+<mark>services.add</mark>(MyPlugin);
+
+// in a component
+my = <mark>usePlugin(MyPlugin)</mark>;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Write plugins. Read both: plenty of services are still in their old shape, and every ported one keeps a <code>useService</code> alias for the code that has not moved yet.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="6a4d1f92">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>The ones already there</h2>
+      <p class="lead">Before writing one, know what the framework already started for you.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table plugins">
+        <li class="head"><span>Plugin</span><span>What it gives you</span><span>Imported from</span></li>
+        <li><span><code>ORM</code></span><span>Reading and writing records.</span><span><code>@web/core/orm_plugin</code></span></li>
+        <li><span><code>NotificationPlugin</code></span><span>The toasts in the top right corner.</span><span><code>@web/core/notifications/notification_plugin</code></span></li>
+        <li><span><code>DialogPlugin</code></span><span>A dialog over the current screen.</span><span><code>@web/core/dialog/dialog_plugin</code></span></li>
+        <li><span><code>EffectPlugin</code></span><span>The rainbowman, and the other effects.</span><span><code>@web/core/effects/effect_plugin</code></span></li>
+        <li><span><code>HotkeyPlugin</code></span><span>Keyboard shortcuts, scoped to what is on screen.</span><span><code>@web/core/hotkeys/hotkey_plugin</code></span></li>
+        <li><span><code>ActionPlugin</code></span><span><code>doAction</code>: the one that opens a screen.</span><span><code>@web/webclient/actions/action_plugin</code></span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>A couple of dozen more in <code>addons/web</code> alone: <code>grep -r "services.add(" addons/web/static/src</code> lists every one of them.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="8c31b7e5">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>Defining a plugin</h2>
+      <ul class="notes">
+        <li>A class extending <code>Plugin</code>, and one line to start it with the web client. Nothing else refers to it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">my_addon/static/src/reporting_plugin.js</h3>
+<pre><code class="language-javascript">import { Plugin, onWillStart, signal, usePlugin } from "@odoo/owl";
+import { ORM } from "@web/core/orm_plugin";
+import { services } from "@web/core/services";
+
+export class ReportingPlugin extends Plugin {
+    <mark>orm = usePlugin(ORM)</mark>;
+    stats = signal.Object({});
+
+    setup() {
+        onWillStart(() =&gt; this.reload());
+    }
+
+    async reload() {
+        const stats = await this.orm.call("my.model", "get_stats");
+        this.stats.set(stats);
+    }
+}
+
+<mark>services.add(ReportingPlugin)</mark>;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">State</span><span>Signals, as in a component. Everything that reads one follows it.</span></li>
+          <li><span class="key">Dependencies</span><span><code>usePlugin</code> in a field, the same call a component makes. What it names is started if it has not been.</span></li>
+          <li><span class="key">setup</span><span>Listeners and subscriptions. <code>onWillStart</code> works here too: the web client waits for it.</span></li>
+          <li><span class="key">Cleanup</span><span>Signals, computeds and <code>useListener</code> undo themselves. For the rest, <code>onWillDestroy</code>.</span></li>
+          <li><span class="key">services.add</span><span>Started once with the web client, and alive until the tab is closed.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>No manifest entry, no registration order: the file is in the bundle, the class is in <code>services</code>, it runs.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="b57e2c14">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>A plugin that only does something</h2>
+      <p class="lead">It holds no state and nobody reads it. It exists because the web client started it.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">my_addon/static/src/tick_tock_plugin.js</h3>
+<pre><code class="language-javascript">import { Plugin, onWillDestroy, usePlugin } from "@odoo/owl";
+import { NotificationPlugin }
+    from "@web/core/notifications/notification_plugin";
+import { services } from "@web/core/services";
+
+class TickTockPlugin extends Plugin {
+    notification = usePlugin(NotificationPlugin);
+
+    setup() {
+        let counter = 1;
+        const id = setInterval(() =&gt; {
+            this.notification.add(`Tick Tock ${counter++}`);
+        }, 5000);
+        <mark>onWillDestroy(() =&gt; clearInterval(id))</mark>;
+    }
+}
+
+services.add(TickTockPlugin);</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Alone</span><span>No component, no template, no screen. Install the addon, reload, and the toasts start.</span></li>
+          <li><span class="key">Reaching out</span><span><code>usePlugin(NotificationPlugin)</code> from inside a plugin: plugins compose the same way components use them.</span></li>
+          <li><span class="key">Giving back</span><span>The interval would outlive the plugin. <code>onWillDestroy</code> runs on the way out, in reverse order.</span></li>
+        </ul>
+        <p class="caption">In the old shape, that dependency was a <code>dependencies: ["notification"]</code> key.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Useful in practice for anything that listens: the bus, a watchdog on the assets, a keyboard shortcut of your own.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="d0a6f3b8">
+    <header class="slide-head">
+      <p class="eyebrow">Services</p>
+      <h2>Reaching one from a component</h2>
+      <ul class="notes">
+        <li><code>usePlugin(Class)</code> hands back the instance, with everything on it: the class you imported is the documentation.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">uploader.js</h3>
+<pre><code class="language-javascript">import { Component, usePlugin } from "@odoo/owl";
+import { ORM } from "@web/core/orm_plugin";
+import { NotificationPlugin }
+    from "@web/core/notifications/notification_plugin";
+
+export class Uploader extends Component {
+    static template = "my_addon.Uploader";
+
+    <mark>orm = usePlugin(ORM)</mark>;
+    notification = usePlugin(NotificationPlugin);
+
+    async onUpload(data) {
+        const [id] = await this.orm.create(
+            "ir.attachment", [data],
+        );
+        this.notification.add(`Uploaded ${id}`);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Where</span><span>A class field, or <code>setup()</code>. Never anywhere else: it has to run while the component is being created.</span></li>
+          <li><span class="key">No string</span><span>An import, so the editor follows it to the class and every method it has.</span></li>
+          <li><span class="key">Reactive</span><span>Read <code>this.stats.stats()</code> from a plugin in your template and the component re-renders when it changes. Owl 2 needed <code>useState(useService(…))</code>; this does not.</span></li>
+          <li><span class="key">Scoped</span><span>An <code>orm</code> call whose component is destroyed before it answers is dropped, not applied to a screen that is gone.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>One instance per tab: two components calling <code>usePlugin(ReportingPlugin)</code> get the same object, cache included.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="9d4f70b2">
+    <header class="slide-head">
+      <p class="eyebrow">Data</p>
+      <h2>Loading before the first render</h2>
+      <ul class="notes">
+        <li><code>onWillStart</code> runs once, before the component is rendered. The screen waits for the promise.</li>
+        <li>Owl renders the whole tree in one pass: every branch waits, then the DOM is touched once.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label file">dashboard.js</h3>
+<pre><code class="language-javascript">import { Component, onWillStart, usePlugin } from "@odoo/owl";
+import { ReportingPlugin } from "./reporting_plugin";
+
+export class Dashboard extends Component {
+    static template = "my_addon.Dashboard";
+
+    reporting = usePlugin(ReportingPlugin);
+
+    setup() {
+        <mark>onWillStart</mark>(() =&gt; this.reporting.load());
+    }
+}</code></pre>
+        <h3 class="label file">dashboard.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="my_addon.Dashboard"&gt;
+    &lt;p t-out="<mark>this.reporting.someData()</mark>"/&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Once</span><span>Per mounting. Come back to the screen and it runs again, which is why the data, and its cache, live in the plugin.</span></li>
+          <li><span class="key">Later</span><span>A slow call that must not block: render, then let the plugin set its signal when it lands.</span></li>
+          <li><span class="key">Never</span><span>No request in <code>setup</code> without awaiting it somewhere: the render will not wait for it.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>One rule: the data a screen cannot render without is loaded in <code>onWillStart</code>.</p>
+    </footer>
+  </article>
+</div>

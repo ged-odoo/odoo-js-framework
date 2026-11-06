@@ -1,0 +1,207 @@
+<div class="deck clean" id="deck-state-management">
+  <article class="slide statement cover" data-id="3e85b1fd">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 5 · State Management</p>
+      <h2>State Management</h2>
+      <p class="lead">Where a piece of state should live, who writes it, and how far it has to travel.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Then</span>Clicker game, twenty-one steps across the whole framework</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="c17e40b9">
+    <header class="slide-head">
+      <p class="eyebrow">Shared state</p>
+      <h2>Where should this state live?</h2>
+      <p class="lead">Climb one rung at a time, and only when the one you are on hurts.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows numbered">
+        <li><span class="num">1</span><h3>In the component</h3><p>A <code>signal</code> field. Most state stops here.</p></li>
+        <li><span class="num">2</span><h3>In a common ancestor</h3><p>Two components need it: lift it up, pass it down as a prop.</p></li>
+        <li><span class="num">3</span><h3>Plus a callback prop</h3><p>A child changes it by calling the owner, never by writing the prop.</p></li>
+        <li><span class="num">4</span><h3>In a plugin</h3><p>Too much plumbing: <code>providePlugins</code> above, <code>usePlugin</code> below.</p></li>
+        <li><span class="num">5</span><h3>In a global plugin</h3><p>It has to outlive the screen: <code>services.add</code>.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>One owner per piece of state, and only the owner writes it.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="f47b0a2e">
+    <header class="slide-head">
+      <p class="eyebrow">Shared state</p>
+      <h2>The same counter, three rungs up</h2>
+      <ul class="notes">
+        <li>The state is a <code>signal</code> at every rung. What changes is who holds it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">1 · the component owns it</h3>
+<pre><code class="language-javascript">class Counter extends Component {
+    <mark>value = signal(0)</mark>;
+    increment() {
+        this.value.set(this.value() + 1);
+    }
+}</code></pre>
+        <h3 class="label">2 and 3 · the parent owns it</h3>
+<pre><code class="language-javascript">class Parent extends Component {
+    value = signal(0);
+    increment = () =&gt; { /* ... */ };
+}</code></pre>
+<pre><code class="language-markup">&lt;Child value="this.value"
+       <mark>onIncrement.bind="this.increment"</mark>/&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label">4 and 5 · a plugin owns it</h3>
+<pre><code class="language-javascript">export class CounterPlugin extends <mark>Plugin</mark> {
+    value = signal(0);
+    double = <mark>computed</mark>(() =&gt; this.value() * 2);
+    increment() {
+        this.value.set(this.value() + 1);
+    }
+}
+
+providePlugins([CounterPlugin]);  // 4 · one subtree
+services.add(CounterPlugin);      // 5 · the whole tab
+
+// anywhere below, no props
+counter = <mark>usePlugin(CounterPlugin)</mark>;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Rungs 4 and 5 are the same class. Only the line that installs it changes.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="1e6d9b03">
+    <header class="slide-head">
+      <p class="eyebrow">Shared state</p>
+      <h2>What belongs in a plugin</h2>
+      <p class="lead">The component renders. The plugin knows the rules. That split is the whole architecture.</p>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label">A plugin holds</h3>
+        <ul class="rows wide-key">
+          <li><span class="key">State</span><span>The signals that actually change.</span></li>
+          <li><span class="key">Derivations</span><span>A <code>computed</code> for everything that follows from them. Never store what you can derive.</span></li>
+          <li><span class="key">Intent</span><span>The methods a component calls: <code>buyBot()</code>, not <code>count.set(...)</code> from three places.</span></li>
+          <li><span class="key">Its own edges</span><span>The server, the storage, the timers. Through another plugin when there is one.</span></li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label">And it buys you</h3>
+        <ul class="rows wide-key">
+          <li><span class="key">One owner</span><span>Everyone reads the same signals. No copy to keep in sync.</span></li>
+          <li><span class="key">No plumbing</span><span>A component three levels down asks for the plugin. Nothing passes through the middle.</span></li>
+          <li><span class="key">Fine grain</span><span>A component re-renders only if it read the signal that changed.</span></li>
+          <li><span class="key">Testable</span><span>A plugin is a class with signals. Its rules can be tested without mounting anything.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Step 4 of the clicker game is this refactor: the game rules leave the components for good.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="9a41d6c8">
+    <header class="slide-head">
+      <p class="eyebrow">Shared state</p>
+      <h2>One game, several screens</h2>
+      <p class="lead">The systray item, the client action and a form view all reach the same counter. None of them owns it.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 250" role="img"
+             aria-label="The systray item, the client action and the user menu item all reach the same ClickerPlugin, which holds the state of the game and saves it through a storage plugin.">
+          <defs>
+            <marker id="adv-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="0" y="0" width="230" height="60" rx="6"/>
+          <text class="t" x="115" y="26">Systray item</text>
+          <text class="s" x="115" y="46">the count, always visible</text>
+
+          <rect class="bx" x="0" y="95" width="230" height="60" rx="6"/>
+          <text class="t" x="115" y="121">Client action</text>
+          <text class="s" x="115" y="141">the game screen</text>
+
+          <rect class="bx" x="0" y="190" width="230" height="60" rx="6"/>
+          <text class="t" x="115" y="216">A form view</text>
+          <text class="s" x="115" y="236">a reward on save</text>
+
+          <path class="ar" marker-end="url(#adv-ar-1)" d="M236 30 L372 108"/>
+          <path class="ar" marker-end="url(#adv-ar-1)" d="M236 125 H372"/>
+          <path class="ar" marker-end="url(#adv-ar-1)" d="M236 220 L372 142"/>
+          <text class="m" x="304" y="112">usePlugin</text>
+
+          <rect class="bx js" x="380" y="60" width="290" height="130" rx="6"/>
+          <text class="t" x="525" y="96">ClickerPlugin</text>
+          <text class="s" x="525" y="120">clicks, bots, milestones</text>
+          <text class="s" x="525" y="142">buyBot(), tick()</text>
+          <text class="s" x="525" y="168">started with the web client</text>
+
+          <path class="ar" marker-end="url(#adv-ar-1)" d="M678 125 H770"/>
+
+          <rect class="bx" x="778" y="80" width="222" height="90" rx="6"/>
+          <text class="t" x="889" y="116">StoragePlugin</text>
+          <text class="s" x="889" y="140">the game survives</text>
+          <text class="s" x="889" y="158">a page reload</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>A global plugin, added with <code>services.add</code>: one instance, alive as long as the tab.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="d8c52f16">
+    <header class="slide-head">
+      <p class="eyebrow">Reading old code</p>
+      <h2>What became of <code>env</code></h2>
+      <ul class="notes">
+        <li>In Owl 2, <code>env</code> was the shared object every component could reach, and <code>useSubEnv</code> the way to hand something down.</li>
+        <li>Owl 3 has neither. What you see in master comes from the compatibility layer.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">What you will read</h3>
+<pre><code class="language-javascript">// still everywhere in addons/web
+this.env.services.action
+this.env.bus
+this.env.debug
+this.env.isSmall
+
+// Owl 2, handing state down the tree
+useSubEnv({ myCounter: this.counter });
+this.counter = useState(this.env.myCounter);</code></pre>
+        <p class="caption">Provided by <code>@web/owl2/<wbr>owl3_compatibility_layer</code>.</p>
+      </section>
+      <section>
+        <h3 class="label">What you write</h3>
+<pre><code class="language-javascript">// handing state down a subtree: useSubEnv's heir
+<mark>providePlugins([ClickerPlugin])</mark>;
+
+// reading it, anywhere below
+clicker = <mark>usePlugin(ClickerPlugin)</mark>;
+
+// something the app was mounted with
+const debug = <mark>useConfig("debug")</mark>;</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Provide</span><span><code>providePlugins</code> is what <code>useSubEnv</code> became: it makes a plugin available to one subtree. <code>services.add</code> does the same for the whole tab.</span></li>
+          <li><span class="key">Read</span><span><code>usePlugin</code> is the other half — typed, asked for by class, and impossible to reach by accident. <code>env</code> was one bag for everything.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Recognize it, do not write it. <code>env</code> goes with the compatibility layer, and the code leaning on it goes too.</p>
+    </footer>
+  </article>
+</div>

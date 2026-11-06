@@ -1,0 +1,120 @@
+<div class="deck clean" id="deck-customizing-ui">
+  <article class="slide statement cover" data-id="a7c4e019">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 5 · Customizing the UI</p>
+      <h2>Customizing the UI</h2>
+      <p class="lead">Changing what the web client already does, and taking the places it leaves open.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Then</span>State Management</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="73911d7c">
+    <header class="slide-head">
+      <p class="eyebrow">Extension points</p>
+      <h2>Extending instead of rewriting</h2>
+      <p class="lead">There is no <code>_inherit</code> in javascript. Four tools instead, of two kinds.</p>
+    </header>
+    <div class="slide-body two-col even snug kinds">
+      <section>
+        <h3 class="label">Add something of your own</h3>
+        <ul class="rows boxes">
+          <li><h3>Registries</h3><p>Add or replace a field widget, a view, a service, a systray item.</p></li>
+          <li><h3><code>extends</code></h3><p>Subclass a component, then register the subclass.</p></li>
+        </ul>
+        <p class="caption">The standard code is untouched, and what you added is used where it was asked for.</p>
+      </section>
+      <section>
+        <h3 class="label">Change what is already there</h3>
+        <ul class="rows boxes">
+          <li><h3><code>patch()</code></h3><p>Change a method on an existing class or object.</p></li>
+          <li><h3><code>t-inherit-mode="extension"</code></h3><p>Change an existing template in place, with an <code>xpath</code>.</p></li>
+        </ul>
+        <p class="caption">In place, everywhere, for everyone — including the screens you have never seen.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The left column first. Reach right only when the standard code left you no hook.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="0c8e3a75">
+    <header class="slide-head">
+      <p class="eyebrow">Patching</p>
+      <h2>When there is no hook</h2>
+      <ul class="notes">
+        <li><code>patch(target, extension)</code> replaces properties and keeps the originals reachable through <code>super</code>.</li>
+        <li>It is global: every use of that class changes, in every addon, for every user.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label file">my_addon/static/src/patches.js</h3>
+<pre><code class="language-javascript">import { patch } from "@web/core/utils/patch";
+import { FormController } from "@web/views/form/form_controller";
+
+<mark>patch</mark>(FormController.prototype, {
+    setup() {
+        <mark>super.setup(...arguments)</mark>;
+        // ... whatever you need
+    },
+
+    get canEdit() {
+        return super.canEdit &amp;&amp; this.props.resId;
+    },
+});</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Prototype</span><span><code>patch(MyClass.prototype, …)</code> for methods and getters, <code>patch(MyClass, …)</code> for statics.</span></li>
+          <li><span class="key">Anything</span><span>A class, a plain object, a service. Not a constructor.</span></li>
+          <li><span class="key">Order</span><span>Two addons patching the same method chain, in the order their bundles load.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The <code>super</code> in a patch is the code you replaced, not the parent class. Call it, unless you truly mean to drop it.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="3d5c8e20">
+    <header class="slide-head">
+      <p class="eyebrow">Slotting in</p>
+      <h2>Places that are waiting for you</h2>
+      <p class="lead">A registry entry is all it takes to appear in the standard chrome.</p>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+<pre class="big"><code class="language-javascript">// a systray item, right of the navbar
+registry.category(<mark>"systray"</mark>).add(
+    "awesome_clicker.counter",
+    { Component: ClickerSystray },
+    { sequence: 10 },
+);
+
+// an entry in the command palette, ctrl-k
+<mark>useCommand</mark>("Buy a ClickBot", () =&gt; this.buyBot(), {
+    category: "awesome_clicker",
+});
+
+// an item in the user menu
+registry.category(<mark>"user_menuitems"</mark>).add("clicker", () =&gt; ({
+    type: "item",
+    description: "Reset the game",
+    callback: () =&gt; this.reset(),
+}));</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Systray</span><span>An object with a <code>Component</code> key, not the component itself. The sequence decides where it lands.</span></li>
+          <li><span class="key">Commands</span><span><code>useCommand</code> registers while the component is mounted, and cleans up on its own.</span></li>
+          <li><span class="key">Hotkeys</span><span>The <code>hotkey</code> service, for a shortcut without a menu.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Read the standard entries first: the user menu and the debug menu are both just registry entries.</p>
+    </footer>
+  </article>
+</div>

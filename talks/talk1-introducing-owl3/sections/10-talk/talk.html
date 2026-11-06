@@ -1,0 +1,1678 @@
+<div class="deck clean" id="deck-talk">
+
+  <!-- ============================ COVER ============================ -->
+
+  <article class="slide welcome current" data-id="a1f00001" data-act="frontier">
+    <div class="welcome-bg"></div>
+    <div class="welcome-stars"></div>
+    <!-- decorations lifted from the template, placed as it places them -->
+    <div class="welcome-art">
+      <img src="assets/stickers/ring.webp" alt="" style="left: 8.08%; top: 9.69%; width: 5.77%;">
+      <img src="assets/stickers/cross.webp" alt="" style="left: 18.72%; top: 6.9%; width: 3.67%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 14.83%; top: 16.22%; width: 1.28%;">
+      <img src="assets/stickers/burst.webp" alt="" style="left: 61.14%; top: 5.04%; width: 3.67%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 66.75%; top: 10.52%; width: 1.28%;">
+      <img src="assets/stickers/ufo.webp" alt="" style="left: 75.86%; top: 53.74%; width: 15.93%;">
+      <img src="assets/stickers/spiral.webp" alt="" style="left: 73.31%; top: 76.09%; width: 9.74%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 94.27%; top: 69.99%; width: 1.28%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 5.88%; top: 86.46%; width: 1.28%;">
+      <img src="assets/stickers/burst.webp" alt="" style="left: 8.08%; top: 89.89%; width: 3.67%;">
+    </div>
+
+    <img class="welcome-logo" src="assets/odoo-experience.webp"
+         alt="Odoo Experience 2026">
+
+    <div class="welcome-content">
+      <h2>Introducing<br>Owl 3</h2>
+      <p class="lead">RD Framework JS - Géry Debongnie</p>
+    </div>
+    <a class="vod" href="https://www.youtube.com/watch?v=OpceOGAEMSQ" target="_blank" rel="noopener">
+      <img class="vod-qr" src="assets/replay-qr.svg" alt="QR code linking to the replay, youtu.be/OpceOGAEMSQ">
+      <span class="vod-label"><svg class="vod-play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24"/><path d="M19 14.5 34 24 19 33.5Z"/></svg>Watch the replay</span>
+      <span class="vod-url">youtu.be/OpceOGAEMSQ</span>
+    </a>
+  </article>
+
+  <!-- ======================= ACT 1 · THE FRONTIER ======================= -->
+
+  <article class="slide divider" data-id="a1f00002" data-act="frontier">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Why Owl 3?</h2>
+      <p class="divider-sub">Scaling Odoo JS: challenges in taming complexity</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f0001b" data-act="frontier" data-label="Three owls">
+    <div class="slide-body">
+      <figure class="figure owls">
+        <svg viewBox="0 152 1000 272" role="img"
+             aria-label="Three owls perched on a branch, in three shades of purple. One looks to the right, one straight out at you, and the third is winking.">
+          <path class="owl-branch" d="M120 409 H880"/>
+          <g transform="translate(250 392) scale(0.92)">
+            <path class="owl-foot" d="M-30 0 v16 M-30 16 h-15 M-30 16 h15 M30 0 v16 M30 16 h-15 M30 16 h15"/>
+            <path fill="#4f3349" d="M-64 -168 L-80 -212 L-40 -184 Z"/>
+            <path fill="#4f3349" d="M64 -168 L80 -212 L40 -184 Z"/>
+            <path fill="#6d4763" d="M-82 -62 C-82 -152 -46 -196 0 -196 C46 -196 82 -152 82 -62 C82 -12 46 8 0 8 C-46 8 -82 -12 -82 -62 Z"/>
+            <ellipse fill="#efe6ed" cx="0" cy="-42" rx="40" ry="46"/>
+            <path fill="#4f3349" opacity="0.22" d="M-78 -96 C-92 -56 -84 -20 -62 -4 C-70 -40 -72 -70 -66 -100 Z"/>
+            <path fill="#4f3349" opacity="0.22" d="M78 -96 C92 -56 84 -20 62 -4 C70 -40 72 -70 66 -100 Z"/>
+            <circle fill="#fff" cx="-30" cy="-126" r="27"/>
+            <circle fill="#fff" cx="30" cy="-126" r="27"/>
+            <circle fill="#2a1c26" cx="37" cy="-126" r="12"/>
+            <circle fill="#fff" cx="41" cy="-131" r="4"/>
+            <circle fill="#2a1c26" cx="-23" cy="-126" r="12"/>
+            <circle fill="#fff" cx="-19" cy="-131" r="4"/>
+            <path fill="#e8a33d" d="M-10 -104 L10 -104 L0 -84 Z"/>
+          </g>
+          <g transform="translate(500 392) scale(1.06)">
+            <path class="owl-foot" d="M-30 0 v16 M-30 16 h-15 M-30 16 h15 M30 0 v16 M30 16 h-15 M30 16 h15"/>
+            <path fill="#4f3349" d="M-64 -168 L-80 -212 L-40 -184 Z"/>
+            <path fill="#4f3349" d="M64 -168 L80 -212 L40 -184 Z"/>
+            <path fill="#8c6382" d="M-82 -62 C-82 -152 -46 -196 0 -196 C46 -196 82 -152 82 -62 C82 -12 46 8 0 8 C-46 8 -82 -12 -82 -62 Z"/>
+            <ellipse fill="#f6eff4" cx="0" cy="-42" rx="40" ry="46"/>
+            <path fill="#4f3349" opacity="0.22" d="M-78 -96 C-92 -56 -84 -20 -62 -4 C-70 -40 -72 -70 -66 -100 Z"/>
+            <path fill="#4f3349" opacity="0.22" d="M78 -96 C92 -56 84 -20 62 -4 C70 -40 72 -70 66 -100 Z"/>
+            <circle fill="#fff" cx="-30" cy="-126" r="27"/>
+            <circle fill="#fff" cx="30" cy="-126" r="27"/>
+            <circle fill="#2a1c26" cx="30" cy="-126" r="12"/>
+            <circle fill="#fff" cx="34" cy="-131" r="4"/>
+            <circle fill="#2a1c26" cx="-30" cy="-126" r="12"/>
+            <circle fill="#fff" cx="-26" cy="-131" r="4"/>
+            <path fill="#e8a33d" d="M-10 -104 L10 -104 L0 -84 Z"/>
+          </g>
+          <g transform="translate(750 392) scale(0.92)">
+            <path class="owl-foot" d="M-30 0 v16 M-30 16 h-15 M-30 16 h15 M30 0 v16 M30 16 h-15 M30 16 h15"/>
+            <path fill="#4f3349" d="M-64 -168 L-80 -212 L-40 -184 Z"/>
+            <path fill="#4f3349" d="M64 -168 L80 -212 L40 -184 Z"/>
+            <path fill="#b08fa6" d="M-82 -62 C-82 -152 -46 -196 0 -196 C46 -196 82 -152 82 -62 C82 -12 46 8 0 8 C-46 8 -82 -12 -82 -62 Z"/>
+            <ellipse fill="#faf5f8" cx="0" cy="-42" rx="40" ry="46"/>
+            <path fill="#4f3349" opacity="0.22" d="M-78 -96 C-92 -56 -84 -20 -62 -4 C-70 -40 -72 -70 -66 -100 Z"/>
+            <path fill="#4f3349" opacity="0.22" d="M78 -96 C92 -56 84 -20 62 -4 C70 -40 72 -70 66 -100 Z"/>
+            <circle fill="#fff" cx="-30" cy="-126" r="27"/>
+            <path class="owl-line" d="M6 -126 C16 -136 44 -136 54 -126"/>
+            <circle fill="#2a1c26" cx="-30" cy="-126" r="12"/>
+            <circle fill="#fff" cx="-26" cy="-131" r="4"/>
+            <path fill="#e8a33d" d="M-10 -104 L10 -104 L0 -84 Z"/>
+          </g>
+        </svg>
+      </figure>
+    </div>
+  </article>
+
+
+  <article class="slide statement bare" data-id="a1f00003" data-act="frontier">
+    <header class="slide-head">
+      <p class="eyebrow">The frontier</p>
+      <h2>Rendering is a solved problem.</h2>
+      <p class="lead">React, Vue, Solid, Owl — every one of them will put your state on screen efficiently. Nobody switches framework for rendering any more.</p>
+    </header>
+  </article>
+
+  <article class="slide" data-id="a1f00006" data-act="frontier">
+    <header class="slide-head">
+      <p class="eyebrow">The diagnosis</p>
+      <h2>Fighting Complexity</h2>
+      <p class="lead">The places where a codebase this size started to press against the framework.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes challenges">
+        <li>
+          <span class="num">1</span>
+          <h3>Reactivity that is subtle to get right</h3>
+          <p>Simple on the surface; hard-to-diagnose bugs underneath, as workflows got more complex.</p>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <h3>Hard to write fast derived state</h3>
+          <p>Caches, getters, <code>onWillRender</code> precomputes — <em>"sadly, they usually do not compose well"</em>.</p>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <h3>No typing or autocompletion</h3>
+          <p>For props and for <code>env</code>. Hence years of hand-written and generated <code>.d.ts</code> files.</p>
+        </li>
+        <li>
+          <span class="num">4</span>
+          <h3>No guidance on how to build an app</h3>
+          <p><em>"It is nice not to be constrained, but it makes it more difficult to understand other parts of the codebase."</em></p>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f0003b" data-act="frontier">
+    <header class="slide-head">
+      <p class="eyebrow">The frontier</p>
+      <h2>Next challenge:<br>State management</h2>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <ul class="notes large">
+          <li>Describing state</li>
+          <li>Deriving one value from another</li>
+          <li>Recomputing efficiently</li>
+          <li>Reacting to change</li>
+          <li>Sharing it, without one part owning another</li>
+          <li>All of that, but asynchronously</li>
+          <li>…</li>
+        </ul>
+      </section>
+      <section>
+        <figure class="figure graph">
+          <!-- no labels on purpose: the shape is the point. Nodes and the
+               arrows between them, drawn dense enough to read as a tangle
+               from the back of the room. Geometry generated, then pasted. -->
+          <svg viewBox="0 0 660 500" role="img"
+               aria-label="An abstract graph: fourteen unlabelled boxes joined by twenty-nine arrows that cross each other, some running back up the graph and two pairs pointing both ways. It stands for state and the dependencies between the pieces of it.">
+            <defs>
+              <marker id="cx-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+              <marker id="cx-rt" class="rt-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+          <path class="ar" marker-end="url(#cx-ar)" d="M82 74 Q100 122 135 160"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M227 62 Q206 119 162 160"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M257 62 Q281 112 324 147"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M409 86 Q395 127 357 147"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M442 86 Q466 135 509 169"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M578 70 Q565 123 534 168"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M588 70 Q577 193 593 316"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M243 63 Q225 174 259 281"/>
+          <path class="rt" marker-end="url(#cx-rt)" d="M428 87 Q459 185 447 287"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M166 200 Q197 248 243 282"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M135 200 Q117 252 79 291"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M328 187 Q311 241 273 282"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M355 187 Q383 246 434 288"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M512 209 Q497 255 462 288"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M535 210 Q550 267 584 316"/>
+          <path class="rt" marker-end="url(#cx-rt)" d="M562 68 Q445 202 286 283"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M105 309 Q164 318 222 304"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M276 322 Q304 379 351 421"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M436 328 Q419 382 379 421"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M342 188 Q323 307 364 420"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M80 331 Q122 374 148 428"/>
+          <path class="rt" marker-end="url(#cx-rt)" d="M588 358 Q564 396 564 440"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M463 328 Q513 378 544 441"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M512 209 Q417 297 379 421"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M161 427 Q169 313 149 201"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M66 290 Q52 182 69 75"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M176 428 Q228 386 247 322"/>
+          <path class="ar" marker-end="url(#cx-ar)" d="M364 420 Q387 301 342 188"/>
+          <path class="rt" marker-end="url(#cx-rt)" d="M544 441 Q486 397 463 328"/>
+
+          <rect class="bx" x="35" y="38" width="68" height="32" rx="6"/>
+          <rect class="bx" x="207" y="26" width="68" height="32" rx="6"/>
+          <rect class="bx" x="392" y="50" width="68" height="32" rx="6"/>
+          <rect class="bx" x="553" y="33" width="68" height="32" rx="6"/>
+          <rect class="bx" x="114" y="164" width="68" height="32" rx="6"/>
+          <rect class="bx js" x="306" y="151" width="68" height="32" rx="6"/>
+          <rect class="bx" x="491" y="173" width="68" height="32" rx="6"/>
+          <rect class="bx" x="32" y="295" width="68" height="32" rx="6"/>
+          <rect class="bx js" x="227" y="286" width="68" height="32" rx="6"/>
+          <rect class="bx" x="415" y="292" width="68" height="32" rx="6"/>
+          <rect class="bx" x="560" y="321" width="68" height="32" rx="6"/>
+          <rect class="bx" x="128" y="432" width="68" height="32" rx="6"/>
+          <rect class="bx js" x="332" y="425" width="68" height="32" rx="6"/>
+          <rect class="bx" x="524" y="445" width="68" height="32" rx="6"/>
+          </svg>
+        </figure>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f00004" data-act="frontier">
+    <header class="slide-head">
+      <h2>Getting the balance right</h2>
+      <ul class="notes">
+        <li><strong>Not enough power</strong> → every team invents its own solution, and none of them compose.</li>
+        <li><strong>Too much power</strong> → code spends its life working around the framework.</li>
+      </ul>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 250" role="img"
+             aria-label="A dial running from too little power on the left to too opinionated on the right, with a balance point in the middle. Owl 2 sits slightly left of it; Owl 3 aims at it.">
+          <defs>
+            <marker id="dial-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <path class="axis" d="M40 120 H960"/>
+          <path class="tick" d="M40 108 V132 M960 108 V132"/>
+
+          <text class="t l" x="40" y="60">Not enough power</text>
+          <text class="s l" x="40" y="84">you invent the missing piece,</text>
+          <text class="s l" x="40" y="102">over and over, differently each time</text>
+
+          <text class="t r" x="960" y="60">Too much power</text>
+          <text class="s r" x="960" y="84">you fight the framework</text>
+          <text class="s r" x="960" y="102">to do anything it did not foresee</text>
+
+          <rect class="chip" x="420" y="96" width="180" height="48" rx="6"/>
+          <text class="s" x="510" y="126">the balance point</text>
+
+          <path class="ar" marker-end="url(#dial-ar)" d="M392 196 V150"/>
+          <text class="t" x="392" y="222">Owl 2</text>
+          <text class="s" x="392" y="242">slightly low</text>
+
+          <path class="ar js" marker-end="url(#dial-ar)" d="M540 196 V150"/>
+          <text class="t" x="540" y="222">Owl 3</text>
+          <text class="s" x="540" y="242">aiming here</text>
+        </svg>
+      </figure>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f00007" data-act="frontier">
+    <header class="slide-head">
+      <p class="eyebrow">Example</p>
+      <h2>Computing a derived value</h2>
+      <ul class="notes">
+        <li>An expensive value, precomputed once per render, cached by hand.</li>
+        <li>It works. It is also three moving parts held together by convention.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">Owl 2</h3>
+<pre><code class="language-javascript">class Dashboard extends Component {
+    setup() {
+        this.state = useState({ total: 0 });
+
+        <mark>onWillRender</mark>(() =&gt; {
+            const key = this.props.orders.length;
+            if (key !== this._key) {
+                this._key = key;
+                const total = expensive(this.props.orders);
+                this.state.total = total;
+            }
+        });
+    }
+}</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Three parts</span><span>A hook, a hand-rolled cache key kept in a private field, and a piece of state to write into.</span></li>
+          <li><span class="key">The rule</span><span>The cache key assumes <em>total</em> depends only on the number of orders, as if the orders themselves never changed. That assumption lives in your head, not in the code.</span></li>
+          <li><span class="key">And then</span><span>Another addon patches <code>expensive</code>, or adds a second input. The cache key is now wrong, silently.</span></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f00013" data-act="frontier">
+    <header class="slide-head">
+      <p class="eyebrow">Derived values</p>
+      <h2>computed values</h2>
+      <ul class="notes">
+        <li>The same expensive value, with the same caching, in one declaration.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">Owl 2 — three moving parts</h3>
+<pre><code class="language-javascript">setup() {
+    this.state = useState({ total: 0 });
+
+    onWillRender(() =&gt; {
+        const key = this.props.orders.length;
+        if (key !== this._key) {
+            this._key = key;
+            const total = expensive(this.props.orders);
+            this.state.total = total;
+        }
+    });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">Owl 3 — one</h3>
+<pre><code class="language-javascript">total = <mark>computed</mark>(() =&gt;
+    expensive(this.props.orders)
+);</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Cached</span><span>It does not recompute unless something it read changed.</span></li>
+          <li><span class="key">Declared</span><span>The dependency is now <em>written down</em>. The runtime can see it.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The trigger moved: Owl 2 recomputed because a component was about to render, Owl 3 because the state it read changed.</p>
+    </footer>
+  </article>
+
+
+
+  <article class="slide" data-id="a1f0004c" data-act="frontier">
+    <header class="slide-head">
+      <p class="eyebrow">The shift</p>
+      <h2>A change of paradigm</h2>
+      <p class="lead">The centre of the framework moves. Rendering stops being the thing everything is arranged around, and state takes its place.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure shift">
+        <svg viewBox="0 0 1000 280" role="img"
+             aria-label="The same component tree, twice. On the left the state sits as dots inside the components that hold it, and props thread from the root down to a grandchild. On the right the same tree holds nothing: the state is three linked nodes beside it, and each component reads the one it needs.">
+          <defs>
+            <marker id="shift-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+            <marker id="shift-rt" class="rt-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <text class="mt" x="170" y="22">rendering based</text>
+          <path class="ar thin" d="M140 78 V97 H80 V116"/>
+          <path class="ar thin" d="M140 78 V97 H200 V116"/>
+          <path class="ar thin" d="M200 150 V169 H200 V188"/>
+          <rect class="bx" x="92" y="44" width="96" height="34" rx="5"/>
+          <rect class="bx" x="32" y="116" width="96" height="34" rx="5"/>
+          <rect class="bx" x="152" y="116" width="96" height="34" rx="5"/>
+          <rect class="bx" x="152" y="188" width="96" height="34" rx="5"/>
+          <circle class="dot" cx="131" cy="61" r="5"/>
+          <circle class="dot" cx="149" cy="61" r="5"/>
+          <circle class="dot" cx="80" cy="133" r="5"/>
+          <circle class="dot" cx="182" cy="205" r="5"/>
+          <circle class="dot" cx="200" cy="205" r="5"/>
+          <circle class="dot" cx="218" cy="205" r="5"/>
+          <text class="s" x="170" y="264">we react on rendering events</text>
+          <path class="ar" marker-end="url(#shift-ar)" d="M462 130 H518"/>
+          <text class="mt" x="700" y="22">state based</text>
+          <path class="ar thin" d="M670 78 V97 H610 V116"/>
+          <path class="ar thin" d="M670 78 V97 H730 V116"/>
+          <path class="ar thin" d="M730 150 V169 H730 V188"/>
+          <rect class="bx" x="622" y="44" width="96" height="34" rx="5"/>
+          <rect class="bx" x="562" y="116" width="96" height="34" rx="5"/>
+          <rect class="bx" x="682" y="116" width="96" height="34" rx="5"/>
+          <rect class="bx" x="682" y="188" width="96" height="34" rx="5"/>
+          <path class="ar thin" d="M900 78 V116"/>
+          <path class="ar thin" d="M900 142 V180"/>
+          <rect class="bx js" x="860" y="52" width="80" height="26" rx="13"/>
+          <rect class="bx js" x="860" y="116" width="80" height="26" rx="13"/>
+          <rect class="bx js" x="860" y="180" width="80" height="26" rx="13"/>
+          <path class="rt" d="M718 61 C789 61 789 65 860 65"/>
+          <path class="rt" d="M778 133 C819 133 819 129 860 129"/>
+          <path class="rt" d="M778 205 C819 205 819 193 860 193"/>
+          <text class="s" x="700" y="264">we react on state changes</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>The component tree has not gone anywhere. But the important part is the state relationships</p>
+    </footer>
+  </article>
+
+
+
+
+  <!-- ========================= ACT 2 · SIGNALS ========================= -->
+
+  <article class="slide divider" data-id="a1f00009" data-act="signals">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Signals</h2>
+      <p class="divider-sub">State management inside the computation graph.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide walkthrough" data-id="a1f00011" data-act="signals">
+    <header class="slide-head">
+      <h2>It all starts with signals</h2>
+<pre><code class="language-javascript">const s = signal(3);
+
+s();      // read: returns 3
+s.set(4); // write: updates the value to 4
+s();      // returns 4</code></pre>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    counter = <mark>signal(0)</mark>;
+
+    increment() {
+        this.counter.set(this.counter() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">counter.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="my_module.Counter"&gt;
+    &lt;p&gt;
+      Counter: &lt;t t-out="<mark>this.counter()</mark>"/&gt;
+    &lt;/p&gt;
+    &lt;button t-on-click="this.increment"&gt;
+      Increment
+    &lt;/button&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f0011c" data-act="signals">
+    <header class="slide-head">
+      <p class="eyebrow">Reactivity</p>
+      <h2>Computations</h2>
+      <p class="lead">Can manage dependencies. Three kinds, and one mechanism under all of them: each reads signals, and re-runs when what it read changes.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="shape-grid three">
+        <li>
+          <span class="num">1</span>
+          <h3>Rendering a component</h3>
+          <p>Reads signals, writes DOM. This is the one you already have.</p>
+<pre><code class="language-markup">&lt;t t-out="this.someValue()"/&gt;</code></pre>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <h3>A computed value</h3>
+          <p>Reads signals, returns a value, and holds on to it until one of them changes.</p>
+<pre><code class="language-javascript">a = signal(3);
+b = signal(5);
+sum = computed(() =&gt;
+    this.a() + this.b()
+);</code></pre>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <h3>An effect</h3>
+          <p>Reads signals, and changes something outside the graph: the document, storage, a library that knows nothing about this one.</p>
+<pre><code class="language-javascript">useEffect(() =&gt; {
+    console.log(this.a(), this.b());
+});</code></pre>
+        </li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>A render is not a special case. It is a computation that happens to paint.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f0013b" data-act="signals">
+    <header class="slide-head">
+      <p class="eyebrow">Effects</p>
+      <h2>useEffect</h2>
+      <ul class="notes">
+        <li>The same tracking, pointed outwards: at the document, at storage, at a library that knows nothing about signals.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">setup() {
+    <mark>useEffect</mark>(() =&gt; {
+        document.title = `Counter: ${this.counter()}`;
+    });
+}</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Nothing to declare</span><span>It read <code>counter</code>, so it re-runs when <code>counter</code> changes.</span></li>
+          <li><span class="key">Runs first</span><span>The first run is how it finds out what it reads.</span></li>
+          <li><span class="key">Then batched</span><span>A burst of writes costs one run, after the microtask.</span></li>
+          <li><span class="key">Disposed</span><span>It goes when the component goes.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A <code>computed</code> gives you a value. An effect changes something outside the graph.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f0011d" data-act="signals">
+    <header class="slide-head">
+      <p class="eyebrow">Reactivity</p>
+      <h2>Computation graph</h2>
+    </header>
+    <div class="slide-body two-col even fit">
+      <section>
+        <h3 class="label file">some_component.js</h3>
+<pre><code class="language-javascript">class SomeComponent extends Component {
+    static template = "my_module.SomeComponent";
+
+    a = signal(3);
+    b = signal(5);
+    sum = computed(() =&gt; this.a() + this.b());
+
+    setup() {
+        useEffect(() =&gt; {
+            document.title = `a: ${this.a()}`;
+        });
+    }
+}</code></pre>
+        <h3 class="label file">some_component.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="my_module.SomeComponent"&gt;
+    &lt;p&gt;Sum: &lt;t t-out="this.sum()"/&gt;&lt;/p&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section class="graph-side">
+        <figure class="figure deps">
+          <svg viewBox="0 0 600 340" role="img"
+               aria-label="The graph of SomeComponent. The signals a and b sit on top. The computed sum reads both of them, and the effect, which sets the document title, reads a alone. At the bottom, the render reads sum.">
+            <defs>
+              <marker id="deps-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <path class="ar" marker-end="url(#deps-ar)" d="M200 66 V108 H90 V144"/>
+            <path class="ar" marker-end="url(#deps-ar)" d="M200 66 V108 H270 V144"/>
+            <path class="ar" marker-end="url(#deps-ar)" d="M400 66 V108 H330 V144"/>
+            <path class="ar" marker-end="url(#deps-ar)" d="M300 202 V280"/>
+            <rect class="bx js" x="145" y="14" width="110" height="52" rx="26"/>
+            <text class="t" x="200" y="44">a</text>
+            <text class="s" x="200" y="59">signal</text>
+            <rect class="bx js" x="345" y="14" width="110" height="52" rx="26"/>
+            <text class="t" x="400" y="44">b</text>
+            <text class="s" x="400" y="59">signal</text>
+            <rect class="bx" x="15" y="150" width="150" height="52" rx="6"/>
+            <text class="t" x="90" y="180">effect</text>
+            <text class="s" x="90" y="195">useEffect</text>
+            <rect class="bx" x="225" y="150" width="150" height="52" rx="6"/>
+            <text class="t" x="300" y="180">sum</text>
+            <text class="s" x="300" y="195">computed</text>
+            <rect class="bx ui" x="225" y="286" width="150" height="52" rx="6"/>
+            <text class="t" x="300" y="316">render</text>
+            <text class="s" x="300" y="331">the template</text>
+          </svg>
+        </figure>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Change <code>b</code>, and the effect does not run: it never read <code>b</code>.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f00014" data-act="signals">
+    <header class="slide-head">
+      <p class="eyebrow">Reactivity</p>
+      <h2>computed vs useEffect</h2>
+      <p class="lead">Both track what they read, and both re-run when it changes. What differs is what you want out of them.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">computed — you want a value</h3>
+<pre><code class="language-javascript">remaining = computed(() =&gt;
+    this.todos().filter(
+        (t) =&gt; !t.completed()
+    ).length
+);</code></pre>
+        <ul class="rows">
+          <li><span class="key">Lazy</span><span>Nothing reads it? It never runs.</span></li>
+          <li><span class="key">Cached</span><span>No cache key to write, or get wrong.</span></li>
+          <li><span class="key">Gated</span><span>An unchanged <em>value</em> stops the propagation.</span></li>
+          <li><span class="key">Composable</span><span>Reads other computeds, survives patches.</span></li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label file">useEffect — you want a side effect</h3>
+<pre><code class="language-javascript">useEffect(() =&gt; {
+    localStorage.setItem(
+        "todos", serialize(this.todos()),
+    );
+});</code></pre>
+        <ul class="rows">
+          <li><span class="key">Outward</span><span>Saving, logging, a third-party library.</span></li>
+          <li><span class="key">Eager</span><span>Its first run finds out what it reads.</span></li>
+          <li><span class="key">Batched</span><span>A burst of writes costs one run.</span></li>
+          <li><span class="key">Disposed</span><span>It goes when the component goes.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>When in doubt, start with <code>computed</code>. Reach for an effect when something outside Owl has to change.</p>
+      <p>Soft limit 2, answered.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f00016" data-act="signals">
+    <header class="slide-head">
+      <p class="eyebrow">Signals</p>
+      <h2>Collection Signals</h2>
+      <p class="lead">Pick by the shape of your data, not by taste.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="shape-grid collections">
+        <li>
+          <code class="shape">const list = signal.Array([1, 2, 3]);</code>
+          <h3>A list you add to</h3>
+          <p>Tracks its own items, shallow.</p>
+        </li>
+        <li>
+          <code class="shape">const obj = signal.Object({ a: 1 });</code>
+          <h3>A flat bag of keys</h3>
+          <p>Tracks its own keys, shallow.</p>
+        </li>
+        <li>
+          <code class="shape">const set = signal.Set(new Set([1, 2]));</code>
+          <h3>Values, each once</h3>
+          <p>Tracks what is in it, shallow.</p>
+        </li>
+        <li>
+          <code class="shape">const map = signal.Map(new Map([["a", 1]]));</code>
+          <h3>Keys to values</h3>
+          <p>Tracks its own entries, shallow.</p>
+        </li>
+        <li class="deep">
+          <code class="shape">const config = proxy({ ui: { theme: "dark" } });</code>
+          <h3>A nested tree of settings</h3>
+          <p>Not a collection signal: tracks every level, recursively.</p>
+        </li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>The collection signals are <strong>shallow</strong>: what is inside stays plain, and stays untracked. That is the one gotcha.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f00017" data-act="signals">
+    <header class="slide-head">
+      <p class="eyebrow">Signals</p>
+      <h2>Bridging the gap</h2>
+      <ul class="notes">
+        <li><code>t-ref</code> fills a signal: <code>signal.ref()</code> holds the element, and <code>null</code> until the component is mounted. No separate <code>useRef</code>.</li>
+        <li><code>t-model</code> binds a signal to an input, both ways.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">todo_list.js</h3>
+<pre><code class="language-javascript">import { signal, computed, useEffect } from "@odoo/owl";
+
+export class TodoList extends Component {
+    input = <mark>signal.ref()</mark>;
+    name = signal("");
+
+    greeting = <mark>computed</mark>(() =&gt; `Hello ${this.name()}`);
+
+    setup() {
+        useEffect(() =&gt; this.input()?.focus());
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.xml</h3>
+<pre><code class="language-markup">&lt;input <mark>t-ref="this.input"</mark>
+       placeholder="What needs doing?"/&gt;
+
+&lt;input <mark>t-model="this.name"</mark>/&gt;
+&lt;p t-out="this.greeting()"/&gt;</code></pre>
+        <p class="caption">One concept fewer to hold: refs, model bindings and state are all the same thing - so a <code>computed</code> reads what <code>t-model</code> writes, with nothing in between.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The state and the DOM, in one graph: what the user types is a signal, and so is the element they type it in.</p>
+    </footer>
+  </article>
+
+
+  <!-- ========================= ACT 3 · PLUGINS ========================= -->
+
+  <article class="slide divider" data-id="a1f00018" data-act="plugins">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Plugins</h2>
+      <p class="divider-sub">State management across the component tree.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f00019" data-act="plugins">
+    <header class="slide-head">
+      <p class="eyebrow">The problem</p>
+      <h2>What was wrong with env</h2>
+      <p class="lead">The same diagnosis, one level up. <code>env</code> was under-powered, so every team invented a convention on top of it — and none of them composed.</p>
+    </header>
+    <div class="slide-body solo">
+      <section>
+        <h3 class="label">Owl 2</h3>
+<pre><code class="language-javascript">// one bag, for everything
+this.env.services.action
+this.env.bus
+this.env.debug
+
+// a service, reached by string
+this.orm = useService("orm");
+
+// and state handed down invisibly
+useSubEnv({ myCounter: this.counter });</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Untyped, invisible, unbounded.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f00020" data-act="plugins">
+    <header class="slide-head">
+      <p class="eyebrow">Plugins</p>
+      <h2>A plugin is a class</h2>
+      <ul class="notes">
+        <li>Reactive state, methods, and a lifecycle of its own: <code>setup</code>, then destroy.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">clock_plugin.js</h3>
+<pre><code class="language-javascript">import { Plugin, signal, onWillDestroy } from "@odoo/owl";
+
+export class Clock extends <mark>Plugin</mark> {
+    now = signal(new Date());
+
+    setup() {
+        const id = setInterval(
+            () =&gt; this.now.set(new Date()), 1000,
+        );
+        <mark>onWillDestroy</mark>(() =&gt; clearInterval(id));
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">two components, one interval</h3>
+<pre><code class="language-javascript">class DigitalClock extends Component {
+    clock = <mark>usePlugin(Clock)</mark>;
+}
+
+class UtcClock extends Component {
+    clock = <mark>usePlugin(Clock)</mark>;
+}</code></pre>
+        <h3 class="label file">digital_clock.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="my_module.DigitalClock"&gt;
+    &lt;span t-out="<mark>this.clock.now()</mark>.toLocaleTimeString()"/&gt;
+&lt;/t&gt;</code></pre>
+        <p class="caption">In sync, and one interval however many clocks mount.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Hooks work inside a plugin too: <code>useEffect</code>, <code>useListener</code>, <code>onWillStart</code>.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f00021" data-act="plugins">
+    <header class="slide-head">
+      <p class="eyebrow">Plugins</p>
+      <h2>Asked for by class, not by name</h2>
+      <p class="lead">This is the whole typing story, and it is why plugins replace <code>env</code> rather than sitting beside it.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">Owl 2</h3>
+<pre><code class="language-javascript">// a string. hope you spelled it right
+this.orm = useService(<mark>"orm"</mark>);
+
+// what does it return? see the .d.ts
+this.orm.searchRead(/* ... */);</code></pre>
+      </section>
+      <section>
+        <h3 class="label">Owl 3</h3>
+<pre><code class="language-javascript">import { ORM } from "@web/core/orm_plugin";
+
+// a class. the editor knows the type
+orm = <mark>usePlugin(ORM)</mark>;
+
+orm.searchRead(/* autocompleted */);</code></pre>
+        <p class="caption">Rename the file, move the class, find every caller — all the things an import gives you and a string never did.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Soft limit 3, answered: no generated <code>.d.ts</code>, because the class <em>is</em> the type.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f00022" data-act="plugins">
+    <header class="slide-head">
+      <p class="eyebrow">Plugins</p>
+      <h2>Global and local plugins</h2>
+      <p class="lead">Plugins should be provided with <code>providePlugins</code>.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure tree">
+        <svg viewBox="0 0 1000 376" role="img"
+             aria-label="A component tree. Each global plugin registers itself with services.add; the WebClient at the root provides them all with providePlugins(services.items()), so anything below can reach them. Under it sit two screens; one of them, a Dashboard, provides a plugin of its own with providePlugins, which only Chart and Table, the components under it, can ask for.">
+          <defs>
+            <marker id="tree-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <path class="ar" marker-end="url(#tree-ar)" d="M330 122 V155 H185 V182"/>
+          <path class="ar" marker-end="url(#tree-ar)" d="M330 122 V155 H475 V182"/>
+          <path class="ar" marker-end="url(#tree-ar)" d="M475 240 V273 H370 V300"/>
+          <path class="ar" marker-end="url(#tree-ar)" d="M475 240 V273 H580 V300"/>
+          <rect class="bx js" x="245" y="70" width="170" height="52" rx="6"/>
+          <text class="t" x="330" y="100">WebClient</text>
+          <text class="s" x="330" y="115">the root</text>
+          <rect class="bx" x="100" y="188" width="170" height="52" rx="6"/>
+          <text class="t" x="185" y="218">Settings</text>
+          <text class="s" x="185" y="233">another screen</text>
+          <rect class="bx js" x="390" y="188" width="170" height="52" rx="6"/>
+          <text class="t" x="475" y="218">Dashboard</text>
+          <text class="s" x="475" y="233">a client action</text>
+          <rect class="bx" x="285" y="306" width="170" height="52" rx="6"/>
+          <text class="t" x="370" y="339">Chart</text>
+          <rect class="bx" x="495" y="306" width="170" height="52" rx="6"/>
+          <text class="t" x="580" y="339">Table</text>
+          <text class="m l" x="690" y="22">services.add(ORM)</text>
+          <text class="s l" x="690" y="44">each global plugin registers itself</text>
+          <text class="m l" x="690" y="96">providePlugins(services.items())</text>
+          <text class="s l" x="690" y="118">all of them, at the root: one instance per tab,</text>
+          <text class="s l" x="690" y="136">reachable from anywhere below</text>
+          <text class="m l" x="690" y="214">providePlugins([ReportingPlugin])</text>
+          <text class="s l" x="690" y="236">this screen and everything under it,</text>
+          <text class="s l" x="690" y="254">destroyed with it</text>
+          <text class="m l" x="690" y="332">usePlugin(ReportingPlugin)</text>
+          <text class="s l" x="690" y="354">the nearest one that provides it</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>State that must outlive a screen goes global. Everything else stays on the screen that owns it.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f00023" data-act="plugins">
+    <header class="slide-head">
+      <p class="eyebrow">Plugins</p>
+      <h2>Dependencies</h2>
+      <ul class="notes">
+        <li>Components can depend on plugins, and plugins can depend on plugins.</li>
+        <li>A plugin reaches another by calling <code>usePlugin</code> — in a class field, or in <code>setup</code>.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even fit">
+      <section>
+        <h3 class="label file">clipboard_plugin.js</h3>
+<pre><code class="language-javascript">export class ClipboardPlugin extends Plugin {
+    notification = <mark>usePlugin(NotificationPlugin)</mark>;
+
+    async copy(text) {
+        await navigator.clipboard.writeText(text);
+        this.notification.add("Copied to the clipboard");
+    }
+}</code></pre>
+      </section>
+      <section class="graph-side">
+        <figure class="figure dep-pair">
+          <svg viewBox="0 0 400 270" role="img"
+               aria-label="Two plugins. ClipboardPlugin, on top, depends on NotificationPlugin, below it: an arrow runs from the first to the second, labelled usePlugin.">
+            <defs>
+              <marker id="dep-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <path class="ar" marker-end="url(#dep-ar)" d="M200 76 V188"/>
+            <text class="m l" x="216" y="137">usePlugin</text>
+            <rect class="bx js" x="80" y="14" width="240" height="62" rx="6"/>
+            <text class="t" x="200" y="45">ClipboardPlugin</text>
+            <text class="s" x="200" y="64">yours</text>
+            <rect class="bx" x="80" y="194" width="240" height="62" rx="6"/>
+            <text class="t" x="200" y="225">NotificationPlugin</text>
+            <text class="s" x="200" y="244">a global plugin, from web</text>
+          </svg>
+        </figure>
+      </section>
+    </div>
+  </article>
+
+
+
+  <article class="slide" data-id="a1f00026" data-act="plugins">
+    <header class="slide-head">
+      <p class="eyebrow">Plugins</p>
+      <h2>Services become plugins</h2>
+      <ul class="notes">
+        <li>A global plugin is exactly a service, with a class instead of a string.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">@web/core/services.js — the whole file</h3>
+<pre><code class="language-javascript">import { Plugin, Resource, types as t } from "@odoo/owl";
+
+export const services = new <mark>Resource</mark>({
+    name: "services",
+    validation: t.constructor(Plugin),
+});</code></pre>
+        <p class="caption">The service registry is itself a Resource. Every global plugin lands in it.</p>
+      </section>
+      <section>
+        <h3 class="label file">and to register one</h3>
+<pre><code class="language-javascript">import { services } from "@web/core/services";
+
+export class TitlePlugin extends Plugin { /* ... */ }
+
+<mark>services.add(TitlePlugin)</mark>;</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Today</span><span>Some twenty plugins in <code>addons/web</code>, against some thirty-five services still in the old shape.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Write plugins. Read both — <code>useService</code> is still all over the codebase, and will be for a while.</p>
+    </footer>
+  </article>
+
+  <!-- ===================== ACT 4 · OTHER CHANGES ===================== -->
+
+  <article class="slide divider" data-id="a1f0026a" data-act="misc">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Other changes</h2>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f0026c" data-act="misc">
+    <header class="slide-head">
+      <p class="eyebrow">Other changes</p>
+      <h2>Rendering context</h2>
+      <ul class="notes">
+        <li>A template used to resolve a bare name against the component, its props and its own <code>t-set</code> variables, in that order. Now <code>this.</code> says which one you meant.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even fit">
+      <section>
+        <h3 class="label file">Owl 2</h3>
+<pre><code class="language-markup">&lt;t t-name="my_module.Counter"&gt;
+    &lt;t t-set="double" t-value="<mark>counter</mark> * 2"/&gt;
+    &lt;p&gt;
+        Counter: &lt;t t-out="<mark>counter</mark>"/&gt;,
+        double: &lt;t t-out="double"/&gt;
+    &lt;/p&gt;
+    &lt;button t-on-click="<mark>increment</mark>"&gt;+1&lt;/button&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">Owl 3</h3>
+<pre><code class="language-markup">&lt;t t-name="my_module.Counter"&gt;
+    &lt;t t-set="double" t-value="<mark>this.counter()</mark> * 2"/&gt;
+    &lt;p&gt;
+        Counter: &lt;t t-out="<mark>this.counter()</mark>"/&gt;,
+        double: &lt;t t-out="double"/&gt;
+    &lt;/p&gt;
+    &lt;button t-on-click="<mark>this.increment</mark>"&gt;+1&lt;/button&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A name your editor can follow back to a class field is a name it can check.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f0026b" data-act="misc">
+    <header class="slide-head">
+      <p class="eyebrow">Other changes</p>
+      <h2>useProps</h2>
+      <ul class="notes">
+        <li><code>useProps</code> is a view over the props: the same values the parent passed, read through signals, with the shape you expect written next to them.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">Owl 2</h3>
+<pre><code class="language-javascript">static props = {
+    count: Number,
+    items: { type: Array, element: Object },
+    onSelect: { type: Function, optional: true },
+};
+
+// this.props.count
+// a schema your editor cannot read</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">Owl 3</h3>
+<pre><code class="language-javascript">props = <mark>useProps</mark>({
+    count: t.number(),
+    items: t.array(t.object({ id: t.number() })),
+    onSelect: t.function().optional(),
+    size: t.selection(["small", "large"]),
+});</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Per key</span><span>Signal-backed. Reading <code>this.props.count</code> subscribes you to that prop alone.</span></li>
+          <li><span class="key">Checked</span><span>On create and on update, in <code>dev</code> mode. <code>useProps()</code> bare takes anything; <code>useProps(["count"])</code> just names the keys.</span></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f0026e" data-act="misc">
+    <header class="slide-head">
+      <p class="eyebrow">Other changes</p>
+      <h2>assertType and validateType</h2>
+      <ul class="notes">
+        <li>The validators <code>useProps</code> takes work on any value, not just props.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even fit">
+      <section>
+        <h3 class="label file">validateType — returns the issues</h3>
+<pre><code class="language-javascript">import { t, validateType } from "@odoo/owl";
+
+const userType = t.object({
+    name: t.string(),
+    age: t.number().optional(),
+});
+
+<mark>validateType</mark>({ name: "Alice" }, userType);
+// []
+<mark>validateType</mark>({ age: 30 }, userType);
+// [{ message: "object value has missing keys" }]</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">assertType — throws, so a function can guard its input</h3>
+<pre><code class="language-javascript">import { assertType } from "@odoo/owl";
+
+/**
+ * @param {typeof userType.type} user
+ */
+function greet(user) {
+    <mark>assertType</mark>(user, userType, "greet: bad user");
+    return `Hello, ${user.name}`;
+}
+
+greet({ name: "Alice" }); // "Hello, Alice"
+greet({ age: 30 });       // throws an OwlError</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>One type language, for props and for anything else that crosses a boundary: an RPC result, a config, something from <code>localStorage</code>.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f0026f" data-act="misc">
+    <header class="slide-head">
+      <p class="eyebrow">Other changes</p>
+      <h2>Resources and Registries</h2>
+    </header>
+    <div class="slide-body two-col even fit">
+      <section>
+        <h3 class="label file">Resource — ordered, no keys</h3>
+<pre><code class="language-javascript">import { <mark>Resource</mark> } from "@odoo/owl";
+
+const systray = new Resource();
+
+systray.add(ClockItem);
+systray.add(SearchItem, { sequence: 10 });
+
+systray.items(); // [SearchItem, ClockItem]</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">Registry — looked up by key</h3>
+<pre><code class="language-javascript">import { <mark>Registry</mark> } from "@odoo/owl";
+
+const views = new Registry();
+
+views.add("list", ListView);
+views.add("form", FormView);
+
+views.get("list");   // ListView
+views.get("kanban"); // throws: not registered
+views.items();       // [ListView, FormView]</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Both are reactive and can validate what goes in, and <code>use()</code> takes an entry out again when its component or plugin goes.</p>
+    </footer>
+  </article>
+
+
+
+
+  <article class="slide" data-id="a1f0028b" data-act="misc">
+    <header class="slide-head">
+      <p class="eyebrow">The change surface</p>
+      <h2>Gone, new, and changed</h2>
+    </header>
+    <div class="slide-body two-col even three">
+      <section>
+        <h3 class="label">gone</h3>
+        <ul class="chips gone">
+          <li>useState</li>
+          <li>reactive</li>
+          <li>toRaw</li>
+          <li>useComponent</li>
+          <li>useRef</li>
+          <li>onWillRender</li>
+          <li>onRendered</li>
+          <li>onWillUpdateProps</li>
+          <li>this.render</li>
+          <li>env</li>
+          <li>useSubEnv</li>
+          <li>useChildSubEnv</li>
+          <li>services</li>
+          <li>t-esc</li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label">new</h3>
+        <ul class="chips new">
+          <li>signal</li>
+          <li>signal.Array</li>
+          <li>signal.Object</li>
+          <li>signal.ref</li>
+          <li>proxy</li>
+          <li>computed</li>
+          <li>asyncComputed</li>
+          <li>useOnChange</li>
+          <li>untrack</li>
+          <li>Plugin</li>
+          <li>usePlugin</li>
+          <li>providePlugins</li>
+          <li>useScope</li>
+          <li>useProps</li>
+          <li>assertType</li>
+          <li>validateType</li>
+          <li>Resource</li>
+          <li>Registry</li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label">changed</h3>
+        <ul class="chips changed">
+          <li>t-slot <span class="to">→</span> t-call-slot</li>
+          <li>useExternalListener <span class="to">→</span> useListener</li>
+          <li>t-portal <span class="to">→</span> Portal</li>
+          <li>useEffect <span class="note">reads, not a deps array</span></li>
+          <li>t-ref <span class="note">a signal, not a name</span></li>
+          <li>t-model <span class="note">binds a signal</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>This list may or may not be exhaustive.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f0028c" data-act="misc">
+    <header class="slide-head">
+      <p class="eyebrow">The change surface</p>
+      <h2>The same component, twice</h2>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">Owl 2</h3>
+<pre><code class="language-javascript">class OrderSummary extends Component {
+    <mark>static props</mark> = {
+        orders: Array,
+        currency: { type: String, optional: true },
+    };
+    <mark>static defaultProps</mark> = { currency: "USD" };
+
+    setup() {
+        this.orm = <mark>useService("orm")</mark>;
+        this.state = useState({ total: 0 });
+        <mark>onWillRender</mark>(() =&gt; {
+            this.state.total = sumAmounts(this.props.orders);
+        });
+    }
+
+    validate() {
+        return this.orm.call("sale.order", "confirm",
+            [this.props.orders.map((o) =&gt; o.id)]);
+    }
+}</code></pre>
+<pre><code class="language-markup">&lt;t t-name="sale.OrderSummary"&gt;
+    &lt;p t-esc="<mark>state.total</mark>"/&gt;
+    &lt;button t-on-click="<mark>validate</mark>"&gt;Validate&lt;/button&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">Owl 3</h3>
+<pre><code class="language-javascript">class OrderSummary extends Component {
+    props = <mark>useProps</mark>({
+        orders: t.array(t.object()),
+        currency: t.string().<mark>optional(() =&gt; "USD")</mark>,
+    });
+
+    orm = <mark>usePlugin(ORM)</mark>;
+
+    total = <mark>computed</mark>(() =&gt; sumAmounts(this.props.orders));
+
+    validate() {
+        return this.orm.call("sale.order", "confirm",
+            [this.props.orders.map((o) =&gt; o.id)]);
+    }
+}</code></pre>
+<pre><code class="language-markup">&lt;t t-name="sale.OrderSummary"&gt;
+    &lt;p t-out="<mark>this.total()</mark>"/&gt;
+    &lt;button t-on-click="<mark>this.validate</mark>"&gt;Validate&lt;/button&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+  </article>
+
+  <!-- ====================== ACT 4 · WHERE WE ARE ====================== -->
+
+  <article class="slide divider" data-id="a1f00027" data-act="transition">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Migration</h2>
+      <p class="divider-sub">Everyone loves migrating code (I think).</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide statement" data-id="a1f0027b" data-act="transition">
+    <header class="slide-head">
+      <p class="eyebrow">Migration</p>
+      <h2>No big deal.<br>We have AIs now.</h2>
+    </header>
+  </article>
+
+  <article class="slide release-notes" data-id="a1f0027d" data-act="transition">
+    <header class="slide-head">
+      <p class="eyebrow">The transition</p>
+      <div class="title-row">
+        <h2>Release notes</h2>
+        <a class="doc-link" href="https://odoo.github.io/owl/documentation/v3/owl/owl3_design.html" target="_blank" rel="noopener">odoo.github.io/owl/documentation/v3/owl/owl3_design.html</a>
+      </div>
+      <p class="lead">It is searchable!! (<code>Ctrl K</code>)</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure shot">
+        <img src="assets/owl3-release-notes.webp"
+             alt="The Owl 3 release notes in the Owl documentation, under Migration. The section on env being removed, with a collapsible block of compatibility code for keeping env, built on a plugin.">
+      </figure>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f0027c" data-act="transition">
+    <header class="slide-head">
+      <p class="eyebrow">The transition</p>
+      <h2>Scripts</h2>
+      <p class="lead"><code>odoo/upgrade_code/owl3-migration.py</code> (~1k loc), with <code>tools_js_expressions.py</code> (&gt; 2.5k loc)</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure shot">
+        <img src="assets/owl3-upgrade-script.webp"
+             alt="The upgrade script's entry point, in Python: a MigrationCollector running one step after another - useEffect, onWillRender, useEnv, useSubEnv, useRef, useState, reactive, t-esc, t-ref, t-model, this. in templates, t-slot, parametric t-call, useService and more.">
+      </figure>
+    </div>
+  </article>
+
+
+
+
+
+  <article class="slide" data-id="a1f0032c" data-act="transition">
+    <header class="slide-head">
+      <p class="eyebrow">The transition</p>
+      <h2>Compatibility Layer</h2>
+      <p class="lead"><code>addons/web/static/src/owl2/*</code> lets Owl 2 code run on Owl 3 (to some extent).</p>
+    </header>
+    <div class="slide-body two-col even fit">
+      <section>
+        <h3 class="label file">owl3_compatibility_layer.js, trimmed</h3>
+<pre><code class="language-javascript">class Component extends owl.Component {
+    constructor(node) {
+        super(node);
+        this.props = owl.useProps();
+        this.env = <mark>useEnv()</mark>;
+    }
+}
+owl.Component = Component;
+
+owl.onWillRender = function (cb) { /* ... */ };
+owl.useEnv = useEnv;
+owl.useSubEnv = useSubEnv;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Puts back</span><span><code>this.env</code>, <code>this.render()</code>, <code>useEnv</code>, <code>useSubEnv</code>, <code>useChildSubEnv</code>, <code>onWillRender</code>, <code>useLayoutEffect</code>, <code>useComponent</code>, <code>useExternalListener</code>, <code>t-portal</code>, …</span></li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f00033" data-act="transition">
+    <header class="slide-head">
+      <p class="eyebrow">The transition</p>
+      <h2>Which version runs what</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure timeline">
+        <svg viewBox="0 0 1000 150" role="img"
+             aria-label="Odoo 19.0 up to saas-19.3 run on Owl 2. From saas-19.4 on, Odoo runs on Owl 3, with a temporary compatibility layer.">
+          <defs>
+            <marker id="tl-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+          <!-- the timeline first: the dates are what everything else hangs off -->
+          <text class="s" x="60" y="16">19.0</text>
+          <text class="s" x="380" y="16">saas-19.3</text>
+          <text class="s" x="520" y="16">saas-19.4</text>
+          <text class="s" x="880" y="16">20.0</text>
+          <path class="axis" marker-end="url(#tl-ar)" d="M20 34 H978"/>
+          <path class="tick" d="M60 28 V40 M380 28 V40 M520 28 V40 M880 28 V40"/>
+
+          <rect class="bx" x="40" y="58" width="410" height="44" rx="6"/>
+          <text class="t" x="245" y="86">Owl 2</text>
+          <rect class="bx js" x="450" y="58" width="530" height="44" rx="6"/>
+          <text class="t" x="715" y="86">Owl 3</text>
+
+          <!-- the layer outlasts 20.0, which is the point of it -->
+          <rect class="chip" x="450" y="110" width="470" height="30" rx="6"/>
+          <text class="s l" x="462" y="129">compatibility layer, temporary</text>
+
+          <path class="rt" d="M450 24 V144"/>
+        </svg>
+      </figure>
+      <ul class="rows wide-key">
+        <li><span class="key">Not compatible</span><span>Owl 3 does not run Owl 2 code. They are separate libraries.</span></li>
+        <li><span class="key">Performance</span><span>Not slower. Somewhat faster, and faster still once code is actually written with signals. That is not why we did it.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Odoo 19.0 stays on Owl 2 for its whole life. Nothing you have shipped is going to move under you.</p>
+    </footer>
+  </article>
+
+
+  <!-- ========================= ACT 5 · VISION ========================= -->
+
+  <article class="slide divider" data-id="a1f00035" data-act="vision">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Conclusion</h2>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide with-owl" data-id="a1f0035b" data-act="vision">
+    <header class="slide-head">
+      <p class="eyebrow">Closing the loop</p>
+      <h2>What Owl 3 gives you</h2>
+      <p class="lead">Three sets of tools against complexity — between them, the four soft limits from the start of the talk.</p>
+    </header>
+    <div class="owl-corner owl-top" aria-hidden="true">
+      <svg viewBox="0 0 220 264">
+        <g transform="translate(110 236)">
+          <path class="owl-foot" d="M-30 0 v16 M-30 16 h-15 M-30 16 h15 M30 0 v16 M30 16 h-15 M30 16 h15"/>
+          <path fill="#4f3349" d="M-64 -168 L-80 -212 L-40 -184 Z"/>
+          <path fill="#4f3349" d="M64 -168 L80 -212 L40 -184 Z"/>
+          <path fill="#8c6382" d="M-82 -62 C-82 -152 -46 -196 0 -196 C46 -196 82 -152 82 -62 C82 -12 46 8 0 8 C-46 8 -82 -12 -82 -62 Z"/>
+          <ellipse fill="#f6eff4" cx="0" cy="-42" rx="40" ry="46"/>
+          <path fill="#4f3349" opacity="0.22" d="M-78 -96 C-92 -56 -84 -20 -62 -4 C-70 -40 -72 -70 -66 -100 Z"/>
+          <path fill="#4f3349" opacity="0.22" d="M78 -96 C92 -56 84 -20 62 -4 C70 -40 72 -70 66 -100 Z"/>
+          <circle fill="#fff" cx="-30" cy="-126" r="27"/>
+          <circle fill="#2a1c26" cx="-30" cy="-126" r="12"/>
+          <circle fill="#fff" cx="-26" cy="-131" r="4"/>
+          <circle fill="#fff" cx="30" cy="-126" r="27"/>
+          <circle fill="#2a1c26" cx="30" cy="-126" r="12"/>
+          <circle fill="#fff" cx="34" cy="-131" r="4"/>
+          <path fill="#e8a33d" d="M-10 -104 L10 -104 L0 -84 Z"/>
+        </g>
+      </svg>
+    </div>
+    <div class="slide-body">
+      <ul class="rows boxes toolkit">
+        <li>
+          <h3>Reactivity</h3>
+          <p><code>signal</code> · <code>computed</code> · <code>useEffect</code></p>
+        </li>
+        <li>
+          <h3>Plugin system</h3>
+          <p><code>Plugin</code> · <code>usePlugin</code> · <code>providePlugins</code></p>
+        </li>
+        <li>
+          <h3>Others</h3>
+          <p><code>useProps</code>, type validation, resources, …</p>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f00037" data-act="vision">
+    <header class="slide-head">
+      <p class="eyebrow">Go and read it</p>
+      <h2>odoo.github.io/owl</h2>
+      <p class="lead">Documentation, versioned. A playground that needs nothing installed. Three tutorials.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure shot">
+        <img src="assets/owl-docs.webp"
+             alt="The Owl v3 documentation site: a reference index down the left, and the introduction with its key features and a first component.">
+      </figure>
+    </div>
+  </article>
+
+
+  <article class="slide welcome" data-id="a1f0038b" data-act="vision">
+    <div class="welcome-bg"></div>
+    <div class="welcome-stars"></div>
+    <div class="welcome-art">
+      <img src="assets/stickers/ring.webp" alt="" style="left: 8.08%; top: 9.69%; width: 5.77%;">
+      <img src="assets/stickers/cross.webp" alt="" style="left: 18.72%; top: 6.9%; width: 3.67%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 14.83%; top: 16.22%; width: 1.28%;">
+      <img src="assets/stickers/burst.webp" alt="" style="left: 61.14%; top: 5.04%; width: 3.67%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 66.75%; top: 10.52%; width: 1.28%;">
+      <img src="assets/stickers/ufo.webp" alt="" style="left: 75.86%; top: 53.74%; width: 15.93%;">
+      <img src="assets/stickers/spiral.webp" alt="" style="left: 73.31%; top: 76.09%; width: 9.74%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 94.27%; top: 69.99%; width: 1.28%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 5.88%; top: 86.46%; width: 1.28%;">
+      <img src="assets/stickers/burst.webp" alt="" style="left: 8.08%; top: 89.89%; width: 3.67%;">
+    </div>
+
+    <img class="welcome-logo" src="assets/odoo-experience.webp"
+         alt="Odoo Experience 2026">
+
+    <div class="welcome-content">
+      <h2>Thank you!</h2>
+      <p class="lead">RD Framework JS - Géry Debongnie</p>
+    </div>
+    <a class="vod" href="https://www.youtube.com/watch?v=OpceOGAEMSQ" target="_blank" rel="noopener">
+      <img class="vod-qr" src="assets/replay-qr.svg" alt="QR code linking to the replay, youtu.be/OpceOGAEMSQ">
+      <span class="vod-label"><svg class="vod-play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24"/><path d="M19 14.5 34 24 19 33.5Z"/></svg>Watch the replay</span>
+      <span class="vod-url">youtu.be/OpceOGAEMSQ</span>
+    </a>
+  </article>
+
+  <article class="slide statement with-owl" data-id="a1f00039" data-act="vision">
+    <header class="slide-head">
+      <p class="eyebrow">Introducing Owl 3</p>
+      <h2>Questions?</h2>
+    </header>
+    <div class="owl-corner" aria-hidden="true">
+      <svg viewBox="0 0 220 264">
+        <g transform="translate(110 236)">
+          <path class="owl-foot" d="M-30 0 v16 M-30 16 h-15 M-30 16 h15 M30 0 v16 M30 16 h-15 M30 16 h15"/>
+          <path fill="#4f3349" d="M-64 -168 L-80 -212 L-40 -184 Z"/>
+          <path fill="#4f3349" d="M64 -168 L80 -212 L40 -184 Z"/>
+          <path fill="#8c6382" d="M-82 -62 C-82 -152 -46 -196 0 -196 C46 -196 82 -152 82 -62 C82 -12 46 8 0 8 C-46 8 -82 -12 -82 -62 Z"/>
+          <ellipse fill="#f6eff4" cx="0" cy="-42" rx="40" ry="46"/>
+          <path fill="#4f3349" opacity="0.22" d="M-78 -96 C-92 -56 -84 -20 -62 -4 C-70 -40 -72 -70 -66 -100 Z"/>
+          <path fill="#4f3349" opacity="0.22" d="M78 -96 C92 -56 84 -20 62 -4 C70 -40 72 -70 66 -100 Z"/>
+          <circle fill="#fff" cx="-30" cy="-126" r="27"/>
+          <circle fill="#2a1c26" cx="-30" cy="-126" r="12"/>
+          <circle fill="#fff" cx="-26" cy="-131" r="4"/>
+          <circle fill="#fff" cx="30" cy="-126" r="27"/>
+          <circle fill="#2a1c26" cx="30" cy="-126" r="12"/>
+          <circle fill="#fff" cx="34" cy="-131" r="4"/>
+          <path fill="#e8a33d" d="M-10 -104 L10 -104 L0 -84 Z"/>
+        </g>
+      </svg>
+    </div>
+    <a class="vod" href="https://www.youtube.com/watch?v=OpceOGAEMSQ" target="_blank" rel="noopener">
+      <img class="vod-qr" src="assets/replay-qr.svg" alt="QR code linking to the replay, youtu.be/OpceOGAEMSQ">
+      <span class="vod-label"><svg class="vod-play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24"/><path d="M19 14.5 34 24 19 33.5Z"/></svg>Watch the replay</span>
+      <span class="vod-url">youtu.be/OpceOGAEMSQ</span>
+    </a>
+    <footer class="slide-foot">
+      <p><span class="k">Everything</span><code>odoo.github.io/owl</code></p>
+    </footer>
+  </article>
+
+  <!-- ============================ APPENDIX ============================ -->
+
+  <!-- Not an act: no eyebrow and no rail, so app.js leaves both alone and the
+       "Act n of 6" count stays the count of the talk as delivered. -->
+  <article class="slide divider" data-id="a1f0004a" data-act="appendix">
+    <div class="divider-body">
+      <h2>Appendix</h2>
+      <p class="divider-sub">Held in reserve, for the questions that come.</p>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f0004d" data-act="appendix">
+    <header class="slide-head">
+      <p class="eyebrow">If it comes up</p>
+      <h2>Performance</h2>
+      <p class="lead">It is not in the talk on purpose. Rendering is a solved problem, and arguing render timings would undercut the slide that says so.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">Equivalent code</span><span>Benchmarks put Owl 3 about level with Owl 2, or a little ahead.</span></li>
+        <li><span class="key">Code that uses <code>computed</code></span><span>Faster, and the gap widens with how much of the work is derived rather than recomputed.</span></li>
+        <li><span class="key">So</span><span>Speed is a consequence of the design, not the reason for it.</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f0004b" data-act="appendix">
+    <header class="slide-head">
+      <p class="eyebrow">If it comes up</p>
+      <h2>Why not just move to React?</h2>
+      <p class="lead">Because the balance point is not universal. It is Odoo's own.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows titled">
+        <li>
+          <span class="key">Addons patch what we ship</span>
+          <p>Templates inherited by xpath, components patched at runtime, by modules Odoo does not write. React has no equivalent, and no reason to want one.</p>
+        </li>
+        <li>
+          <span class="key">4,000 JS files</span>
+          <p>Many teams, plus every custom module in the wild. A rewrite breaks code that is not ours to fix.</p>
+        </li>
+        <li>
+          <span class="key">Owl solves Odoo problems</span>
+          <p>Writing extensible code. Runtime compiling. Dynamic bundles …</p>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a1f00024" data-act="appendix">
+    <header class="slide-head">
+      <p class="eyebrow">Extensibility</p>
+      <h2>Replacing a plugin</h2>
+      <p class="lead">A child <code>providePlugins</code> carrying the same <code>static id</code> shadows the parent's — for that subtree, and only there.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">theme_plugin.js</h3>
+<pre><code class="language-javascript">export class ThemePlugin extends Plugin {
+    <mark>static id = "theme"</mark>;  // defaults to the class name
+    color = "light";
+}
+
+// in another addon
+export class DarkTheme extends Plugin {
+    <mark>static id = "theme"</mark>;  // the same id: it shadows
+    color = "dark";
+}
+
+class DarkSection extends Component {
+    setup() {
+        providePlugins([DarkTheme]);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Scoped</span><span>Below <code>DarkSection</code>, <code>usePlugin(ThemePlugin)</code> hands back the dark one. Elsewhere nothing changes.</span></li>
+          <li><span class="key">Compare</span><span>The registry answer to the same problem is <code>{ force: true }</code> — global, and permanent.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>An override that cannot leak out of the subtree that asked for it.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f00030" data-act="appendix">
+    <header class="slide-head">
+      <p class="eyebrow">If it comes up</p>
+      <h2>Migration: measured, not estimated</h2>
+      <ul class="notes">
+        <li><code>odoo/community</code> at <code>master</code>, 3,998 JS files under <code>addons/*/static/src</code>.</li>
+      </ul>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table migration">
+        <li class="head"><span>Axis</span><span>Done</span><span>Left</span></li>
+        <li><span><code>useState</code> → signals</span><span>439 files on signals</span><span><strong>0</strong></span></li>
+        <li><span><code>t-esc</code> → <code>t-out</code></span><span>866 files</span><span><strong>1</strong></span></li>
+        <li><span><code>t-slot</code> → <code>t-call-slot</code></span><span>173 uses</span><span><strong>0</strong></span></li>
+        <li><span>props → <code>useProps</code></span><span>742 files</span><span>368 on <code>static props</code></span></li>
+        <li><span>services → plugins</span><span>366 files define a Plugin</span><span>112 legacy services</span></li>
+        <li><span><code>env</code> → plugins</span><span>105 <code>usePlugin</code></span><span>469 <code>this.env</code>, 770 <code>useService</code></span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Counted the week of the talk. Re-run before you quote these.</p>
+    </footer>
+  </article>
+
+  <article class="slide statement" data-id="a1f00008" data-act="appendix">
+    <header class="slide-head">
+      <h2>The dependency was never written down.</h2>
+      <p class="lead">It lived implicitly, in a set of closures and some unconnected pieces of state. The framework could not see it — so the framework could not help.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Spoiler:</span>Owl 3 lets us make the state explicit, computed values included.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a1f0004e" data-act="appendix">
+    <header class="slide-head">
+      <p class="eyebrow">If it comes up</p>
+      <h2>Asynchronous state</h2>
+      <ul class="notes">
+        <li><code>asyncComputed</code> is to a fetch what <code>computed</code> is to a value: it re-runs when what it read changes.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">user_card.js</h3>
+<pre><code class="language-javascript">userId = signal(1);
+
+user = <mark>asyncComputed</mark>(async ({ abortSignal }) =&gt; {
+    const url = `/api/users/${this.userId()}`;
+    const res = await fetch(url, { signal: abortSignal });
+    return res.json();
+}, { initial: null });
+
+this.user();          // null, then the user
+this.user.loading();  // true while a run is in flight
+this.user.error();    // Error | null
+this.user.refresh();  // run again</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Experimental</span><span>The API is still shaking out: option names, methods, cancellation.</span></li>
+          <li><span class="key">Cancels itself</span><span>A newer run, or the component going away, aborts the one in flight.</span></li>
+          <li><span class="key">Until the first <code>await</code></span><span>Reads after it are not tracked. Fetch in an <code>asyncComputed</code>, derive in a <code>computed</code>.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><span class="k">Maybe, later</span>A query on top of it: cached, shared by the components that ask for the same thing.</p>
+    </footer>
+  </article>
+
+</div>
+</div>

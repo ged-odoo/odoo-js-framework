@@ -1,0 +1,1725 @@
+<div class="deck clean" id="deck-talk">
+
+  <!-- ============================ COVER ============================ -->
+
+  <article class="slide welcome current" data-id="a2f00001" data-act="question">
+    <div class="welcome-bg"></div>
+    <div class="welcome-stars"></div>
+    <!-- decorations lifted from the template, placed as it places them -->
+    <div class="welcome-art">
+      <img src="assets/stickers/ring.webp" alt="" style="left: 8.08%; top: 9.69%; width: 5.77%;">
+      <img src="assets/stickers/cross.webp" alt="" style="left: 18.72%; top: 6.9%; width: 3.67%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 14.83%; top: 16.22%; width: 1.28%;">
+      <img src="assets/stickers/burst.webp" alt="" style="left: 61.14%; top: 5.04%; width: 3.67%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 66.75%; top: 10.52%; width: 1.28%;">
+      <img src="assets/stickers/ufo.webp" alt="" style="left: 75.86%; top: 53.74%; width: 15.93%;">
+      <img src="assets/stickers/spiral.webp" alt="" style="left: 73.31%; top: 76.09%; width: 9.74%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 94.27%; top: 69.99%; width: 1.28%;">
+      <img src="assets/stickers/sparkle.webp" alt="" style="left: 5.88%; top: 86.46%; width: 1.28%;">
+      <img src="assets/stickers/burst.webp" alt="" style="left: 8.08%; top: 89.89%; width: 3.67%;">
+    </div>
+
+    <img class="welcome-logo" src="assets/odoo-experience.webp"
+         alt="Odoo Experience 2026">
+
+    <div class="welcome-content">
+      <h2>Advanced reactivity<br>in Owl</h2>
+      <p class="lead">RD Framework JS - Géry Debongnie</p>
+    </div>
+    <a class="vod" href="https://www.youtube.com/watch?v=xhSvfHcquuI" target="_blank" rel="noopener">
+      <img class="vod-qr" src="assets/replay-qr.svg" alt="QR code linking to the replay, youtu.be/xhSvfHcquuI">
+      <span class="vod-label"><svg class="vod-play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24"/><path d="M19 14.5 34 24 19 33.5Z"/></svg>Watch the replay</span>
+      <span class="vod-url">youtu.be/xhSvfHcquuI</span>
+    </a>
+  </article>
+
+  <article class="slide" data-id="a2f0001b" data-act="primer">
+    <header class="slide-head">
+      <h2>Owl 3</h2>
+      <p class="lead">Signals and computations</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure owls">
+        <svg viewBox="0 152 1000 272" role="img"
+             aria-label="Three owls perched on a branch, in three shades of purple. One looks to the right, one straight out at you, and the third is winking.">
+          <path class="owl-branch" d="M120 409 H880"/>
+          <g transform="translate(250 392) scale(0.92)">
+            <path class="owl-foot" d="M-30 0 v16 M-30 16 h-15 M-30 16 h15 M30 0 v16 M30 16 h-15 M30 16 h15"/>
+            <path fill="#4f3349" d="M-64 -168 L-80 -212 L-40 -184 Z"/>
+            <path fill="#4f3349" d="M64 -168 L80 -212 L40 -184 Z"/>
+            <path fill="#6d4763" d="M-82 -62 C-82 -152 -46 -196 0 -196 C46 -196 82 -152 82 -62 C82 -12 46 8 0 8 C-46 8 -82 -12 -82 -62 Z"/>
+            <ellipse fill="#efe6ed" cx="0" cy="-42" rx="40" ry="46"/>
+            <path fill="#4f3349" opacity="0.22" d="M-78 -96 C-92 -56 -84 -20 -62 -4 C-70 -40 -72 -70 -66 -100 Z"/>
+            <path fill="#4f3349" opacity="0.22" d="M78 -96 C92 -56 84 -20 62 -4 C70 -40 72 -70 66 -100 Z"/>
+            <circle fill="#fff" cx="-30" cy="-126" r="27"/>
+            <circle fill="#fff" cx="30" cy="-126" r="27"/>
+            <circle fill="#2a1c26" cx="37" cy="-126" r="12"/>
+            <circle fill="#fff" cx="41" cy="-131" r="4"/>
+            <circle fill="#2a1c26" cx="-23" cy="-126" r="12"/>
+            <circle fill="#fff" cx="-19" cy="-131" r="4"/>
+            <path fill="#e8a33d" d="M-10 -104 L10 -104 L0 -84 Z"/>
+          </g>
+          <g transform="translate(500 392) scale(1.06)">
+            <path class="owl-foot" d="M-30 0 v16 M-30 16 h-15 M-30 16 h15 M30 0 v16 M30 16 h-15 M30 16 h15"/>
+            <path fill="#4f3349" d="M-64 -168 L-80 -212 L-40 -184 Z"/>
+            <path fill="#4f3349" d="M64 -168 L80 -212 L40 -184 Z"/>
+            <path fill="#8c6382" d="M-82 -62 C-82 -152 -46 -196 0 -196 C46 -196 82 -152 82 -62 C82 -12 46 8 0 8 C-46 8 -82 -12 -82 -62 Z"/>
+            <ellipse fill="#f6eff4" cx="0" cy="-42" rx="40" ry="46"/>
+            <path fill="#4f3349" opacity="0.22" d="M-78 -96 C-92 -56 -84 -20 -62 -4 C-70 -40 -72 -70 -66 -100 Z"/>
+            <path fill="#4f3349" opacity="0.22" d="M78 -96 C92 -56 84 -20 62 -4 C70 -40 72 -70 66 -100 Z"/>
+            <circle fill="#fff" cx="-30" cy="-126" r="27"/>
+            <circle fill="#fff" cx="30" cy="-126" r="27"/>
+            <circle fill="#2a1c26" cx="30" cy="-126" r="12"/>
+            <circle fill="#fff" cx="34" cy="-131" r="4"/>
+            <circle fill="#2a1c26" cx="-30" cy="-126" r="12"/>
+            <circle fill="#fff" cx="-26" cy="-131" r="4"/>
+            <path fill="#e8a33d" d="M-10 -104 L10 -104 L0 -84 Z"/>
+          </g>
+          <g transform="translate(750 392) scale(0.92)">
+            <path class="owl-foot" d="M-30 0 v16 M-30 16 h-15 M-30 16 h15 M30 0 v16 M30 16 h-15 M30 16 h15"/>
+            <path fill="#4f3349" d="M-64 -168 L-80 -212 L-40 -184 Z"/>
+            <path fill="#4f3349" d="M64 -168 L80 -212 L40 -184 Z"/>
+            <path fill="#b08fa6" d="M-82 -62 C-82 -152 -46 -196 0 -196 C46 -196 82 -152 82 -62 C82 -12 46 8 0 8 C-46 8 -82 -12 -82 -62 Z"/>
+            <ellipse fill="#faf5f8" cx="0" cy="-42" rx="40" ry="46"/>
+            <path fill="#4f3349" opacity="0.22" d="M-78 -96 C-92 -56 -84 -20 -62 -4 C-70 -40 -72 -70 -66 -100 Z"/>
+            <path fill="#4f3349" opacity="0.22" d="M78 -96 C92 -56 84 -20 62 -4 C70 -40 72 -70 66 -100 Z"/>
+            <circle fill="#fff" cx="-30" cy="-126" r="27"/>
+            <path class="owl-line" d="M6 -126 C16 -136 44 -136 54 -126"/>
+            <circle fill="#2a1c26" cx="-30" cy="-126" r="12"/>
+            <circle fill="#fff" cx="-26" cy="-131" r="4"/>
+            <path fill="#e8a33d" d="M-10 -104 L10 -104 L0 -84 Z"/>
+          </g>
+        </svg>
+      </figure>
+    </div>
+  </article>
+
+  <article class="slide divider" data-id="a2f0001a" data-act="primer">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>A primer on Owl 3</h2>
+      <p class="divider-sub">A quick overview.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0001e" data-act="primer">
+    <header class="slide-head">
+      <p class="eyebrow">Ground rules</p>
+      <h2>An Owl 3 component</h2>
+      <p class="lead">Two signals, a value derived from them, something that happens when it changes, and a template bound to all of it.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">order_line.js</h3>
+<pre><code class="language-javascript">class OrderLine extends Component {
+    static template = "sale.OrderLine";
+
+    qty = <mark>signal</mark>(1);
+    price = <mark>signal</mark>(9.99);
+
+    total = <mark>computed</mark>(() =&gt; this.qty() * this.price());
+
+    setup() {
+        <mark>useEffect</mark>(() =&gt; {
+            document.title = `Total: ${this.total()}`;
+        });
+    }
+
+    add() {
+        this.qty.<mark>set</mark>(this.qty() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">order_line.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="sale.OrderLine"&gt;
+    &lt;input <mark>t-model</mark>="this.qty"/&gt;
+    &lt;button t-on-click="this.add"&gt;+1&lt;/button&gt;
+    &lt;p&gt;Total: &lt;t t-out="this.total()"/&gt;&lt;/p&gt;
+&lt;/t&gt;</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Nothing declares</span><span>No dependency list ties <code>total</code> to <code>qty</code>, and none ties the effect to <code>total</code>.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Type in the box and <code>total</code> recomputes and the title changes. Nobody wired that up, and how it happens is the rest of the talk.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f0001c" data-act="primer">
+    <header class="slide-head">
+      <p class="eyebrow">Ground rules</p>
+      <h2>Three primitives</h2>
+      <p class="lead">Everything in this talk is one of these, or the graph they make between them.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript">const count = <mark>signal</mark>(0);
+
+count();        // read
+count.set(1);   // write
+
+const double = <mark>computed</mark>(() =&gt; count() * 2);
+
+<mark>useEffect</mark>(() =&gt; {
+    document.title = `count: ${double()}`;
+});</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key"><code>signal</code></span><span>A value you own. Call it to read, <code>set</code> it to write.</span></li>
+          <li><span class="key"><code>computed</code></span><span>A value derived from other values. It caches itself, and never runs if nothing reads it.</span></li>
+          <li><span class="key"><code>useEffect</code></span><span>A change to something outside the graph. It re-runs when what it read changes.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>All three read the same way, and that read is what the rest of this talk is about.</p>
+    </footer>
+  </article>
+  <article class="slide" data-id="a2f0013e" data-act="primer">
+    <header class="slide-head">
+      <p class="eyebrow">Derived values</p>
+      <h2>computed values</h2>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">Owl 2 — three moving parts</h3>
+<pre><code class="language-javascript">setup() {
+    this.state = useState({ total: 0 });
+
+    onWillRender(() =&gt; {
+        const key = this.props.orders.length;
+        if (key !== this._key) {
+            this._key = key;
+            const total = expensive(this.props.orders);
+            this.state.total = total;
+        }
+    });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">Owl 3 — one</h3>
+<pre><code class="language-javascript">total = <mark>computed</mark>(() =&gt;
+    expensive(this.props.orders)
+);</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Cached</span><span>It does not recompute unless something it read changed.</span></li>
+          <li><span class="key">Declared</span><span>The dependency is now <em>written down</em>. The runtime can see it.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The trigger moved: Owl 2 recomputed because a component was about to render, Owl 3 because the state it read changed.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f0004c" data-act="primer">
+    <header class="slide-head">
+      <p class="eyebrow">The shift</p>
+      <h2>A change of paradigm</h2>
+      <p class="lead">The centre of the framework moves. Rendering stops being the thing everything is arranged around, and state takes its place.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure shift">
+        <svg viewBox="0 0 1000 280" role="img"
+             aria-label="The same component tree, twice. On the left the state sits as dots inside the components that hold it, and props thread from the root down to a grandchild. On the right the same tree holds nothing: the state is three linked nodes beside it, and each component reads the one it needs.">
+          <defs>
+            <marker id="shift2-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+            <marker id="shift2-rt" class="rt-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <text class="mt" x="170" y="22">rendering based</text>
+          <path class="ar thin" d="M140 78 V97 H80 V116"/>
+          <path class="ar thin" d="M140 78 V97 H200 V116"/>
+          <path class="ar thin" d="M200 150 V169 H200 V188"/>
+          <rect class="bx" x="92" y="44" width="96" height="34" rx="5"/>
+          <rect class="bx" x="32" y="116" width="96" height="34" rx="5"/>
+          <rect class="bx" x="152" y="116" width="96" height="34" rx="5"/>
+          <rect class="bx" x="152" y="188" width="96" height="34" rx="5"/>
+          <circle class="dot" cx="131" cy="61" r="5"/>
+          <circle class="dot" cx="149" cy="61" r="5"/>
+          <circle class="dot" cx="80" cy="133" r="5"/>
+          <circle class="dot" cx="182" cy="205" r="5"/>
+          <circle class="dot" cx="200" cy="205" r="5"/>
+          <circle class="dot" cx="218" cy="205" r="5"/>
+          <text class="s" x="170" y="264">we react on rendering events</text>
+          <path class="ar" marker-end="url(#shift2-ar)" d="M462 130 H518"/>
+          <text class="mt" x="700" y="22">state based</text>
+          <path class="ar thin" d="M670 78 V97 H610 V116"/>
+          <path class="ar thin" d="M670 78 V97 H730 V116"/>
+          <path class="ar thin" d="M730 150 V169 H730 V188"/>
+          <rect class="bx" x="622" y="44" width="96" height="34" rx="5"/>
+          <rect class="bx" x="562" y="116" width="96" height="34" rx="5"/>
+          <rect class="bx" x="682" y="116" width="96" height="34" rx="5"/>
+          <rect class="bx" x="682" y="188" width="96" height="34" rx="5"/>
+          <path class="ar thin" d="M900 78 V116"/>
+          <path class="ar thin" d="M900 142 V180"/>
+          <rect class="bx js" x="860" y="52" width="80" height="26" rx="13"/>
+          <rect class="bx js" x="860" y="116" width="80" height="26" rx="13"/>
+          <rect class="bx js" x="860" y="180" width="80" height="26" rx="13"/>
+          <path class="rt" d="M718 61 C789 61 789 65 860 65"/>
+          <path class="rt" d="M778 133 C819 133 819 129 860 129"/>
+          <path class="rt" d="M778 205 C819 205 819 193 860 193"/>
+          <text class="s" x="700" y="264">we react on state changes</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>The component tree has not gone anywhere. But the important part is the state relationships</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f0017b" data-act="primer">
+    <header class="slide-head">
+      <p class="eyebrow">Signals</p>
+      <h2>Bridging the gap</h2>
+      <ul class="notes">
+        <li><code>t-ref</code> fills a signal: <code>signal.ref()</code> holds the element, and <code>null</code> until the component is mounted. No separate <code>useRef</code>.</li>
+        <li><code>t-model</code> binds a signal to an input, both ways.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">todo_list.js</h3>
+<pre><code class="language-javascript">import { signal, computed, useEffect } from "@odoo/owl";
+
+export class TodoList extends Component {
+    input = <mark>signal.ref()</mark>;
+    name = signal("");
+
+    greeting = <mark>computed</mark>(() =&gt; `Hello ${this.name()}`);
+
+    setup() {
+        useEffect(() =&gt; this.input()?.focus());
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.xml</h3>
+<pre><code class="language-markup">&lt;input <mark>t-ref="this.input"</mark>
+       placeholder="What needs doing?"/&gt;
+
+&lt;input <mark>t-model="this.name"</mark>/&gt;
+&lt;p t-out="this.greeting()"/&gt;</code></pre>
+        <p class="caption">One concept fewer to hold: refs, model bindings and state are all the same thing - so a <code>computed</code> reads what <code>t-model</code> writes, with nothing in between.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The state and the DOM, in one graph: what the user types is a signal, and so is the element they type it in.</p>
+    </footer>
+  </article>
+
+  <!-- ==================== ACT 1 · THE QUESTION ==================== -->
+
+  <article class="slide divider" data-id="a2f00002" data-act="question">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Reactivity</h2>
+      <p class="divider-sub">What is it for?</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f00003" data-act="question">
+    <header class="slide-head">
+      <p class="eyebrow">The question</p>
+      <h2>Change a value. Something updates.</h2>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript">const price = signal(100);
+const qty   = signal(2);
+
+const total = computed(() =&gt; price() * qty());
+
+effect(() =&gt; {
+    console.log("total is", total());
+});
+// logs: total is 200
+
+<mark>qty.set(4)</mark>;
+await nextTick();
+// logs: total is 400
+
+qty.set(2);     // divided by 2
+price.set(200); // multiplied by 2
+await nextTick();
+// no logs</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Nobody</span><span>told <code>total</code> that <code>qty</code> had changed.</span></li>
+          <li><span class="key">Nobody</span><span>told the effect that <code>total</code> had changed.</span></li>
+          <li><span class="key">Nobody</span><span>wrote down that any of the three were connected at all.</span></li>
+        </ul>
+        <p class="caption">And yet exactly one log line came out, with the right number in it.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><span class="k">So</span>How did it know? That is the whole talk.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00004" data-act="question">
+    <header class="slide-head">
+      <p class="eyebrow">Ground rules</p>
+      <h2>A <u>signal</u>, on its own</h2>
+      <ul class="notes">
+        <li>If you were at the Owl 3 talk this is a minute of revision. If not, this is everything you need.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript">import { signal } from "@odoo/owl";
+
+const price = <mark>signal(100)</mark>;
+
+price();          // 100   - call it to read
+price.set(120);   //       - set it to write
+price();          // 120</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">A value</span><span>Held in a cell. That is all a signal is.</span></li>
+          <li><span class="key">Two operations</span><span>Call to read, <code>set</code> to write. There is no third.</span></li>
+          <li><span class="key">The read matters</span><span>Calling it is not just fetching. It is how the runtime learns you care.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>One value, two operations, and that is the entire primitive.</p>
+    </footer>
+  </article>
+
+
+  <article class="slide" data-id="a2f00007" data-act="question">
+    <header class="slide-head">
+      <p class="eyebrow">Two models</p>
+      <h2>Owl 2 vs Owl 3</h2>
+      <ul class="notes">
+        <li>Both track your reads. They differ on <em>who</em> the read subscribes, and when that was decided.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">Owl 2 — the proxy carries its watcher</h3>
+<pre><code class="language-javascript">// useState is reactive(obj, cb), and cb is
+// "re-render this component"
+const state = <mark>useState</mark>({ n: 0 });
+
+state.n;   // subscribes the component this proxy
+           // was made for. Only ever that one.</code></pre>
+        <p class="caption">One proxy, one watcher, fixed at the moment it was created. Hold a different proxy over the same object and you wake a different component.</p>
+      </section>
+      <section>
+        <h3 class="label">Owl 3 — a signal is just a signal</h3>
+<pre><code class="language-javascript">const n = <mark>signal</mark>(0);
+
+n();       // wakes whatever computation is
+           // running right now. Decided here,
+           // at the read.</code></pre>
+        <p class="caption">The signal carries nothing. The context you read it in <em>is</em> the observer — a render, a <code>computed</code>, an effect.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Which is the granularity too: Owl 2, a <em>component</em> subscribes and re-renders. Owl 3, a <em>computation</em> subscribes and re-runs.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f0007b" data-act="question">
+    <header class="slide-head">
+      <p class="eyebrow">Ground rules</p>
+      <h2>Every shape is signals underneath</h2>
+      <p class="lead">You pick a shape to suit the data. The graph only ever sees signals, one per key.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">four ways to write the same node</h3>
+<pre><code class="language-javascript">const state = <mark>signal.Object</mark>({ n: 0 });
+state.n;               // a read of one signal
+
+const items = <mark>signal.Array</mark>([]);
+items[0];              // a read of one signal
+
+const conf = <mark>proxy</mark>({ ui: { dense: true } });
+conf.ui.dense;         // a read, one level down
+
+props = <mark>useProps</mark>();     // a class field
+this.props.someNumber;  // props, too</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">One per key</span><span>A <code>signal.Object</code> is a signal for each key, not one signal for the object. Read <code>n</code> and you are subscribed to <code>n</code> alone.</span></li>
+          <li><span class="key">Same for items</span><span><code>signal.Array</code> does it per item, and <code>proxy</code> does it level by level as you read deeper.</span></li>
+          <li><span class="key">Props as well</span><span>The object <code>useProps</code> hands you is signal-backed, so <code>this.props.someNumber</code> is a tracked read.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The shapes are ergonomics. The gate, the batching and <code>untrack</code> land the same way on all of them.</p>
+    </footer>
+  </article>
+
+
+
+
+  <article class="slide" data-id="a2f00008" data-act="question">
+    <header class="slide-head">
+      <p class="eyebrow">The shift</p>
+      <h2>You used to design a component tree.<br>Now you design a <u>computation</u> graph.</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="box-pair">
+        <li>
+          <h3>Owl 2</h3>
+          <p>Decompose the UI and pass props down. A derived value is a field you keep in sync by hand, on every hook that might change it.</p>
+<pre><code class="language-javascript">setup() {
+  this.double = this.props.count * 2;
+  <mark>onWillUpdateProps</mark>((next) =&gt; {
+    this.double = next.count * 2;
+  });
+}</code></pre>
+        </li>
+        <li class="then">
+          <h3>Owl 3</h3>
+          <p>Start from state, and declare the computations that follow from it: derived values, effects, the render itself. The edge from <code>count</code> to <code>double</code> is built by reading it.</p>
+<pre><code class="language-javascript">props = useProps();
+
+double = <mark>computed</mark>(() =&gt; this.props.count * 2);</code></pre>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0008e" data-act="question">
+    <header class="slide-head">
+      <p class="eyebrow">The shift</p>
+      <h2>Where it comes from does not matter</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="box-pair">
+        <li>
+          <h3>Owl 2</h3>
+          <p>A reactive value has to be attached to the component that reads it, with <code>useState</code>. Read it without, and nothing re-renders.</p>
+<pre><code class="language-javascript">setup() {
+  const someService = useService("some_service");
+  this.state = <mark>useState</mark>(
+    someService.someReactiveValue()
+  );
+}</code></pre>
+        </li>
+        <li class="then">
+          <h3>Owl 3</h3>
+          <p>A signal needs no attaching. From a plugin, a prop or a module, reading it is what subscribes whatever is running.</p>
+<pre><code class="language-javascript">somePlugin = usePlugin(SomePlugin);
+
+// and then read
+this.somePlugin.<mark>someSignal()</mark>;</code></pre>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ====================== ACT 2 · THE GRAPH ====================== -->
+
+  <article class="slide divider" data-id="a2f00009" data-act="graph">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>The Computation Graph</h2>
+      <p class="divider-sub">Three kinds of node, and one rule for building edges.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0011d" data-act="graph">
+    <header class="slide-head">
+      <p class="eyebrow">Reactivity</p>
+      <h2>Computations</h2>
+      <p class="lead">Can manage dependencies. Three kinds, and one mechanism under all of them: each reads signals, and re-runs when what it read changes.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="shape-grid three">
+        <li>
+          <span class="num">1</span>
+          <h3>Rendering a component</h3>
+          <p>Reads signals, writes DOM. This is the one you already have.</p>
+<pre><code class="language-markup">&lt;t t-out="this.someValue()"/&gt;</code></pre>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <h3>A computed value</h3>
+          <p>Reads signals, returns a value, and holds on to it until one of them changes.</p>
+<pre><code class="language-javascript">a = signal(3);
+b = signal(5);
+sum = computed(() =&gt;
+    this.a() + this.b()
+);</code></pre>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <h3>An effect</h3>
+          <p>Reads signals, and changes something outside the graph: the document, storage, a library that knows nothing about this one.</p>
+<pre><code class="language-javascript">useEffect(() =&gt; {
+    console.log(this.a(), this.b());
+});</code></pre>
+        </li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>A render is not a special case. It is a computation that happens to paint.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00005" data-act="graph">
+    <header class="slide-head">
+      <p class="eyebrow">Ground rules</p>
+      <h2>Signals (and computations) can be watched</h2>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label"><code>signal</code> — holds a value</h3>
+<pre><code class="language-javascript">const price = signal(100);
+
+price();   // not a subscription
+           // just a read</code></pre>
+<pre><code class="language-markup">&lt;!-- this is a subscription! --&gt;
+&lt;t t-out="this.price()"/&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label">an effect — changes the world</h3>
+<pre><code class="language-javascript">effect(() =&gt; {
+    // this is a subscription!
+    console.log(price());
+});
+// runs now, and again whenever
+// what it read changes</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>price.set(120)</code> → the effect logs, the template re-renders. <strong>And nothing else in the program ran.</strong></p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00010" data-act="graph">
+    <header class="slide-head">
+      <p class="eyebrow">The graph</p>
+      <h2>That example, as a graph</h2>
+      <p class="lead">Two signals, one computed, one effect — and a render, which is a computation like any other.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 260" role="img"
+             aria-label="price and qty are signals. total is a computed reading both. An effect reads total, and so does a template render, which also reads qty directly. Edges run upward as sources and downward as observers.">
+          <defs>
+            <marker id="g-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="110" y="8" width="220" height="62" rx="6"/>
+          <text class="t" x="220" y="34">price</text>
+          <text class="s" x="220" y="56">signal · a value</text>
+
+          <rect class="bx" x="530" y="8" width="220" height="62" rx="6"/>
+          <text class="t" x="640" y="34">qty</text>
+          <text class="s" x="640" y="56">signal · a value</text>
+
+          <path class="ar" marker-end="url(#g-ar)" d="M220 76 L370 116"/>
+          <path class="ar" marker-end="url(#g-ar)" d="M640 76 L470 116"/>
+          <path class="ar" marker-end="url(#g-ar)" d="M690 76 L790 216"/>
+
+          <rect class="bx js" x="290" y="120" width="280" height="62" rx="6"/>
+          <text class="t" x="430" y="146">total</text>
+          <text class="s" x="430" y="168">computed · a value and a compute</text>
+
+          <path class="ar" marker-end="url(#g-ar)" d="M380 188 V216"/>
+          <path class="ar" marker-end="url(#g-ar)" d="M510 188 L700 216"/>
+
+          <rect class="bx fx" x="250" y="220" width="260" height="62" rx="6"/>
+          <text class="t" x="380" y="246">the effect</text>
+          <text class="s" x="380" y="268">a compute, and no value</text>
+
+          <rect class="bx render" x="560" y="220" width="280" height="62" rx="6"/>
+          <text class="t" x="700" y="246">template rendering</text>
+          <text class="s" x="700" y="268">a computation too</text>
+
+          <text class="m l" x="0" y="120">sources ↑</text>
+          <text class="s l" x="0" y="142">what I read</text>
+          <text class="m r" x="1000" y="120">↓ observers</text>
+          <text class="s r" x="1000" y="142">who read me</text>
+        </svg>
+      </figure>
+    </div>
+  </article>
+
+  <article class="slide statement" data-id="a2f00012" data-act="graph">
+    <header class="slide-head">
+      <p class="eyebrow">Implicit dependencies</p>
+      <h2>The graph is discovered, never declared.</h2>
+      <p class="lead">The edges are implicit: you never write them. There is no dependency array to keep in sync, and no way for it to disagree with the code — because the reads <em>are</em> the declaration.</p>
+    </header>
+    <footer class="slide-foot">
+      <p>The graph is dynamic: every time a computation re-runs, it starts from scratch, so it is always correct.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00013" data-act="graph">
+    <header class="slide-head">
+      <p class="eyebrow">The graph</p>
+      <h2>A write pushes. A read pulls.</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 230" role="img"
+             aria-label="On a write, staleness is pushed down to observers. On a read, the value is pulled back up through sources.">
+          <defs>
+            <marker id="pp-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="chip" x="0" y="0" width="480" height="230" rx="6"/>
+          <text class="mt" x="240" y="32">1 · write</text>
+          <text class="s" x="240" y="54">qty.set(3)</text>
+          <rect class="bx" x="170" y="72" width="140" height="42" rx="6"/>
+          <text class="t" x="240" y="99">qty</text>
+          <path class="ar" marker-end="url(#pp-ar)" d="M240 120 V152"/>
+          <text class="m l" x="256" y="140">stale</text>
+          <rect class="bx js" x="170" y="156" width="140" height="42" rx="6"/>
+          <text class="t" x="240" y="183">total</text>
+          <text class="s" x="240" y="220">marked, not recomputed</text>
+
+          <rect class="chip" x="520" y="0" width="480" height="230" rx="6"/>
+          <text class="mt" x="760" y="32">2 · read</text>
+          <text class="s" x="760" y="54">the effect calls total()</text>
+          <rect class="bx" x="690" y="156" width="140" height="42" rx="6"/>
+          <text class="t" x="760" y="183">qty</text>
+          <path class="ar" marker-end="url(#pp-ar)" d="M760 152 V120"/>
+          <text class="m l" x="776" y="140">value</text>
+          <rect class="bx js" x="690" y="72" width="140" height="42" rx="6"/>
+          <text class="t" x="760" y="99">total</text>
+          <text class="s" x="760" y="220">recomputed, once, on demand</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>A write is cheap and shallow. The work happens when somebody actually wants the answer.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00014" data-act="graph">
+    <header class="slide-head">
+      <p class="eyebrow">The graph</p>
+      <h2>The Diamond Problem</h2>
+      <p class="lead">The diamond: <code>a</code> feeds <code>b</code> and <code>c</code>, <code>d</code> reads both — and an effect reads <code>d</code>, or nothing would ever pull it.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section class="span">
+        <figure class="figure diamond">
+          <svg viewBox="0 0 640 252" role="img"
+               aria-label="a is a signal. b and c are computeds reading a. d is a computed reading both b and c. An effect reads d, and is the only thing that pulls.">
+            <defs>
+              <marker id="d-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx" x="230" y="0" width="180" height="48" rx="6"/>
+            <text class="t" x="320" y="22">a</text>
+            <text class="s" x="320" y="40">signal · 1</text>
+
+            <path class="ar" marker-end="url(#d-ar)" d="M285 52 L200 64"/>
+            <path class="ar" marker-end="url(#d-ar)" d="M355 52 L440 64"/>
+
+            <rect class="bx js" x="60" y="68" width="180" height="48" rx="6"/>
+            <text class="t" x="150" y="90">b</text>
+            <text class="s" x="150" y="108">computed · a() * 2</text>
+
+            <rect class="bx js" x="400" y="68" width="180" height="48" rx="6"/>
+            <text class="t" x="490" y="90">c</text>
+            <text class="s" x="490" y="108">computed · a() * 10</text>
+
+            <path class="ar" marker-end="url(#d-ar)" d="M200 120 L285 132"/>
+            <path class="ar" marker-end="url(#d-ar)" d="M440 120 L355 132"/>
+
+            <rect class="bx js" x="230" y="136" width="180" height="48" rx="6"/>
+            <text class="t" x="320" y="158">d</text>
+            <text class="s" x="320" y="176">computed · ${b()}/${c()}</text>
+
+            <path class="ar" marker-end="url(#d-ar)" d="M320 188 V200"/>
+
+            <rect class="bx fx" x="230" y="204" width="180" height="48" rx="6"/>
+            <text class="t" x="320" y="226">the effect</text>
+            <text class="s" x="320" y="244">effect · log(d())</text>
+          </svg>
+        </figure>
+      </section>
+      <section>
+        <h3 class="label">The design being avoided: recompute on write</h3>
+<pre><code class="language-javascript">a.set(2);
+//  -&gt; b recomputes        b = 4
+//  -&gt; d recomputes now    <mark>d = "4/10"</mark>   ← a pair
+//  -&gt; c recomputes        c = 20      that never existed
+//  -&gt; d recomputes again  d = "4/20"</code></pre>
+        <p class="caption">Two runs of <code>d</code> for one write, and between them a value nobody ever set. That is a <strong>glitch</strong>.</p>
+      </section>
+      <section>
+        <h3 class="label">What Owl does: mark, then pull</h3>
+<pre><code class="language-javascript">a.set(2);
+//  b, c       stale     (read a directly)
+//  d          pending   (check my sources)
+//  the effect queued    (flush on the microtask)
+//  ...and nothing has been computed at all
+// then the flush pulls, and the pull computes:
+//  b = 4, c = 20, <mark>d = "4/20"</mark>   ← once, correct</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The write only marks, and marking twice is free. A <code>computed</code> runs when something reads it; effects and renders read on the next microtask.</p>
+    </footer>
+  </article>
+
+  <!-- ================= ACT 3 · LAZINESS AND THE GATE ================= -->
+
+  <article class="slide" data-id="a2f0014b" data-act="graph">
+    <header class="slide-head">
+      <p class="eyebrow">Step by step</p>
+      <h2>executed / stale / pending / queued</h2>
+      <p class="lead">Whatever read <code>a</code> directly is <strong>stale</strong> — it must re-run. Everything further down is <strong>pending</strong> — something moved upstream, go ask your sources. The effect is not a value, so it joins a queue instead.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure diamond">
+          <svg viewBox="0 0 640 252" role="img"
+             aria-label="The diamond, annotated: a on top, b and c below it, d below both, and an effect below d.">
+            <defs>
+              <marker id="s1-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx" x="230" y="0" width="180" height="48" rx="6"/>
+            <text class="t" x="320" y="22">a</text>
+            <text class="s" x="320" y="40">signal · 2</text>
+            <text class="badge l" x="422" y="28">written</text>
+
+            <path class="ar" marker-end="url(#s1-ar)" d="M285 52 L200 64"/>
+            <path class="ar" marker-end="url(#s1-ar)" d="M355 52 L440 64"/>
+
+            <rect class="bx js" x="60" y="68" width="180" height="48" rx="6"/>
+            <text class="t" x="150" y="90">b</text>
+            <text class="s" x="150" y="108">computed · a() * 2</text>
+            <text class="badge hot l" x="252" y="97">stale</text>
+
+            <rect class="bx js" x="400" y="68" width="180" height="48" rx="6"/>
+            <text class="t" x="490" y="90">c</text>
+            <text class="s" x="490" y="108">computed · a() * 10</text>
+            <text class="badge hot r" x="388" y="97">stale</text>
+
+            <path class="ar" marker-end="url(#s1-ar)" d="M200 120 L285 132"/>
+            <path class="ar" marker-end="url(#s1-ar)" d="M440 120 L355 132"/>
+
+            <rect class="bx js" x="230" y="136" width="180" height="48" rx="6"/>
+            <text class="t" x="320" y="158">d</text>
+            <text class="s" x="320" y="176">computed · ${b()}/${c()}</text>
+            <text class="badge l" x="422" y="165">pending</text>
+
+            <path class="ar" marker-end="url(#s1-ar)" d="M320 188 V200"/>
+
+            <rect class="bx fx" x="230" y="204" width="180" height="48" rx="6"/>
+            <text class="t" x="320" y="226">the effect</text>
+            <text class="s" x="320" y="244">effect · log(d())</text>
+            <text class="badge l" x="422" y="233">queued</text>
+          </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Four flags and one queue push, and <code>a.set(2)</code> returns. Not one compute function has run.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f0014c" data-act="graph">
+    <header class="slide-head">
+      <p class="eyebrow">Step by step</p>
+      <h2>Flushing in a microtask</h2>
+      <p class="lead">On the microtask the queue drains. The effect asks for <code>d</code>, <code>d</code> asks its sources, and the values come back up the way the question went down.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure diamond">
+          <svg viewBox="0 0 640 252" role="img"
+             aria-label="The diamond, annotated: a on top, b and c below it, d below both, and an effect below d.">
+            <defs>
+              <marker id="s2-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx" x="230" y="0" width="180" height="48" rx="6"/>
+            <text class="t" x="320" y="22">a</text>
+            <text class="s" x="320" y="40">signal · 2</text>
+
+            <path class="ar" marker-end="url(#s2-ar)" d="M285 52 L200 64"/>
+            <path class="ar" marker-end="url(#s2-ar)" d="M355 52 L440 64"/>
+
+            <rect class="bx js" x="60" y="68" width="180" height="48" rx="6"/>
+            <text class="t" x="150" y="90">b</text>
+            <text class="s" x="150" y="108">computed · a() * 2</text>
+            <text class="badge l" x="252" y="97">1 · 4</text>
+
+            <rect class="bx js" x="400" y="68" width="180" height="48" rx="6"/>
+            <text class="t" x="490" y="90">c</text>
+            <text class="s" x="490" y="108">computed · a() * 10</text>
+            <text class="badge r" x="388" y="97">2 · 20</text>
+
+            <path class="ar" marker-end="url(#s2-ar)" d="M200 120 L285 132"/>
+            <path class="ar" marker-end="url(#s2-ar)" d="M440 120 L355 132"/>
+
+            <rect class="bx js" x="230" y="136" width="180" height="48" rx="6"/>
+            <text class="t" x="320" y="158">d</text>
+            <text class="s" x="320" y="176">computed · ${b()}/${c()}</text>
+            <text class="badge l" x="422" y="165">3 · "4/20"</text>
+
+            <path class="ar" marker-end="url(#s2-ar)" d="M320 188 V200"/>
+
+            <rect class="bx fx" x="230" y="204" width="180" height="48" rx="6"/>
+            <text class="t" x="320" y="226">the effect</text>
+            <text class="s" x="320" y="244">effect · log(d())</text>
+            <text class="badge l" x="422" y="233">4 · logs</text>
+          </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Four computations, in that order, each one run once — and <code>d</code> never sees a <code>b</code> and a <code>c</code> that disagree.</p>
+    </footer>
+  </article>
+
+  <article class="slide divider" data-id="a2f00016" data-act="gate">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Fast,<br>by doing nothing</h2>
+      <p class="divider-sub">The two behaviours that make the graph cheap.</p>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f00018" data-act="gate">
+    <header class="slide-head">
+      <p class="eyebrow">The gate</p>
+      <h2>Propagation stops at an unchanged value</h2>
+      <p class="lead">The check is on what the computed <em>returns</em> — not on whether its inputs moved.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">gate.mjs</h3>
+<pre><code class="language-javascript">const n = signal(1);
+const isPositive = computed(() =&gt; n() &gt; 0);
+
+effect(() =&gt; { isPositive(); downstream++; });
+
+n.set(2);  await tick();
+n.set(3);  await tick();
+// n moved twice. how often did the effect run?
+
+n.set(-1); await tick();</code></pre>
+      </section>
+      <section>
+        <h3 class="label">the graph</h3>
+        <figure class="figure">
+          <svg viewBox="0 0 400 320" role="img"
+               aria-label="A three-node graph. The signal n feeds the computed isPositive, which feeds an effect. n moves from 1 to 2 to 3, isPositive stays true, so the edge to the effect is dashed: the unchanged value stops there and the effect does not re-run.">
+            <defs>
+              <marker id="gate-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+              <marker id="gate-rt" class="rt-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx" x="90" y="6" width="220" height="62" rx="6"/>
+            <text class="t" x="200" y="32">n</text>
+            <text class="s" x="200" y="54">signal · 1 → 2 → 3</text>
+
+            <path class="ar" marker-end="url(#gate-ar)" d="M200 72 V122"/>
+
+            <rect class="bx js" x="90" y="128" width="220" height="62" rx="6"/>
+            <text class="t" x="200" y="154">isPositive</text>
+            <text class="s" x="200" y="176">computed · true, still true</text>
+
+            <path class="rt" marker-end="url(#gate-rt)" d="M200 194 V244"/>
+            <text class="s l" x="214" y="224">true → true: stops here</text>
+
+            <rect class="bx fx" x="90" y="250" width="220" height="62" rx="6"/>
+            <text class="t" x="200" y="276">the effect</text>
+            <text class="s" x="200" y="298">does not re-run</text>
+          </svg>
+        </figure>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>Object.is</code> by default. Pass <code>equals: false</code> to notify on every write, for a value you mutate in place.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00017" data-act="gate">
+    <header class="slide-head">
+      <p class="eyebrow">Laziness</p>
+      <h2>A computed nobody reads never runs</h2>
+      <p class="lead">Not "runs and throws the answer away". Does not run.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">lazy.mjs</h3>
+<pre><code class="language-javascript">const s = signal(0);
+const lazy = computed(() =&gt; { runs++; return s() * 2; });
+
+s.set(1);
+s.set(2);
+s.set(3);
+await tick();
+// runs so far?
+
+lazy();   // 6</code></pre>
+      </section>
+      <section>
+        <h3 class="label">output</h3>
+<pre><code class="language-javascript">recomputes before first read: <mark>0</mark>
+value: 6 | recomputes after read: <mark>1</mark></code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Why</span><span>A write marks observers stale. Marking is not computing.</span></li>
+          <li><span class="key">So</span><span>A screen you are not looking at costs nothing, even while its data churns.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>An effect is the exception: it has no value to pull, so it runs on its own. Effects are the roots that drive everything.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f0017c" data-act="gate">
+    <header class="slide-head">
+      <p class="eyebrow">Laziness</p>
+      <h2>Reads outside a computation are free</h2>
+      <p class="lead">A read subscribes whatever computation is running. In an event handler, none is.</p>
+    </header>
+    <div class="slide-body solo">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">class Counter extends Component {
+    static template = "my_module.Counter";
+
+    value = signal(0);
+
+    onClick() {
+        // no computation running here:
+        // reads the value, subscribes nothing
+        console.log(<mark>this.value()</mark>);
+    }
+}</code></pre>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f00019" data-act="gate">
+    <header class="slide-head">
+      <p class="eyebrow">The gate</p>
+      <h2>Which is why memoisation is free</h2>
+      <p class="lead">Laziness and the gate together are the caching you used to write by hand — and this time it composes.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">What you used to write</h3>
+<pre><code class="language-javascript">onWillRender(() =&gt; {
+    const key = this.props.orders.length;
+    if (key !== this._key) {
+        this._key = key;
+        this._total = expensive(this.props.orders);
+    }
+    this.state.total = this._total;
+});</code></pre>
+        <p class="caption">You had to know what to invalidate. And another addon patching <code>expensive</code> made the key silently wrong.</p>
+      </section>
+      <section>
+        <h3 class="label">What replaces it</h3>
+<pre><code class="language-javascript">total = computed(() =&gt; expensive(this.props.orders));</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">No key</span><span>The reads are the key, and they are recorded on every run.</span></li>
+          <li><span class="key">Composes</span><span>A computed over a computed inherits both the laziness and the gate.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Nobody writes a cache key, so nobody gets the cache key wrong.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00020" data-act="gate">
+    <header class="slide-head">
+      <p class="eyebrow">The gate</p>
+      <h2>Comparisons</h2>
+      <ul class="notes">
+        <li><code>Object.is</code> on a fresh array is always <code>false</code>: a filter recomputes to a new array every time, so the gate never holds.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">The problem</h3>
+<pre><code class="language-javascript">visible = computed(() =&gt;
+    this.todos.filter((t) =&gt; t.text.includes(q))
+);
+// same contents, new array object
+// -&gt; every downstream render re-runs</code></pre>
+      </section>
+      <section>
+        <h3 class="label">The fix</h3>
+<pre><code class="language-javascript">import { shallowEqual } from "@odoo/owl";
+
+visible = computed(
+    () =&gt; this.todos.filter(/* ... */),
+    { <mark>equals: shallowEqual</mark> },
+);</code></pre>
+        <p class="caption">Now the gate compares contents, and an unchanged filter result stops the propagation dead.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The rule of thumb: a computed that returns a fresh object or array every time wants an <code>equals</code>.</p>
+    </footer>
+  </article>
+
+  <!-- ======================= ACT 4 · MISCELLANEOUS ======================= -->
+
+  <article class="slide divider" data-id="a2f00022" data-act="effects">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Miscellaneous</h2>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0022b" data-act="effects">
+    <header class="slide-head">
+      <p class="eyebrow">Scheduling</p>
+      <h2>When each computation runs</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table kinds">
+        <li class="head"><span>Type</span><span>Eager / lazy</span><span>Scheduling</span></li>
+        <li><span>Template rendering</span><span>eager</span><span>on the next microtask, applied on the next animation frame</span></li>
+        <li><span><code>computed</code> values</span><span>lazy</span><span>no scheduling: computed when read</span></li>
+        <li><span>Effects</span><span>eager</span><span>immediately, then on each microtask</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f00024" data-act="effects">
+    <header class="slide-head">
+      <p class="eyebrow">Effects</p>
+      <h2>Batched, and cleaned up</h2>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">three writes in a row</h3>
+<pre><code class="language-javascript">const s = signal(0);
+effect(() =&gt; log.push(s()));
+
+s.set(1); s.set(2); s.set(3);
+await tick();</code></pre>
+<pre><code class="language-javascript">effect saw: [ <mark>0, 3</mark> ]</code></pre>
+        <p class="caption">Once immediately, then once for the batch — landing on the final value. The intermediates never existed as far as the effect is concerned.</p>
+      </section>
+      <section>
+        <h3 class="label file">returning a cleanup</h3>
+<pre><code class="language-javascript">effect(() =&gt; {
+    const v = t();
+    trace.push(`run ${v}`);
+    <mark>return</mark> () =&gt; trace.push(`cleanup ${v}`);
+});</code></pre>
+<pre><code class="language-javascript">run 0 | cleanup 0 | run 1 |
+cleanup 1 | run 2 | cleanup 2</code></pre>
+        <p class="caption">Before every re-run, and once more on dispose. This is where a listener or a timer goes.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Whatever you start in an effect, stop it in the function that effect returns.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00023" data-act="effects">
+    <header class="slide-head">
+      <p class="eyebrow">Effects</p>
+      <h2>effect and useEffect</h2>
+      <p class="lead"><code>useEffect</code> is <code>effect</code>, called in a component or a plugin — and cleaned up for you when that is destroyed.</p>
+    </header>
+    <div class="slide-body two-col even fit">
+      <section>
+        <h3 class="label file">effect — you dispose it</h3>
+<pre><code class="language-javascript">const stop = <mark>effect</mark>(() =&gt; {
+    console.log(value());
+});
+
+// later, by hand
+stop();</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">useEffect — disposed with its owner</h3>
+<pre><code class="language-javascript">class Clock extends Component {
+    setup() {
+        <mark>useEffect</mark>(() =&gt; {
+            console.log(this.value());
+        });
+    }
+}
+// Clock destroyed: the effect goes too</code></pre>
+        <p class="caption">In a plugin's <code>setup</code> as well: there it lives as long as the plugins around it, and goes when they do.</p>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f00025" data-act="effects">
+    <header class="slide-head">
+      <p class="eyebrow">Effects</p>
+      <h2>Sub-effects</h2>
+      <ul class="notes">
+        <li>Any <code>effect()</code> called while another effect is on the stack becomes its <strong>child</strong> — even from inside a helper three calls down.</li>
+        <li>When the parent re-runs, its previous children are disposed first.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript">effect(() =&gt; {          // parent
+    console.log("parent");
+
+    effect(() =&gt; {      // child, owned by it
+        console.log(someSignal());
+        return () =&gt; console.log("child cleanup");
+    });
+});</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Implicit</span><span>Nothing in the child says who owns it. The call stack decided.</span></li>
+          <li><span class="key">Each re-run</span><span>The old child is disposed, a fresh one created. Cleanup fires every time.</span></li>
+          <li><span class="key">Usually right</span><span>It is what you want when the inner effect really is per-run. It is a trap when it is not.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Which is fine — until someone creates the inner one conditionally.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00027" data-act="effects">
+    <header class="slide-head">
+      <p class="eyebrow">Effects</p>
+      <h2>untrack: read without subscribing</h2>
+      <ul class="notes">
+        <li>It breaks tracking — and it breaks ownership.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">Reading without an edge</h3>
+<pre><code class="language-javascript">const c = computed(() =&gt; {
+    const tracked = s();
+    const free = <mark>untrack</mark>(() =&gt; s());
+    return tracked + free;
+});
+// c depends on s once, not twice</code></pre>
+        <h3 class="label">And escaping ownership</h3>
+<pre><code class="language-javascript">disposeInner = <mark>untrack</mark>(() =&gt;
+    effect(() =&gt; { inner(); })
+);</code></pre>
+      </section>
+      <section>
+        <h3 class="label">output, the same test as before</h3>
+<pre><code class="language-javascript">inner effect saw: [ 0, 9 ]
+<mark>survived the parent's re-run</mark></code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Your job now</span><span>An effect created inside <code>untrack</code> has no owner. You dispose it, or it leaks.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Reach for it deliberately and rarely. Most code that wants <code>untrack</code> actually wants the next slide.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f0028c" data-act="effects">
+    <header class="slide-head">
+      <p class="eyebrow">A common trap</p>
+      <h2>No cycle allowed</h2>
+      <p class="lead">A computed reads its sources to compute. If two of them read each other, the reading never bottoms out.</p>
+    </header>
+    <div class="slide-body two-col even fit">
+      <section>
+        <h3 class="label file">cart.js</h3>
+<pre><code class="language-javascript">class Cart extends Component {
+    static template = "my_module.Cart";
+
+    price = signal(100);
+
+    total = computed(() =&gt; this.price() + <mark>this.tax()</mark>);
+    tax = computed(() =&gt; <mark>this.total()</mark> * 0.2);
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">reading this.total()</h3>
+<pre><code class="language-javascript">RangeError: Maximum call stack size exceeded</code></pre>
+        <p class="caption"><code>total</code> reads <code>tax</code>, which reads <code>total</code>, which reads <code>tax</code>… Nothing catches it earlier: the stack does. The graph has to point one way — derive both from the same source instead.</p>
+      </section>
+    </div>
+  </article>
+
+  <!-- ===================== ACT 5 · PRACTICAL TIPS ===================== -->
+
+  <article class="slide divider" data-id="a2f00028" data-act="tips">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Practical Tips</h2>
+      <div class="prog"></div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0028b" data-act="tips">
+    <header class="slide-head">
+      <p class="eyebrow">A common trap</p>
+      <h2>Keep the signal, read it late</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="box-pair">
+        <li>
+          <h3>Don't do this</h3>
+          <p>The signal is read once, in <code>setup</code>. The template gets a plain value, and never hears of a change.</p>
+<pre><code class="language-javascript">somePlugin = usePlugin(SomePlugin);
+someValue = <mark>this.somePlugin.someSignal()</mark>;</code></pre>
+<pre><code class="language-markup">&lt;t t-out="this.someValue"/&gt;</code></pre>
+        </li>
+        <li class="do">
+          <h3>Do this</h3>
+          <p>Keep the signal itself, and read it in the template: the render subscribes, and re-runs when it changes.</p>
+<pre><code class="language-javascript">somePlugin = usePlugin(SomePlugin);
+someSignal = this.somePlugin.someSignal;</code></pre>
+<pre><code class="language-markup">&lt;t t-out="<mark>this.someSignal()</mark>"/&gt;</code></pre>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0028d" data-act="tips">
+    <header class="slide-head">
+      <p class="eyebrow">A common trap</p>
+      <h2>Give the signal, not the value</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="box-pair">
+        <li>
+          <h3>Give the value</h3>
+          <p>The parent reads the signal as it renders, so the parent subscribes. Every change re-renders the parent, to hand the child a new number.</p>
+<pre><code class="language-markup">&lt;!-- parent --&gt;
+&lt;SomeChild value="<mark>this.value()</mark>"/&gt;
+
+&lt;!-- child --&gt;
+&lt;t t-out="this.props.value"/&gt;</code></pre>
+        </li>
+        <li class="do">
+          <h3>Give the signal</h3>
+          <p>The parent passes the signal itself and reads nothing. Only the child, which reads it, subscribes — and only the child re-renders.</p>
+<pre><code class="language-markup">&lt;!-- parent --&gt;
+&lt;SomeChild value="this.value"/&gt;
+
+&lt;!-- child --&gt;
+&lt;t t-out="<mark>this.props.value()</mark>"/&gt;</code></pre>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f00021" data-act="tips">
+    <header class="slide-head">
+      <p class="eyebrow">Design</p>
+      <h2>Derive, don't store.</h2>
+      <p class="lead">Anything you can compute from something else should be a <code>computed</code>, not a second piece of state you keep in sync.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="box-pair">
+        <li>
+          <h3>Store, and keep in sync</h3>
+          <p>Two signals that must agree, and an effect to make them. Until it runs, they do not.</p>
+<pre><code class="language-javascript">count = signal(1);
+double = signal(2);
+
+setup() {
+    <mark>useEffect</mark>(() =&gt; {
+        this.double.set(this.count() * 2);
+    });
+}</code></pre>
+        </li>
+        <li class="do">
+          <h3>Derive</h3>
+          <p>One signal, and a <code>computed</code> that cannot disagree with it.</p>
+<pre><code class="language-javascript">count = signal(1);
+double = <mark>computed</mark>(() =&gt; this.count() * 2);</code></pre>
+        </li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Two facts that must agree are a bug waiting for a deadline.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f0021b" data-act="tips">
+    <header class="slide-head">
+      <p class="eyebrow">Design</p>
+      <h2>Make everything reactive</h2>
+      <p class="lead">A <code>computed</code> only knows about what it reads through a signal. A plain field slips past it.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="box-pair">
+        <li>
+          <h3>Mixing raw values and signals</h3>
+          <p><code>this.value</code> is read, but not tracked: change it, and <code>total</code> keeps the old answer until <code>counter</code> happens to move.</p>
+<pre><code class="language-javascript">value = 10;
+counter = signal(1);
+
+total = computed(() =&gt;
+    <mark>this.value</mark> + this.counter()
+);</code></pre>
+        </li>
+        <li class="do">
+          <h3>Signals all the way</h3>
+          <p>Both reads are tracked, so a change to either one recomputes <code>total</code>.</p>
+<pre><code class="language-javascript">value = signal(10);
+counter = signal(1);
+
+total = computed(() =&gt;
+    <mark>this.value()</mark> + this.counter()
+);</code></pre>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0021c" data-act="tips">
+    <header class="slide-head">
+      <p class="eyebrow">Design</p>
+      <h2>Make a readonly version</h2>
+      <p class="lead">Hand out a <code>computed</code> that reads the signal: the same value, just as reactive, and nothing to write to.</p>
+    </header>
+    <div class="slide-body solo">
+      <section>
+        <h3 class="label file">some_plugin.js</h3>
+<pre><code class="language-javascript">mySignal = signal(1);
+myReadonlySignal = <mark>computed</mark>(() =&gt; this.mySignal());
+
+this.myReadonlySignal();      // 1, and it tracks
+this.myReadonlySignal.set(2); // throws: read-only
+this.mySignal.set(2);         // only the owner writes</code></pre>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0021e" data-act="tips">
+    <header class="slide-head">
+      <p class="eyebrow">Design</p>
+      <h2>Do not wrap everything in a proxy</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="box-pair">
+        <li>
+          <h3>Don't do this</h3>
+          <p>Every field of the model, at every depth, becomes reactive — including the ones that never needed to be. What is state is decided by a wrapper, far from the class.</p>
+<pre><code class="language-javascript">this.model = <mark>proxy</mark>(new Model());</code></pre>
+        </li>
+        <li class="do">
+          <h3>Do this</h3>
+          <p>The class says which of its fields are state. Everything else stays a plain field.</p>
+<pre><code class="language-javascript">class Model {
+    someState = <mark>signal</mark>(1);
+
+    someFunction() { ... }
+}
+
+this.model = new Model();</code></pre>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0021d" data-act="tips">
+    <header class="slide-head">
+      <p class="eyebrow">Design</p>
+      <h2>Short-circuit with computed</h2>
+      <p class="lead">A <code>computed</code> in front of a render is a gate: the render only hears about the result, not about every input that fed it.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="box-pair">
+        <li>
+          <h3>Read in the template</h3>
+          <p>The render reads <code>a</code> and <code>b</code> itself, so it subscribes to both. Any change to either re-renders, even when the condition comes out the same.</p>
+<pre><code class="language-markup">&lt;div t-if="<mark>this.a() &amp;&amp; this.b()</mark>"&gt;
+    ...
+&lt;/div&gt;</code></pre>
+        </li>
+        <li class="do">
+          <h3>Read through a computed</h3>
+          <p>The render subscribes to <code>isVisible</code> alone. <code>a</code> and <code>b</code> can move all they like: unless the result flips, nothing re-renders.</p>
+<pre><code class="language-javascript">isVisible = <mark>computed</mark>(() =&gt; this.a() &amp;&amp; this.b());</code></pre>
+<pre><code class="language-markup">&lt;div t-if="this.isVisible()"&gt;
+    ...
+&lt;/div&gt;</code></pre>
+        </li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f00034" data-act="tips">
+    <header class="slide-head">
+      <p class="eyebrow">The tool</p>
+      <h2>useOnChange for explicit dependency tracking</h2>
+      <p class="lead">Sometimes you genuinely must write state when something changes — load a record when the id moves. The hook splits in two, so the cycle cannot form.</p>
+    </header>
+    <div class="slide-body solo">
+      <section>
+        <h3 class="label file">record_viewer.js</h3>
+<pre><code class="language-javascript">setup() {
+    useOnChange(
+        // tracked: this half only
+        () =&gt; [this.props.recordId],
+
+        // not tracked: read and write freely
+        async (recordId) =&gt; {
+            this.record.set(null);
+            this.record.set(await load(recordId));
+        },
+    );
+}</code></pre>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f00035" data-act="tips">
+    <header class="slide-head">
+      <p class="eyebrow">The tool</p>
+      <h2>And the dependencies compare by value</h2>
+      <p class="lead">Which makes it fire on the change you meant, not on every write upstream of it.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript">useOnChange(
+    () =&gt; [<mark>this.count() &gt; 10</mark>],
+    (isBig) =&gt; console.log("isBig", isBig),
+);
+
+// count 2 -&gt; 3 -&gt; 4 ... nothing.
+// the dependency is still false.
+
+// count 10 -&gt; 11: <mark>fires once</mark></code></pre>
+      </section>
+      <section>
+        <h3 class="label">the plain effect, for contrast</h3>
+<pre><code class="language-javascript">useEffect(() =&gt; {
+    console.log("isBig", this.count() &gt; 10);
+});
+// re-runs on every single change of count</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Use it</span><span>When the callback must read reactive values that should <em>not</em> trigger it, or when the trigger is a derived condition.</span></li>
+          <li><span class="key">Otherwise</span><span>A plain <code>useEffect</code> is simpler. Do not reach for this by default.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Same gate as a <code>computed</code>, applied to the trigger instead of to the value.</p>
+    </footer>
+  </article>
+
+  <!-- ========================= ACT 6 · CONCLUSION ========================= -->
+
+  <article class="slide divider" data-id="a2f0040b" data-act="close">
+    <div class="divider-body">
+      <p class="divider-eyebrow"></p>
+      <h2>Conclusion</h2>
+      <div class="prog"></div>
+    </div>
+    <a class="vod side" href="https://www.youtube.com/watch?v=xhSvfHcquuI" target="_blank" rel="noopener">
+      <img class="vod-qr" src="assets/replay-qr.svg" alt="QR code linking to the replay, youtu.be/xhSvfHcquuI">
+      <span class="vod-label"><svg class="vod-play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24"/><path d="M19 14.5 34 24 19 33.5Z"/></svg>Watch the replay</span>
+      <span class="vod-url">youtu.be/xhSvfHcquuI</span>
+    </a>
+  </article>
+
+  <article class="slide" data-id="a2f0001d" data-act="close">
+    <header class="slide-head">
+      <p class="eyebrow">Ground rules</p>
+      <h2>The whole set</h2>
+      <p class="lead">Three primitives, and the five names around them. Nothing else to learn.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">values</h3>
+        <ul class="rows wide-key">
+          <li><span class="key"><code>signal</code></span><span>A value. Call it to read, <code>set</code> it to write.</span></li>
+          <li><span class="key"><code>signal.Array</code></span><span>A list, one signal per item. Shallow.</span></li>
+          <li><span class="key"><code>signal.Object</code></span><span>A bag of keys, one signal per key. Shallow.</span></li>
+          <li><span class="key"><code>proxy</code></span><span>The same, every level down, as you read deeper.</span></li>
+          <li><span class="key"><code>computed</code></span><span>Derived from other values. Cached, and lazy.</span></li>
+          <li><span class="key"><code>asyncComputed</code></span><span>The same, for a value that has to be awaited.</span></li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label file">reactions</h3>
+        <ul class="rows wide-key">
+          <li><span class="key"><code>effect</code></span><span>Runs when what it read changes. Nothing pulls it, so it is what drives the graph at all.</span></li>
+          <li><span class="key"><code>useEffect</code></span><span>The same thing inside a component, disposed with it.</span></li>
+          <li><span class="key"><code>useOnChange</code></span><span>Run a callback when the values you name change, compared by value.</span></li>
+          <li><span class="key"><code>untrack</code></span><span>Read without subscribing to what you read.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The last two are the escape hatches — and you have now seen, twice each, why you would want one.</p>
+    </footer>
+  </article>
+
+  <article class="slide statement" data-id="a2f00041" data-act="close">
+    <header class="slide-head">
+      <p class="eyebrow">Advanced reactivity in Owl</p>
+      <h2>Questions?</h2>
+      <p class="lead">The playground is the fastest way to check any of this for yourself — every probe in this talk is a dozen lines.</p>
+    </header>
+    <a class="vod side" href="https://www.youtube.com/watch?v=xhSvfHcquuI" target="_blank" rel="noopener">
+      <img class="vod-qr" src="assets/replay-qr.svg" alt="QR code linking to the replay, youtu.be/xhSvfHcquuI">
+      <span class="vod-label"><svg class="vod-play" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24"/><path d="M19 14.5 34 24 19 33.5Z"/></svg>Watch the replay</span>
+      <span class="vod-url">youtu.be/xhSvfHcquuI</span>
+    </a>
+    <footer class="slide-foot">
+      <p><span class="k">Everything</span><code>odoo.github.io/owl</code></p>
+    </footer>
+  </article>
+
+  <!-- ============================ APPENDIX ============================ -->
+
+  <!-- Not an act: no eyebrow and no rail, so app.js leaves both alone and the
+       "Act n of 6" count stays the count of the talk as delivered. Anything
+       held back for questions goes after this, with data-act="appendix". -->
+  <article class="slide divider" data-id="a2f0004a" data-act="appendix">
+    <div class="divider-body">
+      <h2>Appendix</h2>
+      <p class="divider-sub">Held in reserve, for the questions that come.</p>
+    </div>
+  </article>
+
+  <article class="slide" data-id="a2f0008b" data-act="appendix">
+    <header class="slide-head">
+      <p class="eyebrow">Two models</p>
+      <h2>Reactivity</h2>
+      <p class="lead">They all render well. Two questions separate them, and each row below moves exactly one.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table models">
+        <li class="head"><span>Framework</span><span>Who writes the dependency down</span><span>You read a value. Who gets subscribed?</span><span>So what can observe</span></li>
+        <li><span><code>React</code></span><span>You do, by hand</span><span>Nobody. The read is not the subscription, owning the state is: a setter re-renders the component either way.</span><span>A component, when you say so</span></li>
+        <li><span><code>Owl 2</code></span><span>The framework, on read</span><span>Whoever the proxy was made for. <code>useState</code> chose that once; reads only narrow which keys wake it.</span><span>A component render, nothing else</span></li>
+        <li><span><code>Owl 3</code></span><span>The framework, on read</span><span>Whatever computation is running.</span><span>Any computation. A render is one of them</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Vue 3 and Solid capture the way Owl 3 does: the observer is whatever is running, so a <code>computed</code> can be one.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f0008c" data-act="appendix">
+    <header class="slide-head">
+      <p class="eyebrow">Two models</p>
+      <h2>Two questions, four answers</h2>
+      <p class="lead">Three of them are frameworks. The fourth is what you write when the framework has no answer.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure quadrants">
+        <svg viewBox="0 0 1000 480" role="img"
+             aria-label="A two by two matrix. Across: who writes the dependency down, you by hand or the framework on read. Down: what can observe, a component or any computation. React is by hand and a component. Owl 2 is on read and a component. Owl 3 is on read and any computation. The fourth square, by hand and any computation, is the hand-rolled cache you write yourself.">
+          <defs>
+            <marker id="q-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <text class="s" x="615" y="18">Who writes the dependency down</text>
+          <text class="s r" x="205" y="48">What can observe</text>
+          <text class="t" x="420" y="48">You do, by hand</text>
+          <text class="t" x="810" y="48">The framework, on read</text>
+
+          <text class="t r" x="205" y="163">Any computation</text>
+          <text class="t r" x="205" y="388">A component</text>
+
+          <rect class="chip" x="235" y="70" width="370" height="175" rx="6"/>
+          <text class="t" x="420" y="140">The hand-rolled cache</text>
+          <text class="s" x="420" y="170">onWillRender, and a key you maintain</text>
+          <text class="s" x="420" y="192">the graph exists, in your head</text>
+
+          <rect class="bx js" x="625" y="70" width="370" height="175" rx="6"/>
+          <text class="t" x="810" y="140">Owl 3</text>
+          <text class="s" x="810" y="170">signal, computed, effect</text>
+          <text class="s" x="810" y="192">a render is one of them</text>
+
+          <rect class="bx" x="235" y="295" width="370" height="175" rx="6"/>
+          <text class="t" x="420" y="365">React</text>
+          <text class="s" x="420" y="395">useMemo, and a deps array you keep in sync</text>
+
+          <rect class="bx" x="625" y="295" width="370" height="175" rx="6"/>
+          <text class="t" x="810" y="365">Owl 2</text>
+          <text class="s" x="810" y="395">useState, per key, per component</text>
+
+          <path class="ar js" marker-end="url(#q-ar)" d="M810 292 V252"/>
+          <text class="s l" x="828" y="277">one move</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Nobody ships the top left. It is where you end up when the only observer on offer is a component.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a2f00015" data-act="appendix">
+    <header class="slide-head">
+      <p class="eyebrow">Evidence</p>
+      <h2>The diamond, actually run</h2>
+      <ul class="notes">
+        <li>Owl 3 at <code>3.0.0-alpha.48</code>, counting every recompute.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">diamond.mjs</h3>
+<pre><code class="language-javascript">const a = signal(1);
+const b = computed(() =&gt; { bRuns++; return a() * 2; });
+const c = computed(() =&gt; { cRuns++; return a() * 10; });
+const d = computed(() =&gt; { dRuns++; return `${b()}/${c()}`; });
+
+effect(() =&gt; seen.push(d()));
+
+a.set(2);   await tick();
+a.set(3);   await tick();</code></pre>
+      </section>
+      <section>
+        <h3 class="label">output</h3>
+<pre><code class="language-javascript">effect saw: [ '2/10', '4/20', '6/30' ]
+recomputes  b: 3   c: 3   d: 3</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">No glitch</span><span>No inconsistent pair, ever. <code>4/10</code> never appears.</span></li>
+          <li><span class="key">No waste</span><span>Three changes, three recomputes each. Not four, not six.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Correct <em>and</em> minimal. Those usually trade off; here they fall out of the same design.</p>
+    </footer>
+  </article>
+
+</div>
+</div>

@@ -1,0 +1,99 @@
+/* "UNIJPP" - unicorn colours: a full, bright rainbow (pink, orange, yellow,
+   green, blue, violet) over a pale lilac ground, with a magenta accent. The
+   dark face is the same unicorn at night: a deep violet ground and a
+   candy-pink accent. Text and accent stay plain colours, at least 4.5:1
+   against every surface they sit on: the rainbow is decoration only, and
+   rainbow text would not read.
+
+   Unlike the other palettes, this one also draws the rainbow itself, with a
+   few rules of its own below the colours:
+   - the sidebar: a twilight gradient (violet to magenta) with a rainbow down
+     its edge. That is a rule, not --sidebar: --sidebar also paints the
+     options of the sidebar's preset list, and an option cannot show a
+     gradient.
+   - a rainbow band along the top of every slide
+   - on screen, a cover's big topic numeral, painted in the rainbow */
+
+[data-palette="unijpp"] {
+  --bg: #fbf5ff;
+  --panel: #fffbff;
+  --card: #f5ecff;
+  --sidebar: #4a2377;
+  --sidebar-text: #e6d9f7;
+  --sidebar-active: #ffffff;
+  --text: #2b1840;
+  --muted: #75658c;
+  --border: #ead9f6;
+  --accent: #a8247f;
+  --accent-soft: #fbe6f5;
+  --accent-light: #f0a6db;
+  --pink: #ff4fa3;
+  --cyan: #22d3ee;
+  --yellow: #ffd600;
+  --lavender: #a66bff;
+  --rainbow: #ff3d8b, #ff8a00, #ffd600, #2ed573, #1e9bff, #8e44ff;
+}
+
+[data-palette="unijpp"][data-theme="dark"] {
+  --bg: #1a1230;
+  --panel: #22183d;
+  --card: #2c2150;
+  --sidebar: #1d1238;
+  --sidebar-text: #d9ccef;
+  --sidebar-active: #ffffff;
+  --text: #f4ecff;
+  --muted: #b4a5cf;
+  --border: #3b2d5c;
+  --accent: #ff94dc;
+  --accent-soft: #43264f;
+  --accent-light: #ffc4ec;
+  --pink: #ff4fa3;
+  --cyan: #22d3ee;
+  --yellow: #f5c400;
+  --lavender: #a66bff;
+}
+
+/* the rainbow edge first: the top layer, down the right side */
+[data-palette="unijpp"] .sidebar {
+  background:
+    linear-gradient(180deg, var(--rainbow)) right / 6px 100% no-repeat,
+    linear-gradient(180deg, #3b1f6b 0%, #6a2a83 55%, #8a2f78 100%);
+}
+
+[data-palette="unijpp"][data-theme="dark"] .sidebar {
+  background:
+    linear-gradient(180deg, var(--rainbow)) right / 6px 100% no-repeat,
+    linear-gradient(180deg, #160e2b 0%, #241341 55%, #3a1642 100%);
+}
+
+/* background-image only, so each slide keeps its own background colour (a
+   cover's is not --panel). :root makes it outrank style.css's
+   ".deck.clean .slide.cover" and ".inverse": their background shorthand
+   would reset the image, and style.css loads after the palettes, so a tie
+   goes to them. An act divider paints its own image, so it is left alone */
+:root[data-palette="unijpp"] .deck .slide:not(.divider) {
+  background-image: linear-gradient(90deg, var(--rainbow));
+  background-size: 100% 0.7cqw;
+  background-position: top;
+  background-repeat: no-repeat;
+}
+
+/* screen only: the rainbow is a background clipped to the glyph, and a
+   printed page leaves backgrounds out, so it would print nothing at all.
+   The handwritten glyph spills out of its own box, and a background stops
+   at the box: the padding widens the box over the spill, and the negative
+   margin of the same size keeps the glyph where it was */
+@media screen {
+  [data-palette="unijpp"] .cover-numeral {
+    padding: 0.1em;
+    margin: -0.1em;
+    /* top to bottom, the stops packed where the glyph's ink is (about a
+       quarter down the padded box to four fifths), so all six colours show */
+    background: linear-gradient(180deg, #ff3d8b 26%, #ff8a00 37%, #ffd600 48%,
+      #2ed573 59%, #1e9bff 70%, #8e44ff 81%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.8;
+  }
+}
