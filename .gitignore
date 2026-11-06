@@ -6,3 +6,6 @@
 
 # python bytecode, written by gas/ whenever the build runs
 __pycache__/
+
+# the talks, built next to it by build.py
+/talks/*.html

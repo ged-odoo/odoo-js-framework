@@ -88,7 +88,7 @@ already use.
 `slide-head` and `slide-foot` are optional per slide; `slide-body` holds
 whatever body layout the slide needs.
 
-A slide's row in the sidebar (a deck with acts - see `README.md`) is named
+A slide's row in the sidebar (the open deck's outline - see `README.md`) is named
 after its `<h2>`, or its eyebrow when it has no heading. A slide that prints
 neither - a picture, a full-bleed image - names its own row with a
 `data-label` attribute instead: `<article class="slide" data-id="..."

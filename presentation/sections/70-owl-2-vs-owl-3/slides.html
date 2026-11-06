@@ -1,0 +1,385 @@
+<div class="deck" id="deck-owl-2-vs-3">
+  <article class="slide title-slide" data-id="8918ec55">
+    <h2>Owl 2 vs Owl 3</h2>
+    <p class="lead">The same counter, before and after</p>
+  </article>
+
+  <article class="slide" data-id="61ef50a9">
+    <h2>The component</h2>
+    <div class="code-cols">
+      <div>
+        <pre><code class="language-javascript">import { Component, useState } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    setup() {
+        <mark>this.counter = useState({ value: 0 })</mark>;
+    }
+
+    increment() {
+        <mark>this.counter.value++</mark>;
+    }
+}</code></pre>
+        <p class="caption">Owl 2</p>
+      </div>
+      <div>
+        <pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    <mark>counter = signal(0)</mark>;
+
+    increment() {
+        <mark>this.counter.set(this.counter() + 1)</mark>;
+    }
+}</code></pre>
+        <p class="caption">Owl 3</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="08121828">
+    <h2>The template</h2>
+    <div class="code-cols">
+      <div>
+        <pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t <mark>t-esc="counter.value"</mark>/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            <mark>t-on-click="increment"</mark>&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+        <p class="caption">Owl 2</p>
+      </div>
+      <div>
+        <pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t <mark>t-out="this.counter()"</mark>/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            <mark>t-on-click="this.increment"</mark>&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+        <p class="caption">Owl 3</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="6c4fbab0">
+    <h2>What changed</h2>
+    <ul>
+      <li>State: <code>useState</code> inside <code>setup</code>, now
+        <code>signal</code> as a field on the instance</li>
+      <li>Reading it: <code>counter.value</code>, now <code>counter()</code> — a signal is called, not read</li>
+      <li>Writing it: assignment, now <code>counter.set(...)</code></li>
+      <li>In the template: <code>t-esc</code>, now <code>t-out</code>, and the
+        component reached through <code>this.</code></li>
+    </ul>
+  </article>
+
+  <article class="slide" data-id="bffe36b5">
+    <h2>Services become plugins</h2>
+    <div class="code-cols">
+      <div>
+        <pre><code class="language-javascript">import { Component } from "@odoo/owl";
+import { <mark>useService</mark> } from "@web/core/utils/hooks";
+
+class Dashboard extends Component {
+    setup() {
+        this.orm = <mark>useService("orm")</mark>;
+    }
+
+    async load() {
+        this.partners = await this.orm.searchRead(
+            "res.partner", [], ["name"],
+        );
+    }
+}</code></pre>
+        <p class="caption">Owl 2</p>
+      </div>
+      <div>
+        <pre><code class="language-javascript">import { Component, <mark>usePlugin</mark> } from "@odoo/owl";
+import { ORM } from "@web/core/orm_plugin";
+
+class Dashboard extends Component {
+    setup() {
+        this.orm = <mark>usePlugin(ORM)</mark>;
+    }
+
+    async load() {
+        this.partners = await this.orm.searchRead(
+            "res.partner", [], ["name"],
+        );
+    }
+}</code></pre>
+        <p class="caption">Owl 3</p>
+      </div>
+    </div>
+    <ul>
+      <li>Asked for by class, not by a string nobody can follow back to its
+        source — <code>usePlugin(ORM)</code>, not <code>useService("orm")</code></li>
+      <li>The class is the type, so what <code>this.orm</code> has on it is
+        known without a single line of generated typing</li>
+    </ul>
+  </article>
+
+  <article class="slide" data-id="4b1c7d02">
+    <h2>Props</h2>
+    <div class="code-cols">
+      <div>
+        <pre><code class="language-javascript">class Card extends Component {
+    <mark>static props = {
+        count: Number,
+        items: { type: Array, element: Object },
+        onSelect: { type: Function, optional: true },
+    }</mark>;
+
+    get label() {
+        return `${this.props.count} items`;
+    }
+}</code></pre>
+        <p class="caption">Owl 2</p>
+      </div>
+      <div>
+        <pre><code class="language-javascript">class Card extends Component {
+    props = <mark>useProps({
+        count: t.number(),
+        items: t.array(t.object({ id: t.number() })),
+        onSelect: t.function().optional(),
+    })</mark>;
+
+    get label() {
+        return `${this.props.count} items`;
+    }
+}</code></pre>
+        <p class="caption">Owl 3</p>
+      </div>
+    </div>
+    <ul>
+      <li>Signal-backed, key by key: reading <code>this.props.count</code> subscribes to that prop alone</li>
+      <li>Checked on create and on update, in <code>dev</code> mode — and it is a schema your editor can read</li>
+    </ul>
+  </article>
+
+  <article class="slide" data-id="9f3e58a1">
+    <h2>A derived value</h2>
+    <div class="code-cols">
+      <div>
+        <pre><code class="language-javascript">setup() {
+    this.state = useState({ total: 0 });
+
+    <mark>onWillRender</mark>(() =&gt; {
+        const key = this.props.orders.length;
+        if (key !== this._key) {
+            this._key = key;
+            this._total = expensive(this.props.orders);
+        }
+        this.state.total = this._total;
+    });
+}</code></pre>
+        <p class="caption">Owl 2 — four moving parts</p>
+      </div>
+      <div>
+        <pre><code class="language-javascript">total = <mark>computed</mark>(() =&gt;
+    expensive(this.props.orders)
+);</code></pre>
+        <p class="caption">Owl 3 — one</p>
+      </div>
+    </div>
+    <ul>
+      <li>Cached: it does not recompute unless something it read changed</li>
+      <li>The dependency is written down, so the runtime can see it — the trigger moved from "a component is about to render" to "the state it read changed"</li>
+    </ul>
+  </article>
+
+  <article class="slide" data-id="2d7a04c6">
+    <h2>Refs</h2>
+    <div class="code-cols">
+      <div>
+        <pre><code class="language-javascript">setup() {
+    this.input = <mark>useRef("input")</mark>;
+    onMounted(() =&gt; this.input.el.focus());
+}</code></pre>
+        <pre><code class="language-markup">&lt;input <mark>t-ref="input"</mark>/&gt;</code></pre>
+        <p class="caption">Owl 2</p>
+      </div>
+      <div>
+        <pre><code class="language-javascript">input = <mark>signal.ref()</mark>;
+
+setup() {
+    useEffect(() =&gt; this.input()?.focus());
+}</code></pre>
+        <pre><code class="language-markup">&lt;input <mark>t-ref="this.input"</mark>/&gt;</code></pre>
+        <p class="caption">Owl 3</p>
+      </div>
+    </div>
+    <ul>
+      <li>No separate concept: a ref is a signal that starts at <code>null</code> and holds the element once mounted</li>
+      <li><code>t-model</code> takes one too, and binds it both ways — so a <code>computed</code> can read what the input writes</li>
+    </ul>
+  </article>
+
+  <article class="slide" data-id="6e59b3f8">
+    <h2>The rendering context</h2>
+    <div class="code-cols">
+      <div>
+        <pre><code class="language-markup">&lt;t t-name="my_module.Counter"&gt;
+    &lt;t t-set="double" t-value="<mark>counter</mark> * 2"/&gt;
+    &lt;p&gt;
+        Counter: &lt;t t-out="<mark>counter</mark>"/&gt;,
+        double: &lt;t t-out="double"/&gt;
+    &lt;/p&gt;
+    &lt;button t-on-click="<mark>increment</mark>"&gt;+1&lt;/button&gt;
+&lt;/t&gt;</code></pre>
+        <p class="caption">Owl 2</p>
+      </div>
+      <div>
+        <pre><code class="language-markup">&lt;t t-name="my_module.Counter"&gt;
+    &lt;t t-set="double" t-value="<mark>this.counter()</mark> * 2"/&gt;
+    &lt;p&gt;
+        Counter: &lt;t t-out="<mark>this.counter()</mark>"/&gt;,
+        double: &lt;t t-out="double"/&gt;
+    &lt;/p&gt;
+    &lt;button t-on-click="<mark>this.increment</mark>"&gt;+1&lt;/button&gt;
+&lt;/t&gt;</code></pre>
+        <p class="caption">Owl 3</p>
+      </div>
+    </div>
+    <ul>
+      <li>A bare name used to resolve against the component, its props and the template's own <code>t-set</code> variables, in that order</li>
+      <li><code>this.</code> says which one you meant — and a name your editor can follow back to a class field is a name it can check</li>
+    </ul>
+  </article>
+
+  <article class="slide" data-id="71cd820b">
+    <h2>Gone, new, and changed</h2>
+    <p class="lead">The same change, as the words you actually type.</p>
+    <div class="vocab">
+      <div>
+        <h3>gone</h3>
+        <ul class="chips gone">
+          <li>useState</li>
+          <li>reactive</li>
+          <li>toRaw</li>
+          <li>useComponent</li>
+          <li>useRef</li>
+          <li>onWillRender</li>
+          <li>onRendered</li>
+          <li>onWillUpdateProps</li>
+          <li>this.render</li>
+          <li>env</li>
+          <li>useSubEnv</li>
+          <li>services</li>
+          <li>t-esc</li>
+        </ul>
+      </div>
+      <div>
+        <h3>new</h3>
+        <ul class="chips new">
+          <li>signal</li>
+          <li>signal.Array</li>
+          <li>signal.Object</li>
+          <li>signal.ref</li>
+          <li>proxy</li>
+          <li>computed</li>
+          <li>asyncComputed</li>
+          <li>useOnChange</li>
+          <li>untrack</li>
+          <li>Plugin</li>
+          <li>usePlugin</li>
+          <li>providePlugins</li>
+          <li>Registry</li>
+          <li>Resource</li>
+          <li>useScope</li>
+          <li>useProps</li>
+          <li>assertType</li>
+          <li>validateType</li>
+        </ul>
+      </div>
+      <div>
+        <h3>changed</h3>
+        <ul class="chips changed">
+          <li>t-slot <span class="to">→</span> t-call-slot</li>
+          <li>useExternalListener <span class="to">→</span> useListener</li>
+          <li>useEffect <span class="note">reads, not a deps array</span></li>
+          <li>t-ref <span class="note">a signal, not a name</span></li>
+          <li>t-model <span class="note">binds a signal</span></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide" data-id="c1a9e4f2">
+    <h2>Claude findings</h2>
+    <p class="lead">Found while porting the exercise solutions - not yet reviewed for the training</p>
+    <ul>
+      <li><code>static props = { label: String, data: Object }</code> (Owl 2's
+        constructors-as-types shorthand) is gone - declare with
+        <code>useProps</code> and typed helpers, <code>t.string()</code>,
+        <code>t.object()</code>, etc.</li>
+      <li><code>static props = ["*"]</code> ("accept anything, don't
+        validate") is no longer a valid schema</li>
+      <li>A slot prop no longer needs a nested shape
+        (<code>{type: Object, shape: {default: Object}}</code>) -
+        <code>t.object()</code> is enough</li>
+      <li><code>useRef("canvas")</code> (a bare name) is gone - a ref is a
+        <code>signal.ref()</code> field, and <code>t-ref</code> takes it as an
+        expression: <code>t-ref="this.canvasRef"</code>, not
+        <code>t-ref="canvas"</code></li>
+      <li><code>reactive(obj)</code> is renamed <code>proxy(obj)</code>, same
+        behavior</li>
+      <li>A <code>signal.Array</code>'s reactivity is shallow: mutating a
+        property of an array <em>element</em> isn't tracked, only
+        reassigning the array itself is</li>
+      <li>Owl 2's <code>env</code> and Odoo's <code>useService</code>-based
+        services are replaced by <code>Plugin</code>: a class extending it,
+        registered on the <code>services</code> resource from
+        <code>@web/core/services</code>, read with <code>usePlugin(MyPlugin)</code>
+        instead of <code>useService("name")</code></li>
+      <li>The <code>this.</code> prefix on a template expression isn't just
+        style: a bare getter/property read (<code>t-if="ready"</code>) fails
+        <em>silently</em> - evaluates to undefined, no error - while a bare
+        method in <code>t-on-click</code> throws, but only the moment it's
+        clicked. Both worked as bare names in Owl 2; neither does reliably in
+        Owl 3's <code>t-foreach</code>/slot templates</li>
+      <li>Owl 3 ships its own <code>Registry</code> (keyed, <code>add</code>/
+        <code>get</code>) and <code>Resource</code> (unkeyed collection) -
+        both from <code>@odoo/owl</code>, both able to take a
+        <code>validation</code> schema checked on every insertion. Distinct
+        from Odoo's older <code>@web/core/registry</code>, reachable from
+        anywhere by a category string - Owl 3's isn't ambient, so reading
+        from (or adding to) one always needs an actual <code>import</code>
+        of that specific instance. Nothing in current Odoo addon code uses
+        Owl 3's own <code>Registry</code> yet</li>
+      <li>A <code>signal.Object</code>'s <code>.set(newValue)</code> replaces
+        the whole object (and the fine-grained per-key tracking that came
+        with the old one) in one shot; mutating it in place
+        (<code>Object.assign(sig(), updates)</code>) only notifies the
+        readers of the keys that actually changed. Owl 2 had no such choice -
+        <code>useState</code> was always mutated in place</li>
+      <li><code>useProps</code>'s validation is loose (checked against
+        <code>makeProps</code> in the vendored <code>owl.js</code>): it only
+        checks the keys you declare, and doesn't flag extra ones the caller
+        passes but you didn't declare. So a component only needs to declare
+        the props it actually reads, not the full shape a helper like
+        <code>standardWidgetProps</code>/<code>standardFieldProps</code>
+        exports - unlike Owl 2, where <code>static props</code> could warn
+        about undeclared incoming props</li>
+      <li><code>useService("effect")</code> (the rainbowman, notifications-as-
+        effect) is a legacy wrapper too - <code>effect = usePlugin(EffectPlugin)</code>
+        (<code>@web/core/effects/effect_plugin</code>) is the current form,
+        same <code>.add(params)</code> call</li>
+    </ul>
+  </article>
+</div>

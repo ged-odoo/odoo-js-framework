@@ -1,0 +1,207 @@
+<div class="deck clean" id="deck-advanced">
+  <article class="slide statement cover" data-id="e17bfdc7">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 5 · JS Framework 201</p>
+      <h2>JS Framework 201</h2>
+      <p class="lead">The pieces you did not have to write, and how your own files reach the browser.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Then</span>Customizing the UI, then State Management</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="6b2f9d41">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 5 · Advanced JS framework</p>
+      <h2>Goals</h2>
+      <p class="lead">So far you added things of your own. This topic is about the rest of Odoo.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">Extending</span><span>Four tools, and which one to reach for.</span></li>
+        <li><span class="key">Patching</span><span>Changing standard code that offers no hook.</span></li>
+        <li><span class="key">Slotting in</span><span>The systray, the user menu, the command palette.</span></li>
+        <li><span class="key">Shared state</span><span>One game, three screens, and a state that survives them.</span></li>
+        <li><span class="key">The toolbox</span><span>Notifications, dialogs, effects, and the generic components.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>The clicker game touches all of it, one step at a time.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="4a90c7e5">
+    <header class="slide-head">
+      <p class="eyebrow">The DOM</p>
+      <h2>Where an event is caught</h2>
+      <p class="lead">A click on a button is also a click on everything around it. The phase decides who hears it first.</p>
+    </header>
+    <div class="slide-body two-col tree">
+      <section>
+        <figure class="figure">
+          <svg viewBox="0 0 420 300" role="img"
+               aria-label="An event travels down from the document to the button, the capture phase, then back up to the document, the bubbling phase.">
+            <defs>
+              <marker id="adv-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx" x="60" y="0" width="300" height="290" rx="6"/>
+            <text class="m" x="210" y="24">document</text>
+
+            <rect class="bx" x="90" y="40" width="240" height="210" rx="6"/>
+            <text class="m" x="210" y="64">body</text>
+
+            <rect class="bx" x="120" y="80" width="180" height="130" rx="6"/>
+            <text class="m" x="210" y="104">div</text>
+
+            <rect class="bx js" x="150" y="120" width="120" height="50" rx="6"/>
+            <text class="t" x="210" y="150">button</text>
+
+            <path class="ar" marker-end="url(#adv-ar-2)" d="M30 6 V186"/>
+            <text class="s l" x="0" y="200">capture</text>
+
+            <path class="ar" marker-end="url(#adv-ar-2)" d="M390 186 V6"/>
+            <text class="s r" x="420" y="200">bubbling</text>
+          </svg>
+        </figure>
+      </section>
+      <section>
+<pre><code class="language-javascript">setup() {
+    useListener(document.body, "click",
+        () =&gt; this.clicker.addClick(1),
+        <mark>{ capture: true }</mark>,
+    );
+}</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">Capture</span><span>Down from the document. You hear the click before the button does.</span></li>
+          <li><span class="key">Bubbling</span><span>Back up. <code>t-on-click</code> listens here, and a handler can stop the trip.</span></li>
+          <li><span class="key">Cleanup</span><span><code>useListener</code> removes it when the component goes. <code>addEventListener</code> does not.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Step 2 of the exercise uses exactly this call, capture included.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="e2b70f93">
+    <header class="slide-head">
+      <p class="eyebrow">The toolbox</p>
+      <h2>Talking to the user</h2>
+      <p class="lead">Four standard ways. None of them is a component you have to write.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript"><mark>notification = usePlugin(NotificationPlugin)</mark>;
+effect = usePlugin(EffectPlugin);
+dialog = usePlugin(DialogPlugin);
+
+// a toast, top right
+this.notification.add("A bot was bought", {
+    type: "success",
+});
+
+// a rainbowman, for a milestone
+this.effect.add({ message: "1000 clicks!" });
+
+// a dialog
+this.dialog.add(ConfirmationDialog, {
+    body: "Reset the game?",
+    confirm: () =&gt; this.reset(),
+});</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Notification</span><span>Short, non-blocking. <code>sticky: true</code> when it must be dismissed by hand.</span></li>
+          <li><span class="key">Effect</span><span>The rainbowman. Reserved for something worth celebrating.</span></li>
+          <li><span class="key">Dialog</span><span>A component in a modal, stacked and closed by the plugin.</span></li>
+          <li><span class="key">Tooltip</span><span><code>data-tooltip</code> in the template, or a template of your own with <code>data-tooltip-template</code>.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>All three under <code>@web/core</code>: <code>notifications/notification_plugin</code>, <code>effects/effect_plugin</code>, <code>dialog/dialog_plugin</code>. The clicker game uses every one of them.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="4e8b0c37">
+    <header class="slide-head">
+      <p class="eyebrow">Assets</p>
+      <h2>Everything under <code>static/</code> is served</h2>
+      <p class="lead">Two ways into the browser: the page fetches the file by url, or a bundle carries it.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">static/src</span><span>Your javascript, scss and xml templates. Bundled, never fetched one by one.</span></li>
+        <li><span class="key">static/lib</span><span>A third-party library, as it was downloaded. Bundled too, or loaded on demand with <code>loadJS</code>.</span></li>
+        <li><span class="key">static/img</span><span>Images and fonts. Fetched by url, when something on the page asks for one.</span></li>
+        <li><span class="key">static/tests</span><span>Test files, in a bundle the web client never loads.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>No controller and no access rule in front of it: <code>/my_addon/static/img/logo.png</code> is a public url. Nothing private goes under <code>static/</code>.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="b1f6a24d">
+    <header class="slide-head">
+      <p class="eyebrow">Assets</p>
+      <h2>Bundles</h2>
+      <ul class="notes">
+        <li>A bundle is an ordered list of files — js, scss, css, xml — declared in <code>__manifest__.py</code>.</li>
+        <li>Your code runs because it is in one. Nothing else loads it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">my_addon/__manifest__.py</h3>
+<pre><code class="language-python">{
+    'assets': {
+        '<mark>web.assets_backend</mark>': [
+            'my_addon/static/src/**/*',
+            (<mark>'remove'</mark>, 'my_addon/static/src/heavy/**/*'),
+        ],
+        # a bundle of your own, loaded when it is needed
+        'my_addon.heavy': [
+            'my_addon/static/src/heavy/**/*',
+        ],
+    },
+}</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">web.assets_backend</span><span>The web client. Nearly everything written in this training.</span></li>
+          <li><span class="key">web.assets_frontend</span><span>The public website: another application, another bundle.</span></li>
+          <li><span class="key">web.assets_unit_tests</span><span>Test files, run by hoot, out of the way of the client.</span></li>
+          <li><span class="key">your own</span><span>Any name you like. <code>LazyComponent</code> loads it the first time a screen needs it.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Ordered, and editable: <code>('before', …)</code>, <code>('after', …)</code>, <code>('replace', …)</code> and <code>('remove', …)</code> place a file, or take one out of a bundle you do not own.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="7f1a92c4">
+    <header class="slide-head">
+      <p class="eyebrow">The toolbox</p>
+      <h2>Components you should not rewrite</h2>
+      <p class="lead">The web client ships a small library of generic components. Look there first.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table generic">
+        <li class="head"><span>Component</span><span>What it does</span><span>Where</span></li>
+        <li><span><code>Dropdown</code></span><span>A toggle and a menu, with the keyboard handled.</span><span><code>@web/core/dropdown/dropdown</code></span></li>
+        <li><span><code>Notebook</code></span><span>Tabs, from a list of pages or from slots.</span><span><code>@web/core/notebook/notebook</code></span></li>
+        <li><span><code>Pager</code></span><span>Previous, next, and the count.</span><span><code>@web/core/pager/pager</code></span></li>
+        <li><span><code>CheckBox</code></span><span>A checkbox with its label, and the click zone right.</span><span><code>@web/core/checkbox/checkbox</code></span></li>
+        <li><span><code>Layout</code></span><span>The control panel, for a screen of your own.</span><span><code>@web/search/layout</code></span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>The formatters in <code>@web/core/utils/numbers</code> and <code>@web/core/l10n</code> save the same kind of work.</p>
+    </footer>
+  </article>
+</div>
