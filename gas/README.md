@@ -186,6 +186,12 @@ window.GAS_CONFIG = {
 Topics are numbered in the sidebar by their place in the program - but only
 the ones in the program proper. A group with an `at` sits outside that flow,
 at the foot, and keeps its heading without a number.
+A topic can also set its own: `number: 0` on an opening topic numbers it 0,
+and the topics after it still count from 1.
+
+A topic may also name an `icon`, drawn beside its heading: `layers`, `owl`,
+`blocks`, `layout`, `bolt` or `star` (`TOPIC_ICONS` in `app.js`, where a new
+one is a few lines of SVG on a 16-unit grid). A topic without one has none.
 
 ### Embedding another GAS site
 
@@ -251,31 +257,57 @@ whose `data-act` names no listed act still groups under that raw id.
 Adding an act is one entry here plus a matching `data-act` on the new
 slides; every divider renumbers itself.
 
+### The slide outline
+
+Every deck's sidebar entry unfolds into its slides, one row each, while that
+deck is open: a level of its own under the entry, with the slide on screen
+lit and kept in view. A deck with acts groups its rows under them (above);
+one without is a plain list. Closing the deck, by opening anything else,
+folds it back.
+
+### From one entry to the next
+
+Past a deck's last slide, Next (the button, the right arrow or space) opens
+the next entry of the program: a deck on its first slide, an exercise at its
+top. Previous on a first slide opens the previous one, a deck on its last
+slide. On an exercise, the right and left arrows do the same (space and the
+up and down arrows still scroll the page). Only the program proper counts, in
+sidebar order and as the preset leaves it: the groups at the foot (`at`) stay
+out of the chain.
+
 ### Presets
 
-A `slides` item may also list **presets**: named cuts of the deck, for
-giving only part of it - one training of a series, or a shorter onboarding:
+The config may also list **presets**: named cuts of the whole program, for
+giving only part of it - one training of a series, or a shorter overview:
 
 ```js
-{ type: "slides", id: "talk", label: "...", acts: [...], presets: [
-    { id: "training-1", label: "Training 1", acts: ["title", "ecosystem", "owl"] },
-    { id: "onboarding", label: "Onboarding",
-      acts: ["title", "ecosystem"],    // whole acts
-      skip: ["9e9cc97e"],              // less these slides (data-id)
-      slides: ["85474460"] },          // plus these, from any act
-] }
+presets: [
+  { id: "training-2", label: "Training 2", topics: ["The Odoo JS Framework"] },
+  { id: "overview", label: "Overview",
+    items: ["intro"],                  // whole items, by id
+    topics: [],                        // whole topics, by name
+    slides: ["c3edbcc4", "12d9fc3b"],  // single slides (data-id), from any deck
+    skip: ["9e9cc97e"] },              // less these slides
+]
 ```
 
-The sidebar then shows a picker above the deck's outline, "All slides" first.
-A preset keeps the slides of its `acts`, minus `skip`, plus `slides`, in deck
-order. The others are out of the deck while it is picked: the counter, the
-arrows, the outline and Print only see the cut. The dividers keep the
-numbering of the whole deck, so a training's own divider still says where it
-sits in the full program.
+The sidebar then shows a picker on top, "Everything" first. A preset keeps
+the items of its `topics` and its `items`, whole, and from any other deck the
+slides it names in `slides`, in deck order; `skip` takes slides back out of
+either. Everything else is out while it is picked: the sidebar hides it (a
+topic left empty goes, heading and all), and the counter, the arrows, the
+outline, Ctrl+K, Print and Print everything only see the cut. The groups sent
+to the foot of the sidebar with `at` are not part of the program proper, and
+are always kept.
+
+An item can also name the only presets it belongs to, with `presets` on its
+program entry: `{ type: "slides", id: "owl-2-vs-3", ..., presets:
+["training-1"] }` is shown with Everything and with Training 1, and with no
+other preset, whatever its topic or group.
 
 The pick rides in the url as `?preset=<id>`, so a link hands the same cut to
 someone else, and is remembered in localStorage for the next visit. A slide
-number in the url (`#slides/talk/12`) counts in the cut deck.
+number in the url (`#slides/owl/3`) counts in the cut deck.
 
 ## Palettes
 

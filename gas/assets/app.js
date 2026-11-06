@@ -67,6 +67,24 @@ const ICONS = {
   topic: "<path d='M6 3.5 10.5 8 6 12.5'/>",
 };
 
+// what a topic's `icon` may name, drawn beside its heading in the sidebar
+const TOPIC_ICONS = {
+  layers: "<path d='M8 1.8 14.5 5 8 8.2 1.5 5Z'/><path d='m1.5 8 6.5 3.2L14.5 8'/>" +
+    "<path d='m1.5 11 6.5 3.2 6.5-3.2'/>",
+  owl: "<path d='M3 2.5 5.2 4.8h5.6L13 2.5V10a5 5 0 0 1-10 0Z'/>" +
+    "<circle cx='6' cy='8.2' r='1.4'/><circle cx='10' cy='8.2' r='1.4'/>" +
+    "<path d='m7.3 10.6.7 1 .7-1'/>",
+  blocks: "<rect x='1.5' y='8.5' width='6' height='6' rx='1'/>" +
+    "<rect x='8.5' y='8.5' width='6' height='6' rx='1'/>" +
+    "<rect x='5' y='1.5' width='6' height='6' rx='1'/>",
+  layout: "<rect x='1.5' y='2' width='13' height='12' rx='1.5'/>" +
+    "<path d='M1.5 5.5h13M6 5.5V14'/>",
+  bolt: "<path d='M9 1.5 3 9h4.5L7 14.5 13 7H8.5Z'/>",
+  globe: "<circle cx='8' cy='8' r='6.5'/><path d='M1.5 8h13'/>" +
+    "<path d='M8 1.5c-1.9 1.9-2.8 4-2.8 6.5s.9 4.6 2.8 6.5c1.9-1.9 2.8-4 2.8-6.5S9.9 3.4 8 1.5Z'/>",
+  star: "<path d='m8 1.8 1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6Z'/>",
+};
+
 const DEFAULT_DECK = CONFIG.defaultDeck || "";
 
 // Cover image for the welcome screen. Empty (the default) falls back to the
@@ -322,15 +340,20 @@ const topicNumberOf = {};
 
 const PROGRAM_SLOTS = { end: programEndEl, last: programLastEl };
 
-for (const { topic, items, at } of PROGRAM) {
+for (const { topic, items, at, number: fixed, icon } of PROGRAM) {
   const into = PROGRAM_SLOTS[at] || programEl;
   const group = document.createElement("div");
   group.className = topic ? "nav-group" : "nav-group flat";
   // the numbered topics are the program proper: a group sent to a slot at the
-  // foot of the sidebar is outside it, and keeps its name without a number
-  const number = topic && !at ? ++topicNumber : 0;
+  // foot of the sidebar is outside it, and keeps its name without a number.
+  // A topic may set its own `number` - 0 for an opening topic that comes
+  // before the first one - and leaves the count of the others alone.
+  let number = null;
+  if (topic && !at) {
+    number = fixed ?? ++topicNumber;
+  }
   for (const item of items) {
-    if (number && item.type === "slides") {
+    if (number !== null && item.type === "slides") {
       topicNumberOf[item.id] = number;
     }
     const button = document.createElement("button");
@@ -354,11 +377,16 @@ for (const { topic, items, at } of PROGRAM) {
     heading.type = "button";
     heading.className = "nav-section";
     heading.innerHTML =
-      `<svg width="12" height="12" viewBox="0 0 16 16" fill="none" ` +
+      `<svg class="topic-chevron" width="12" height="12" viewBox="0 0 16 16" fill="none" ` +
       `stroke="currentColor" stroke-width="2" stroke-linecap="round" ` +
       `stroke-linejoin="round" aria-hidden="true">${ICONS.topic}</svg>` +
+      (TOPIC_ICONS[icon]
+        ? `<svg class="topic-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" ` +
+          `stroke="currentColor" stroke-width="1.4" stroke-linecap="round" ` +
+          `stroke-linejoin="round" aria-hidden="true">${TOPIC_ICONS[icon]}</svg>`
+        : "") +
       `<span></span>`;
-    heading.querySelector("span").textContent = number ? `${number}. ${topic}` : topic;
+    heading.querySelector("span").textContent = number !== null ? `${number}. ${topic}` : topic;
     const entry = { name: topic, heading, entries: group };
     heading.addEventListener("click", () => {
       foldTopic(entry, group.hidden);
@@ -506,17 +534,17 @@ function slidesOf(deckId) {
 // things follow, both drawn from that one list so they cannot drift apart:
 // the sidebar lists the deck slide by slide, grouped under its act with the
 // clock time the act opens at, and every divider draws "Act n of m" plus a
-// progress rail with its own act lit. A deck with no acts configured is
-// untouched - it keeps the single sidebar entry it always had.
+// progress rail with its own act lit. A deck with no acts configured still
+// gets its outline, one row per slide, with no act headings.
+//
+// The outline is a level of its own under the deck's sidebar entry, and
+// only the open deck shows it: the program stays one screen tall, and the
+// deck you are in unfolds into the slides it is made of, the current one lit.
 const ACTS_OF = {};
-const PRESETS_OF = {};
 for (const { items } of PROGRAM) {
   for (const item of items) {
     if (item.type === "slides" && item.acts && item.acts.length) {
       ACTS_OF[item.id] = item.acts;
-    }
-    if (item.type === "slides" && item.presets && item.presets.length) {
-      PRESETS_OF[item.id] = item.presets;
     }
   }
 }
@@ -557,9 +585,12 @@ function buildDeckOutline(deckId, acts) {
   }
   const outline = document.createElement("div");
   outline.className = "deck-outline";
+  outline.hidden = !(outlineEls[deckId] && !outlineEls[deckId].hidden);
   const rows = [];
   let group = null;
-  let actId = null;
+  // undefined, as a slide with no data-act reads: a deck without acts is one
+  // group with no heading
+  let actId;
   let act = null;
 
   // Which slide is each act's own row: its first divider, wherever that sits
@@ -657,8 +688,8 @@ function buildDeckOutline(deckId, acts) {
   } else {
     anchor.after(outline);
   }
-  // the outline is the deck's entry now: keeping both would name the deck
-  // twice over, once as itself and once as its own cover slide
+  // the deck's entry stays, and opens on its first slide; the rows under it
+  // are what Ctrl+K lists for this deck
   anchor.classList.add("has-outline");
   outlineRows[deckId] = rows;
   outlineEls[deckId] = outline;
@@ -725,34 +756,90 @@ function revealRow(row) {
 
 // ---------- presets ----------
 
-const PRESET_KEY = "gas-presets";
-const presetPicked = readStore(PRESET_KEY, {});
+// Named cuts of the whole program, for giving only part of it: one training
+// of a series, or a shorter overview (see gas/README.md, "Presets"). A
+// preset keeps whole topics, whole items, and single slides out of decks it
+// does not keep whole; the groups sent to the foot of the sidebar (`at`) are
+// outside the program proper, and always stay.
+const PRESETS = CONFIG.presets || [];
+const PRESET_KEY = "gas-preset";
+let presetPicked = "";
 
-function inPreset(preset, slide) {
-  if ((preset.skip || []).includes(slide.dataset.id)) {
+// what a preset keeps of one program item: true (all of it), false
+// (nothing), or, for a deck, the Set of its slides' data-ids
+function presetKeeps(preset, group, item) {
+  // an item may name the only presets it belongs to (and Everything)
+  if (preset && item.presets) {
+    return item.presets.includes(preset.id);
+  }
+  if (!preset || group.at) {
+    return true;
+  }
+  if ((preset.items || []).includes(item.id) ||
+      (group.topic && (preset.topics || []).includes(group.topic))) {
+    return true;
+  }
+  if (item.type !== "slides" || !decks[item.id]) {
     return false;
   }
-  return (preset.acts || []).includes(slide.dataset.act) ||
-    (preset.slides || []).includes(slide.dataset.id);
-}
-
-function applyPreset(deckId, presetId) {
-  const preset = PRESETS_OF[deckId].find((one) => one.id === presetId);
-  const shown = slidesOf(deckId)[deckIndex[deckId]];
-  for (const slide of decks[deckId].querySelectorAll(".slide")) {
-    slide.classList.toggle("skipped", Boolean(preset) && !inPreset(preset, slide));
+  const ids = new Set();
+  for (const slide of decks[item.id].querySelectorAll(".slide")) {
+    if ((preset.slides || []).includes(slide.dataset.id)) {
+      ids.add(slide.dataset.id);
+    }
   }
-  presetPicked[deckId] = preset ? preset.id : "";
-  deckIndex[deckId] = Math.max(0, [...slidesOf(deckId)].indexOf(shown));
+  return ids.size ? ids : false;
 }
 
-function rememberPreset(presetId) {
+function applyPreset(presetId) {
+  const preset = PRESETS.find((one) => one.id === presetId) || null;
+  presetPicked = preset ? preset.id : "";
+  const skip = new Set((preset && preset.skip) || []);
+  for (const group of PROGRAM) {
+    let anyShown = false;
+    for (const item of group.items) {
+      const keeps = presetKeeps(preset, group, item);
+      anyShown = anyShown || Boolean(keeps);
+      const entry = document.querySelector(
+        `.nav-item[data-view="${item.type === "view" ? item.id : item.type}"]` +
+        `[data-item="${item.type === "view" ? "" : item.id}"]`
+      );
+      entry?.classList.toggle("preset-out", !keeps);
+      if (item.type === "slides" && decks[item.id]) {
+        const shown = slidesOf(item.id)[deckIndex[item.id]];
+        for (const slide of decks[item.id].querySelectorAll(".slide")) {
+          const out = skip.has(slide.dataset.id) ||
+            (keeps instanceof Set && !keeps.has(slide.dataset.id));
+          slide.classList.toggle("skipped", out);
+        }
+        deckIndex[item.id] = Math.max(0, [...slidesOf(item.id)].indexOf(shown));
+      }
+    }
+    // a topic with nothing left in it goes too, heading and all
+    const topic = topicGroups.find((one) => group.topic && one.name === group.topic);
+    if (topic) {
+      topic.heading.classList.toggle("preset-out", !anyShown);
+      topic.entries.classList.toggle("preset-out", !anyShown);
+    }
+  }
+  for (const deckId of Object.keys(decks)) {
+    buildDeckOutline(deckId, ACTS_OF[deckId] || []);
+  }
+}
+
+function itemInPreset(item) {
+  const group = PROGRAM.find((one) => one.items.includes(item));
+  const preset = PRESETS.find((one) => one.id === presetPicked);
+  return Boolean(presetKeeps(preset, group || {}, item));
+}
+
+function rememberPreset() {
   try {
     localStorage.setItem(PRESET_KEY, JSON.stringify(presetPicked));
   } catch (err) {}
   const url = new URL(location.href);
-  if (presetId) {
-    url.searchParams.set("preset", presetId);
+  if (presetPicked) {
+    url.searchParams.set("preset", presetPicked);
   } else {
     url.searchParams.delete("preset");
   }
@@ -761,55 +848,56 @@ function rememberPreset(presetId) {
   } catch (err) {}
 }
 
-function buildPresetPicker(deckId) {
-  const anchor = document.querySelector(
-    `.nav-item[data-view="slides"][data-item="${deckId}"]`
+// the first thing a preset keeps, to land on when it hides what was open
+function firstEntryShown() {
+  return sidebarEl.querySelector(
+    "#program .nav-item:not(.slide-item):not(.preset-out)"
   );
-  if (!anchor) {
-    return;
-  }
+}
+
+function buildPresetPicker() {
   const picker = document.createElement("label");
   picker.className = "deck-preset";
   const name = document.createElement("span");
   name.className = "deck-preset-label";
   name.textContent = "Preset";
   const select = document.createElement("select");
-  select.add(new Option("All slides", ""));
-  for (const preset of PRESETS_OF[deckId]) {
+  select.add(new Option("Everything", ""));
+  for (const preset of PRESETS) {
     select.add(new Option(preset.label || preset.id, preset.id));
   }
-  select.value = presetPicked[deckId];
+  select.value = presetPicked;
   select.addEventListener("change", () => {
-    applyPreset(deckId, select.value);
-    if (ACTS_OF[deckId]) {
-      buildDeckOutline(deckId, ACTS_OF[deckId]);
-    }
-    rememberPreset(select.value);
-    if (!views.slides.hidden && currentDeck === deckId) {
-      showSlide(deckIndex[deckId]);
+    applyPreset(select.value);
+    rememberPreset();
+    const open = sidebarEl.querySelector('.nav-item:not(.slide-item)[aria-current="page"]');
+    if (open && open.classList.contains("preset-out")) {
+      firstEntryShown()?.click();
+    } else {
+      syncFromHash();
     }
   });
   picker.append(name, select);
-  anchor.after(picker);
+  programEl.before(picker);
 }
 
-const presetInUrl = new URLSearchParams(location.search).get("preset");
-for (const [deckId, presets] of Object.entries(PRESETS_OF)) {
-  const fromUrl = presets.some((preset) => preset.id === presetInUrl);
-  applyPreset(deckId, fromUrl ? presetInUrl : presetPicked[deckId]);
+if (PRESETS.length) {
+  const presetInUrl = new URLSearchParams(location.search).get("preset");
+  const fromUrl = PRESETS.some((preset) => preset.id === presetInUrl);
+  applyPreset(fromUrl ? presetInUrl : readStore(PRESET_KEY, ""));
   // slide numbers in the hash count in the preset, so the url must name it
-  if (presetPicked[deckId]) {
-    rememberPreset(presetPicked[deckId]);
+  if (presetPicked) {
+    rememberPreset();
+  }
+  buildPresetPicker();
+} else {
+  for (const deckId of Object.keys(decks)) {
+    buildDeckOutline(deckId, ACTS_OF[deckId] || []);
   }
 }
 
 for (const [deckId, acts] of Object.entries(ACTS_OF)) {
-  buildDeckOutline(deckId, acts);
   renderDividers(deckId, acts);
-}
-
-for (const deckId of Object.keys(PRESETS_OF)) {
-  buildPresetPicker(deckId);
 }
 
 // The slide rides in the url, so a refresh lands where you were and a link
@@ -878,8 +966,9 @@ function showSlide(n) {
   slides.forEach((slide, i) => slide.classList.toggle("current", i === index));
   counter.textContent = `${index + 1} / ${slides.length}`;
   startBtn.disabled = index === 0;
-  prevBtn.disabled = index === 0;
-  nextBtn.disabled = index === slides.length - 1;
+  // the ends of a deck lead on to the decks either side of it
+  prevBtn.disabled = index === 0 && !neighbourEntry("slides", -1);
+  nextBtn.disabled = index === slides.length - 1 && !neighbourEntry("slides", 1);
   rememberSlide();
   paintOutline();
   syncEditor();
@@ -1273,8 +1362,47 @@ function showDeck(deckId) {
 }
 
 startBtn.addEventListener("click", () => showSlide(0));
-prevBtn.addEventListener("click", () => showSlide(deckIndex[currentDeck] - 1));
-nextBtn.addEventListener("click", () => showSlide(deckIndex[currentDeck] + 1));
+// The decks and exercises of the program, in sidebar order, as the preset
+// leaves them: the pages at the foot (`at`) are outside the program. From the
+// entry open in `view`, the one `step` away, or null at either end.
+function neighbourEntry(view, step) {
+  const order = [...programEl.querySelectorAll(
+    '.nav-item[data-view="slides"]:not(.slide-item):not(.preset-out), ' +
+    '.nav-item[data-view="project"]:not(.preset-out)'
+  )].map((item) => ({ view: item.dataset.view, id: item.dataset.item }))
+    .filter(({ view, id }) => view === "project" ? projects[id] : decks[id] && slidesOf(id).length);
+  const current = view === "project" ? currentProject : currentDeck;
+  const here = order.findIndex((entry) => entry.view === view && entry.id === current);
+  return here < 0 ? null : order[here + step] || null;
+}
+
+// open an entry: a deck on its first slide going forward, on its last coming
+// back; an exercise at its top
+function openEntry(entry, step) {
+  location.hash = entry.view === "slides"
+    ? `slides/${entry.id}/${step > 0 ? 1 : slidesOf(entry.id).length}`
+    : `project/${entry.id}`;
+  syncFromHash();
+  if (entry.view === "project") {
+    scroller.scrollTop = 0;
+  }
+}
+
+// one slide on or back - and past either end of a deck, into the next entry
+// of the program or the previous one
+function stepSlide(step) {
+  const index = deckIndex[currentDeck] + step;
+  const count = slidesOf(currentDeck).length;
+  const next = (index < 0 || index >= count) && neighbourEntry("slides", step);
+  if (!next) {
+    showSlide(index);
+    return;
+  }
+  openEntry(next, step);
+}
+
+prevBtn.addEventListener("click", () => stepSlide(-1));
+nextBtn.addEventListener("click", () => stepSlide(1));
 
 // ---------- printing a deck ----------
 
@@ -1341,15 +1469,29 @@ document.addEventListener("keydown", (ev) => {
   if (ev.target.closest("input, textarea, [contenteditable]")) {
     return;
   }
+  // on an exercise, space and the up and down arrows scroll the page; left
+  // and right go to the entry before or after it
+  if (!views.project.hidden && (ev.key === "ArrowRight" || ev.key === "ArrowLeft")) {
+    if (ev.metaKey || ev.ctrlKey || ev.altKey || ev.shiftKey) {
+      return;
+    }
+    const step = ev.key === "ArrowRight" ? 1 : -1;
+    const entry = neighbourEntry("project", step);
+    if (entry) {
+      ev.preventDefault();
+      openEntry(entry, step);
+    }
+    return;
+  }
   if (views.slides.hidden) {
     return;
   }
   if (ev.key === "ArrowRight" || ev.key === " ") {
     ev.preventDefault();
-    showSlide(deckIndex[currentDeck] + 1);
+    stepSlide(1);
   } else if (ev.key === "ArrowLeft") {
     ev.preventDefault();
-    showSlide(deckIndex[currentDeck] - 1);
+    stepSlide(-1);
   } else if (ev.key === "Home") {
     ev.preventDefault();
     showSlide(0);
@@ -1432,7 +1574,14 @@ function showView(name, itemId) {
       item.removeAttribute("aria-current");
     }
   }
-  scrolledPage = `${name}/${name === "project" ? currentProject : currentDeck}`;
+  // the open deck unfolds into its slides, and only that one
+  for (const [id, outline] of Object.entries(outlineEls)) {
+    outline.hidden = !(name === "slides" && id === currentDeck);
+  }
+  if (name === "slides") {
+    paintOutline();
+  }
+  scrolledPage =`${name}/${name === "project" ? currentProject : currentDeck}`;
   scroller.scrollTop = scrollTops[scrolledPage] || 0;
   syncEditor();
 }
@@ -1503,7 +1652,7 @@ function collectJumpTargets() {
   prepareProjects();
   const targets = [];
   const entries = sidebarEl.querySelectorAll(
-    ".nav-item:not([hidden]):not(.slide-item):not(.print-everything)"
+    ".nav-item:not([hidden]):not(.preset-out):not(.slide-item):not(.print-everything)"
   );
   for (const item of entries) {
     // a deck with an outline is reached through its slides, its cover first
@@ -1514,7 +1663,7 @@ function collectJumpTargets() {
     const slides = deckId && slidesOf(deckId);
     for (const [i, row] of (outlineRows[deckId] || []).entries()) {
       const label = row.querySelector(".slide-label").textContent;
-      const act = ACTS_OF[deckId].find((one) => one.id === slides[i].dataset.act);
+      const act = (ACTS_OF[deckId] || []).find((one) => one.id === slides[i].dataset.act);
       const hint = [
         Object.keys(decks).length > 1 && DECK_LABEL[deckId],
         act && act.counted !== false && act.title !== label && act.title,
@@ -2818,7 +2967,8 @@ function programElements() {
     const el = (where[item.type] || {})[item.id];
     // data-print="skip": a page that is a window onto somebody else's site
     // prints as an empty box, so it is left out of the document
-    if (el && el.dataset.print !== "skip") {
+    // and what the preset picked in the sidebar leaves out, it leaves out here
+    if (el && el.dataset.print !== "skip" && itemInPreset(item)) {
       out.push(el);
     }
   }

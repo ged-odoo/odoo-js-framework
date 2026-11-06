@@ -1,0 +1,479 @@
+<div class="deck clean" id="deck-js-framework">
+  <article class="slide statement cover" data-id="85474460">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 3 · Part 1</p>
+      <h2>JS Framework 101</h2>
+      <p class="lead">What <code>addons/web</code> gives you, and how your code plugs into it.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Then</span>Dashboard, steps 1 to 4: a client action built from scratch</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="7a79bc68">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 3 · The Odoo JS framework</p>
+      <h2>Goals</h2>
+      <p class="lead">Owl gave you components. This topic is the application they live in.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">The web client</span><span>One component tree, from the navbar down to your screen.</span></li>
+        <li><span class="key">Registries</span><span>How an addon adds something the web client picks up.</span></li>
+        <li><span class="key">Services</span><span>The code that stays alive, and how a component reaches it.</span></li>
+        <li><span class="key">Client actions</span><span>A screen of your own, opened from a menu.</span></li>
+        <li><span class="key">The server</span><span>The orm plugin, controllers, and when to load.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Dashboard, the exercise that follows, uses every one of them.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="20b72e9c">
+    <header class="slide-head">
+      <p class="eyebrow">The web client</p>
+      <h2>Building blocks</h2>
+      <p class="lead">Three layers, and the names you will keep meeting. Your addon writes the top one.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 300" role="img"
+             aria-label="Three layers. Your addon writes components, templates, a client action and a plugin. addons/web provides the WebClient, the registries, the services, the actions and the ORM. The server holds the Python models and the controllers.">
+          <text class="lane" x="0" y="12">your addon</text>
+
+          <rect class="bx js" x="0" y="20" width="235" height="66" rx="6"/>
+          <text class="t" x="117" y="48">Components</text>
+          <text class="s" x="117" y="70">Owl, as in topic 2</text>
+
+          <rect class="bx js" x="255" y="20" width="235" height="66" rx="6"/>
+          <text class="t" x="372" y="48">Templates</text>
+          <text class="s" x="372" y="70">QWeb, in XML</text>
+
+          <rect class="bx js" x="510" y="20" width="235" height="66" rx="6"/>
+          <text class="t" x="627" y="48">Client action</text>
+          <text class="s" x="627" y="70">a screen of your own</text>
+
+          <rect class="bx js" x="765" y="20" width="235" height="66" rx="6"/>
+          <text class="t" x="882" y="48">Plugins</text>
+          <text class="s" x="882" y="70">your long-lived code</text>
+
+          <text class="lane" x="0" y="118">addons/web</text>
+
+          <rect class="bx" x="0" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="93" y="154">WebClient</text>
+          <text class="s" x="93" y="176">the root</text>
+
+          <rect class="bx" x="203" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="296" y="154">Registries</text>
+          <text class="s" x="296" y="176">how you plug in</text>
+
+          <rect class="bx" x="406" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="499" y="154">Services</text>
+          <text class="s" x="499" y="176">the ones web ships</text>
+
+          <rect class="bx" x="610" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="703" y="154">Actions</text>
+          <text class="s" x="703" y="176">what menus open</text>
+
+          <rect class="bx" x="813" y="126" width="187" height="66" rx="6"/>
+          <text class="t" x="906" y="154">ORM</text>
+          <text class="s" x="906" y="176">calls the server</text>
+
+          <text class="lane" x="0" y="224">the server</text>
+
+          <rect class="bx srv" x="0" y="232" width="490" height="66" rx="6"/>
+          <text class="t" x="245" y="260">Python models</text>
+          <text class="s" x="245" y="282">where the data actually is</text>
+
+          <rect class="bx srv" x="510" y="232" width="490" height="66" rx="6"/>
+          <text class="t" x="755" y="260">Controllers</text>
+          <text class="s" x="755" y="282">routes, for everything else</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Your addon never imports the web client. It writes into a registry, and the web client reads it.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="1a7c9e42">
+    <header class="slide-head">
+      <p class="eyebrow">The web client</p>
+      <h2>Web client</h2>
+      <p class="lead">The web client is an ordinary Owl component. Everything on screen hangs below it.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <figure class="figure webclient">
+          <svg viewBox="0 0 520 256" role="img"
+               aria-label="WebClient at the top, with three children: NavBar, ActionContainer and MainComponentsContainer. The ActionContainer holds the current action, a view or a client action.">
+            <defs>
+              <marker id="fw-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx" x="0" y="0" width="250" height="54" rx="6"/>
+            <text class="t" x="125" y="24">WebClient</text>
+            <text class="s" x="125" y="44">web.WebClient</text>
+
+            <path class="ar" d="M28 54 V223 M28 95 H56 M28 159 H56 M28 223 H56"/>
+
+            <rect class="bx" x="56" y="70" width="250" height="50" rx="6"/>
+            <text class="t" x="181" y="92">NavBar</text>
+            <text class="s" x="181" y="110">apps, menus, systray</text>
+
+            <rect class="bx js" x="56" y="134" width="230" height="50" rx="6"/>
+            <text class="t" x="171" y="156">ActionContainer</text>
+            <text class="s" x="171" y="174">the current action</text>
+
+            <path class="ar" marker-end="url(#fw-ar-1)" d="M290 159 H312"/>
+
+            <rect class="chip" x="316" y="134" width="204" height="50" rx="6"/>
+            <text class="s" x="418" y="154">a view, a report,</text>
+            <text class="s" x="418" y="172">or your client action</text>
+
+            <rect class="bx" x="56" y="198" width="380" height="50" rx="6"/>
+            <text class="t" x="246" y="220">MainComponentsContainer</text>
+            <text class="s" x="246" y="238">dialogs, notifications</text>
+          </svg>
+        </figure>
+      </section>
+      <section>
+        <h3 class="label file">web/static/src/webclient/webclient.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="<mark>web.WebClient</mark>"&gt;
+    &lt;t t-if="!this.state.fullscreen"&gt;
+        &lt;NavBar/&gt;
+    &lt;/t&gt;
+    &lt;ActionContainer/&gt;
+    &lt;MainComponentsContainer/&gt;
+&lt;/t&gt;</code></pre>
+        <p class="caption">That is the whole thing. Three tags, one of them behind a <code>t-if</code>.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Nothing special about it: open the file and read it, then follow <code>ActionContainer</code> down.</p>
+    </footer>
+  </article>
+  <article class="slide" data-id="3f6b1d84">
+    <header class="slide-head">
+      <p class="eyebrow">Registries</p>
+      <h2>Extending the web client</h2>
+      <p class="lead">The primary extension mechanism: every addon registers what it adds, and the web client picks it up.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 280" role="img"
+             aria-label="Three addons, accounting, crm and yours, each add entries to the registries: fields, views, systray, actions. The web client reads those registries to build the screen.">
+          <defs>
+            <marker id="fw-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="0" y="20" width="210" height="52" rx="6"/>
+          <text class="t" x="105" y="52">accounting</text>
+
+          <rect class="bx" x="0" y="100" width="210" height="52" rx="6"/>
+          <text class="t" x="105" y="132">crm</text>
+
+          <rect class="bx" x="0" y="180" width="210" height="52" rx="6"/>
+          <text class="t" x="105" y="212">your addon</text>
+
+          <path class="ar" marker-end="url(#fw-ar-2)" d="M214 46 H326"/>
+          <path class="ar" marker-end="url(#fw-ar-2)" d="M214 126 H326"/>
+          <path class="ar" marker-end="url(#fw-ar-2)" d="M214 206 H326"/>
+          <text class="s" x="270" y="116">register</text>
+
+          <rect class="chip" x="330" y="0" width="240" height="246" rx="8"/>
+
+          <rect class="bx js" x="350" y="14" width="200" height="44" rx="6"/>
+          <text class="t" x="450" y="42">fields</text>
+
+          <rect class="bx js" x="350" y="72" width="200" height="44" rx="6"/>
+          <text class="t" x="450" y="100">views</text>
+
+          <rect class="bx js" x="350" y="130" width="200" height="44" rx="6"/>
+          <text class="t" x="450" y="158">systray</text>
+
+          <rect class="bx js" x="350" y="188" width="200" height="44" rx="6"/>
+          <text class="t" x="450" y="216">actions</text>
+
+          <text class="s" x="450" y="268">registries</text>
+
+          <path class="ar" marker-start="url(#fw-ar-2)" d="M574 123 H696"/>
+          <text class="s" x="635" y="113">reads</text>
+
+          <rect class="bx" x="700" y="71" width="300" height="104" rx="6"/>
+          <text class="t" x="850" y="118">the web client</text>
+          <text class="s" x="850" y="140">builds the screen out of them</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Nothing is special about <code>web</code>: it fills the same registries, and the standard list view is registered exactly the way yours is.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="4b8d2f61">
+    <header class="slide-head">
+      <p class="eyebrow">Registries</p>
+      <h2>Registries</h2>
+      <ul class="notes">
+        <li>The primary extension point: an addon registers something, the web client picks it up.</li>
+        <li>One global <code>registry</code>, split into categories. A <code>sequence</code> keeps an order when order matters.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label file">my_addon/static/src/dashboard/dashboard.js</h3>
+<pre><code class="language-javascript">import { registry } from "@web/core/registry";
+
+// a category is a sub-registry
+const actions = registry.<mark>category("actions")</mark>;
+
+actions.<mark>add</mark>("my_addon.dashboard", Dashboard);
+
+// with an order, for the categories that keep one
+registry.category("systray").add(
+    "my_addon.counter",
+    { Component: CounterItem },
+    <mark>{ sequence: 30 }</mark>,
+);</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">No import</span><span>The web client never imports your addon. It reads the registry.</span></li>
+          <li><span class="key">Replace</span><span>Adding on a key that exists, with <code>{ force: true }</code>, overrides the standard entry.</span></li>
+          <li><span class="key">Live</span><span>A registry is an <code>EventBus</code>: it fires on every add, so a late entry still reaches the screen.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>In the console: <code>odoo.loader.modules.get("@web/core/registry").registry.category("actions").getEntries()</code></p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="7c3e5a09">
+    <header class="slide-head">
+      <p class="eyebrow">Registries</p>
+      <h2>The ones you will use</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table registries">
+        <li class="head"><span>Category</span><span>What it holds</span><span>Topic</span></li>
+        <li><span><code>actions</code></span><span>Client actions: a screen of your own.</span><span>this one</span></li>
+        <li><span><code>services</code></span><span>The code started with the web client.</span><span>this one</span></li>
+        <li><span><code>fields</code></span><span>One component per field widget.</span><span>Views and fields</span></li>
+        <li><span><code>views</code></span><span>The list, kanban, form… and yours.</span><span>Views and fields</span></li>
+        <li><span><code>systray</code></span><span>The items at the right of the navbar.</span><span>Advanced JS framework</span></li>
+        <li><span><code>error_handlers</code></span><span>What happens when something throws.</span><span class="quiet">good to know</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Some fifty categories in all. These six cover most of what an addon adds.</p>
+    </footer>
+  </article>
+  <article class="slide" data-id="9e2c5b70">
+    <header class="slide-head">
+      <p class="eyebrow">Registries</p>
+      <h2>Registry and Resource, in Owl 3</h2>
+      <ul class="notes">
+        <li>The global <code>registry</code> is Odoo's own, and still holds every category above. Owl 3 ships two of its own, and new code uses those.</li>
+        <li>Each one is a plain object, declared and exported where it belongs. No string category to spell right, and the type is checked on the way in.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label">Registry · keyed, like the ones above</h3>
+<pre><code class="language-javascript">import { Registry, t } from "@odoo/owl";
+
+const views = new Registry({
+    name: "views",
+    <mark>validation: t.object({ type: t.string() })</mark>,
+});
+
+views.add("list", listView, { sequence: 10 });
+views.add("list", other);                   // throws
+views.add("list", other, { force: true });  // ok
+
+views.get("list");        // throws if missing
+views.get("map", null);   // or a default
+views.<mark>items()</mark>;          // sorted by sequence</code></pre>
+      </section>
+      <section>
+        <h3 class="label">Resource · a list, no keys</h3>
+<pre><code class="language-javascript">import { Plugin, Resource, t } from "@odoo/owl";
+
+// @web/core/services, the one you meet first
+export const services = new Resource({
+    name: "services",
+    validation: t.constructor(Plugin),
+});
+
+services.add(ReportingPlugin);  // started with the web client
+
+// one of your own, read back with tiles.items()
+const tiles = new Resource({ name: "tiles" });
+
+tiles.add({ Component: SalesTile }, { sequence: 20 });
+tiles.<mark>use</mark>({ Component: SalesTile });  // until destroy</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>items()</code> is a computed, so a template that reads one follows every add and remove. <code>use()</code> drops the entry when the component or plugin that added it is destroyed.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="b3e91d47">
+    <header class="slide-head">
+      <p class="eyebrow">Client actions</p>
+      <h2>Everything on screen is an action</h2>
+      <p class="lead">A menu item points at an action record. The type of that record decides who renders it.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table actions">
+        <li class="head"><span>Type</span><span>What it is</span><span>Rendered by</span></li>
+        <li><span><code>ir.actions.act_window</code></span><span>Views on a model, with a domain and a context.</span><span>the view, from the <code>views</code> registry</span></li>
+        <li><span><code>ir.actions.client</code></span><span>A component of your own. Anything you like.</span><span>your entry in the <code>actions</code> registry</span></li>
+        <li><span><code>ir.actions.report</code></span><span>A PDF or an HTML report.</span><span>the report action</span></li>
+        <li><span><code>ir.actions.server</code></span><span>Python, which usually returns another action.</span><span>the server, then the browser</span></li>
+        <li><span><code>ir.actions.act_url</code></span><span>A url to open.</span><span>the browser</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>One service runs them all: <code>this.action.doAction("base_setup.action_general_configuration")</code>.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="d6f1a30b">
+    <header class="slide-head">
+      <p class="eyebrow">Client actions</p>
+      <h2>Window actions</h2>
+      <ul class="notes">
+        <li>Far and away the most common one: nearly every menu in Odoo opens an <code>act_window</code>.</li>
+        <li>The xml below is not read at runtime: installing the addon writes a row in <code>ir_actions</code>. The UI lives in the database, which most frameworks do not do.</li>
+        <li>It names a model and a list of view types. The web client loads those views and renders the first, with a switcher for the rest.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">crm/views/crm_lead_views.xml</h3>
+<pre><code class="language-markup">&lt;record id="crm_lead_action_pipeline"
+        model="<mark>ir.actions.act_window</mark>"&gt;
+    &lt;field name="name"&gt;Pipeline&lt;/field&gt;
+    &lt;field name="<mark>res_model</mark>"&gt;crm.lead&lt;/field&gt;
+    &lt;field name="<mark>view_mode</mark>"&gt;kanban,list,form&lt;/field&gt;
+    &lt;field name="domain"&gt;[("type", "=", "opportunity")]&lt;/field&gt;
+    &lt;field name="context"&gt;{"default_type": "opportunity"}&lt;/field&gt;
+&lt;/record&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">res_model</span><span>The model the views are built on.</span></li>
+          <li><span class="key">view_mode</span><span>Which views, and in what order. The first one opens.</span></li>
+          <li><span class="key">domain</span><span>What is in scope. The user's own filters are added to it, never instead of it.</span></li>
+          <li><span class="key">context</span><span>Defaults for a new record, and anything a view wants to read.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Nothing here is javascript: it is a record, and a user with the rights can edit it. Your addon writes one when a menu should open a screen it did not have to build.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="5f1a8c37">
+    <header class="slide-head">
+      <p class="eyebrow">Client actions</p>
+      <h2>Client Actions</h2>
+      <ul class="notes">
+        <li>A record in Python names the action; the registry says which component renders it.</li>
+        <li><code>Layout</code> gives your screen the control panel every other screen has.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">dashboard.js, and the action record</h3>
+<pre><code class="language-javascript">class Dashboard extends Component {
+    static template = "awesome_dashboard.Dashboard";
+    // ...
+}
+
+registry.category("actions")
+    .add(<mark>"awesome_dashboard.dashboard"</mark>, Dashboard);</code></pre>
+<pre><code class="language-markup">&lt;record id="dashboard" model="<mark>ir.actions.client</mark>"&gt;
+    &lt;field name="name"&gt;Dashboard&lt;/field&gt;
+    &lt;field name="tag"&gt;awesome_dashboard.dashboard&lt;/field&gt;
+&lt;/record&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">dashboard.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="awesome_dashboard.Dashboard"&gt;
+    &lt;<mark>Layout</mark> display="{ controlPanel: {} }"
+            className="'o_dashboard h-100'"&gt;
+        &lt;t t-set-slot="layout-buttons"&gt;
+            &lt;button class="btn btn-primary"
+                    t-on-click="this.openCustomers"&gt;
+                Customers
+            &lt;/button&gt;
+        &lt;/t&gt;
+        the content of the dashboard
+    &lt;/Layout&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A menu item points at the action record. From there on, the screen is yours.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="c48ea30f">
+    <header class="slide-head">
+      <p class="eyebrow">Data</p>
+      <h2>Talking to the server</h2>
+      <p class="lead">The browser has no database: every piece of data is a request, and your Python method is the API.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">A controller route</h3>
+<pre><code class="language-javascript">import { rpc } from "@web/core/network/rpc";
+
+const stats = await <mark>rpc</mark>("/my_addon/stats", {
+    period: "month",
+});</code></pre>
+<pre><code class="language-python">@http.route("/my_addon/stats", auth="user",
+            <mark>type="jsonrpc"</mark>)
+def stats(self, period):
+    return {"orders": 42}</code></pre>
+        <p class="caption">JSON in, JSON out.</p>
+      </section>
+      <section>
+        <h3 class="label">The orm plugin</h3>
+<pre><code class="language-javascript">import { Component, onWillStart, signal, usePlugin } from "@odoo/owl";
+import { ORM } from "@web/core/orm_plugin";
+
+class Dashboard extends Component {
+    orm = <mark>usePlugin(ORM)</mark>;
+    partners = signal([]);
+
+    setup() {
+        onWillStart(() =&gt; this.load());
+    }
+
+    async load() {
+        const domain = [["is_company", "=", true]];
+        const partners = await this.orm.<mark>searchRead</mark>(
+            "res.partner", domain, ["name", "email"],
+        );
+        this.partners.set(partners);
+    }
+}</code></pre>
+        <p class="caption"><code>orm.call</code> reaches any other model method.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Both go through JSON-RPC. The network tab of the browser shows every call.</p>
+    </footer>
+  </article>
+</div>

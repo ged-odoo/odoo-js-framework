@@ -5,7 +5,7 @@
 /* ---------- the display face on every title ---------- */
 
 /* Branding, the same call the two talks make: Caveat carries every slide
-   title, so the masterclass and the talks read as one set. Three things have
+   title, so the presentation and the talks read as one set. Three things have
    to move with the family - it only ships a bold, its x-height is far
    smaller than Geist's at the same size, so the sizes go up to match, and
    the tracking Geist was tightened by has to come back off. */
@@ -76,22 +76,22 @@
 /* the lifecycle's two nested pairs: setup/onWillDestroy on the outside,
    onMounted/onWillUnmount within it. Colour is the whole explanation, so it
    goes on those four boxes and nothing else. */
-#deck-talk .slide[data-from="owl"] .figure .bx.open {
+#deck-owl .figure .bx.open {
   fill: #e6f1e8;
   stroke: #7fb896;
 }
 
-#deck-talk .slide[data-from="owl"] .figure .bx.mount {
+#deck-owl .figure .bx.mount {
   fill: #fdf0dd;
   stroke: #d3a45e;
 }
 
-[data-theme="dark"] #deck-talk .slide[data-from="owl"] .figure .bx.open {
+[data-theme="dark"] #deck-owl .figure .bx.open {
   fill: #1c3326;
   stroke: #4f8f68;
 }
 
-[data-theme="dark"] #deck-talk .slide[data-from="owl"] .figure .bx.mount {
+[data-theme="dark"] #deck-owl .figure .bx.mount {
   fill: #35291a;
   stroke: #91743f;
 }
@@ -99,13 +99,13 @@
 /* the web client tree shares its slide with the template that produces it, so
    it is drawn at the width of its own column. The width carries
    --content-scale, or the figure is dead weight the auto-fit cannot compress */
-#deck-talk .slide[data-from="js-framework"] .figure.webclient {
+#deck-js-framework .figure.webclient {
   width: calc(46cqw * var(--content-scale, 1));
   margin: 0 auto;
 }
 
 /* web client and website, compared row by row */
-#deck-talk .rows.compare { --cols: 15cqw 1fr 1fr; }
+#deck-intro .rows.compare { --cols: 15cqw 1fr 1fr; }
 
 /* ---------- a wider sidebar ---------- */
 
@@ -127,13 +127,13 @@
    copy reads --line/--card/--quiet/--ink, which only the clean system
    defines - this deck is the plainer one, so these read the palette's own
    tokens instead. */
-#deck-talk .slide[data-from="owl-2-vs-3"] .vocab {
+#deck-owl-2-vs-3 .vocab {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2.6cqw;
 }
 
-#deck-talk .slide[data-from="owl-2-vs-3"] .chips {
+#deck-owl-2-vs-3 .chips {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -143,7 +143,7 @@
   list-style: none;
 }
 
-#deck-talk .slide[data-from="owl-2-vs-3"] .chips li {
+#deck-owl-2-vs-3 .chips li {
   margin: 0;
   padding: 0.6cqw 1cqw;
   border: 1px solid transparent;
@@ -153,7 +153,7 @@
   line-height: 1.2;
 }
 
-#deck-talk .slide[data-from="owl-2-vs-3"] .chips.gone li {
+#deck-owl-2-vs-3 .chips.gone li {
   border-color: var(--border);
   background: var(--bg);
   color: var(--muted);
@@ -161,26 +161,26 @@
   text-decoration-thickness: 1px;
 }
 
-#deck-talk .slide[data-from="owl-2-vs-3"] .chips.new li {
+#deck-owl-2-vs-3 .chips.new li {
   border-color: var(--accent-light);
   background: var(--accent-soft);
   color: var(--accent);
 }
 
 /* a rename is one chip, not two: the arrow carries the accent */
-#deck-talk .slide[data-from="owl-2-vs-3"] .chips.changed li {
+#deck-owl-2-vs-3 .chips.changed li {
   border-color: var(--border);
   background: var(--panel);
   color: var(--text);
 }
 
-#deck-talk .slide[data-from="owl-2-vs-3"] .chips .to {
+#deck-owl-2-vs-3 .chips .to {
   padding: 0 0.2cqw;
   color: var(--accent);
 }
 
 /* a name that stayed while its contract moved: the note says what changed */
-#deck-talk .slide[data-from="owl-2-vs-3"] .chips .note {
+#deck-owl-2-vs-3 .chips .note {
   font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
   font-size: 0.86em;
   color: var(--muted);
@@ -219,33 +219,19 @@
   color: var(--ink-2);
 }
 
-/* ---------- the cover, as a slide of a clean deck ---------- */
+/* ---------- The Website Framework ---------- */
 
-.deck.clean .slide.welcome {
-  position: relative;
-  justify-content: flex-start;
-  padding: 0;
-  overflow: hidden;
-  background: none;
-  color: #fff;
-}
+/* the hummingbird is a drawing on a transparent background, not a photograph
+   to crop: show all of it */
+#deck-website .two-col.picture .frame img { object-fit: contain; }
 
-.deck.clean .slide.welcome h2 {
-  font-family: "Caveat", ui-rounded, cursive;
-  font-size: 8.3cqw;
-  font-weight: 700;
-  font-style: normal;
-  line-height: 0.975;
-  letter-spacing: 0;
-  color: #fff;
-  margin: 0;
-}
+/* ---------- Bonus Content ---------- */
 
-.deck.clean .slide.welcome .lead {
-  font-family: "Geist", inherit;
-  font-size: 2.03cqw;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.92);
-  margin: 0;
-  max-width: none;
+/* the bar over an embedded talk: its replay, and the talk in a tab of its
+   own */
+#view-talk1 .pad-bar .links,
+#view-talk2 .pad-bar .links {
+  display: flex;
+  gap: 20px;
+  white-space: nowrap;
 }

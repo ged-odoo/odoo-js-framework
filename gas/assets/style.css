@@ -104,6 +104,7 @@ body {
   padding: 4px 6px;
 }
 
+.sidebar.collapsed .deck-preset,
 .sidebar.collapsed #program,
 .sidebar.collapsed #program-end,
 .sidebar.collapsed > .nav-item,
@@ -207,12 +208,19 @@ body {
 
 .nav-section:hover { color: #c9ccd2; }
 
-.nav-section svg {
+.nav-section .topic-chevron {
   flex: 0 0 12px;
   transition: transform 0.15s ease;
 }
 
-.nav-section[aria-expanded="true"] svg { transform: rotate(90deg); }
+.nav-section[aria-expanded="true"] .topic-chevron { transform: rotate(90deg); }
+
+/* a topic's own icon, from its `icon` in config.js */
+.nav-section .topic-icon {
+  flex: 0 0 16px;
+  margin-right: 2px;
+  color: #c9ccd2;
+}
 
 .nav-item {
   display: block;
@@ -1893,15 +1901,24 @@ html.embedded .sidebar { display: none; }
 
 .nav-item.act-row .act-time { font-size: 10.5px; }
 
-/* the outline stands in for the deck's own entry: it names the deck on its
-   cover row already */
-.nav-item.has-outline { display: none; }
+/* The outline is a level of its own, under the open deck's entry: indented,
+   and hung off a thin rule so it reads as that deck's slides. */
+.deck-outline {
+  margin: 2px 0 8px 22px;
+  padding-left: 4px;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.deck-outline[hidden] { display: none; }
+
+/* what the preset picked in the sidebar leaves out */
+.preset-out { display: none !important; }
 
 .deck-preset {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin: 0 12px 8px;
+  margin: 0 12px 12px;
 }
 
 .deck-preset-label {

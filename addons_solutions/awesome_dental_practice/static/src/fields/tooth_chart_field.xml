@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="awesome_dental_practice.ToothChartField">
+        <div>
+            <ToothChart tooth="this.toothData()" tooltipTemplate="'awesome_dental_practice.Tooltip'" toothSelected.bind="this.toothSelected"/>
+            <button type="button" class="btn btn-secondary mt-2" t-on-click="() => this.mouthCareSelected()">Mouth Care</button>
+        </div>
+    </t>
+    <t t-name="awesome_dental_practice.Tooltip">
+        <div class="o-tooltip">
+            <t t-if="data.length === 0">
+                <span>No information</span>
+            </t>
+            <t t-else="">
+                <table class="table o-tooltip--string">
+                    <thead>
+                        <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Position</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="data" t-as="d" t-key="d.id">
+                            <tr>
+                                <td><span t-out="d.name"/></td>
+                                <td><span t-out="d.date"/></td>
+                                <td><span t-if="d.dental_position" t-out="d.dental_position"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+        </div>
+    </t>
+</templates>

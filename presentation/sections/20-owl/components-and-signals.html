@@ -1,0 +1,461 @@
+<div class="deck clean" id="deck-owl">
+  <article class="slide statement cover" data-id="c3edbcc4">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 2 · Owl</p>
+      <h2>An introduction to Owl 3</h2>
+      <p class="lead">Components, signals, templates, props, hooks.</p>
+    </header>
+  </article>
+
+
+  <article class="slide" data-id="12d9fc3b">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 2 · Owl</p>
+      <h2>What is Owl?</h2>
+      <p class="lead">A JavaScript framework, in the family of React and Vue.</p>
+    </header>
+    <div class="slide-body two-col picture">
+      <section>
+        <h3 class="label">It defines</h3>
+        <ul class="rows wide-key">
+          <li><span class="key">Components</span><span>A base <code>Component</code> class.</span></li>
+          <li><span class="key">Reactivity</span><span>Built on signals.</span></li>
+          <li><span class="key">Templates</span><span>An extension of QWeb.</span></li>
+          <li><span class="key">Hooks</span><span>And utility functions.</span></li>
+        </ul>
+      </section>
+      <section class="frame">
+        <img src="assets/owl.webp" alt="A great horned owl perched on a branch">
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Open source, at <code>github.com/odoo/owl</code>. The Odoo web client is built on it.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="a3eca203">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>A Counter component</h2>
+      <p class="lead">A component is a class and a template.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    counter = signal(0);
+
+    increment() {
+        this.counter.set(this.counter() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">counter.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t t-out="this.counter()"/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            t-on-click="this.increment"&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The template name in <code>static template</code> is what ties the two files together.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="f2902aa5">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>Rendering context</h2>
+      <p class="lead">A template has a context of its own. At first it only holds the component, reached through <code>this</code>.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    counter = signal(0);
+
+    increment() {
+        this.counter.set(this.counter() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">counter.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t t-out="<mark>this.counter()</mark>"/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            <mark>t-on-click="this.increment"</mark>&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Every directive value is a JavaScript expression, evaluated in that context.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="657824c5">
+    <header class="slide-head">
+      <p class="eyebrow">Reactivity</p>
+      <h2>Signals</h2>
+      <ul class="notes">
+        <li>A value of its own: <em>call it</em> to read, <code>set</code> it to write. There is no <code>get</code>.</li>
+        <li>Fine grained: a component follows the signals it reads, and re-renders when one changes.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    counter = <mark>signal(0)</mark>;
+
+    increment() {
+        this.counter.set(this.counter() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">counter.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t t-out="<mark>this.counter()</mark>"/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            t-on-click="this.increment"&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Signals are new in Owl 3. Owl 2 used <code>useState</code>: see Owl 2 vs Owl 3, at the foot of the sidebar.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="91cdaddf">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>Event handling</h2>
+      <p class="lead">The <code>t-on-</code> directive takes any event name: <code>t-on-click</code>, <code>t-on-keydown</code>, <code>t-on-input</code>.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">counter.js</h3>
+<pre><code class="language-javascript">import { Component, signal } from "@odoo/owl";
+
+class Counter extends Component {
+    static template = "my_module.Counter";
+
+    counter = signal(0);
+
+    <mark>increment</mark>() {
+        this.counter.set(this.counter() + 1);
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">counter.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="my_module.Counter"&gt;
+        &lt;p&gt;
+          Counter: &lt;t t-out="this.counter()"/&gt;
+        &lt;/p&gt;
+        &lt;button
+            class="btn btn-primary"
+            <mark>t-on-click="this.increment"</mark>&gt;
+          Increment
+        &lt;/button&gt;
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The handler receives the DOM event as its argument.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="7d1f0a6c">
+    <header class="slide-head">
+      <p class="eyebrow">Templates</p>
+      <h2>Template syntax</h2>
+      <p class="lead">QWeb, plus what a component needs.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows table syntax">
+        <li class="head"><span>Directive</span><span>What it does</span><span>Example</span></li>
+        <li><span><code>t-out</code></span><span>insert a value</span><span><code>&lt;span t-out="this.name()"/&gt;</code></span></li>
+        <li><span><code>t-if</code>, <code>t-else</code></span><span>render or not</span><span><code>&lt;p t-if="this.isValid()"&gt;Ok&lt;/p&gt;</code></span></li>
+        <li><span><code>t-foreach</code>, <code>t-key</code></span><span>repeat a block</span><span><code>&lt;t t-foreach="this.todos()" t-as="todo" t-key="todo.id"&gt;</code></span></li>
+        <li><span><code>t-att-*</code></span><span>set an attribute</span><span><code>&lt;li t-att-class="{ done: this.done() }"&gt;</code></span></li>
+        <li><span><code>t-on-*</code></span><span>listen to an event</span><span><code>&lt;button t-on-click="this.increment"&gt;</code></span></li>
+        <li><span><code>t-model</code></span><span>two-way binding</span><span><code>&lt;input t-model="this.name"/&gt;</code></span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Every value is plain JavaScript, evaluated with the component as <code>this</code>.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="0c9b53ae">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>Sub components</h2>
+      <p class="lead">A component is a unit you reuse: its JavaScript, its template, its CSS.</p>
+    </header>
+    <div class="slide-body two-col even snug">
+      <section>
+      <figure class="figure">
+        <svg viewBox="0 0 1000 215" role="img"
+             aria-label="A Root component renders two independent Counter components. A Counter is made of three files: counter.js, counter.xml and counter.css.">
+          <defs>
+            <marker id="owl-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="330" y="8" width="340" height="72" rx="6"/>
+          <text class="t" x="500" y="50">Root</text>
+
+          <path class="ar" marker-end="url(#owl-ar-1)" d="M430 86 L182 124"/>
+          <path class="ar" marker-end="url(#owl-ar-1)" d="M570 86 L818 124"/>
+
+          <rect class="bx js" x="0" y="128" width="290" height="76" rx="6"/>
+          <text class="t" x="145" y="160">Counter</text>
+          <text class="m" x="145" y="186">count = signal(0)</text>
+
+          <rect class="bx js" x="710" y="128" width="290" height="76" rx="6"/>
+          <text class="t" x="855" y="160">Counter</text>
+          <text class="m" x="855" y="186">count = signal(0)</text>
+
+          <text class="s" x="500" y="158">two instances,</text>
+          <text class="s" x="500" y="180">two states of their own</text>
+
+        </svg>
+      </figure>
+      </section>
+      <section>
+        <h3 class="label file">root.js</h3>
+<pre><code class="language-javascript">import { Component } from "@odoo/owl";
+import { Counter } from "./counter";
+
+class Root extends Component {
+    static template = "my_module.Root";
+    <mark>static components = { Counter }</mark>;
+}</code></pre>
+        <h3 class="label file">root.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="my_module.Root"&gt;
+    &lt;div class="p-3"&gt;
+        &lt;h1&gt;Two counters&lt;/h1&gt;
+        &lt;<mark>Counter</mark>/&gt;
+        &lt;<mark>Counter</mark>/&gt;
+    &lt;/div&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Declared in <code>static components</code>, then used as a tag: lowercase is html, a capital is a component.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="5e46d8b2">
+    <header class="slide-head">
+      <p class="eyebrow">Components</p>
+      <h2>Props, and their validation</h2>
+      <ul class="notes">
+        <li>The parent passes data down. The child never writes to it.</li>
+        <li><code>useProps</code> declares the shape. A missing or wrong prop fails loudly, in dev mode.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">The child declares what it accepts</h3>
+<pre><code class="language-javascript">import { useProps, t } from "@odoo/owl";
+
+export class ProductCard extends Component {
+    static template = "tutorial.ProductCard";
+
+    props = <mark>useProps</mark>({
+        name: t.string(),
+        price: t.number(),
+        image: t.string().<mark>optional("📦")</mark>,
+    });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label">The parent passes them, as JavaScript</h3>
+<pre><code class="language-markup">&lt;t t-name="tutorial.Root"&gt;
+    &lt;ProductCard
+        name="this.keyboard.name"
+        price="this.keyboard.price"
+        image="this.keyboard.image"/&gt;
+&lt;/t&gt;
+
+&lt;!-- in the child --&gt;
+&lt;div t-out="<mark>this.props.name</mark>"/&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>To send something up, the parent passes a function: callback props, in Building an Application.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="4b2c7e91">
+    <header class="slide-head">
+      <p class="eyebrow">Reactivity</p>
+      <h2>Derived values: computed</h2>
+      <ul class="notes">
+        <li>A value built from other signals, read like a signal: <code>this.isValid()</code>.</li>
+        <li>Recomputed on its own, only when what it read has changed.</li>
+        <li><code>t-model</code> binds an input to a signal, both ways.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">some_component.js</h3>
+<pre><code class="language-javascript">import { signal, computed } from "@odoo/owl";
+
+class SomeComponent extends Component {
+    name = signal("");
+    email = signal("");
+
+    isValid = <mark>computed</mark>(() =&gt; {
+        return this.name()
+            &amp;&amp; this.email().includes("@");
+    });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">some_component.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="my_module.SomeComponent"&gt;
+    &lt;input <mark>t-model="this.name"</mark>
+           placeholder="Name"/&gt;
+    &lt;input t-model="this.email"
+           placeholder="Email"/&gt;
+    &lt;div t-out="this.isValid()
+                ? 'Valid' : 'Invalid'"/&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Read a computed like a signal. Never set it: it follows its inputs.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a71c2f30">
+    <header class="slide-head">
+      <p class="eyebrow">Hooks</p>
+      <h2>The lifecycle, and its hooks</h2>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 216" role="img"
+             aria-label="Three phases, one after the other. On creation: setup, then onWillStart - the one hook that may be async, which the first render waits for - then the first render, then onMounted. Then, on every re-render: onWillPatch, the patch, then onPatched. Then, on removal: onWillUnmount, then onWillDestroy.">
+          <defs>
+            <marker id="owl-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+            <marker id="owl-ar-3" class="rt-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <text class="lane" x="0" y="22">create</text>
+          <text class="s l" x="0" y="42">once</text>
+
+          <rect class="bx open" x="170" y="0" width="170" height="44" rx="6"/>
+          <text class="t" x="255" y="28">setup</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M344 22 H382"/>
+
+          <rect class="bx" x="386" y="0" width="170" height="44" rx="6"/>
+          <text class="t" x="471" y="22">onWillStart</text>
+          <text class="s" x="471" y="38">async — the render waits</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M560 22 H598"/>
+
+          <rect class="chip" x="602" y="0" width="170" height="44" rx="6"/>
+          <text class="t" x="687" y="28">first render</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M776 22 H814"/>
+
+          <rect class="bx mount" x="818" y="0" width="170" height="44" rx="6"/>
+          <text class="t" x="903" y="28">onMounted</text>
+
+          <path class="ar rt" marker-end="url(#owl-ar-3)" d="M24 50 V80"/>
+
+          <text class="lane" x="0" y="100">update</text>
+          <text class="s l" x="0" y="120">every re-render</text>
+
+          <rect class="bx" x="170" y="78" width="170" height="44" rx="6"/>
+          <text class="t" x="255" y="106">onWillPatch</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M344 100 H382"/>
+
+          <rect class="chip" x="386" y="78" width="170" height="44" rx="6"/>
+          <text class="t" x="471" y="106">the patch</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M560 100 H598"/>
+
+          <rect class="bx" x="602" y="78" width="170" height="44" rx="6"/>
+          <text class="t" x="687" y="106">onPatched</text>
+
+          <path class="ar rt" marker-end="url(#owl-ar-3)" d="M24 128 V158"/>
+
+          <text class="lane" x="0" y="178">destroy</text>
+          <text class="s l" x="0" y="198">once</text>
+
+          <rect class="bx mount" x="170" y="156" width="170" height="44" rx="6"/>
+          <text class="t" x="255" y="184">onWillUnmount</text>
+          <path class="ar" marker-end="url(#owl-ar-2)" d="M344 178 H382"/>
+
+          <rect class="bx open" x="386" y="156" width="170" height="44" rx="6"/>
+          <text class="t" x="471" y="184">onWillDestroy</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>What <code>setup</code> starts, <code>onWillDestroy</code> ends. What <code>onMounted</code> starts, <code>onWillUnmount</code> ends. And <code>onWillStart</code> may be async.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="b8e0d4a7">
+    <header class="slide-head">
+      <p class="eyebrow">Owl</p>
+      <h2>odoo.github.io/owl</h2>
+      <p class="lead">The documentation, the playground and the source. Everything in this topic, in reference form.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure shot">
+        <img src="assets/owl-website.webp" alt="The Owl website: what Owl is, with links to the documentation and the playground">
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p><a href="https://odoo.github.io/owl/">odoo.github.io/owl</a> — also under Resources, at the foot of the sidebar.</p>
+    </footer>
+  </article>
+</div>

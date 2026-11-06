@@ -1,0 +1,123 @@
+<div class="deck clean" id="deck-generic-components">
+  <article class="slide statement cover" data-id="074e956b">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 2 · Owl</p>
+      <h2>Generic components</h2>
+      <p class="lead">A component whose content is somebody else's: slots.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Then</span>The Odoo JS framework, and the dashboard</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="50b92cfe">
+    <header class="slide-head">
+      <p class="eyebrow">Slots</p>
+      <h2>Content the caller writes</h2>
+      <ul class="notes">
+        <li>A <code>Card</code> draws the frame. What goes inside is different at every call site.</li>
+        <li>Props pass <em>data</em> down: a string, a number, a record. They cannot pass a paragraph and a button with a handler on it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">root.xml — what we want to be able to write</h3>
+<pre><code class="language-markup">&lt;t t-name="tutorial.Root"&gt;
+    &lt;<mark>Card</mark>&gt;
+        &lt;p&gt;Some quick example text.&lt;/p&gt;
+        &lt;a class="btn btn-primary"
+           t-on-click="this.goSomewhere"&gt;
+          Go somewhere
+        &lt;/a&gt;
+    &lt;/Card&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Markup</span><span>A paragraph, a button, another component — whatever this screen needs.</span></li>
+          <li><span class="key">Its own</span><span><code>this.goSomewhere</code> is the Root's method. The Card never hears about it.</span></li>
+          <li><span class="key">Every call</span><span>The next <code>&lt;Card/&gt;</code> holds something else entirely.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Owl calls that a slot: the generic component leaves a hole, and whoever uses it fills the hole.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="c47b0e83">
+    <header class="slide-head">
+      <p class="eyebrow">Slots</p>
+      <h2>A slot is a hole in a template</h2>
+      <ul class="notes">
+        <li>The generic component says <em>where</em> the content goes, with <code>t-call-slot</code>. The caller says what it is.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">card.xml — the generic component</h3>
+<pre><code class="language-markup">&lt;t t-name="tutorial.Card"&gt;
+    &lt;div class="card"&gt;
+        &lt;div class="card-body"&gt;
+            &lt;t <mark>t-call-slot="default"</mark>/&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">default</span><span>Everything the caller wrote between <code>&lt;Card&gt;</code> and <code>&lt;/Card&gt;</code>.</span></li>
+          <li><span class="key">Nothing else</span><span>The Card is seven lines of markup, and no javascript at all.</span></li>
+          <li><span class="key">Reusable</span><span>Every screen that needs a card frame now has one.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The content is rendered where it was <em>written</em>: <code>this.goSomewhere</code> is the Root's method, not the Card's.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="944efe79">
+    <header class="slide-head">
+      <p class="eyebrow">Slots</p>
+      <h2>Named slots, and optional ones</h2>
+      <ul class="notes">
+        <li><code>t-set-slot</code> names a piece of content. Everything left over is the <code>default</code> slot.</li>
+        <li>What the caller gave you is readable: <code>this.props.slots</code>, keyed by slot name.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">card.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="tutorial.Card"&gt;
+  &lt;div class="card"&gt;
+    &lt;div class="card-body"&gt;
+      &lt;h5 class="card-title"
+          t-if="<mark>this.props.slots.title</mark>"&gt;
+        &lt;t t-call-slot="title"/&gt;
+      &lt;/h5&gt;
+      &lt;t t-call-slot="default"/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">root.xml</h3>
+<pre><code class="language-markup">&lt;Card&gt;
+    &lt;t <mark>t-set-slot="title"</mark>&gt;Card title&lt;/t&gt;
+    &lt;p&gt;Some quick example text.&lt;/p&gt;
+&lt;/Card&gt;
+
+&lt;!-- no title given: the h5 is not
+     rendered at all --&gt;
+&lt;Card&gt;
+    &lt;p&gt;Just a body.&lt;/p&gt;
+&lt;/Card&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A slot can carry a default too: <code>&lt;t t-call-slot="title"&gt;Untitled&lt;/t&gt;</code> renders that when the caller gave nothing.</p>
+    </footer>
+  </article>
+
+</div>

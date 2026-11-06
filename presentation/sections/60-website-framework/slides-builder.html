@@ -1,0 +1,560 @@
+<div class="deck clean" id="deck-website-builder">
+  <article class="slide statement cover" data-id="4bf180ed">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 6 · Part 2</p>
+      <h2>Snippets and the Builder</h2>
+      <p class="lead">A snippet of your own, alive on the page, and still alive while the page is edited.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Example</span>A weather forecast, from its template to its options</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="1027e08b">
+    <header class="slide-head">
+      <p class="eyebrow">Snippets</p>
+      <h2>Our goal</h2>
+      <p class="lead">Attach behaviour to a snippet of your own, with API calls, and keep it working in edit mode.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure shot">
+        <img src="assets/weather-snippet.webp" alt="The weather snippet on a page: Brussels's weather, an input to type another city, and five days of forecast, each a card with an icon, the day and the temperature">
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p><span class="k">Steps</span>A template, the snippets dialog, an interaction, edit mode, options</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="c2bd5338">
+    <header class="slide-head">
+      <p class="eyebrow">Snippets</p>
+      <h2>A QWeb template</h2>
+      <p class="lead">A snippet is a template: the HTML dropped into the page.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">views/snippets/s_weather.xml</h3>
+<pre><code class="language-markup">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;odoo&gt;
+    &lt;template id="demo.s_weather"
+              name="Weather Forecast"&gt;
+        &lt;section class="s_weather"&gt;
+            &lt;div class="container"&gt;
+                &lt;h1 class="text-center"&gt;
+                    Hello World!
+                &lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+    &lt;/template&gt;
+&lt;/odoo&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">A block</span><span>A snippet the width of the page is a <code>&lt;section&gt;</code>: it gets the options every block has.</span></li>
+          <li><span class="key">An inner one</span><span>A snippet dropped inside another: any element you like.</span></li>
+          <li><span class="key">Bootstrap</span><span><code>container</code>, <code>row</code>, <code>text-center</code>: its classes come with some generic options.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The class, <code>s_weather</code>, is what the interaction will look for.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="6a8b598e">
+    <header class="slide-head">
+      <p class="eyebrow">Snippets</p>
+      <h2>Into the snippets dialog</h2>
+      <p class="lead">A standard xpath, on the list of snippets.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">views/snippets/snippets.xml</h3>
+<pre><code class="language-markup">&lt;template id="snippets"
+          inherit_id="website.snippets"&gt;
+    &lt;xpath expr="//t[@t-snippet='website.s_text_image']"
+           position="before"&gt;
+        &lt;t t-snippet="demo.s_weather"
+           string="Weather Forecast"
+           group="content"&gt;
+            &lt;keywords&gt;weather, forecast, climate&lt;/keywords&gt;
+        &lt;/t&gt;
+    &lt;/xpath&gt;
+&lt;/template&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">__manifest__.py</h3>
+<pre><code class="language-python">"depends": ["website"],
+"data": [
+    "views/snippets/snippets.xml",
+    "views/snippets/s_weather.xml",
+],</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">t-snippet</span><span>The template to drop into the page.</span></li>
+          <li><span class="key">group</span><span>The dialog's category it is listed in.</span></li>
+          <li><span class="key">keywords</span><span>As many as you want: what the dialog's search finds it by.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Both files go in the manifest's <code>data</code>, or the dialog never hears of them.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="f8d1191b">
+    <header class="slide-head">
+      <p class="eyebrow">Snippets</p>
+      <h2>Get it in shape</h2>
+      <p class="lead">A static template first: the layout, with made-up data.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-markup">&lt;section class="pt32 pb32 s_weather"
+         data-location-name="Brussels"&gt;
+    &lt;div class="container"&gt;
+        &lt;h2 class="h5"&gt;Weather in
+            &lt;span class="weather-location-name"&gt;Brussels&lt;/span&gt;
+        &lt;/h2&gt;
+        &lt;input class="weather-location-input"
+               placeholder="Another city"/&gt;
+        &lt;div class="row align-items-center"&gt;
+            &lt;t t-foreach="[('Monday', 'clouds', '14'),
+                           ('Tuesday', 'rain', '12'),
+                           ('Wednesday', 'sun', '18')]"
+               t-as="day"&gt;
+                &lt;div class="card col mx-2 p-0"&gt;
+                    &lt;img class="card-img-top img-fluid"
+                         t-att-src="'/demo/static/img/' + day[1] + '.svg'"
+                         t-att-alt="day[1]"/&gt;
+                    &lt;div class="card-body"&gt;
+                        &lt;div class="h6" t-out="day[0]"/&gt;
+                        &lt;p class="h5 card-title"&gt;&lt;t t-out="day[2]"/&gt;°C&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/t&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">t-foreach</span><span>Runs once, on the server, when the snippets are loaded. What lands in the page is plain HTML.</span></li>
+          <li><span class="key">data-location-name</span><span>A setting kept in the HTML itself, for the interaction to read.</span></li>
+          <li><span class="key">Classes</span><span>No ids: a snippet can be dropped twice on the same page.</span></li>
+          <li><span class="key">Bootstrap</span><span><code>row</code>, <code>col</code>, <code>card</code> do the layout.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The forecast is made up for now. The interaction brings the real one.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="f71422cf">
+    <header class="slide-head">
+      <p class="eyebrow">Interactions</p>
+      <h2>Add an interaction</h2>
+      <p class="lead">A class with a selector, registered in <code>public.interactions</code>.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">static/src/interactions/weather.js</h3>
+<pre><code class="language-javascript">import { Interaction } from "@web/public/interaction";
+import { registry } from "@web/core/registry";
+import { rpc } from "@web/core/network/rpc";
+
+export class Weather extends Interaction {
+    static selector = <mark>".s_weather"</mark>;
+    dynamicContent = {
+        ".weather-location-name": {
+            "t-out": () =&gt; this.locationName,
+        },
+    };
+
+    setup() {
+        this.locationName = this.el.dataset.locationName;
+    }
+
+    async willStart() {
+        this.days = await rpc("/demo/get_weather", {
+            location: this.locationName,
+        });
+    }
+    ...
+}
+
+registry
+    .category(<mark>"public.interactions"</mark>)
+    .add("demo.weather", Weather);</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">selector</span><span>A CSS selector: one instance per element it matches.</span></li>
+          <li><span class="key">selectorHas</span><span>Only the matches that contain an element matching this one.</span></li>
+          <li><span class="key">selectorNotHas</span><span>Only the ones that do not.</span></li>
+          <li><span class="key">this.el</span><span>The matched element: here the section, and its <code>data-location-name</code>.</span></li>
+          <li><span class="key">willStart</span><span>The interaction waits for the forecast before it starts.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>/demo/get_weather</code> is a JSON route of the addon's own controller.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="78c94eb4">
+    <header class="slide-head">
+      <p class="eyebrow">Interactions</p>
+      <h2>Add some listeners</h2>
+      <p class="lead">A <code>t-on-…</code> in <code>dynamicContent</code>, and <code>waitFor</code> around anything asynchronous.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript">class Weather extends Interaction {
+    ...
+    dynamicContent = {
+        ".weather-location-input": {
+            "t-on-change": this.onInputChange,
+        },
+    };
+
+    async onInputChange(ev) {
+        this.locationName = ev.currentTarget.value;
+        this.days = await <mark>this.waitFor</mark>(
+            rpc("/demo/get_weather", {
+                location: this.locationName,
+            }),
+        );
+        this.updateWeather();
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label">Modifiers, after the event's name</h3>
+        <ul class="rows wide-key">
+          <li><span class="key">.prevent</span><span><code>preventDefault()</code></span></li>
+          <li><span class="key">.stop</span><span><code>stopPropagation()</code></span></li>
+          <li><span class="key">.capture, .once, .passive</span><span>As for <code>addEventListener</code>.</span></li>
+          <li><span class="key">.noUpdate</span><span>No <code>updateContent()</code> after the handler: you call it yourself.</span></li>
+          <li><span class="key">Combined</span><span><code>t-on-click.prevent.stop</code></span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>No <code>bind</code>. And if the interaction is destroyed while the request runs, <code>waitFor</code> never settles: no code runs on a dead snippet.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="e5635547">
+    <header class="slide-head">
+      <p class="eyebrow">Edit mode</p>
+      <h2>Also in edit mode</h2>
+      <p class="lead">While a page is edited, its interactions are stopped. Unless you say otherwise.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">static/src/interactions/weather.js</h3>
+<pre><code class="language-javascript">// start the interaction in edit mode too
+registry
+    .category(<mark>"public.interactions.edit"</mark>)
+    .add("demo.weather", {
+        Interaction: Weather,
+    });</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">__manifest__.py</h3>
+<pre><code class="language-python">"assets": {
+    "web.assets_frontend": [
+        "demo/static/src/interactions/**/*",
+    ],
+},</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">The edit registry</span><span>The interactions listed there run while the page is edited, under the same key.</span></li>
+          <li><span class="key">The bundle</span><span>The frontend one: every page loads it, the one in the builder too.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The simplest case: the same behaviour, edited or not.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="29e0cb05">
+    <header class="slide-head">
+      <p class="eyebrow">Edit mode</p>
+      <h2>An edit interaction</h2>
+      <p class="lead">A mixin takes the interaction, and returns what it should be in edit mode.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">static/src/interactions/weather.edit.js</h3>
+<pre><code class="language-javascript">import { registry } from "@web/core/registry";
+import { Weather } from "./weather";
+
+const WeatherEdit = (I) =&gt;
+    class extends I {
+        dynamicContent = {
+            ...this.dynamicContent,
+            // no listener while the page is edited
+            ".weather-location-input": {},
+        };
+    };
+
+registry
+    .category("public.interactions.edit")
+    .add("demo.weather", {
+        Interaction: Weather,
+        <mark>mixin: WeatherEdit</mark>,
+    });</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">__manifest__.py</h3>
+<pre><code class="language-python">"assets": {
+    "web.assets_frontend": [
+        "demo/static/src/interactions/**/*",
+        ("remove", "demo/static/src/**/*.edit.js"),
+    ],
+    "website.assets_inside_builder_iframe": [
+        "demo/static/src/**/*.edit.js",
+    ],
+},</code></pre>
+        <ul class="rows wide-key">
+          <li><span class="key">The mixin</span><span>A function, class in, class out: it extends whatever the interaction is.</span></li>
+          <li><span class="key">.edit.js</span><span>Loaded only inside the builder's iframe, and kept out of the public bundle.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>One entry per key in the edit registry: this one replaces the previous slide's.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="c4efd01f">
+    <header class="slide-head">
+      <p class="eyebrow">Architecture</p>
+      <h2>The website builder</h2>
+      <p class="lead">The page runs in an iframe, with its edit interactions. The options sit beside it.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 360" role="img"
+             aria-label="On the left, the page, in an iframe: its snippets, with the weather forecast selected, and the edit interaction Weather attached to it. ReadMore, which has no edit interaction, is stopped while editing. On the right, the builder's options for the selected snippet: default location, title and theme, each an option component that runs a builder action on the snippet.">
+          <defs>
+            <marker id="web-ar-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="chip" x="0" y="0" width="640" height="360" rx="8"/>
+          <text class="lane" x="20" y="32">The page, in an iframe</text>
+
+          <rect class="bx js" x="20" y="70" width="200" height="64" rx="6"/>
+          <text class="t" x="120" y="98">Weather</text>
+          <text class="s" x="120" y="120">edit interaction</text>
+          <path class="ar" marker-end="url(#web-ar-3)" d="M226 102 H260"/>
+
+          <rect class="chip" x="20" y="230" width="200" height="64" rx="6"/>
+          <text class="t" x="120" y="258">ReadMore</text>
+          <text class="s" x="120" y="280">stopped while editing</text>
+
+          <rect class="bound" x="264" y="54" width="362" height="96" rx="8"/>
+          <rect class="bx srv" x="270" y="60" width="350" height="84" rx="6"/>
+          <text class="t" x="445" y="98">Weather forecast</text>
+          <text class="s" x="445" y="120">selected</text>
+
+          <rect class="bx srv" x="270" y="162" width="350" height="84" rx="6"/>
+          <text class="t" x="445" y="210">Text and image</text>
+
+          <rect class="bx srv" x="270" y="260" width="350" height="84" rx="6"/>
+          <text class="t" x="445" y="308">Three columns</text>
+
+          <rect class="bx" x="680" y="0" width="320" height="360" rx="8"/>
+          <text class="t" x="840" y="34">Options</text>
+          <text class="s" x="840" y="56">the builder's own UI, in Owl</text>
+
+          <rect class="bx js" x="700" y="76" width="280" height="56" rx="6"/>
+          <text class="mt" x="840" y="101">Default location</text>
+          <text class="s" x="840" y="120">an option component</text>
+
+          <rect class="bx js" x="700" y="146" width="280" height="56" rx="6"/>
+          <text class="mt" x="840" y="171">Title</text>
+          <text class="s" x="840" y="190">an option component</text>
+
+          <rect class="bx js" x="700" y="216" width="280" height="56" rx="6"/>
+          <text class="mt" x="840" y="241">Theme</text>
+          <text class="s" x="840" y="260">an option component</text>
+
+          <text class="s" x="840" y="310">each runs a builder action</text>
+          <text class="s" x="840" y="330">on the selected snippet</text>
+
+          <path class="ar" marker-end="url(#web-ar-3)" d="M694 104 C664 104 664 92 632 92"/>
+          <path class="ar" marker-end="url(#web-ar-3)" d="M694 174 C656 174 660 102 632 102"/>
+          <path class="ar" marker-end="url(#web-ar-3)" d="M694 244 C648 244 656 112 632 112"/>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Two sides, two worlds: the page is HTML with interactions, the builder around it is Owl.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="564486bb">
+    <header class="slide-head">
+      <p class="eyebrow">Architecture</p>
+      <h2>The builder, in javascript</h2>
+      <p class="lead">An editor made of plugins, and the options beside it. A plugin brings actions, an option runs them.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 372" role="img"
+             aria-label="The JS framework, with the env and the services, builds the Builder, the edit mode. The Builder builds the Editor, made of plugins, and the Options, the sidebar. WeatherPlugin extends Plugin, is registered in website-plugins, and brings a BuilderAction in its builder_actions resource: yours, or a built-in one. WeatherOption extends BaseOptionComponent, is registered in website-options, and runs the action.">
+          <defs>
+            <marker id="web-ar-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="0" y="141" width="170" height="90" rx="6"/>
+          <text class="t" x="85" y="180">JS framework</text>
+          <text class="s" x="85" y="204">env, services</text>
+          <path class="ar" marker-end="url(#web-ar-4)" d="M176 186 H214"/>
+
+          <rect class="bx" x="220" y="141" width="150" height="90" rx="6"/>
+          <text class="t" x="295" y="180">Builder</text>
+          <text class="s" x="295" y="204">the edit mode</text>
+          <path class="ar" marker-end="url(#web-ar-4)" d="M376 176 C394 176 386 80 404 80"/>
+          <path class="ar" marker-end="url(#web-ar-4)" d="M376 196 C394 196 386 290 404 290"/>
+
+          <rect class="bound" x="410" y="0" width="590" height="160" rx="8"/>
+          <text class="lane" x="430" y="32">Editor</text>
+          <text class="s l" x="496" y="32">made of plugins</text>
+
+          <rect class="bx js" x="430" y="56" width="250" height="80" rx="6"/>
+          <text class="t" x="555" y="86">WeatherPlugin</text>
+          <text class="s" x="555" y="106">extends Plugin</text>
+          <text class="s m" x="555" y="125">website-plugins</text>
+
+          <path class="ar" marker-end="url(#web-ar-4)" d="M686 96 H734"/>
+          <text class="s" x="710" y="86">brings</text>
+
+          <rect class="bx" x="740" y="56" width="240" height="80" rx="6"/>
+          <text class="t" x="860" y="86">BuilderAction</text>
+          <text class="s" x="860" y="106">yours, or a built-in one</text>
+          <text class="s m" x="860" y="125">builder_actions</text>
+
+          <rect class="bound" x="410" y="196" width="590" height="176" rx="8"/>
+          <text class="lane" x="430" y="228">Options</text>
+          <text class="s l" x="505" y="228">the sidebar</text>
+
+          <rect class="bx js" x="430" y="256" width="250" height="80" rx="6"/>
+          <text class="t" x="555" y="286">WeatherOption</text>
+          <text class="s" x="555" y="306">extends BaseOptionComponent</text>
+          <text class="s m" x="555" y="325">website-options</text>
+
+          <path class="ar" marker-end="url(#web-ar-4)" d="M686 296 C800 296 860 236 860 142"/>
+          <text class="s r" x="824" y="240">runs, when a value changes</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Built-in actions cover most options: a class, a style, an attribute, a data attribute. A plugin is for the rest.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="d1efceb4">
+    <header class="slide-head">
+      <p class="eyebrow">The builder</p>
+      <h2>Options of your own</h2>
+      <p class="lead">Go further: let whoever edits the page choose the city.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <figure class="figure">
+          <svg viewBox="0 0 420 210" role="img"
+               aria-label="The builder's options for the weather snippet: a default location, Brussels; a title, Classic; and a theme, light or dark, with dark picked.">
+            <rect class="bx" x="0" y="0" width="420" height="210" rx="8"/>
+            <text class="t l" x="20" y="34">Weather Forecast</text>
+            <path class="tick" d="M0 52 H420"/>
+
+            <text class="s l" x="20" y="91">Default location</text>
+            <rect class="chip" x="200" y="70" width="200" height="32" rx="4"/>
+            <text class="m l" x="212" y="91">Brussels</text>
+
+            <text class="s l" x="20" y="136">Title</text>
+            <rect class="chip" x="200" y="115" width="200" height="32" rx="4"/>
+            <text class="s l" x="212" y="136">Classic</text>
+            <path class="tick" d="M376 128 L382 134 L388 128"/>
+
+            <text class="s l" x="20" y="181">Theme</text>
+            <rect class="bx" x="200" y="160" width="100" height="32" rx="4"/>
+            <text class="s" x="250" y="181">Light</text>
+            <rect class="bx js" x="300" y="160" width="100" height="32" rx="4"/>
+            <text class="s" x="350" y="181">Dark</text>
+          </svg>
+        </figure>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">An option</span><span>A component and its template: a row per setting, a text input, a select, a pair of buttons.</span></li>
+          <li><span class="key">Its place</span><span>On <code>.s_weather</code>, set in the <code>website.BuilderOptions</code> template.</span></li>
+          <li><span class="key">An action</span><span>What a value does to the snippet: a class, a style, a data attribute, or one of your own, brought by a plugin.</span></li>
+          <li><span class="key">Back in the page</span><span>Default location writes <code>data-location-name</code>. The interaction reads it in <code>setup</code>.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The options write the HTML, the interaction reads it. Neither knows the other.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="f789cd57">
+    <header class="slide-head">
+      <p class="eyebrow">The builder</p>
+      <h2>An option, in code</h2>
+      <p class="lead">A component in <code>website-options</code>, and a line that puts it on the snippet.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">static/src/builder/weather_option.js</h3>
+<pre><code class="language-javascript">import { BaseOptionComponent } from "@html_builder/core/base_option_component";
+import { registry } from "@web/core/registry";
+
+export class WeatherOption extends BaseOptionComponent {
+    static id = "weather_option";
+    static template = "demo.WeatherOption";
+}
+
+registry
+    .category(<mark>"website-options"</mark>)
+    .add(WeatherOption.id, WeatherOption);</code></pre>
+        <h3 class="label file">__manifest__.py</h3>
+<pre><code class="language-python">"assets": {
+    "website.website_builder_assets": [
+        "demo/static/src/builder/**/*",
+    ],
+},</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">static/src/builder/weather_option.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="demo.WeatherOption"&gt;
+    &lt;BuilderRow label.translate="Default location"&gt;
+        &lt;BuilderTextInput
+            <mark>dataAttributeAction="'locationName'"</mark>/&gt;
+    &lt;/BuilderRow&gt;
+&lt;/t&gt;
+
+&lt;t t-inherit="website.BuilderOptions"
+   t-inherit-mode="extension"&gt;
+    &lt;xpath expr="//t[@id='snippet_specific_options']"
+           position="after"&gt;
+        &lt;weather_option selector=".s_weather"/&gt;
+    &lt;/xpath&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>dataAttributeAction</code> is built in: no plugin needed here. It writes <code>data-location-name</code>, the attribute the interaction reads.</p>
+    </footer>
+  </article>
+</div>

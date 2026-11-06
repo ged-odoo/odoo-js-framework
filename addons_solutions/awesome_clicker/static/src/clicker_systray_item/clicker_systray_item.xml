@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="awesome_clicker.ClickerSystray">
+        <div class="o_nav_entry">
+            <Dropdown>
+                <button>
+                    <ClickerValue/> <i class="oi oi-fw" data-icon="arrow_selector_tool"></i>,
+                    <t t-out="this.numberTrees"/> <i class="oi oi-fw" data-icon="park"></i>,
+                    <t t-out="this.numberFruits"/> <i class="oi oi-fw" data-icon="eco"></i>
+                </button>
+                <t t-set-slot="content">
+                    <DropdownItem>
+                        <button class="btn btn-secondary" t-on-click="this.openClientAction"> Open the clicker game </button>
+                    </DropdownItem>
+                    <DropdownItem>
+                        <button class="btn btn-secondary" t-on-click="() => this.clicker.buyBot('clickbot')"> Buy a ClickBot </button>
+                    </DropdownItem>
+                    <DropdownItem t-foreach="this.clicker.trees" t-as="tree" t-key="tree">
+                        <t t-out="tree_value.purchased()"/>x
+                        <t t-out="tree"/>
+                    </DropdownItem>
+                    <DropdownItem t-foreach="this.clicker.fruits" t-as="fruit" t-key="fruit">
+                        <t t-out="fruit_value()"/>x
+                        <t t-out="fruit"/>
+                    </DropdownItem>
+                </t>
+            </Dropdown>
+        </div>
+    </t>
+</templates>

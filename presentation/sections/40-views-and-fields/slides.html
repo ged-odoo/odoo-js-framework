@@ -1,0 +1,688 @@
+<div class="deck clean" id="deck-views-fields">
+  <article class="slide statement cover" data-id="b4817e9c">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 4 · Part 1</p>
+      <h2>Views and Fields</h2>
+      <p class="lead">What a view is made of whatever its type, the model behind the relational ones, and the components that plug into them.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Then</span>Customizing views and fields</p>
+    </footer>
+  </article>
+
+
+  <article class="slide" data-id="ad84c814">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>What a view does</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes">
+        <li><h3>Loads data</h3><p>Through the ORM, from the model it is set on.</p></li>
+        <li><h3>Structures it</h3><p>According to an <code>arch</code>: an xml document, stored in <code>ir.ui.view</code>.</p></li>
+        <li><h3>Shows it</h3><p>Usually records and fields, though not always.</p></li>
+        <li><h3>Edits</h3><p>Sometimes: a view can be read-only by design.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>The debug tools (developer mode) are the fast way to read a view's actual arch.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="2b7e14c9">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>View architecture</h2>
+      <p class="lead">The same shape whatever the type: a controller on top, a renderer and a model under it.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 288" role="img"
+             aria-label="The web client mounts the controller. The controller owns a renderer, which draws the records, and a model, which loads them from the server and writes them back.">
+          <defs>
+            <marker id="vw-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="280" y="0" width="240" height="56" rx="6"/>
+          <text class="t" x="400" y="24">the web client</text>
+          <text class="s" x="400" y="44">mounts it as an action</text>
+
+          <path class="ar" marker-end="url(#vw-ar-1)" d="M400 56 V92"/>
+
+          <rect class="bx js" x="280" y="96" width="240" height="64" rx="6"/>
+          <text class="t" x="400" y="124">Controller</text>
+          <text class="s" x="400" y="146">owns both, and the arch</text>
+
+          <path class="ar" d="M400 160 V184 M180 184 H620"/>
+          <path class="ar" marker-end="url(#vw-ar-1)" d="M180 184 V210"/>
+          <path class="ar" marker-end="url(#vw-ar-1)" d="M620 184 V210"/>
+
+          <rect class="bx js" x="60" y="214" width="240" height="64" rx="6"/>
+          <text class="t" x="180" y="242">Renderer</text>
+          <text class="s" x="180" y="264">draws the records</text>
+
+          <rect class="bx js" x="500" y="214" width="240" height="64" rx="6"/>
+          <text class="t" x="620" y="242">Model</text>
+          <text class="s" x="620" y="264">loads them, writes them</text>
+
+          <path class="ar" marker-start="url(#vw-ar-1)" marker-end="url(#vw-ar-1)" d="M746 246 H794"/>
+          <text class="s" x="770" y="234">rpc</text>
+
+          <rect class="bx srv" x="800" y="214" width="200" height="64" rx="6"/>
+          <text class="t" x="900" y="242">the server</text>
+          <text class="s" x="900" y="264">the database</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>The renderer never calls the server, and the model never draws anything. They meet in the controller.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a29dff6f">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>The pieces of a view</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">Controller</span><span>The main component: owns the model, holds the control panel and the renderer.</span></li>
+        <li><span class="key">Renderer</span><span>Below the control panel, the component that actually represents the data.</span></li>
+        <li><span class="key">Model</span><span>Loads data from the database, and writes changes back to it.</span></li>
+        <li><span class="key">ArchParser</span><span>Reads the arch and extracts the information the rest needs.</span></li>
+        <li><span class="key">Compiler</span><span>For some views: turns the arch into an actual Owl template.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>A view type registers all five together, under one name.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="3fc61c8b">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>Registering a view type</h2>
+      <p class="lead">The same shape for every view: kanban, list, form...</p>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+<pre><code class="language-javascript">export const kanbanView = {
+    type: "kanban",
+    ArchParser: KanbanArchParser,
+    Controller: KanbanController,
+    Model: RelationalModel,
+    Renderer: KanbanRenderer,
+    Compiler: KanbanCompiler,
+    buttonTemplate: "web.KanbanView.Buttons",
+    props: (genericProps, view) => {
+        // whatever this returns is what the
+        // controller is then created with
+    },
+};
+
+registry.category("views").add("kanban", kanbanView);</code></pre>
+      </section>
+      <section>
+        <figure class="figure">
+          <svg viewBox="0 0 560 300" role="img"
+               aria-label="The view object defines the controller, and the controller holds a renderer and a model.">
+            <defs>
+              <marker id="vw-ar-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <rect class="bx js" x="0" y="40" width="200" height="72" rx="6"/>
+            <text class="t" x="100" y="83">view</text>
+
+            <path class="ar" marker-start="url(#vw-ar-3)" marker-end="url(#vw-ar-3)" d="M212 76 H288"/>
+            <text class="s" x="250" y="60">defines</text>
+
+            <rect class="bx" x="300" y="40" width="260" height="72" rx="6"/>
+            <text class="t" x="430" y="83">Controller</text>
+
+            <path class="ar" d="M430 112 V168 M360 168 H500"/>
+            <path class="ar" marker-end="url(#vw-ar-3)" d="M360 168 V204"/>
+            <path class="ar" marker-end="url(#vw-ar-3)" d="M500 168 V204"/>
+
+            <rect class="bx" x="290" y="208" width="140" height="72" rx="6"/>
+            <text class="t" x="360" y="251">Renderer</text>
+
+            <rect class="bx" x="440" y="208" width="120" height="72" rx="6"/>
+            <text class="t" x="500" y="251">Model</text>
+          </svg>
+        </figure>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The view's own <code>props</code> function is what feeds the controller the arch, the fields, the domain...</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="5d0c8a37">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>Example: the form view</h2>
+      <p class="lead">The same names, in the tree an actual form view mounts.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure formtree">
+        <svg viewBox="0 0 1000 368" role="img"
+             aria-label="View, the component an action mounts, holds WithSearch, which holds the FormController. The controller owns a RelationalModel and mounts a Layout. The Layout holds the ControlPanel and the FormRenderer. The FormRenderer mounts one component per field: CharField, Many2OneField, X2ManyField. The X2ManyField holds a ListRenderer of its own.">
+          <defs>
+            <marker id="vw-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="0" y="0" width="300" height="40" rx="6"/>
+          <text class="t" x="150" y="26">View</text>
+          <text class="s l" x="320" y="26">what the action mounts</text>
+
+          <path class="ar" d="M18 40 V64 H32"/>
+
+          <rect class="bx" x="36" y="44" width="300" height="40" rx="6"/>
+          <text class="t" x="186" y="70">WithSearch</text>
+          <text class="s l" x="356" y="70">the search bar and its domain</text>
+
+          <path class="ar" d="M54 84 V108 H68"/>
+
+          <rect class="bx js" x="72" y="88" width="300" height="40" rx="6"/>
+          <text class="t" x="222" y="114">FormController</text>
+
+          <path class="ar" marker-end="url(#vw-ar-2)" d="M376 108 H696"/>
+          <text class="s" x="536" y="98">owns</text>
+
+          <rect class="bx js" x="700" y="88" width="280" height="40" rx="6"/>
+          <text class="t" x="840" y="114">RelationalModel</text>
+
+          <path class="ar" d="M90 128 V152 H104"/>
+
+          <rect class="bx" x="108" y="132" width="300" height="40" rx="6"/>
+          <text class="t" x="258" y="158">Layout</text>
+
+          <path class="ar" d="M126 172 V240 M126 196 H144 M126 240 H144"/>
+
+          <rect class="bx" x="144" y="176" width="300" height="40" rx="6"/>
+          <text class="t" x="294" y="202">ControlPanel</text>
+
+          <rect class="bx js" x="144" y="220" width="300" height="40" rx="6"/>
+          <text class="t" x="294" y="246">FormRenderer</text>
+
+          <path class="ar" d="M162 260 V270 H722 M270 270 V276 M486 270 V276 M722 270 V276"/>
+
+          <rect class="bx" x="180" y="276" width="180" height="40" rx="6"/>
+          <text class="t" x="270" y="302">CharField</text>
+
+          <rect class="bx" x="376" y="276" width="220" height="40" rx="6"/>
+          <text class="t" x="486" y="302">Many2OneField</text>
+
+          <rect class="bx" x="612" y="276" width="220" height="40" rx="6"/>
+          <text class="t" x="722" y="302">X2ManyField</text>
+
+          <path class="ar" d="M630 316 V340 H648"/>
+
+          <rect class="bx js" x="648" y="320" width="220" height="40" rx="6"/>
+          <text class="t" x="758" y="346">ListRenderer</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>One component per <code>&lt;field&gt;</code> in the arch, and an x2many holds a renderer of its own: the same architecture, one level down.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="13ec8327">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>Standard flows</h2>
+    </header>
+    <div class="slide-body two-col even flows">
+      <section>
+        <h3 class="label">Editing a value</h3>
+        <ul>
+          <li>The user changes a value in a field's input.</li>
+          <li>That field instance calls <code>update</code> on <code>props.record</code>.</li>
+          <li>The relational model is notified of the change.</li>
+          <li>If there are onchanges, the server is called to get the new values.</li>
+          <li>The model updates, and every changed field rerenders.</li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label">Changing a domain in a list</h3>
+        <ul>
+          <li>The user changes the search filters.</li>
+          <li><code>WithSearch</code> updates its domain.</li>
+          <li>The controller is updated with the new domain as a prop.</li>
+          <li>The relational model refetches the data.</li>
+          <li>The renderer updates, destroying its previous components.</li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Both flows go through the model - it is the one source of truth for a view's data.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="7a2f4c81">
+    <header class="slide-head">
+      <p class="eyebrow">Views</p>
+      <h2>Odoo views</h2>
+      <p class="lead">Three of them show records and their fields. The rest aggregate, schedule or plot the same data.</p>
+    </header>
+    <div class="slide-body two-col even view-types">
+      <section>
+        <h3 class="label">Relational views</h3>
+        <ul class="rows boxes relational">
+          <li><h3>form</h3><p>One record, and its fields.</p></li>
+          <li><h3>list</h3><p>Many records, in rows.</p></li>
+          <li><h3>kanban</h3><p>Many records, as cards.</p></li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label">The others</h3>
+        <ul class="rows boxes others">
+          <li><h3>graph</h3><p>Totals, as a chart.</p></li>
+          <li><h3>pivot</h3><p>Totals, in a table.</p></li>
+          <li><h3>calendar</h3><p>Records on dates.</p></li>
+          <li><h3>activity</h3><p>What is due, per record.</p></li>
+          <li><h3>gantt</h3><p>Spans on a timeline.</p></li>
+          <li><h3>map</h3><p>Records on a map.</p></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Only the three on the left share the <code>RelationalModel</code>; the others bring their own. <code>gantt</code> and <code>map</code> are enterprise.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="8d581190">
+    <header class="slide-head">
+      <p class="eyebrow">The model</p>
+      <h2>The RelationalModel</h2>
+      <p class="lead">One model behind form, list and kanban. What it manages is not a screen: it is collections of records, and the relations between them.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 300" role="img"
+             aria-label="A record holds its own values; a many2one field points at one other record, and a one2many field holds a list of records, each of which is a record in its own right.">
+          <defs>
+            <marker id="rv-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx js" x="0" y="10" width="380" height="280" rx="8"/>
+          <text class="m" x="190" y="50">res.partner #5</text>
+          <text class="s" x="190" y="76">one record, and its values</text>
+
+          <text class="m l" x="28" y="140">name</text>
+          <text class="s r" x="352" y="140">char</text>
+
+          <text class="m l" x="28" y="200">company_id</text>
+          <text class="s r" x="352" y="200">many2one</text>
+
+          <text class="m l" x="28" y="256">child_ids</text>
+          <text class="s r" x="352" y="256">one2many</text>
+
+          <path class="ar" marker-end="url(#rv-ar-1)" d="M386 196 H516"/>
+          <rect class="bx" x="530" y="166" width="320" height="60" rx="6"/>
+          <text class="m" x="690" y="202">res.company #1</text>
+          <text class="s l" x="866" y="202">one record</text>
+
+          <path class="ar" marker-end="url(#rv-ar-1)" d="M386 252 H516"/>
+          <rect class="bx" x="530" y="238" width="320" height="24" rx="4"/>
+          <text class="m" x="690" y="255">res.partner #7</text>
+          <rect class="bx" x="530" y="266" width="320" height="24" rx="4"/>
+          <text class="m" x="690" y="283">res.partner #9</text>
+          <text class="s l" x="866" y="266">a list of records</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Records, groups of records and x2many lists are all <code>DataPoint</code>s — one tree, loaded and saved in one call. <code>many2many</code> behaves like <code>one2many</code> here.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="5c9a1e46">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>A field is a component</h2>
+      <p class="lead">One <code>&lt;field&gt;</code> in the arch, one component on screen: a child of the renderer, bound to one value of one record.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">the arch, in <code>ir.ui.view</code></h3>
+<pre><code class="language-markup">&lt;form&gt;
+    &lt;group&gt;
+        &lt;<mark>field</mark> name="name"/&gt;
+        &lt;<mark>field</mark> name="email"/&gt;
+        &lt;<mark>field</mark> name="category_id"
+               widget="many2many_tags"/&gt;
+    &lt;/group&gt;
+&lt;/form&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label">what the renderer mounts</h3>
+<pre><code class="language-markup">&lt;!-- FormRenderer, compiled from the arch --&gt;
+&lt;<mark>Field</mark> name="'name'"
+       record="this.props.record"/&gt;
+&lt;<mark>Field</mark> name="'email'"
+       record="this.props.record"/&gt;
+&lt;<mark>Field</mark> name="'category_id'"
+       record="this.props.record"/&gt;</code></pre>
+        <p class="caption">Simplified: the compiler also hands each one its id, the arch info that describes it, and the view's readonly state.</p>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Same <code>Field</code> component every time. Which component it then renders is what the <code>widget</code> attribute, or the field's type, decides.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="2f5a820a">
+    <header class="slide-head">
+      <p class="eyebrow">Fields and widgets</p>
+      <h2>Two registries</h2>
+      <p class="lead">Views are generic, but form, kanban and list allow two kinds of sub components: fields and widgets. Both can read and write the current record.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">Fields</h3>
+        <p>Registry: <code>"fields"</code></p>
+<pre><code class="language-markup">&lt;field name="module_stock_fleet"/&gt;</code></pre>
+        <p>The component is chosen from the field's type, or from the registry if <code>widget=</code> names one.</p>
+<pre><code class="language-markup">&lt;field
+    name="module_delivery_ups"
+    widget="upgrade_boolean"/&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label">Widgets</h3>
+        <p>Registry: <code>"view_widgets"</code></p>
+<pre><code class="language-markup">&lt;widget name="res_config_invite_users"/&gt;</code></pre>
+        <p><code>name</code> is the key in the registry: a widget is not tied to a specific field.</p>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide walkthrough" data-id="64f7d9e4">
+    <header class="slide-head">
+      <p class="eyebrow">Widgets</p>
+      <h2>A view widget</h2>
+      <p class="lead">Typically like a field, but reading whatever it needs off the record.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">In the arch</h3>
+<pre><code class="language-markup">&lt;widget
+    name="web_ribbon"
+    title="Archived"
+    bg_color="text-bg-danger"
+    invisible="active"/&gt;</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">ribbon_widget.js</h3>
+<pre><code class="language-javascript">class RibbonWidget extends Component {
+    static template = "web.Ribbon";
+    props = useProps({
+        ...standardWidgetProps,
+        text: t.string(),
+        title: t.string().optional(),
+        bgClass: t.string().optional(),
+    });
+    get classes() {
+        return this.props.bgClass;
+    }
+}
+const ribbonWidget = {
+    component: RibbonWidget,
+    extractProps: ({ attrs }) => ({
+        text: attrs.title || attrs.text,
+        title: attrs.tooltip,
+        bgClass: attrs.bg_color,
+    }),
+};
+registry.category("view_widgets").add("web_ribbon", ribbonWidget);</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A widget receives the record, and everything <code>extractProps</code> pulls out of the arch, as props.</p>
+    </footer>
+  </article>
+
+  <article class="slide statement" data-id="5c3a4ab6">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Every &lt;field&gt; tag spawns a field component.</h2>
+    </header>
+    <footer class="slide-foot">
+      <p>Except basic fields in list and kanban views, kept as plain cells for performance.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="a79caf93">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Which component, for which field?</h2>
+    </header>
+    <div class="slide-body two-col even snug">
+      <section>
+        <h3 class="label">1. The widget attribute</h3>
+<pre><code class="language-markup">&lt;field name="category_ids" widget="many2many_tags"/&gt;</code></pre>
+        <p>If it is set, that name is looked up in the <code>"fields"</code> registry.</p>
+      </section>
+      <section>
+        <h3 class="label">2. The field's type</h3>
+<pre><code class="language-markup">&lt;field name="contact_name"/&gt;</code></pre>
+        <p>Otherwise, the type (<code>char</code>, <code>many2one</code>...) picks a default component.</p>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide walkthrough" data-id="6ec1d1bc">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>A field, from nothing</h2>
+      <p class="lead">A component, a template, registered under a name.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">hash_field.js</h3>
+<pre><code class="language-javascript">import { Component, useProps } from "@odoo/owl";
+import { registry } from "@web/core/registry";
+
+class HashField extends Component {
+    static template = "web.HashField";
+}
+
+const hashField = {
+    component: HashField,
+};
+
+registry.category("fields").add("hash", hashField);</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">hash_field.xml</h3>
+<pre><code class="language-markup">&lt;templates xml:space="preserve"&gt;
+    &lt;t t-name="web.HashField"&gt;
+        Hello there
+    &lt;/t&gt;
+&lt;/templates&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;field name="passkey" widget="hash"/&gt;</code> now renders "Hello there" wherever it is used.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="181075f9">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Reading and writing the record</h2>
+      <p class="lead">Fields get a default set of props: <code>standardFieldProps</code>.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">hash_field.js</h3>
+<pre><code class="language-javascript">import { Component, useProps } from "@odoo/owl";
+import { registry } from "@web/core/registry";
+import { standardFieldProps } from "../standard_field_props";
+import { createRandomString } from "./utils";
+
+class HashField extends Component {
+    static template = "web.HashField";
+
+    props = useProps({ ...standardFieldProps });
+
+    generate() {
+        const randomHash = createRandomString(18);
+        this.props.record.update({[this.props.name]: randomHash});
+    }
+}
+
+const hashField = {
+    component: HashField,
+};
+
+registry.category("fields").add("hash", hashField);</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">hash_field.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="web.HashField"&gt;
+    &lt;div t-if="!<mark>this.props</mark>.record.data[<mark>this.props</mark>.name]"&gt;
+        &lt;button
+            class="btn btn-secondary"
+            t-on-click="this.generate"&gt;
+            Generate
+        &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;span t-out="<mark>this.props</mark>.record.data[this.props.name]"/&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>record</code> carries the data, <code>update</code> to write to it, plus <code>fields</code>, <code>resId</code>, <code>resModel</code>...</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="618694c6">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>A field-specific prop, from the arch</h2>
+      <p class="lead">For example, the hash's length.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">✗</span><span><code>&lt;field name="passkey" widget="hash" props="{ 'length': 12 }"/&gt;</code></span></li>
+        <li><span class="key">✗</span><span><code>&lt;field name="passkey" widget="hash" length="12"/&gt;</code></span></li>
+        <li><span class="key">✓</span><span><code>&lt;field name="passkey" widget="hash" options="{ 'hash_length': 12 }"/&gt;</code></span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p><code>options</code> is the arch's own way of passing arbitrary data to a field or a widget.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="076925f9">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Extracting options from the arch, into props</h2>
+    </header>
+    <div class="slide-body">
+      <section>
+<pre><code class="language-javascript">const hashFieldProps = { ...standardFieldProps, length: t.number().optional() };
+
+class HashField extends Component {
+    static template = "web.HashField";
+
+    props = useProps(hashFieldProps);
+
+    generate() {
+        const randomHash = createRandomString(this.props.length);
+        this.props.record.update({[this.props.name]: randomHash});
+    }
+}
+
+const hashField = {
+    component: HashField,
+    extractProps: ({ options }) => ({
+        length: options.hash_length,
+    }),
+};
+
+registry.category("fields").add("hash", hashField);</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;field name="passkey" widget="hash" options="{ 'hash_length': 12 }"/&gt;</code></p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="60a37879">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>extractProps</h2>
+      <p class="lead">Turns arch data into component props. It takes two arguments.</p>
+    </header>
+    <div class="slide-body two-col even snug">
+      <section>
+        <h3 class="label">fieldInfo</h3>
+        <ul>
+          <li><code>attrs</code>, <code>options</code></li>
+          <li><code>viewType</code></li>
+          <li>...</li>
+        </ul>
+        <p class="caption">What the arch said, and which view is asking.</p>
+      </section>
+      <section>
+        <h3 class="label">dynamicInfo</h3>
+        <ul>
+          <li><code>readonly</code>, <code>required</code></li>
+          <li><code>context</code>, <code>domain()</code></li>
+        </ul>
+        <p class="caption">What is true of this instance, right now.</p>
+      </section>
+    </div>
+    <div class="slide-body two-col even snug" style="margin-top: 1.6cqw">
+      <section>
+        <h3 class="label file">priority_field.js — from addons/web</h3>
+<pre><code class="language-javascript">extractProps(<mark>fieldInfo</mark>, dynamicInfo) {
+    return {
+        withCommand: <mark>fieldInfo.viewType === "form"</mark>,
+        readonly: dynamicInfo.readonly,
+    };
+},</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">The component</span><span>Takes a <code>withCommand</code> prop. It never asks what view it is in.</span></li>
+          <li><span class="key">extractProps</span><span>Reads <code>fieldInfo.viewType</code> and decides. Defaulting or forcing a prop per view type is what it is for.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>dynamicInfo is what lets several instances of the same field on a view behave differently.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="fde98e93">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Registering for one view type only</h2>
+      <p class="lead">A field can be added under a view-specific name.</p>
+    </header>
+    <div class="slide-body">
+      <section>
+<pre><code class="language-javascript">registry.category("fields").add("list.hash", listHashField);
+registry.category("fields").add("kanban.hash", kanbanHashField);
+
+// uncommon, but possible
+registry.category("fields").add("form.hash", formHashField);</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;field name="passkey" widget="hash"/&gt;</code> resolves to whichever entry matches the current view.</p>
+    </footer>
+  </article>
+</div>

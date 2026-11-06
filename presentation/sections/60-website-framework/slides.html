@@ -1,0 +1,349 @@
+<div class="deck clean" id="deck-website">
+  <article class="slide statement cover" data-id="f8cd2452">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 6 · The Website Framework</p>
+      <h2>Interactions</h2>
+      <p class="lead">Pages the server renders, and the javascript that brings them to life.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Then</span>Snippets and the Builder</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="1a757600">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 6 · The Website Framework</p>
+      <h2>Goals</h2>
+      <p class="lead">The web client is one application. The website is a page, then another one.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows wide-key">
+        <li><span class="key">Pages</span><span>What the server sends, and where javascript takes over.</span></li>
+        <li><span class="key">Interactions</span><span>Colibri, the lifecycle, and <code>dynamicContent</code>.</span></li>
+        <li><span class="key">Owl on the website</span><span>A component inside a page, and when it is worth it.</span></li>
+        <li><span class="key">Snippets</span><span>The blocks a page is built from, and one of your own.</span></li>
+        <li><span class="key">The builder</span><span>Edit mode: edit interactions, options, and the architecture behind them.</span></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>One snippet, a weather forecast, runs through the second part.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="f4be4021">
+    <header class="slide-head">
+      <p class="eyebrow">Pages</p>
+      <h2>What happens when a page loads</h2>
+      <p class="lead">The server does most of the work. Javascript comes last.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows numbered">
+        <li><span class="num">1</span><h3>A route answers</h3><p>A controller (<code>/shop</code>), or a <code>website.page</code> record (<code>/</code>, <code>/contactus</code>).</p></li>
+        <li><span class="num">2</span><h3>QWeb renders the view</h3><p>The <code>ir.ui.view</code>, with every inheriting view's xpaths applied, for this website and in this language.</p></li>
+        <li><span class="num">3</span><h3>The server returns HTML</h3><p>A complete page: the content is in it, for the first paint and for search engines.</p></li>
+        <li><span class="num">4</span><h3>The browser loads the bundle</h3><p><code>web.assets_frontend</code>: the JS framework, and every interaction.</p></li>
+        <li><span class="num">5</span><h3>The interactions start</h3><p>One on every element that matches an interaction's selector.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>The page is alive, until the next link: the server renders a whole new page, and it all starts again.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="170c15dc">
+    <header class="slide-head">
+      <p class="eyebrow">Architecture</p>
+      <h2>A page, and its interactions</h2>
+      <p class="lead">The page is HTML, made of snippets. Interactions attach to it, by CSS selector.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 344" role="img"
+             aria-label="On the left, two interactions: Weather, for .s_weather, and ReadMore, for .o_read_more. On the right, a website page rendered by the server, made of three snippets. Weather is attached to the weather forecast snippet. ReadMore is attached twice, to a read-more block in each of the two other snippets.">
+          <defs>
+            <marker id="web-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <text class="lane" x="0" y="26">Interactions</text>
+          <text class="s l" x="0" y="48">javascript, from the bundle</text>
+
+          <rect class="bx js" x="0" y="66" width="250" height="64" rx="6"/>
+          <text class="t" x="125" y="94">Weather</text>
+          <text class="s m" x="125" y="116">.s_weather</text>
+
+          <rect class="bx js" x="0" y="214" width="250" height="64" rx="6"/>
+          <text class="t" x="125" y="242">ReadMore</text>
+          <text class="s m" x="125" y="264">.o_read_more</text>
+          <text class="s" x="125" y="304">two matches, two instances</text>
+
+          <rect class="bound" x="400" y="0" width="600" height="344" rx="8"/>
+          <text class="lane" x="420" y="30">A website page</text>
+          <text class="s r" x="980" y="30">HTML, rendered by the server</text>
+
+          <rect class="bx srv" x="420" y="48" width="560" height="84" rx="6"/>
+          <text class="t r" x="960" y="86">Weather forecast</text>
+          <text class="s m r" x="960" y="108">section.s_weather</text>
+
+          <rect class="bx srv" x="420" y="146" width="560" height="84" rx="6"/>
+          <rect class="chip" x="440" y="168" width="170" height="40" rx="6"/>
+          <text class="m" x="525" y="193">.o_read_more</text>
+          <text class="t r" x="960" y="184">Text and image</text>
+          <text class="s r" x="960" y="206">a read-more block inside</text>
+
+          <rect class="bx srv" x="420" y="244" width="560" height="84" rx="6"/>
+          <rect class="chip" x="440" y="266" width="170" height="40" rx="6"/>
+          <text class="m" x="525" y="291">.o_read_more</text>
+          <text class="t r" x="960" y="282">Three columns</text>
+          <text class="s r" x="960" y="304">and another one</text>
+
+          <path class="ar" marker-end="url(#web-ar-1)" d="M256 98 C330 98 340 90 414 90"/>
+          <path class="ar" marker-end="url(#web-ar-1)" d="M256 240 C340 240 350 188 434 188"/>
+          <path class="ar" marker-end="url(#web-ar-1)" d="M256 252 C340 252 350 286 434 286"/>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>A snippet may get several interactions, or none. An interaction gets one instance per element it matches.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="68c5146d">
+    <header class="slide-head">
+      <p class="eyebrow">Interactions</p>
+      <h2>What's an Interaction?</h2>
+      <p class="lead">A base class to extend, on a light framework of its own: Colibri.</p>
+    </header>
+    <div class="slide-body two-col picture">
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Dynamic content</span><span>For the frontend: the website, and every other page the server renders.</span></li>
+          <li><span class="key">Owl-like</span><span>The same words, <code>setup</code>, <code>willStart</code>, <code>t-on-click</code>, but no Owl. The HTML is already there.</span></li>
+          <li><span class="key">Lifecycle</span><span><code>setup</code>, <code>willStart</code>, <code>start</code>, <code>destroy</code>, and helpers that clean up after themselves.</span></li>
+          <li><span class="key">The builder</span><span>An interaction can run, or run differently, while the page is edited.</span></li>
+          <li><span class="key">publicWidget</span><span>What it replaces. You still meet it in older code.</span></li>
+        </ul>
+      </section>
+      <section class="frame">
+        <img src="assets/colibri.webp" alt="A pink hummingbird in flight: Colibri, the framework behind interactions">
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Colibri is French for hummingbird: small, light, and quick.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="2c1916a4">
+    <header class="slide-head">
+      <p class="eyebrow">Architecture</p>
+      <h2>Interactions, in javascript</h2>
+      <p class="lead">The JS framework underneath, as in the web client. Colibri in between.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 270" role="img"
+             aria-label="The JS framework, with the env and the services, feeds the interaction service. The interaction service calls startInteractions and creates one Colibri per instance. Each Colibri applies the dynamic content of its interaction, here Weather, which extends Interaction and reaches this.el and this.services. After each handler, Colibri updates the content again.">
+          <defs>
+            <marker id="web-ar-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+            <marker id="web-rt-2" class="rt-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="0" y="40" width="205" height="110" rx="6"/>
+          <text class="t" x="102" y="82">JS framework</text>
+          <text class="s" x="102" y="106">env, services</text>
+          <text class="s" x="102" y="126">as in the web client</text>
+          <path class="ar" marker-end="url(#web-ar-2)" d="M211 95 H259"/>
+
+          <rect class="bound" x="250" y="8" width="760" height="228" rx="8"/>
+          <text class="m l" x="250" y="258">@web/public</text>
+
+          <rect class="bx" x="265" y="40" width="205" height="110" rx="6"/>
+          <text class="t" x="367" y="82">Interaction service</text>
+          <text class="s m" x="367" y="106">startInteractions()</text>
+          <text class="s" x="367" y="126">finds every match</text>
+          <path class="ar" marker-end="url(#web-ar-2)" d="M476 95 H524"/>
+
+          <rect class="bx" x="546" y="24" width="205" height="110" rx="6"/>
+          <rect class="bx" x="538" y="32" width="205" height="110" rx="6"/>
+          <rect class="bx" x="530" y="40" width="205" height="110" rx="6"/>
+          <text class="t" x="632" y="82">Colibri</text>
+          <text class="s" x="632" y="104">one per instance</text>
+          <text class="s" x="632" y="124">applies dynamicContent</text>
+          <path class="ar" marker-end="url(#web-ar-2)" d="M757 95 H789"/>
+
+          <rect class="bx js" x="795" y="40" width="205" height="110" rx="6"/>
+          <text class="t" x="897" y="82">Weather</text>
+          <text class="s" x="897" y="104">extends Interaction</text>
+          <text class="s m" x="897" y="126">this.el, this.services</text>
+
+          <path class="rt" marker-end="url(#web-rt-2)" d="M897 156 V196 H640 V162"/>
+          <text class="s" x="768" y="218">after each handler: updateContent()</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>Same services as the web client: <code>this.services.orm</code>, <code>this.services.notification</code>. You write only the last box.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="49b8dd85">
+    <header class="slide-head">
+      <p class="eyebrow">Interactions</p>
+      <h2>Lifecycle, and the helpers</h2>
+      <p class="lead">An interaction can be stopped at any time. The helpers undo what it did.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">The lifecycle</h3>
+        <ul class="rows wide-key">
+          <li><span class="key">setup</span><span>Synchronous. Read the element, set your fields.</span></li>
+          <li><span class="key">willStart</span><span>Asynchronous. Load what the page needs, before the interaction starts.</span></li>
+          <li><span class="key">start</span><span>The interaction is running: work with the page.</span></li>
+          <li><span class="key">destroy</span><span>It is stopped: edit mode starts or ends, its element is removed.</span></li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="label">Helpers that clean up after themselves</h3>
+        <ul class="rows wide-key">
+          <li><span class="key">waitFor</span><span>A promise that settles only while the interaction lives.</span></li>
+          <li><span class="key">addListener</span><span>A listener on any element, removed on destroy.</span></li>
+          <li><span class="key">insert, renderAt</span><span>Elements added to the page, taken out on destroy.</span></li>
+          <li><span class="key">mountComponent</span><span>An Owl component, destroyed with the interaction.</span></li>
+          <li><span class="key">registerCleanup</span><span>Anything else to undo.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The builder stops and restarts interactions all the time. Whatever one adds, it has to take back.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="49000b34">
+    <header class="slide-head">
+      <p class="eyebrow">Interactions</p>
+      <h2>dynamicContent's syntax</h2>
+      <p class="lead">Selectors on the left, directives on the right. Familiar, if you know Owl's templates.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript">dynamicContent = {
+    // a CSS selector, inside this.el
+    ".my-selector": {
+        "t-on-click": this.onClick,
+        "t-att-class": () =&gt; ({ "d-none": !this.open }),
+        "t-att-style": () =&gt; ({
+            "background-color": this.color,
+        }),
+    },
+    ".my-label": {
+        "t-out": () =&gt; this.label,
+    },
+    ".my-chart": {
+        "t-component": () =&gt;
+            [Chart, { someProp: "value" }],
+    },
+    // the interaction's own element
+    _root: {
+        "t-att-required": () =&gt; this.condition,
+    },
+};</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Selector</span><span>Every element that matches it, inside the interaction's own element.</span></li>
+          <li><span class="key">t-on-…</span><span>A listener. The handler is called on the interaction: no <code>bind</code>.</span></li>
+          <li><span class="key">t-att-…</span><span>An attribute, a class, a style, from a function.</span></li>
+          <li><span class="key">t-out</span><span>The element's text.</span></li>
+          <li><span class="key">t-component</span><span>An Owl component, mounted in the element.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The functions run again on every <code>updateContent()</code>: after each handler, and when a <code>waitFor</code> settles.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="2d4d784c">
+    <header class="slide-head">
+      <p class="eyebrow">Interactions</p>
+      <h2>Beyond the element</h2>
+      <p class="lead">A selector matches inside <code>this.el</code>. Named selectors reach further.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript">// the ones every interaction has
+dynamicSelectors = {
+    _root: () =&gt; this.el,
+    _body: () =&gt; this.el.ownerDocument.body,
+    _window: () =&gt; window,
+    _document: () =&gt; this.el.ownerDocument,
+};
+
+dynamicContent = {
+    _window: {
+        "t-on-resize": this.onResize,
+    },
+    _root: {
+        "t-att-required": () =&gt; this.condition
+            ? true
+            : <mark>Interaction.INITIAL_VALUE</mark>,
+    },
+};</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">_root</span><span>The element the interaction was started on.</span></li>
+          <li><span class="key">_body, _document, _window</span><span>For what happens outside it: a scroll, a resize, a key.</span></li>
+          <li><span class="key">Your own</span><span>Add a key to <code>dynamicSelectors</code>, spreading the defaults, and use it in <code>dynamicContent</code>.</span></li>
+          <li><span class="key">INITIAL_VALUE</span><span>Puts back what the attribute was before the interaction started.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A listener on the window is removed with the interaction, like any other.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="fed97421">
+    <header class="slide-head">
+      <p class="eyebrow">Owl on the website</p>
+      <h2>A component in a page</h2>
+      <p class="lead">For the part of a page that really is an application.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+<pre><code class="language-javascript">// from an interaction, where a selector matches
+dynamicContent = {
+    ".o_weather_chart": {
+        "t-component": () =&gt;
+            [WeatherChart, { days: this.days }],
+    },
+};
+
+// from an interaction, by hand
+this.mountComponent(this.el, WeatherChart, { days: this.days });
+
+// from the page: register it...
+registry.category("public_components")
+    .add("demo.weather_chart", WeatherChart);</code></pre>
+<pre><code class="language-markup">&lt;!-- ...then name it in the HTML --&gt;
+&lt;owl-component name="demo.weather_chart"/&gt;</code></pre>
+      </section>
+      <section>
+        <ul class="rows wide-key">
+          <li><span class="key">Interaction</span><span>The HTML is the server's: there from the first paint, read by search engines, edited in the builder.</span></li>
+          <li><span class="key">Component</span><span>The HTML is rendered in the browser: rich state, but nothing in the page until the javascript runs.</span></li>
+          <li><span class="key">The rule</span><span>An interaction by default. A component for the part that needs one.</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A component on a page is the same Owl as in topic 2: signals, props, templates.</p>
+    </footer>
+  </article>
+</div>

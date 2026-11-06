@@ -1,0 +1,112 @@
+<div class="deck clean" id="deck-customizing-views">
+  <article class="slide statement cover" data-id="e5d2b70a">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 4 · Part 2</p>
+      <h2>Customizing views and fields</h2>
+      <p class="lead">Changing what a standard field or view does, without forking it.</p>
+    </header>
+    <footer class="slide-foot">
+      <p><span class="k">Then</span>Dental Practice, then Customizing</p>
+    </footer>
+  </article>
+
+  <article class="slide statement" data-id="897fbb20">
+    <header class="slide-head">
+      <p class="eyebrow">Customizing views</p>
+      <h2>Two strategies: monkey-patching, or subclassing.</h2>
+    </header>
+    <footer class="slide-foot"></footer>
+  </article>
+
+  <article class="slide" data-id="a9f30c5e">
+    <header class="slide-head">
+      <p class="eyebrow">Customizing views</p>
+      <h2>Which one, and when</h2>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes strategies">
+        <li><h3>Monkey-patching</h3><p>Modify in place. Every instance of that view or field changes, everywhere in the web client, for every user.</p></li>
+        <li><h3>Subclassing</h3><p>Create a variation, and use it on the screens that asked for it: a <code>js_class</code> on the view, a <code>widget</code> on the field.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>Subclass when you can: what you add is opt-in, and the standard behaviour is still there for everyone who did not ask.</p>
+    </footer>
+  </article>
+
+  <article class="slide walkthrough" data-id="7453c22a">
+    <header class="slide-head">
+      <p class="eyebrow">Fields</p>
+      <h2>Subclassing a field</h2>
+      <p class="lead">Extend the component, extend its props, change what needs changing.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">hidden_hash_field.js</h3>
+<pre><code class="language-javascript">class HiddenHashField extends HashField {
+    props = useProps({
+        ...hashFieldProps,
+        isHidden: t.boolean().optional(),
+    });
+}
+
+const hiddenHashField = {
+    ...hashField,
+    component: HiddenHashField,
+    extractProps(fieldInfo) {
+        const props = hashField.extractProps(fieldInfo);
+        props.isHidden = fieldInfo.options.should_hide;
+        return props;
+    },
+};
+
+registry.category("fields").add("hidden-hash", hiddenHashField);</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">hidden_hash_field.xml</h3>
+<pre><code class="language-markup">&lt;t t-name="web.HiddenHashField" t-inherit="web.HashField"&gt;
+    &lt;xpath expr="//span" position="replace"&gt;
+        &lt;t t-set="hash"
+           t-value="<mark>this.props</mark>.record.data[<mark>this.props</mark>.name]"/&gt;
+        &lt;span t-if="<mark>this.props</mark>.isHidden"
+              t-out="'*'.repeat(hash.length)"/&gt;
+        &lt;span t-else="" t-out="hash"/&gt;
+    &lt;/xpath&gt;
+&lt;/t&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;field name="passkey" widget="hash" options="{ 'should_hide': True, 'hash_length': 30 }"/&gt;</code></p>
+    </footer>
+  </article>
+
+
+  <article class="slide walkthrough" data-id="78e90cbb">
+    <header class="slide-head">
+      <p class="eyebrow">Customizing views</p>
+      <h2>Subclassing, with js_class</h2>
+      <p class="lead">Register a new view under a name, and use it with the <code>js_class</code> attribute.</p>
+    </header>
+    <div class="slide-body">
+      <section>
+<pre><code class="language-javascript">class CrmFormRecord extends formView.Model.Record {
+    async _save() {
+        // custom behaviour before saving, e.g. a rainbowman
+    }
+}
+
+class CrmFormModel extends formView.Model {
+    static Record = CrmFormRecord;
+}
+
+registry.category("views").add("crm_form", {
+    ...formView,
+    Model: CrmFormModel,
+});</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p><code>&lt;form class="o_lead_opportunity_form" js_class="crm_form"&gt;</code></p>
+    </footer>
+  </article>
+</div>

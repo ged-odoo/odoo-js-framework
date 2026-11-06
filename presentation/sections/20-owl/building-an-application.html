@@ -1,0 +1,394 @@
+<div class="deck clean" id="deck-owl-app">
+  <article class="slide statement cover" data-id="2f8a41d7">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 2 · Owl</p>
+      <h2>Building an application</h2>
+      <p class="lead">Lists, state, and where the logic lives.</p>
+    </header>
+  </article>
+
+  <article class="slide" data-id="9c3e5b18">
+    <header class="slide-head">
+      <p class="eyebrow">Topic 2 · Owl</p>
+      <h2>Goals</h2>
+      <p class="lead">The first deck was the syntax. This one is the architecture.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes tinted goals">
+        <li><h3>Lists</h3></li>
+        <li><h3>Refs</h3></li>
+        <li><h3>Callback props</h3></li>
+        <li><h3>Plugins</h3></li>
+        <li><h3>Picking one</h3></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="slide" data-id="6a0d92f4">
+    <header class="slide-head">
+      <p class="eyebrow">Lists</p>
+      <h2>A list of components</h2>
+      <ul class="notes">
+        <li><code>t-foreach</code> over the data, one child component per item.</li>
+        <li><code>t-key</code> is how Owl tells the items apart between two renders. Never skip it.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">todo_list.js</h3>
+<pre><code class="language-javascript">export class TodoList extends Component {
+    static template = "tutorial.TodoList";
+    static components = { TodoItem };
+
+    todos = signal.Array([
+        { id: 1, text: "Buy milk" },
+        { id: 2, text: "Walk the dog" },
+    ]);
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.xml</h3>
+<pre><code class="language-markup">&lt;ul class="todo-list"&gt;
+    &lt;t <mark>t-foreach="this.todos()"</mark>
+       t-as="todo"
+       <mark>t-key="todo.id"</mark>&gt;
+        &lt;TodoItem todo="todo"/&gt;
+    &lt;/t&gt;
+&lt;/ul&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Owl keeps the child whose key is still there, and creates or drops the rest.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="3e7f16c9">
+    <header class="slide-head">
+      <p class="eyebrow">Lists</p>
+      <h2>When push renders nothing</h2>
+      <p class="lead">A plain array is not reactive. Owl has no way to know it changed.</p>
+      <ul class="notes">
+        <li><code>signal.Array</code> and <code>signal.Object</code> track their own content: <code>push</code>, <code>splice</code>, a key set or deleted.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">A plain array</h3>
+<pre><code class="language-javascript">// nothing happens on screen
+todos = [
+    { id: 1, text: "Buy milk" },
+];
+
+addTodo(text) {
+    this.todos.push({ id: 2, text });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label">A collection signal</h3>
+<pre><code class="language-javascript">// the list re-renders
+todos = <mark>signal.Array</mark>([
+    { id: 1, text: "Buy milk" },
+]);
+
+addTodo(text) {
+    this.todos()<mark>.push</mark>({ id: 2, text });
+}</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>The wrapping is shallow: what is inside stays a plain object, and stays untracked.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="8b52c0da">
+    <header class="slide-head">
+      <p class="eyebrow">Lists</p>
+      <h2>Reactive data inside the list</h2>
+      <p class="lead">Ticking the checkbox changes nothing: <code>completed</code> is a plain boolean, one level below what <code>signal.Array</code> tracks.</p>
+      <ul class="notes">
+        <li>A signal is a value. It can sit in an object, be passed as a prop, be bound with <code>t-model</code>.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label">The data, and the props of the item</h3>
+<pre><code class="language-javascript">todos = signal.Array([
+    { id: 1, text: "Buy milk",
+      completed: <mark>signal(false)</mark> },
+]);
+
+// in TodoItem
+props = useProps({
+    todo: t.object({
+        id: t.number(),
+        text: t.string(),
+        completed: <mark>t.signal()</mark>,
+    }),
+});</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_item.xml</h3>
+<pre><code class="language-markup">&lt;li class="todo-item"
+    t-att-class="{
+      completed: <mark>this.props.todo.completed()</mark>
+    }"&gt;
+    &lt;input type="checkbox"
+           <mark>t-model="this.props.todo.completed"</mark>/&gt;
+    &lt;span t-out="this.props.todo.text"/&gt;
+&lt;/li&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Make reactive what actually changes, and nothing else: <code>text</code> and <code>id</code> stay plain.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="cc4a8e17">
+    <header class="slide-head">
+      <p class="eyebrow">Refs</p>
+      <h2>Reaching the DOM</h2>
+      <ul class="notes">
+        <li><code>signal.ref()</code> plus <code>t-ref</code>: the element lands in the signal once mounted.</li>
+        <li>Before mounting it is <code>null</code>, which is why the DOM is touched in <code>onMounted</code>.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col code">
+      <section>
+        <h3 class="label file">todo_list.js</h3>
+<pre><code class="language-javascript">import { signal, onMounted } from "@odoo/owl";
+
+export class TodoList extends Component {
+    input = <mark>signal.ref()</mark>;
+
+    setup() {
+        onMounted(() =&gt; {
+            this.input().focus();
+        });
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.xml</h3>
+<pre><code class="language-markup">&lt;input class="todo-input"
+       <mark>t-ref="this.input"</mark>
+       placeholder="What needs to be done?"/&gt;</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>A ref is a signal: read it with <code>this.input()</code>, like any other.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="47b30f5e">
+    <header class="slide-head">
+      <p class="eyebrow">Refs</p>
+      <h2>Writing your own hook</h2>
+      <ul class="notes">
+        <li>A plain function that calls other hooks, named <code>use…</code> by convention.</li>
+        <li>It is how behaviour is shared between components, without a base class.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">utils.js</h3>
+<pre><code class="language-javascript">import { onMounted } from "@odoo/owl";
+
+export function <mark>useAutofocus</mark>(ref) {
+    onMounted(() =&gt; {
+        ref()?.focus();
+    });
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.js</h3>
+<pre><code class="language-javascript">import { useAutofocus } from "./utils";
+
+export class TodoList extends Component {
+    input = signal.ref();
+
+    setup() {
+        <mark>useAutofocus(this.input)</mark>;
+    }
+}</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>Called while the component is being created: in <code>setup</code>, or as a class field. Not later, from a handler or a method.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="e2915cb6">
+    <header class="slide-head">
+      <p class="eyebrow">Callback props</p>
+      <h2>Talking to the parent</h2>
+      <p class="lead">The child displays a todo, but the parent owns the list. So the parent deletes, and the child asks.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="150 0 700 260" role="img"
+             aria-label="TodoList passes a todo and an onDelete callback down to TodoItem. TodoItem calls the callback back up when its delete button is clicked.">
+          <defs>
+            <marker id="app-ar-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 Z"/>
+            </marker>
+          </defs>
+
+          <rect class="bx" x="300" y="8" width="400" height="78" rx="6"/>
+          <text class="t" x="500" y="42">TodoList</text>
+          <text class="s" x="500" y="66">owns the array of todos</text>
+
+          <path class="ar" marker-end="url(#app-ar-1)" d="M420 92 V166"/>
+          <text class="m r" x="404" y="126">todo="todo"</text>
+          <text class="s r" x="404" y="146">data goes down</text>
+
+          <path class="ar" marker-end="url(#app-ar-1)" d="M580 168 V94"/>
+          <text class="m l" x="596" y="126">onDelete="..."</text>
+          <text class="s l" x="596" y="146">intent comes up</text>
+
+          <rect class="bx js" x="300" y="174" width="400" height="78" rx="6"/>
+          <text class="t" x="500" y="208">TodoItem</text>
+          <text class="s" x="500" y="232">displays one todo</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>A function is a prop like any other: <code>onDelete: t.function().optional()</code>.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="70ad3c81">
+    <header class="slide-head">
+      <p class="eyebrow">Picking one</p>
+      <h2>Reacting to a change</h2>
+      <p class="lead">Both track the signals they read, and run again when those change. The difference is what you want out of them.</p>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">computed</h3>
+        <ul class="notes">
+          <li>You want a value.</li>
+          <li>Read it like a signal: <code>this.remaining()</code>.</li>
+          <li>No side effect, ever.</li>
+        </ul>
+<pre><code class="language-javascript">remaining = computed(() =&gt;
+    this.todos().filter((t) =&gt; !t.completed()).length
+);</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">useEffect</h3>
+        <ul class="notes">
+          <li>You want a side effect.</li>
+          <li>Saving, logging, a third-party library.</li>
+          <li>Returns nothing useful.</li>
+        </ul>
+<pre><code class="language-javascript">useEffect(() =&gt; {
+    localStorage.setItem("todos", serialize(this.todos()));
+});</code></pre>
+      </section>
+    </div>
+  </article>
+
+  <article class="slide" data-id="b6f42e09">
+    <header class="slide-head">
+      <p class="eyebrow">Plugins</p>
+      <h2>Sharing state and logic between components</h2>
+      <p class="lead">A component renders. Everything else, the data and the rules, belongs somewhere a second component can reach.</p>
+    </header>
+    <div class="slide-body">
+      <figure class="figure">
+        <svg viewBox="0 0 1000 300" role="img"
+             aria-label="A tree of components: TodoList, with two TodoItem children. All three overlap the same TodoListPlugin, drawn behind them: one object, shared by the three of them.">
+          <rect class="bx js" x="480" y="24" width="420" height="252" rx="8"/>
+          <text class="t" x="700" y="110">TodoListPlugin</text>
+          <text class="s" x="700" y="138">todos, addTodo, remaining</text>
+          <text class="m" x="700" y="180">usePlugin(TodoListPlugin)</text>
+          <text class="s" x="700" y="216">one instance, the same in each</text>
+
+          <path class="ar" d="M104 88 V246 M104 152 H160 M104 246 H160"/>
+
+          <rect class="bx" x="80" y="16" width="420" height="72" rx="6"/>
+          <text class="t" x="290" y="50">TodoList</text>
+          <text class="s" x="290" y="74">renders the list</text>
+
+          <rect class="bx" x="160" y="116" width="340" height="72" rx="6"/>
+          <text class="t" x="330" y="150">TodoItem</text>
+          <text class="s" x="330" y="174">renders one todo</text>
+
+          <rect class="bx" x="160" y="210" width="340" height="72" rx="6"/>
+          <text class="t" x="330" y="244">TodoItem</text>
+          <text class="s" x="330" y="268">renders one todo</text>
+        </svg>
+      </figure>
+    </div>
+    <footer class="slide-foot">
+      <p>A plugin is a class with signals and methods. Every component that asks gets the same instance.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="19c8d7fb">
+    <header class="slide-head">
+      <p class="eyebrow">Plugins</p>
+      <h2>A plugin, in code</h2>
+      <ul class="notes">
+        <li><code>providePlugins</code> at the top, once: it opens the plugins to that component and its children.</li>
+        <li><code>usePlugin</code> anywhere below, in a component or in a plugin.</li>
+      </ul>
+    </header>
+    <div class="slide-body two-col even">
+      <section>
+        <h3 class="label file">todo_list_plugin.js</h3>
+<pre><code class="language-javascript">import { Plugin, signal, usePlugin } from "@odoo/owl";
+import { StoragePlugin } from "../storage_plugin";
+
+export class TodoListPlugin extends <mark>Plugin</mark> {
+    todos = signal.Array([]);
+
+    storage = <mark>usePlugin(StoragePlugin)</mark>;
+
+    addTodo(text) {
+        text = text.trim();
+        if (text) {
+            this.todos().push({ ... });
+        }
+    }
+}</code></pre>
+      </section>
+      <section>
+        <h3 class="label file">todo_list.js, todo_item.js</h3>
+<pre><code class="language-javascript">export class TodoList extends Component {
+    setup() {
+        <mark>providePlugins([TodoListPlugin])</mark>;
+        this.todoList = usePlugin(TodoListPlugin);
+    }
+}
+
+// and in the child, no prop needed
+export class TodoItem extends Component {
+    todoList = <mark>usePlugin(TodoListPlugin)</mark>;
+}</code></pre>
+      </section>
+    </div>
+    <footer class="slide-foot">
+      <p>No prop drilling: the child reaches the plugin on its own.</p>
+    </footer>
+  </article>
+
+  <article class="slide" data-id="5af3e2b4">
+    <header class="slide-head">
+      <p class="eyebrow">Picking one</p>
+      <h2>Four ways to be reactive</h2>
+      <p class="lead">One dependency tracker underneath, four shapes on top. Pick by the shape of your data.</p>
+    </header>
+    <div class="slide-body">
+      <ul class="rows boxes shapes">
+        <li><h3><code>signal(0)</code></h3><p>A single value.</p><p class="meta">Tracks the value.</p></li>
+        <li><h3><code>signal.Array([])</code></h3><p>A list you add to.</p><p class="meta">Tracks its own items, shallow.</p></li>
+        <li><h3><code>signal.Object({})</code></h3><p>A flat bag of keys.</p><p class="meta">Tracks its own keys, shallow.</p></li>
+        <li><h3><code>proxy({...})</code></h3><p>A nested tree of settings.</p><p class="meta">Tracks every level, recursively.</p></li>
+      </ul>
+    </div>
+    <footer class="slide-foot">
+      <p>With a <code>proxy</code>, a plain write notifies: <code>viewPrefs.sort.direction = "desc"</code>. In a template, <code>t-model.proxy="this.viewPrefs.sort.by"</code>.</p>
+    </footer>
+  </article>
+</div>
